@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bg" />
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:id="@+id/topBarLayout"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    app:srcCompat="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="PROFILE"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/dummylayout"
+                android:layout_below="@+id/topBarLayout"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/dummylayout"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+                    <RelativeLayout
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/relativeLayoutImg">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:padding="1dp"
+                            android:id="@+id/imageView81"
+                            android:src="@drawable/blackimg"
+                            app:civ_border_width="1dp"
+                            app:civ_border_color="#000"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="5sp"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/plus_btn"
+                            android:id="@+id/addPic"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <EditText
+                                    android:id="@+id/ed__name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:ems="10"
+                                    android:textColorHint="@color/textColorHint"
+                                    android:gravity="center"
+                                    android:background="#00000000"
+                                    android:hint="Your name"
+                                    android:inputType="text" />
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/white"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <EditText
+                                    android:id="@+id/ed_nick_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:ems="10"
+                                    android:textColorHint="@color/textColorHint"
+                                    android:gravity="center"
+                                    android:background="#00000000"
+                                    android:hint="Nick name"
+                                    android:inputType="text" />
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/white"/>
+                            </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/selectCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:ems="10"
+                            android:textColorHint="@color/textColorHint"
+                            android:gravity="center"
+                            android:background="#00000000"
+                            android:hint="Select your City"
+                            android:inputType="text" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/white"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed__district"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="District"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed_dob"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Date of Birth"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed__height"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Height"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed_weight"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Weight"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/ed_local_fvt_club"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:ems="10"
+                            android:textColorHint="@color/textColorHint"
+                            android:gravity="center"
+                            android:background="#00000000"
+                            android:hint="Local Fourite Club"
+                            android:inputType="text" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/white"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/ed_intl_fvt_club"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:ems="10"
+                            android:textColorHint="@color/textColorHint"
+                            android:gravity="center"
+                            android:background="#00000000"
+                            android:hint="International Fourite Club"
+                            android:inputType="text" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/white"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed_you_player"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Are you a Player"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed_select_position"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Select Position"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed_refree"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Are you a Referee"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed_schedule"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Select Schedule"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/ed_you_team"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:textColorHint="@color/textColorHint"
+                                android:gravity="center"
+                                android:background="#00000000"
+                                android:hint="Your Team"
+                                android:inputType="text" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingTop="5dp"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/roundeges">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:text="Create Your Team"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:text="SAVE PROFILE"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+</RelativeLayout>

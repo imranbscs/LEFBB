@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="centerCrop"
+                    android:padding="80dp"
+                    app:srcCompat="@drawable/logo1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/numberlayout">
+
+                        <EditText
+                            android:id="@+id/ed_contrycode"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="+966"
+                            android:background="#00000000"
+                            android:ems="10"
+                            android:textColor="@color/white"
+                            android:inputType="number" />
+                        <EditText
+                            android:id="@+id/ed_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:textColorHint="@color/textColorHint"
+                            android:gravity="center"
+                            android:background="#00000000"
+                            android:hint="Phone Number"
+                            android:inputType="number" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/dummylayout"
+                        android:layout_below="@+id/numberlayout"
+                        android:background="@color/white"/>
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:onClick="continueClicked"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/white"
+                    android:text="CONTINUE" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
