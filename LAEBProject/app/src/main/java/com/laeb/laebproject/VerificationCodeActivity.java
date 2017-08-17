@@ -15,6 +15,6 @@ public class VerificationCodeActivity extends AppCompatActivity {
     }
 
     public void submitClicked(View view) {
-        startActivity(new Intent(this, MainMenuActivity.class));
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 }

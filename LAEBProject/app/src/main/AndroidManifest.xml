@@ -9,10 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LanguageActivity">
+        <activity android:name=".LanguageActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -20,8 +19,16 @@
         <activity android:name=".VerificationCodeActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".UpComingGamesActivity" />
-        <activity android:name=".FullProfileActivity"></activity>
+        <activity android:name=".UpComingGamesActivity">
+
+        </activity>
+        <activity android:name=".FullProfileActivity" />
+        <activity android:name=".ScheduleRefreeActivity">
+
+        </activity>
+        <activity android:name=".FootBallFieldActivity">
+
+        </activity>
     </application>
 
 </manifest>

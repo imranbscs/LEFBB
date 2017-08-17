@@ -7,13 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
 import com.laeb.laebproject.adapters.UpComingGamesAdapter;
 import com.laeb.laebproject.model.UpComingGames;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpComingGamesActivity extends AppCompatActivity {
+public class FootBallFieldActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -23,7 +24,7 @@ public class UpComingGamesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_up_coming_games);
+        setContentView(R.layout.activity_foot_ball_field);
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
@@ -37,7 +38,7 @@ public class UpComingGamesActivity extends AppCompatActivity {
             listItems.add(new UpComingGames("RMD", "Riyadh", "Aug 16,2014 | 17:15"));
         }
 
-        adapter = new UpComingGamesAdapter(listItems, this);
+        adapter = new FootBallFieldsAdapter(listItems, this);
         recyclerView.setAdapter(adapter);
 
 

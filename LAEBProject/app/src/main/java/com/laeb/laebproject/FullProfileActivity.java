@@ -1,7 +1,9 @@
 package com.laeb.laebproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 
 public class FullProfileActivity extends AppCompatActivity {
@@ -12,5 +14,9 @@ public class FullProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_full_profile);
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
+    public void saveProfileClicked(View view) {
+        startActivity(new Intent(this, MainMenuActivity.class));
     }
 }
