@@ -1,63 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/bg"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/bg" />
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
+        <ScrollView android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:id="@+id/topBarLayout"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="120dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
-                    app:srcCompat="@drawable/logo" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="PROFILE"
-                    android:layout_alignParentBottom="true"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:id="@+id/dummylayout"
-                android:layout_below="@+id/topBarLayout"
-                android:background="@color/white"/>
+            android:layout_below="@+id/dummylayout"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,10 +55,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp">
+                    android:layout_marginRight="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -211,6 +167,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:ems="10"
+                                android:drawableRight="@drawable/calendaricon"
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
@@ -331,6 +288,7 @@
                                 android:ems="10"
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
+                                android:drawableLeft="@drawable/tick"
                                 android:background="#00000000"
                                 android:hint="Are you a Player"
                                 android:inputType="text" />
@@ -342,7 +300,7 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginLeft="7dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -354,6 +312,7 @@
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
+                                android:drawableRight="@drawable/dropdown"
                                 android:hint="Select Position"
                                 android:inputType="text" />
                             <RelativeLayout
@@ -381,6 +340,7 @@
                                 android:ems="10"
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
+                                android:drawableLeft="@drawable/tick"
                                 android:background="#00000000"
                                 android:hint="Are you a Referee"
                                 android:inputType="text" />
@@ -392,7 +352,7 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginLeft="7dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -404,6 +364,7 @@
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
+                                android:drawableRight="@drawable/dropdown"
                                 android:hint="Select Schedule"
                                 android:inputType="text" />
                             <RelativeLayout
@@ -466,7 +427,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:gravity="center"
-                        android:onClick="saveProfileClicked"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:text="SAVE PROFILE"/>
@@ -475,7 +435,20 @@
 
             </LinearLayout>
 
-        </RelativeLayout>
         </ScrollView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomBar"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+        <include
+            android:id="@+id/container_login_lyt"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/bottom_menu"/>
     </RelativeLayout>
 </RelativeLayout>

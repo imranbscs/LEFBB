@@ -13,24 +13,24 @@ import com.laeb.laebproject.model.UpComingGames;
 
 import java.util.List;
 
-public class SecduleRefreeAdapter extends RecyclerView.Adapter<SecduleRefreeAdapter.ViewHolder> {
+public class ScheduleRefreeAdapter extends RecyclerView.Adapter<ScheduleRefreeAdapter.ViewHolder> {
 
     List<UpComingGames> listItems;
     public Context context;
 
-    public SecduleRefreeAdapter(List<UpComingGames> listItems, Context context) {
+    public ScheduleRefreeAdapter(List<UpComingGames> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
 
     @Override
-    public SecduleRefreeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ScheduleRefreeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_schdule_ref, parent, false);
-        return new SecduleRefreeAdapter.ViewHolder(view);
+        return new ScheduleRefreeAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(SecduleRefreeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ScheduleRefreeAdapter.ViewHolder holder, int position) {
         UpComingGames listItem = listItems.get(position);
         final int a = position;
         //holder.nameTeam.setText(listItem.getNameTeam());
