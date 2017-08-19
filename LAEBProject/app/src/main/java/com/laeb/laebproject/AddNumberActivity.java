@@ -95,12 +95,12 @@ public class AddNumberActivity extends AppCompatActivity {
                 AWSCredentials oCredentials = new AWSCredentials() {
                     @Override
                     public String getAWSAccessKeyId() {
-                        return "AKIAI32CBHEIFFN333EQ";
+                        return "aaaa";
                     }
 
                     @Override
                     public String getAWSSecretKey() {
-                        return "UB5RdyGlTNKNrY8jrzKSTogc8UUdprlVi2VDRdK0";
+                        return "aaa";
                     }
                 };
                 snsClient = new AmazonSNSClient(oCredentials);
@@ -154,7 +154,7 @@ public class AddNumberActivity extends AppCompatActivity {
         uc.setRequestProperty("locale", "en");
         String android_id = Settings.Secure.getString(this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
+        uc.setRequestProperty("x-access-key", "aaa");
         // uc.setRequestProperty("device", android_id);
         uc.setRequestMethod("POST");
         uc.setDoInput(true);
