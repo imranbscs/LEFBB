@@ -27,5 +27,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile group: 'com.amazonaws' , name: 'aws-android-sdk-sns' , version : '2.4.7'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'org.json:json:20160212'
     testCompile 'junit:junit:4.12'
 }

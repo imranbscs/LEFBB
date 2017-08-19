@@ -17,4 +17,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public void profileClicked(View view) {
         startActivity(new Intent(this, ProfileActivity.class));
     }
+    public void bookingClicked(View view) {
+        startActivity(new Intent(this, BookingActivity.class));
+    }
 }

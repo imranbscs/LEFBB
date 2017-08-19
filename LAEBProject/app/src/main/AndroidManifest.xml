@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.laeb.laebproject">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +23,8 @@
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".UpComingGamesActivity" />
-        <activity android:name=".FullProfileActivity"></activity>
+        <activity android:name=".FullProfileActivity" />
+        <activity android:name=".BookingActivity"></activity>
     </application>
 
 </manifest>
