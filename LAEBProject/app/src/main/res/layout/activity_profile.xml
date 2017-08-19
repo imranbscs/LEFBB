@@ -58,6 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/dummylayout"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -84,10 +85,11 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="5sp"
                             android:layout_alignParentRight="true"
-                            android:src="@drawable/plus_btn"
+                            android:src="@drawable/plusicon_white"
                             android:id="@+id/addPic"/>
                     </RelativeLayout>
                 </RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -167,6 +169,7 @@
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
                             android:background="#00000000"
+                            android:drawableRight="@drawable/calendaricon"
                             android:hint="Date of Birth"
                             android:layout_marginTop="5dp"
                             android:inputType="number" />
@@ -182,7 +185,7 @@
                         android:gravity="center">
 
                         <TextView
-                            android:text="Login"
+                            android:text="Male"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -201,7 +204,7 @@
                             android:layout_marginBottom="40dp"/>
 
                         <TextView
-                            android:text="Register"
+                            android:text="Female"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"

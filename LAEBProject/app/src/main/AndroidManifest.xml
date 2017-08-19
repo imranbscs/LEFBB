@@ -11,20 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LanguageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".LanguageActivity">            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
-        <activity android:name=".MainMenuActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".ProfileActivity" />
+<<<<<<< HEAD
         <activity android:name=".UpComingGamesActivity" />
         <activity android:name=".FullProfileActivity" />
         <activity android:name=".BookingActivity"></activity>
+=======
+        <activity android:name=".MenuActivity" android:windowSoftInputMode="adjustPan">
+
+        </activity>
+>>>>>>> e52924ad69e03bc8c748464b559ad277fb436f4d
     </application>
 
 </manifest>

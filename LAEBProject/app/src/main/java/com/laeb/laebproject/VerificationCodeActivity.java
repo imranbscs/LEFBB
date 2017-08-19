@@ -43,6 +43,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
     }
 
     public void submitClicked(View view) {
+<<<<<<< HEAD
         Intent i = getIntent();
         final String code = i.getStringExtra("code");
         final String phone = i.getStringExtra("phone");
@@ -118,5 +119,8 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
         uc.disconnect();
         return jsonString.toString();
+=======
+        startActivity(new Intent(this, ProfileActivity.class));
+>>>>>>> e52924ad69e03bc8c748464b559ad277fb436f4d
     }
 }

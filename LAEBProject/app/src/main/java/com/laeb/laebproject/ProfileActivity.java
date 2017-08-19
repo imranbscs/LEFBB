@@ -92,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void saveClicked(View view) {
-        startActivity(new Intent(this, FullProfileActivity.class));
+        startActivity(new Intent(this, MenuActivity.class));
     }
 
     public  String makePostRequest(String stringUrl, String payload,
