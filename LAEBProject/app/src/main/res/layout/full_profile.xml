@@ -75,6 +75,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
                                     android:ems="10"
+                                    android:textColor="@color/textColorHint"
                                     android:textColorHint="@color/textColorHint"
                                     android:gravity="center"
                                     android:background="#00000000"
@@ -100,6 +101,7 @@
                                     android:textColorHint="@color/textColorHint"
                                     android:gravity="center"
                                     android:background="#00000000"
+                                    android:textColor="@color/textColorHint"
                                     android:hint="Nick name"
                                     android:inputType="text" />
                                 <RelativeLayout
@@ -123,6 +125,7 @@
                             android:gravity="center"
                             android:background="#00000000"
                             android:hint="Select your City"
+                            android:textColor="@color/textColorHint"
                             android:inputType="text" />
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -149,6 +152,7 @@
                                 android:gravity="center"
                                 android:background="#00000000"
                                 android:hint="District"
+                                android:textColor="@color/textColorHint"
                                 android:inputType="text" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -172,7 +176,8 @@
                                 android:gravity="center"
                                 android:background="#00000000"
                                 android:hint="Date of Birth"
-                                android:inputType="text" />
+                                android:textColor="@color/textColorHint"
+                                android:inputType="none" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
@@ -200,6 +205,7 @@
                                 android:gravity="center"
                                 android:background="#00000000"
                                 android:hint="Height"
+                                android:textColor="@color/textColorHint"
                                 android:inputType="number" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -222,6 +228,7 @@
                                 android:gravity="center"
                                 android:background="#00000000"
                                 android:hint="Weight"
+                                android:textColor="@color/textColorHint"
                                 android:inputType="number" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -244,6 +251,7 @@
                             android:gravity="center"
                             android:background="#00000000"
                             android:hint="Local Fourite Club"
+                            android:textColor="@color/textColorHint"
                             android:inputType="text" />
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -262,6 +270,7 @@
                             android:ems="10"
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
+                            android:textColor="@color/textColorHint"
                             android:background="#00000000"
                             android:hint="International Fourite Club"
                             android:inputType="text" />
@@ -309,6 +318,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:ems="10"
+                                android:textColor="@color/textColorHint"
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
@@ -364,6 +374,7 @@
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
+                                android:textColor="@color/textColorHint"
                                 android:drawableRight="@drawable/dropdown"
                                 android:hint="Select Schedule"
                                 android:inputType="text" />
@@ -393,6 +404,7 @@
                                 android:ems="10"
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
+                                android:textColor="@color/textColorHint"
                                 android:background="#00000000"
                                 android:hint="Your Team"
                                 android:inputType="text" />
