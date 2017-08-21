@@ -1,18 +1,29 @@
 package com.laeb.laebproject;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.laeb.laebproject.model.City;
 import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,46 +31,153 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
-;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
-     EditText Edt_Full_Name;
-     EditText Edt_city;
-     EditText Edt_Email;
-     EditText Edt_DOB;
-
-
+    EditText Edt_Full_Name;
+    EditText Edt_Email;
+    EditText Edt_DOB;
+    DatePickerDialog datePickerDialog;
+    JSONArray jsonarray;
+    ArrayList<City> cities;
+    ArrayList<String> worldlist;
     TextView SaveProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        Edt_DOB = (EditText) findViewById(R.id.ed_dob);
+        // perform click event on edit text
+        Edt_DOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(ProfileActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
 
-        Edt_Full_Name =(EditText) findViewById(R.id.ed_fumm_name);
-        Edt_city =(EditText) findViewById(R.id.ed_city);
-        Edt_Email =(EditText) findViewById(R.id.ed_email);
-        Edt_DOB =(EditText) findViewById(R.id.ed_dob) ;
 
-        SaveProfile=(TextView)findViewById(R.id.tv_saveProfile);
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                Log.i("asd", "---------------- this is response : " + dayOfMonth);
+                                // set day of month , month and year value in the edit text
+                                Edt_DOB.setText(year + "-"
+                                        + dayOfMonth + "-" + (monthOfYear + 1));
+
+                            }
+
+                        }, mYear, mMonth, mDay);
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        datePickerDialog.show();
+                    }
+                }, 100);
+
+            }
+        });
+        new AsyncTask<String, String, ArrayList<String>>() {
+
+            @Override
+            protected ArrayList<String> doInBackground(String... params) {
+                try {
+
+                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",
+                            null,
+                            getApplicationContext(), "GET");
+                    Spinner staticSpinner = (Spinner) findViewById(R.id.ed_city);
+                    JSONObject jsonobject = new JSONObject(response);
+                    cities = new ArrayList<City>();
+                    jsonarray = jsonobject.getJSONArray("cities");
+                    worldlist = new ArrayList<String>();
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        jsonobject = jsonarray.getJSONObject(i);
+
+                        City city = new City();
+
+                        city.setName(jsonobject.optString("city_name"));
+                        city.setId(jsonobject.optInt("city_id"));
+                        cities.add(city);
+
+                        worldlist.add(jsonobject.optString("city_name"));
+                        // Create an ArrayAdapter using the string array and a default spinner
+
+                    }
+                    return worldlist;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    return null;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+            }
+
+
+            @Override
+            protected void onPostExecute(ArrayList<String> s) {
+                super.onPostExecute(s);
+                Spinner mySpinner = (Spinner) findViewById(R.id.ed_city);
+
+                // Spinner adapter
+                mySpinner
+                        .setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+                                android.R.layout.simple_spinner_dropdown_item,
+                                worldlist));
+
+                // Spinner on item click listener
+                mySpinner
+                        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                            @Override
+                            public void onItemSelected(AdapterView<?> arg0,
+                                                       View arg1, int position, long arg3) {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> arg0) {
+                                // TODO Auto-generated method stub
+                            }
+                        });
+            }
+
+
+        }.execute("");
+
+        Edt_Full_Name = (EditText) findViewById(R.id.ed_fumm_name);
+
+        Edt_Email = (EditText) findViewById(R.id.ed_email);
+        // Edt_DOB = (EditText) findViewById(R.id.ed_dob);
+
+        SaveProfile = (TextView) findViewById(R.id.tv_saveProfile);
 
 
         SaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String mName = Edt_Full_Name.getText().toString();
-                String mCity = Edt_city.getText().toString();
+
                 String mEmail = Edt_Email.getText().toString();
                 String mDOB = Edt_DOB.getText().toString();
                 HashMap<String, String> param = new HashMap<String, String>();
                 param.put("name", mName);
-                param.put("picture", null);
+                param.put("image", "base64image");
                 param.put("email", mEmail);
-                param.put("city", mCity);
-                param.put("dob", mDOB);
-                param.put("gender", null);
+                param.put("city", "3");
+                param.put("dob", "1986-04-13");
+                param.put("gender", "M");
 
                 final RequestParams paramss = new RequestParams(param);
 
@@ -71,7 +189,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                             String response = makePostRequest("http://192.169.138.14:4000/api/profile/v2/basic",
                                     paramss.toString(),
-                                    getApplicationContext());
+                                    getApplicationContext(), "POST");
                             Log.i("asd", "---------------- this is response : " + response);
                             return "Success";
                         } catch (IOException ex) {
@@ -84,7 +202,6 @@ public class ProfileActivity extends AppCompatActivity {
                 getSupportActionBar().hide();
 
 
-
             }
         });
 
@@ -95,36 +212,38 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(new Intent(this, MenuActivity.class));
     }
 
-    public  String makePostRequest(String stringUrl, String payload,
-                                   Context context) throws IOException {
+    public String makePostRequest(String stringUrl, String payload,
+                                  Context context, String Method) throws IOException {
 
         URL url = new URL(stringUrl);
         HttpURLConnection uc = (HttpURLConnection) url.openConnection();
 
         String line;
         StringBuffer jsonString = new StringBuffer();
-        SharedPreferences channel=this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String strChannel=channel.getString("token","Default").toString();
+        SharedPreferences channel = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String strChannel = channel.getString("token", "Default").toString();
         Log.i("asd", "---------------- this is response : " + strChannel);
         uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        uc.setRequestProperty("x-access-token", strChannel );
+        uc.setRequestProperty("x-access-token", strChannel);
         uc.setRequestProperty("locale", "en");
         String android_id = Settings.Secure.getString(this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
         // uc.setRequestProperty("device", android_id);
-        uc.setRequestMethod("POST");
+        uc.setRequestMethod(Method);
         uc.setDoInput(true);
         uc.setInstanceFollowRedirects(false);
         uc.connect();
-        OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
-        writer.write(payload);
-        writer.close();
+        if (payload != null) {
+            OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
+            writer.write(payload);
+            writer.close();
+        }
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 jsonString.append(line);
-                Log.i("asd",line);
+                Log.i("asd", line);
             }
             br.close();
         } catch (Exception ex) {
