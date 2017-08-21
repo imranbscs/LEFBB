@@ -65,6 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
         Edt_DOB = (EditText) findViewById(R.id.ed_dob);
         Male = (TextView) findViewById(R.id.txtMale);
         Female = (TextView) findViewById(R.id.txtFemale);
+        getSupportActionBar().hide();
         // perform click event on edit text
         Edt_DOB.setOnClickListener(new View.OnClickListener() {
             @Override
