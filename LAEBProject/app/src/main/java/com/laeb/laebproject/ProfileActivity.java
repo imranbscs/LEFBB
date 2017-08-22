@@ -54,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
     String gender = "M";
     TextView Male;
     TextView Female;
+    int mCity_Id = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,7 +150,8 @@ public class ProfileActivity extends AppCompatActivity {
                             public void onItemSelected(AdapterView<?> arg0,
                                                        View arg1, int position, long arg3) {
 
-
+                                City  areaName = (City) cities.get(position);
+                                mCity_Id = areaName.getId();
                             }
 
                             @Override
@@ -181,7 +183,7 @@ public class ProfileActivity extends AppCompatActivity {
                 param.put("name", mName);
                 param.put("image", "base64image");
                 param.put("email", mEmail);
-                param.put("city", "3");
+                param.put("city", mCity_Id + "");
                 param.put("dob", mDOB);
                 param.put("gender", gender);
 

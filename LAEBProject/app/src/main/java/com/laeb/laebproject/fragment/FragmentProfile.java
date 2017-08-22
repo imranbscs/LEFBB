@@ -196,13 +196,15 @@ public class FragmentProfile extends Fragment {
                             @Override
                             public void onItemSelected(AdapterView<?> arg0,
                                                        View arg1, int position, long arg3) {
-
-
+                                Log.i("asd", "item selected " + "");
+                                City  areaName = (City) cities.get(position);
+                                Log.i("asd", areaName.getId() + "");
                             }
 
                             @Override
                             public void onNothingSelected(AdapterView<?> arg0) {
                                 // TODO Auto-generated method stub
+
                             }
                         });
             }
