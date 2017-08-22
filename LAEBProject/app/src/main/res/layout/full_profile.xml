@@ -200,7 +200,7 @@
                                 android:gravity="center"
                                 android:background="#00000000"
                                 android:hint="Height"
-                                android:inputType="text" />
+                                android:inputType="number" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
@@ -222,7 +222,7 @@
                                 android:gravity="center"
                                 android:background="#00000000"
                                 android:hint="Weight"
-                                android:inputType="text" />
+                                android:inputType="number" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
