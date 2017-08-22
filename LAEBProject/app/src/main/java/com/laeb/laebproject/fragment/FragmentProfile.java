@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -111,6 +112,9 @@ public class FragmentProfile extends Fragment {
 
         Spinner spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
         spn_position.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));
+
+//        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
+//        spn_position.setAdapter(adap);
 
         MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
 
@@ -217,7 +221,8 @@ public class FragmentProfile extends Fragment {
                         .setAdapter(new ArrayAdapter<String>(getActivity(),
                                 android.R.layout.simple_spinner_dropdown_item,
                                 worldlist));
-
+                SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
+                mySpinner.setAdapter(adap);
                 // Spinner on item click listener
                 mySpinner
                         .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

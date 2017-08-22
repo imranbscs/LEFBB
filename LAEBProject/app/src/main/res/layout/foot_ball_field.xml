@@ -6,12 +6,23 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg">
 
-
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/recylerView"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -22,12 +33,6 @@
             android:id="@+id/btnCreateFields"
             android:clickable="true"
             android:layout_marginBottom="20dp"/>
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:id="@+id/recylerView"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
-
+    </RelativeLayout>
 </RelativeLayout>

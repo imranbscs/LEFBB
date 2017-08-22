@@ -122,7 +122,6 @@
                             android:layout_height="40dp"
                             android:ems="10"
                             android:textColorHint="@color/textColorHint"
-                            android:gravity="center"
                             android:hint="Select your City"
                             android:textColor="@color/textColorHint"
                             android:inputType="text" />

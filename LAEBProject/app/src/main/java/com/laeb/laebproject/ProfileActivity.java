@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,12 +110,11 @@ public class ProfileActivity extends AppCompatActivity {
             protected ArrayList<String> doInBackground(String... params) {
                 try {
 
-                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",
-                            null,
-                            getApplicationContext(), "GET");
+                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",null, getApplicationContext(), "GET");
 
                     JSONObject jsonobject = new JSONObject(response);
                     cities = new ArrayList<City>();
+
                     jsonarray = jsonobject.getJSONArray("cities");
                     worldlist = new ArrayList<String>();
                     for (int i = 0; i < jsonarray.length(); i++) {
@@ -144,12 +144,14 @@ public class ProfileActivity extends AppCompatActivity {
                 Spinner mySpinner = (Spinner) findViewById(R.id.ed_city);
 
 
-                // Spinner adapter
-                mySpinner
-                        .setAdapter(new ArrayAdapter<String>(getApplicationContext(),
-                                android.R.layout.simple_spinner_dropdown_item,
-                                worldlist));
+                SpinnerAdapter adap = new ArrayAdapter<String>(ProfileActivity.this, R.layout.spinner_item, worldlist);
 
+
+                // Spinner adapter
+//                mySpinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+//                                android.R.layout.simple_spinner_dropdown_item,
+//                                worldlist));
+                mySpinner.setAdapter(adap);
                 // Spinner on item click listener
                 mySpinner
                         .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
