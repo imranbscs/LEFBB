@@ -58,17 +58,20 @@ public class FragmentProfile extends Fragment {
     EditText Edt_Nick;
     EditText Edt_Height;
     EditText Edt_Weight;
-    EditText PlayRole;
+    TextView ed_player;
+    TextView ed_refree;
     EditText fc_local;
     EditText Place_of_Birth;
     EditText fc_International;
     Spinner EDT_City;
+    String PlayingRole;
 
     DatePickerDialog datePickerDialog;
     JSONArray jsonarray;
     ArrayList<City> cities;
     ArrayList<String> worldlist;
     TextView SaveProfile;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
@@ -81,7 +84,29 @@ public class FragmentProfile extends Fragment {
         Edt_Height = (EditText) v.findViewById(R.id.ed__height);
         Edt_Weight = (EditText) v.findViewById(R.id.ed_weight);
         Place_of_Birth = (EditText) v.findViewById(R.id.ed__district);
-        PlayRole = (EditText) v.findViewById(R.id.ed_you_player);
+        ed_player = (TextView) v.findViewById(R.id.ed_you_player);
+        ed_refree = (TextView) v.findViewById(R.id.ed_refree);
+
+        ed_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int imgResource = R.drawable.tickselected;
+                ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
+                imgResource = R.drawable.tick;
+                ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
+                PlayingRole = "Player";
+            }
+        });
+        ed_refree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int imgResource = R.drawable.tickselected;
+                ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
+                imgResource = R.drawable.tick;
+                ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
+                PlayingRole = "Refree";
+            }
+        });
         fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
         fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
 
@@ -95,7 +120,7 @@ public class FragmentProfile extends Fragment {
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
                 // date picker dialog
-                datePickerDialog = new DatePickerDialog(getActivity(),R.style.DialogTheme,
+                datePickerDialog = new DatePickerDialog(getActivity(), R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -189,13 +214,11 @@ public class FragmentProfile extends Fragment {
             public void onClick(View v) {
 
 
-
                 String mName = Edt_Full_Name.getText().toString();
                 String mDOB = Edt_DOB.getText().toString();
                 String mNick = Edt_Nick.getText().toString();
                 String mHeight = Edt_Height.getText().toString();
                 String mWeight = Edt_Weight.getText().toString();
-                String mPlayRole = PlayRole.getText().toString();
                 String mLocal = fc_local.getText().toString();
                 String mInter = fc_International.getText().toString();
                 String mDistrict = Place_of_Birth.getText().toString();
@@ -205,14 +228,14 @@ public class FragmentProfile extends Fragment {
                 param.put("name", mName);
                 param.put("image", "base64image");
                 param.put("nickname", mNick);
-                param.put("email", "imran@yahoo.com" );
+                param.put("email", "imran@yahoo.com");
                 param.put("city", mCity);
                 param.put("dob", mDOB);
                 param.put("gender", "M");
                 param.put("place_of_birth", mDistrict);
                 param.put("height", mHeight);
                 param.put("weight", mWeight);
-                param.put("playing_role", mPlayRole);
+                param.put("playing_role", PlayingRole);
                 param.put("fc_local", mLocal);
                 param.put("fc_international", mInter);
 

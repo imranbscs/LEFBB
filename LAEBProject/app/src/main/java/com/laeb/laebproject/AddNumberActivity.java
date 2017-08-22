@@ -95,7 +95,7 @@ public class AddNumberActivity extends AppCompatActivity {
                 AWSCredentials oCredentials = new AWSCredentials() {
                     @Override
                     public String getAWSAccessKeyId() {
-                        return "aaa";
+                        return "aa";
                     }
 
                     @Override
@@ -118,11 +118,11 @@ public class AddNumberActivity extends AppCompatActivity {
                 smsAttributes.put("AWS.SNS.SMS.SMSType", new MessageAttributeValue()
                         .withStringValue("Promotional") //Sets the type to promotional.
                         .withDataType("String"));
-                //PublishResult oresult = snsClient.publish(new PublishRequest()
-                 //      .withMessage(message)
-                 //       .withPhoneNumber(phoneNumber)
-                 //      .withMessageAttributes(smsAttributes));
-               // Log.i("ERR", oresult.toString());
+              //  PublishResult oresult = snsClient.publish(new PublishRequest()
+                //       .withMessage(message)
+               //         .withPhoneNumber(phoneNumber)
+               //        .withMessageAttributes(smsAttributes));
+             //   Log.i("ERR", oresult.toString());
                 return urls[0];
 
             } catch (Exception e) {
