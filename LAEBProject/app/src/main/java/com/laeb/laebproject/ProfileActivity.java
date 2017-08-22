@@ -55,6 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView Male;
     TextView Female;
     int mCity_Id = 0;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,6 +177,11 @@ public class ProfileActivity extends AppCompatActivity {
         SaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(!validation()){
+                    return;
+                }
+
                 String mName = Edt_Full_Name.getText().toString();
 
                 String mEmail = Edt_Email.getText().toString();
@@ -274,9 +281,35 @@ public class ProfileActivity extends AppCompatActivity {
         Male.setBackgroundColor(Color.TRANSPARENT);
         gender = "M";
     }
+
     public void btnMale(View view) {
         view.setBackgroundColor(Color.argb(255, 0, 0, 0));
         Female.setBackgroundColor(Color.TRANSPARENT);
         gender = "F";
     }
+
+    public boolean validation(){
+        boolean b = true;
+        if(Edt_Full_Name.getText().toString().trim().equals("")){
+            Edt_Full_Name.setError("Invalid number or Contry code.");
+            return false;
+        }else {
+            Edt_Full_Name.setError(null);
+        }
+
+        if (Edt_Email.getText().toString().trim().matches(emailPattern) && Edt_Email.getText().toString().length() > 0)
+        {
+            Edt_Email.setError(null);
+        }
+        else
+        {
+            Edt_Email.setError("Invalid Email.");
+            return false;
+        }
+
+
+
+        return true;
+    }
+
 }

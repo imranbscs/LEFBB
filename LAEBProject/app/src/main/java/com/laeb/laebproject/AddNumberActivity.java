@@ -39,19 +39,24 @@ public class AddNumberActivity extends AppCompatActivity {
 
     AmazonSNSClient snsClient;
     String phoneNumber;
+    EditText ctCode, ctNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_number);
-
+        ctCode = (EditText) findViewById(R.id.ed_contrycode);
+        ctNumber = (EditText) findViewById(R.id.ed_number);
         getSupportActionBar().hide();
     }
 
     public void continueClicked(View view) {
-        EditText ctCode = (EditText) findViewById(R.id.ed_contrycode);
-        EditText ctNumber = (EditText) findViewById(R.id.ed_number);
+
+        if(!validation()){
+            //return;
+        }
+
         phoneNumber = ctCode.getText().toString() + ctNumber.getText().toString();
         new AsyncTask<String, String, String>() {
 
@@ -175,4 +180,16 @@ public class AddNumberActivity extends AppCompatActivity {
         uc.disconnect();
         return jsonString.toString();
     }
+
+    public boolean validation(){
+        boolean b = true;
+        if(ctCode.getText().toString().equals("") || ctNumber.getText().toString().equals("")){
+            ctNumber.setError("Invalid number or Contry code.");
+            return false;
+        }else {
+            ctNumber.setError(null);
+        }
+        return true;
+    }
+
 }
