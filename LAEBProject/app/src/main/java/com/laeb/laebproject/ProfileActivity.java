@@ -2,17 +2,21 @@ package com.laeb.laebproject;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,6 +28,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,12 +51,16 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayList<City> cities;
     ArrayList<String> worldlist;
     TextView SaveProfile;
-
+    String gender = "M";
+    TextView Male;
+    TextView Female;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Edt_DOB = (EditText) findViewById(R.id.ed_dob);
+        Male = (TextView) findViewById(R.id.txtMale);
+        Female = (TextView) findViewById(R.id.txtFemale);
         // perform click event on edit text
         Edt_DOB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,22 +70,22 @@ public class ProfileActivity extends AppCompatActivity {
                 int mYear = c.get(Calendar.YEAR); // current year
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                // date picker dialog
-                datePickerDialog = new DatePickerDialog(ProfileActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
 
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(ProfileActivity.this,R.style.DialogTheme,
+                        new DatePickerDialog.OnDateSetListener() {
 
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                Log.i("asd", "---------------- this is response : " + dayOfMonth);
                                 // set day of month , month and year value in the edit text
                                 Edt_DOB.setText(year + "-"
-                                        + dayOfMonth + "-" + (monthOfYear + 1));
+                                        + (monthOfYear + 1) + "-" + dayOfMonth);
 
                             }
 
                         }, mYear, mMonth, mDay);
+
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         datePickerDialog.show();
@@ -94,23 +103,19 @@ public class ProfileActivity extends AppCompatActivity {
                     String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",
                             null,
                             getApplicationContext(), "GET");
-                    Spinner staticSpinner = (Spinner) findViewById(R.id.ed_city);
+
                     JSONObject jsonobject = new JSONObject(response);
                     cities = new ArrayList<City>();
                     jsonarray = jsonobject.getJSONArray("cities");
                     worldlist = new ArrayList<String>();
                     for (int i = 0; i < jsonarray.length(); i++) {
                         jsonobject = jsonarray.getJSONObject(i);
-
                         City city = new City();
-
                         city.setName(jsonobject.optString("city_name"));
                         city.setId(jsonobject.optInt("city_id"));
                         cities.add(city);
 
                         worldlist.add(jsonobject.optString("city_name"));
-                        // Create an ArrayAdapter using the string array and a default spinner
-
                     }
                     return worldlist;
                 } catch (IOException ex) {
@@ -129,6 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 Spinner mySpinner = (Spinner) findViewById(R.id.ed_city);
 
+
                 // Spinner adapter
                 mySpinner
                         .setAdapter(new ArrayAdapter<String>(getApplicationContext(),
@@ -142,7 +148,7 @@ public class ProfileActivity extends AppCompatActivity {
                             @Override
                             public void onItemSelected(AdapterView<?> arg0,
                                                        View arg1, int position, long arg3) {
-                                // TODO Auto-generated method stub
+
 
                             }
 
@@ -176,8 +182,8 @@ public class ProfileActivity extends AppCompatActivity {
                 param.put("image", "base64image");
                 param.put("email", mEmail);
                 param.put("city", "3");
-                param.put("dob", "1986-04-13");
-                param.put("gender", "M");
+                param.put("dob", mDOB);
+                param.put("gender", gender);
 
                 final RequestParams paramss = new RequestParams(param);
 
@@ -198,6 +204,14 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
 
+                    @Override
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                    }
+
+
+
                 }.execute("");
                 getSupportActionBar().hide();
 
@@ -208,9 +222,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void saveClicked(View view) {
-        startActivity(new Intent(this, MenuActivity.class));
-    }
+
 
     public String makePostRequest(String stringUrl, String payload,
                                   Context context, String Method) throws IOException {
@@ -252,5 +264,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         uc.disconnect();
         return jsonString.toString();
+    }
+
+
+    public void btnFemale(View view) {
+        view.setBackgroundColor(Color.argb(255, 0, 0, 0));
+        Male.setBackgroundColor(Color.TRANSPARENT);
+        gender = "M";
+    }
+    public void btnMale(View view) {
+        view.setBackgroundColor(Color.argb(255, 0, 0, 0));
+        Female.setBackgroundColor(Color.TRANSPARENT);
+        gender = "F";
     }
 }

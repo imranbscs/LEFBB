@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,18 +28,19 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs";
-
+EditText et_Code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification_code);
+        et_Code = (EditText) findViewById(R.id.ed_number) ;
         getSupportActionBar().hide();
     }
 
     public void submitClicked(View view) {
 
         Intent i = getIntent();
-        final String code = i.getStringExtra("code");
+        final String code = et_Code.getText().toString();
         final String phone = i.getStringExtra("phone");
         new AsyncTask<String, String, String>() {
 
@@ -51,8 +55,9 @@ public class VerificationCodeActivity extends AppCompatActivity {
                     String response = makePostRequest("http://192.169.138.14:4000/api/users/verifyCode",
                             paramss.toString(), getApplicationContext());
                     JSONObject reader = new JSONObject(response);
+                    Log.i("asd", "---------------- this is response : " + response);
                     String token = reader.getString("token");
-                    if (!token.equals("")) {
+                    if (!response.contains("ServerInvalidVerificationCode")) {
                         Intent i = new Intent(getBaseContext(), HomeActivity.class);
                         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -60,7 +65,12 @@ public class VerificationCodeActivity extends AppCompatActivity {
                         editor.commit();
                         startActivity(i);
                         Log.i("asd", "---------------- this is response : " + code);
+
                         return "Success";
+                    }
+                    else
+                    {
+                        return "Fail";
                     }
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -69,6 +79,16 @@ public class VerificationCodeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 return "";
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                TextView tvError = (TextView) findViewById(R.id.tvError);
+                if (s != "Success")
+                tvError.setVisibility(View.VISIBLE);
+                else
+                    tvError.setVisibility(View.INVISIBLE);
             }
 
         }.execute("");

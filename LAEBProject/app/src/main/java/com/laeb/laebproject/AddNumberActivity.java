@@ -95,7 +95,7 @@ public class AddNumberActivity extends AppCompatActivity {
                 AWSCredentials oCredentials = new AWSCredentials() {
                     @Override
                     public String getAWSAccessKeyId() {
-                        return "aaaa";
+                        return "aaa";
                     }
 
                     @Override
@@ -104,9 +104,6 @@ public class AddNumberActivity extends AppCompatActivity {
                     }
                 };
                 snsClient = new AmazonSNSClient(oCredentials);
-                SecureRandom random = new SecureRandom();
-                int num = random.nextInt(100000);
-                String formatted = String.format("%05d", num);
 
                 String message = "Your verification code is " + urls[0];
 
@@ -121,12 +118,13 @@ public class AddNumberActivity extends AppCompatActivity {
                 smsAttributes.put("AWS.SNS.SMS.SMSType", new MessageAttributeValue()
                         .withStringValue("Promotional") //Sets the type to promotional.
                         .withDataType("String"));
-                PublishResult oresult = snsClient.publish(new PublishRequest()
-                        .withMessage(message)
-                        .withPhoneNumber(phoneNumber)
-                        .withMessageAttributes(smsAttributes));
-                Log.i("ERR", oresult.toString());
+                //PublishResult oresult = snsClient.publish(new PublishRequest()
+                 //      .withMessage(message)
+                 //       .withPhoneNumber(phoneNumber)
+                 //      .withMessageAttributes(smsAttributes));
+               // Log.i("ERR", oresult.toString());
                 return urls[0];
+
             } catch (Exception e) {
                 this.exception = e;
                 Log.e("ABC", e.getMessage());
@@ -154,7 +152,7 @@ public class AddNumberActivity extends AppCompatActivity {
         uc.setRequestProperty("locale", "en");
         String android_id = Settings.Secure.getString(this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        uc.setRequestProperty("x-access-key", "aaa");
+        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
         // uc.setRequestProperty("device", android_id);
         uc.setRequestMethod("POST");
         uc.setDoInput(true);

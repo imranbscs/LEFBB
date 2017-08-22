@@ -128,6 +128,8 @@
                             android:ems="10"
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
                             android:textAlignment="center"
                             android:background="#00000000"
                             android:hint="City"
@@ -167,6 +169,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:ems="10"
+                            android:clickable="true"
+                            android:editable="false"
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
                             android:background="#00000000"
@@ -191,8 +195,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
-                            android:id="@+id/loginText"
+                            android:id="@+id/txtMale"
                             android:textSize="16sp"
+                            android:onClick="btnMale"
                             android:textColor="@color/white"
                             android:gravity="right"
                             android:textStyle="normal" />
@@ -212,7 +217,8 @@
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:layout_weight="1"
-                            android:id="@+id/regText"
+                            android:onClick="btnFemale"
+                            android:id="@+id/txtFemale"
                             android:textStyle="normal" />
 
                     </LinearLayout>
