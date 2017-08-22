@@ -24,10 +24,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.laeb.laebproject.MenuActivity;
+import com.laeb.laebproject.MultiSelectionSpinner;
 import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
 import com.laeb.laebproject.model.City;
+import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.PlayerPosition;
 import com.laeb.laebproject.model.UpComingGames;
 import com.loopj.android.http.RequestParams;
@@ -43,6 +45,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -73,6 +76,9 @@ public class FragmentProfile extends Fragment {
     ArrayList<String> worldlist;
     TextView SaveProfile;
 
+    public static String[] names() {
+        return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
@@ -88,9 +94,12 @@ public class FragmentProfile extends Fragment {
         ed_player = (TextView) v.findViewById(R.id.ed_you_player);
         ed_refree = (TextView) v.findViewById(R.id.ed_refree);
 
-        Spinner mySpinner = (Spinner) v.findViewById(R.id.ed_select_position);
+        Spinner spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
+        spn_position.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));
 
-        mySpinner.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));
+        MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
+
+        spn_days.setItems(names());
 
         ed_player.setOnClickListener(new View.OnClickListener() {
             @Override
