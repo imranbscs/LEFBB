@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/bg"
+        android:visibility="visible"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actionBarLyout">
+
+            <TextView
+                android:text="Add Soical Media"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:id="@+id/soical_title"
+                android:textStyle="normal|bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/soicalLyout"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:hint="Facebook"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:id="@+id/facebook" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:hint="Twitter"
+                android:backgroundTint="@color/white"
+                android:gravity="center"
+                android:id="@+id/twitter" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:hint="Instagram"
+                android:backgroundTint="@color/white"
+                android:gravity="center"
+                android:id="@+id/instagram" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@color/darkTransparentBg"
+            android:layout_marginTop="40dp"
+            android:id="@+id/nextBtn"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="NEXT"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_below="@+id/actionBarLyout">-->
+        <!--</LinearLayout>-->
+
+    </LinearLayout>
+</RelativeLayout>

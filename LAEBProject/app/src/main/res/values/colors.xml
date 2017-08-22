@@ -8,4 +8,5 @@
     <color name="textColorHintProfile">#e0e0d2</color>
     <color name="black_upcoming_game">#D8000000</color>
     <color name="footBallFieldWhiteBg">#CCFFFFFF</color>
+    <color name="darkTransparentBg">#66000000</color>
 </resources>

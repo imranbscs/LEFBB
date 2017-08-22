@@ -28,6 +28,7 @@ import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
 import com.laeb.laebproject.model.City;
+import com.laeb.laebproject.model.PlayerPosition;
 import com.laeb.laebproject.model.UpComingGames;
 import com.loopj.android.http.RequestParams;
 
@@ -87,11 +88,15 @@ public class FragmentProfile extends Fragment {
         ed_player = (TextView) v.findViewById(R.id.ed_you_player);
         ed_refree = (TextView) v.findViewById(R.id.ed_refree);
 
+        Spinner mySpinner = (Spinner) v.findViewById(R.id.ed_select_position);
+
+        mySpinner.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));
+
         ed_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int imgResource = R.drawable.tickselected;
-                ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
+                ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                 imgResource = R.drawable.tick;
                 ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                 PlayingRole = "Player";
@@ -196,9 +201,8 @@ public class FragmentProfile extends Fragment {
                             @Override
                             public void onItemSelected(AdapterView<?> arg0,
                                                        View arg1, int position, long arg3) {
-                                Log.i("asd", "item selected " + "");
                                 City  areaName = (City) cities.get(position);
-                                Log.i("asd", areaName.getId() + "");
+
                             }
 
                             @Override
