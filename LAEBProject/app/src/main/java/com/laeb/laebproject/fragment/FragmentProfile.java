@@ -73,6 +73,18 @@ public class FragmentProfile extends Fragment {
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
         TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
+
+        Edt_Full_Name = (EditText) v.findViewById(R.id.ed__name);
+        Edt_DOB = (EditText) v.findViewById(R.id.ed_dob);
+        Edt_Nick = (EditText) v.findViewById(R.id.ed_nick_name);
+        EDT_City = (Spinner) v.findViewById(R.id.ed_city);
+        Edt_Height = (EditText) v.findViewById(R.id.ed__height);
+        Edt_Weight = (EditText) v.findViewById(R.id.ed_weight);
+        Place_of_Birth = (EditText) v.findViewById(R.id.ed__district);
+        PlayRole = (EditText) v.findViewById(R.id.ed_you_player);
+        fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
+        fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
+
         Edt_DOB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +95,7 @@ public class FragmentProfile extends Fragment {
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
                 // date picker dialog
-                datePickerDialog = new DatePickerDialog(ProfileActivity.this,R.style.DialogTheme,
+                datePickerDialog = new DatePickerDialog(getActivity(),R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
