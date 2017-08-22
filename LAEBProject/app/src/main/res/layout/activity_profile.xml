@@ -127,14 +127,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:ems="10"
-                            android:textColor="@color/textColorHint"
-                            android:textColorHint="@color/textColorHint"
-                            android:gravity="center"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:textAlignment="center"
                             android:background="#00000000"
-                            android:hint="City"
                             android:layout_marginTop="5dp"
                             android:inputType="text" />
                         <RelativeLayout
@@ -193,18 +186,31 @@
                         android:orientation="horizontal"
                         android:gravity="center">
 
-                        <TextView
-                            android:text="Male"
-                            android:layout_weight="1"
+                        <RelativeLayout
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:id="@+id/txtMale"
-                            android:textSize="16sp"
-                            android:onClick="btnMale"
-                            android:textColor="@color/white"
-                            android:gravity="right"
-                            android:textStyle="normal" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="Male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:id="@+id/txtMale"
+                                android:layout_centerVertical="true"
+                                android:textSize="16sp"
+                                android:onClick="btnMale"
+                                android:textColor="@color/white"
+                                android:layout_alignParentRight="true"
+                                android:textStyle="normal" />
+                            <RelativeLayout
+                                android:layout_width="45dp"
+                                android:layout_height="1dp"
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/male_selector"
+                                android:layout_marginRight="16dp"
+                                android:layout_below="@+id/txtMale"
+                                android:background="#fff"/>
+                        </RelativeLayout>
 
                         <RelativeLayout
                             android:layout_width="1dp"
@@ -212,19 +218,33 @@
                             android:background="@color/white"
                             android:layout_marginTop="40dp"
                             android:layout_marginBottom="40dp"/>
-
-                        <TextView
-                            android:text="Female"
+                        <RelativeLayout
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            android:layout_weight="1"
-                            android:onClick="btnFemale"
-                            android:id="@+id/txtFemale"
-                            android:textStyle="normal" />
-
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="Female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:textColor="@color/white"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:textSize="16sp"
+                                android:onClick="btnFemale"
+                                android:id="@+id/txtFemale"
+                                android:textStyle="normal" />
+                            <RelativeLayout
+                                android:layout_width="60dp"
+                                android:id="@+id/female_delector"
+                                android:layout_height="1dp"
+                                android:layout_alignParentLeft="true"
+                                android:visibility="gone"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_below="@+id/txtFemale"
+                                android:background="#fff"/>
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
