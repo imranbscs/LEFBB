@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,10 +16,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.laeb.laebproject.MenuActivity;
+import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
 import com.laeb.laebproject.model.City;
@@ -26,6 +32,8 @@ import com.laeb.laebproject.model.UpComingGames;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,6 +42,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,8 +52,18 @@ import java.util.List;
 
 public class FragmentProfile extends Fragment {
     EditText Edt_Full_Name;
-    EditText Edt_Email;
     EditText Edt_DOB;
+    EditText ed_image;
+    EditText ed_gender;
+    EditText Edt_Nick;
+    EditText Edt_Height;
+    EditText Edt_Weight;
+    EditText PlayRole;
+    EditText fc_local;
+    EditText Place_of_Birth;
+    EditText fc_International;
+    Spinner EDT_City;
+
     DatePickerDialog datePickerDialog;
     JSONArray jsonarray;
     ArrayList<City> cities;
@@ -52,26 +71,138 @@ public class FragmentProfile extends Fragment {
     TextView SaveProfile;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.full_profile, container, false);
+        final View v = inflater.inflate(R.layout.full_profile, container, false);
         TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
+        Edt_DOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(ProfileActivity.this,R.style.DialogTheme,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                Edt_DOB.setText(year + "-"
+                                        + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                            }
+
+                        }, mYear, mMonth, mDay);
+
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        datePickerDialog.show();
+                    }
+                }, 100);
+
+            }
+        });
+        new AsyncTask<String, String, ArrayList<String>>() {
+
+            @Override
+            protected ArrayList<String> doInBackground(String... params) {
+                try {
+
+                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",
+                            null,
+                            getActivity(), "GET");
+
+                    JSONObject jsonobject = new JSONObject(response);
+                    cities = new ArrayList<City>();
+                    jsonarray = jsonobject.getJSONArray("cities");
+                    worldlist = new ArrayList<String>();
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        jsonobject = jsonarray.getJSONObject(i);
+                        City city = new City();
+                        city.setName(jsonobject.optString("city_name"));
+                        city.setId(jsonobject.optInt("city_id"));
+                        cities.add(city);
+
+                        worldlist.add(jsonobject.optString("city_name"));
+                    }
+                    return worldlist;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    return null;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+            }
+
+
+            @Override
+            protected void onPostExecute(ArrayList<String> s) {
+                super.onPostExecute(s);
+                Spinner mySpinner = (Spinner) v.findViewById(R.id.selectCity);
+
+
+                // Spinner adapter
+                mySpinner
+                        .setAdapter(new ArrayAdapter<String>(getActivity(),
+                                android.R.layout.simple_spinner_dropdown_item,
+                                worldlist));
+
+                // Spinner on item click listener
+                mySpinner
+                        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                            @Override
+                            public void onItemSelected(AdapterView<?> arg0,
+                                                       View arg1, int position, long arg3) {
+
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> arg0) {
+                                // TODO Auto-generated method stub
+                            }
+                        });
+            }
+
+
+        }.execute("");
         saveprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mName = Edt_Full_Name.getText().toString();
 
-                String mEmail = Edt_Email.getText().toString();
+
+
+                String mName = Edt_Full_Name.getText().toString();
                 String mDOB = Edt_DOB.getText().toString();
+                String mNick = Edt_Nick.getText().toString();
+                String mHeight = Edt_Height.getText().toString();
+                String mWeight = Edt_Weight.getText().toString();
+                String mPlayRole = PlayRole.getText().toString();
+                String mLocal = fc_local.getText().toString();
+                String mInter = fc_International.getText().toString();
+                String mDistrict = Place_of_Birth.getText().toString();
+                String mCity = "2";
 
                 HashMap<String, String> param = new HashMap<String, String>();
                 param.put("name", mName);
                 param.put("image", "base64image");
-                param.put("nickname", mEmail);
-                param.put("city", "3");
-                param.put("dob", "1986-04-13");
+                param.put("nickname", mNick);
+                param.put("email", "imran@yahoo.com" );
+                param.put("city", mCity);
+                param.put("dob", mDOB);
                 param.put("gender", "M");
-                param.put("place_of_birth", "M");
-                param.put("height", "22");
-                param.put("weight", "75");
+                param.put("place_of_birth", mDistrict);
+                param.put("height", mHeight);
+                param.put("weight", mWeight);
+                param.put("playing_role", mPlayRole);
+                param.put("fc_local", mLocal);
+                param.put("fc_international", mInter);
 
                 final RequestParams paramss = new RequestParams(param);
 
