@@ -7,8 +7,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/cardview_light_background</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
 </resources>

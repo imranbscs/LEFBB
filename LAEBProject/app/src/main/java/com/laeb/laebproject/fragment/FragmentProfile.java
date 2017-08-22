@@ -22,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.laeb.laebproject.MenuActivity;
 import com.laeb.laebproject.MultiSelectionSpinner;
@@ -45,9 +46,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -383,6 +387,22 @@ public class FragmentProfile extends Fragment {
             return false;
         } else {
             Edt_Weight.setError(null);
+        }
+
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = fmt.parse(Edt_DOB.getText().toString());
+            fmt.format(date);
+        }
+        catch(ParseException pe) {
+        }
+        int diff1 =new Date().compareTo(date);
+
+        if(diff1<0){
+            Toast.makeText(getActivity(), "Please select a valid date.",  Toast.LENGTH_LONG).show();
+            return false;
         }
 
         return true;
