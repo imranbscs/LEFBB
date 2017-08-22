@@ -223,7 +223,6 @@ public class FragmentProfile extends Fragment {
                                                        View arg1, int position, long arg3) {
                                 City areaName = (City) cities.get(position);
                                 mCity_Id = areaName.getId();
-
                             }
 
                             @Override
@@ -233,8 +232,6 @@ public class FragmentProfile extends Fragment {
                             }
                         });
             }
-
-
         }.execute("");
 
         saveprofile.setOnClickListener(new View.OnClickListener() {
@@ -253,7 +250,7 @@ public class FragmentProfile extends Fragment {
                 String mLocal = fc_local.getText().toString();
                 String mInter = fc_International.getText().toString();
                 String mDistrict = Place_of_Birth.getText().toString();
-                String mCity = "2";
+
 
                 HashMap<String, String> param = new HashMap<String, String>();
                 param.put("name", mName);
@@ -292,7 +289,8 @@ public class FragmentProfile extends Fragment {
                     @Override
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
-                        //startActivity(new Intent(getActivity(), MenuActivity.class));
+                        if (s == "Success")
+                            startActivity(new Intent(getActivity(), MenuActivity.class));
                     }
 
 
