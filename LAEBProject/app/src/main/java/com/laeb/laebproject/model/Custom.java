@@ -22,3 +22,4 @@ public class Custom implements Serializable {
         this.list = list;
     }
 }
+
