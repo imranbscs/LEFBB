@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.laeb.laebproject.model.City;
+import com.laeb.laebproject.model.Custom;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -75,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
                 // date picker dialog
-                datePickerDialog = new DatePickerDialog(ProfileActivity.this,R.style.DialogTheme,
+                datePickerDialog = new DatePickerDialog(ProfileActivity.this, R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -152,7 +153,7 @@ public class ProfileActivity extends AppCompatActivity {
                             public void onItemSelected(AdapterView<?> arg0,
                                                        View arg1, int position, long arg3) {
 
-                                City  areaName = (City) cities.get(position);
+                                City areaName = (City) cities.get(position);
                                 mCity_Id = areaName.getId();
                             }
 
@@ -178,7 +179,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(!validation()){
+                if (!validation()) {
                     return;
                 }
 
@@ -186,7 +187,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 String mEmail = Edt_Email.getText().toString();
                 String mDOB = Edt_DOB.getText().toString();
-                HashMap<String, String> param = new HashMap<String, String>();
+                final HashMap<String, String> param = new HashMap<String, String>();
                 param.put("name", mName);
                 param.put("image", "base64image");
                 param.put("email", mEmail);
@@ -216,9 +217,13 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
-                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+                        Log.i("asd",param.toString());
+                        Custom custom = new Custom();
+                        custom.setList(param);
+                        i.putExtra("user", custom);
+                        startActivity(i);
                     }
-
 
 
                 }.execute("");
@@ -230,7 +235,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
-
 
 
     public String makePostRequest(String stringUrl, String payload,
@@ -288,21 +292,18 @@ public class ProfileActivity extends AppCompatActivity {
         gender = "F";
     }
 
-    public boolean validation(){
+    public boolean validation() {
         boolean b = true;
-        if(Edt_Full_Name.getText().toString().trim().equals("")){
+        if (Edt_Full_Name.getText().toString().trim().equals("")) {
             Edt_Full_Name.setError("Invalid number or Contry code.");
             return false;
-        }else {
+        } else {
             Edt_Full_Name.setError(null);
         }
 
-        if (Edt_Email.getText().toString().trim().matches(emailPattern) && Edt_Email.getText().toString().length() > 0)
-        {
+        if (Edt_Email.getText().toString().trim().matches(emailPattern) && Edt_Email.getText().toString().length() > 0) {
             Edt_Email.setError(null);
-        }
-        else
-        {
+        } else {
             Edt_Email.setError("Invalid Email.");
             return false;
         }

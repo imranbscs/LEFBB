@@ -29,6 +29,7 @@ import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
 import com.laeb.laebproject.model.City;
+import com.laeb.laebproject.model.Custom;
 import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.PlayerPosition;
 import com.laeb.laebproject.model.UpComingGames;
@@ -69,6 +70,7 @@ public class FragmentProfile extends Fragment {
     EditText fc_International;
     Spinner EDT_City;
     String PlayingRole;
+    int mCity_Id = 0;
 
     DatePickerDialog datePickerDialog;
     JSONArray jsonarray;
@@ -79,10 +81,12 @@ public class FragmentProfile extends Fragment {
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
     }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
         TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
+
 
         Edt_Full_Name = (EditText) v.findViewById(R.id.ed__name);
         Edt_DOB = (EditText) v.findViewById(R.id.ed_dob);
@@ -93,6 +97,13 @@ public class FragmentProfile extends Fragment {
         Place_of_Birth = (EditText) v.findViewById(R.id.ed__district);
         ed_player = (TextView) v.findViewById(R.id.ed_you_player);
         ed_refree = (TextView) v.findViewById(R.id.ed_refree);
+
+        Intent i = getActivity().getIntent();
+        Custom custom = (Custom) i.getSerializableExtra("user");
+        HashMap<String, String> param = custom.getList();
+
+        Edt_Full_Name.setText(param.get("name"));
+        Edt_DOB.setText(param.get("dob"));
 
         Spinner spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
         spn_position.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));
@@ -210,7 +221,8 @@ public class FragmentProfile extends Fragment {
                             @Override
                             public void onItemSelected(AdapterView<?> arg0,
                                                        View arg1, int position, long arg3) {
-                                City  areaName = (City) cities.get(position);
+                                City areaName = (City) cities.get(position);
+                                mCity_Id = areaName.getId();
 
                             }
 
@@ -229,7 +241,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(!validation()){
+                if (!validation()) {
                     return;
                 }
 
@@ -248,7 +260,7 @@ public class FragmentProfile extends Fragment {
                 param.put("image", "base64image");
                 param.put("nickname", mNick);
                 param.put("email", "imran@yahoo.com");
-                param.put("city", mCity);
+                param.put("city", mCity_Id + "");
                 param.put("dob", mDOB);
                 param.put("gender", "M");
                 param.put("place_of_birth", mDistrict);
@@ -329,49 +341,49 @@ public class FragmentProfile extends Fragment {
         return jsonString.toString();
     }
 
-    public boolean validation(){
+    public boolean validation() {
         boolean b = true;
-        if(Edt_Full_Name.getText().toString().trim().equals("")){
+        if (Edt_Full_Name.getText().toString().trim().equals("")) {
             Edt_Full_Name.setError("Invalid name.");
             return false;
-        }else {
+        } else {
             Edt_Full_Name.setError(null);
         }
 
-        if(fc_local.getText().toString().trim().equals("") && fc_local.getText().toString().length() < 1){
+        if (fc_local.getText().toString().trim().equals("") && fc_local.getText().toString().length() < 1) {
             fc_local.setError("Invalid Club name.");
             return false;
-        }else {
+        } else {
             fc_local.setError(null);
         }
 
-        if(fc_International.getText().toString().trim().equals("")){
+        if (fc_International.getText().toString().trim().equals("")) {
             fc_International.setError("Invalid Club name");
             return false;
-        }else {
+        } else {
             fc_International.setError(null);
         }
 
-        if(Place_of_Birth.getText().toString().trim().equals("")){
+        if (Place_of_Birth.getText().toString().trim().equals("")) {
             Place_of_Birth.setError("Invalid Club name");
             return false;
-        }else {
+        } else {
             Place_of_Birth.setError(null);
         }
 
         float hieght = Float.parseFloat(Edt_Height.getText().toString());
-        if(Edt_Height.getText().toString().trim().equals("") && Edt_Height.getText().toString().length() < 1 && hieght > 10 && hieght < 1){
+        if (Edt_Height.getText().toString().trim().equals("") && Edt_Height.getText().toString().length() < 1 && hieght > 10 && hieght < 1) {
             Edt_Height.setError("Invalid Hieght");
             return false;
-        }else {
+        } else {
             Edt_Height.setError(null);
         }
 
         float wieght = Float.parseFloat(Edt_Weight.getText().toString());
-        if(Edt_Weight.getText().toString().trim().equals("") && Edt_Weight.getText().toString().length() < 1 && wieght > 500 && wieght < 5){
+        if (Edt_Weight.getText().toString().trim().equals("") && Edt_Weight.getText().toString().length() < 1 && wieght > 500 && wieght < 5) {
             Edt_Weight.setError("Invalid Wieght");
             return false;
-        }else {
+        } else {
             Edt_Weight.setError(null);
         }
 
