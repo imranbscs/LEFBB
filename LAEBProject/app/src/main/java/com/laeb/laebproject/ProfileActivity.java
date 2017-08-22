@@ -306,9 +306,6 @@ public class ProfileActivity extends AppCompatActivity {
             Edt_Email.setError("Invalid Email.");
             return false;
         }
-
-
-
         return true;
     }
 

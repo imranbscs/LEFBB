@@ -215,10 +215,14 @@ public class FragmentProfile extends Fragment {
 
 
         }.execute("");
+
         saveprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(!validation()){
+                    return;
+                }
 
                 String mName = Edt_Full_Name.getText().toString();
                 String mDOB = Edt_DOB.getText().toString();
@@ -314,5 +318,54 @@ public class FragmentProfile extends Fragment {
 
         uc.disconnect();
         return jsonString.toString();
+    }
+
+    public boolean validation(){
+        boolean b = true;
+        if(Edt_Full_Name.getText().toString().trim().equals("")){
+            Edt_Full_Name.setError("Invalid name.");
+            return false;
+        }else {
+            Edt_Full_Name.setError(null);
+        }
+
+        if(fc_local.getText().toString().trim().equals("") && fc_local.getText().toString().length() < 1){
+            fc_local.setError("Invalid Club name.");
+            return false;
+        }else {
+            fc_local.setError(null);
+        }
+
+        if(fc_International.getText().toString().trim().equals("")){
+            fc_International.setError("Invalid Club name");
+            return false;
+        }else {
+            fc_International.setError(null);
+        }
+
+        if(Place_of_Birth.getText().toString().trim().equals("")){
+            Place_of_Birth.setError("Invalid Club name");
+            return false;
+        }else {
+            Place_of_Birth.setError(null);
+        }
+
+        float hieght = Float.parseFloat(Edt_Height.getText().toString());
+        if(Edt_Height.getText().toString().trim().equals("") && Edt_Height.getText().toString().length() < 1 && hieght > 10 && hieght < 1){
+            Edt_Height.setError("Invalid Hieght");
+            return false;
+        }else {
+            Edt_Height.setError(null);
+        }
+
+        float wieght = Float.parseFloat(Edt_Weight.getText().toString());
+        if(Edt_Weight.getText().toString().trim().equals("") && Edt_Weight.getText().toString().length() < 1 && wieght > 500 && wieght < 5){
+            Edt_Weight.setError("Invalid Wieght");
+            return false;
+        }else {
+            Edt_Weight.setError(null);
+        }
+
+        return true;
     }
 }
