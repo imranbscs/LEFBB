@@ -7,10 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-<<<<<<< HEAD
+
 import android.provider.Settings;
-=======
->>>>>>> 98326378f87eb6d78270524e43dd431c27732153
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +19,8 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-<<<<<<< HEAD
-import com.laeb.laebproject.CreateFieldActivity;
-import com.laeb.laebproject.MenuActivity;
+
+
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
 import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
@@ -32,38 +30,32 @@ import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.FieldInfo;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-=======
+
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
 import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
 import com.laeb.laebproject.testjson.TestStaticMethod;
 
->>>>>>> 98326378f87eb6d78270524e43dd431c27732153
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-<<<<<<< HEAD
+
 /**
  * Created by tariq on 8/21/2017.
  */
 
 public class WeeklyScheduleFragment extends Fragment implements View.OnClickListener {
-=======
-public class WeeklyScheduleFragment extends Fragment implements View.OnClickListener{
->>>>>>> 98326378f87eb6d78270524e43dd431c27732153
+
 
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
