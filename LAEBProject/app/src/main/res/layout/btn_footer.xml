@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:text="NEXT"
+        android:text="Create Field"
+        android:id="@+id/btnNext"
         android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

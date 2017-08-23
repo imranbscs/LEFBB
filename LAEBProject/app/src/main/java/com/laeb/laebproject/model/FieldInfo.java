@@ -124,4 +124,33 @@ public class FieldInfo {
     public String nearby;
     public int water;
 
+    public int getWc() {
+        return wc;
+    }
+
+    public void setWc(int wc) {
+        this.wc = wc;
+    }
+
+    public int getFootball() {
+        return football;
+    }
+
+    public void setFootball(int football) {
+        this.football = football;
+    }
+
+    public int getVests() {
+        return vests;
+    }
+
+    public void setVests(int vests) {
+        this.vests = vests;
+    }
+
+    public int wc;
+    public int football;
+    public int vests;
+
+
 }
