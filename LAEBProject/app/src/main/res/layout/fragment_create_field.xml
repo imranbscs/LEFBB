@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <EditText
-                android:id="@+id/ed_city"
+                android:id="@+id/ed_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:ems="10"
@@ -199,6 +199,7 @@
                     android:textColor="@color/textColorHint" />
 
                 <ImageView
+                    android:id="@+id/imgGrass"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/tick"
@@ -229,6 +230,7 @@
                     android:textColor="@color/textColorHint" />
 
                 <ImageView
+                    android:id="@+id/imgClay"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/tick"

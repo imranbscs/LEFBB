@@ -3,6 +3,7 @@ package com.laeb.laebproject.create_field_fragments;
 import android.app.Fragment;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.model.Custom;
+import com.laeb.laebproject.model.CustomBinder;
 import com.laeb.laebproject.model.FieldInfo;
 
 import org.w3c.dom.Text;
@@ -23,11 +26,13 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
 
     TextView tv_water;
     TextView tv_parking;
-
+    FieldInfo fieldInfo;
+    CustomBinder oCustom;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final FieldInfo fieldInfo = (FieldInfo) savedInstanceState.get("complexObject");
-
+         oCustom = (CustomBinder) getArguments().get("complexObject");
+         fieldInfo = oCustom.getField();
+        Log.i("asd",fieldInfo.name);
         View view = inflater.inflate(R.layout.fragment_facilities, container, false);
         View b = (View) view.findViewById(R.id.nextBtn);
         b.setOnClickListener(this);
@@ -41,7 +46,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                 ImageView i = (ImageView) container.getChildAt(1);
                 int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.water = 1;
+                //fieldInfo.water = 1;
             }
 
         });
@@ -52,7 +57,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                 ImageView i = (ImageView) container.getChildAt(1);
                 int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.parking = 1;
+                //fieldInfo.parking = 1;
             }
 
         });
@@ -68,6 +73,11 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
             case R.id.nextBtn:
 
                 MapFragment fragment = new MapFragment();
+                Bundle args = new Bundle();
+                CustomBinder oCustom = new CustomBinder();
+                oCustom.setList(fieldInfo);
+                args.putSerializable("complexObject", oCustom);
+                fragment.setArguments(args);
                 ((CreateFieldActivity) getActivity()).addFragment(fragment);
                 break;
         }

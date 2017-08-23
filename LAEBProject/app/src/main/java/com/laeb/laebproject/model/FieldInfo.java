@@ -23,19 +23,19 @@ public class FieldInfo {
         this.city = city;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -112,8 +112,8 @@ public class FieldInfo {
     }
 
     public String city;
-    public String latitude;
-    public String longitude;
+    public double latitude;
+    public double longitude;
     public String size;
     public String capacity;
     public String type;
