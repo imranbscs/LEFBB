@@ -299,7 +299,8 @@ public class FragmentProfile extends Fragment {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         if (s == "Success")
-                            startActivity(new Intent(getActivity(), MenuActivity.class));
+                            Toast.makeText(getActivity(),"Profile saved successfully", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getActivity(), MenuActivity.class));
                     }
 
 

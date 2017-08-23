@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -288,14 +289,19 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void btnFemale(View view) {
-        view.setBackgroundColor(Color.argb(255, 0, 0, 0));
-        Male.setBackgroundColor(Color.TRANSPARENT);
+        RelativeLayout or = (RelativeLayout) findViewById(R.id.male_selector) ;
+        or.setVisibility(View.INVISIBLE);
+        or = (RelativeLayout) findViewById(R.id.female_delector) ;
+        or.setVisibility(View.VISIBLE);
         gender = "M";
     }
 
     public void btnMale(View view) {
-        view.setBackgroundColor(Color.argb(255, 0, 0, 0));
-        Female.setBackgroundColor(Color.TRANSPARENT);
+        RelativeLayout or = (RelativeLayout) findViewById(R.id.male_selector) ;
+        or.setVisibility(View.VISIBLE);
+        or = (RelativeLayout) findViewById(R.id.female_delector) ;
+        or.setVisibility(View.INVISIBLE);
+
         gender = "F";
     }
 
