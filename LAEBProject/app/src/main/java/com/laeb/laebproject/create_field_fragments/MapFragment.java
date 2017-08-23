@@ -76,8 +76,13 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.nextMapp:
+<<<<<<< HEAD
                 //fieldInfo.latitude = latLng.latitude;
                 //fieldInfo.longitude = latLng.longitude;
+=======
+//                fieldInfo.latitude = latLng.latitude;
+//                fieldInfo.longitude = latLng.longitude;
+>>>>>>> 98326378f87eb6d78270524e43dd431c27732153
 
                 Toast.makeText(getActivity(), fieldInfo.name, Toast.LENGTH_SHORT).show();
                 SoicalMediaFragment fragment = new SoicalMediaFragment();

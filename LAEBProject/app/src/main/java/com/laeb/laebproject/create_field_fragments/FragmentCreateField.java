@@ -2,10 +2,14 @@ package com.laeb.laebproject.create_field_fragments;
 
 import android.app.Fragment;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +39,18 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
     EditText ed_city;
     EditText ed_size;
     TextView grass_pitch;
+    ImageView addImage;
     TextView clay_pitch;
+
+    private static final int RESULT_OK = -1;
+    Bitmap image;
+
+    private static int RESULT_LOAD_IMAGE = 1;
+
+
+    View myView;
+    private ImageView profImg;
+
     final FieldInfo fieldInfo = new FieldInfo();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,10 +58,12 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         View b = (View) view.findViewById(R.id.nextBtn);
 
         ed_name = (EditText) view.findViewById(R.id.ed_name);
-        ed_city = (EditText) view.findViewById(R.id.ed_city);
+        ed_city = (EditText) view.findViewById(R.id.ed__district);
         ed_size = (EditText) view.findViewById(R.id.field_size);
         grass_pitch = (TextView) view.findViewById(R.id.grass_pitch);
         clay_pitch = (TextView) view.findViewById(R.id.clay_pitch);
+        profImg = (ImageView) view.findViewById(R.id.picture);
+        addImage = (ImageView) view.findViewById(R.id.addImage);
         grass_pitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +87,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         });
 
         b.setOnClickListener(this);
+        addImage.setOnClickListener(this);
         return view;
 
     }
@@ -92,6 +110,37 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
                 fragment.setArguments(args);
                 ((CreateFieldActivity) getActivity()).addFragment(fragment);
                 break;
+
+            case R.id.addImage:
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //GETTING IMAGE FROM GALLERY
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = this.getActivity().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+
+            profImg.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
         }
     }
 

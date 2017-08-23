@@ -20,8 +20,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> expandableListTitle;
     private HashMap<String, List<String>> expandableListDetail;
 
-    public CustomExpandableListAdapter(Context context, List<String> expandableListTitle,
-                                       HashMap<String, List<String>> expandableListDetail) {
+    public CustomExpandableListAdapter(Context context, List<String> expandableListTitle, HashMap<String, List<String>> expandableListDetail) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
@@ -29,8 +28,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int listPosition, int expandedListPosition) {
-        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .get(expandedListPosition);
+        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition)).get(expandedListPosition);
     }
 
     @Override
@@ -39,15 +37,25 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int listPosition, final int expandedListPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int listPosition, final int expandedListPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final String expandedListText = (String) getChild(listPosition, expandedListPosition);
+
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item_laeb, null);
         }
+
+        String string = expandedListText;
+        String[] parts = string.split("-");
+        String part1 = parts[0];
+        String part2 = parts[1];
+        String part3 = parts[2];
+
         TextView expandedListTextView = (TextView) convertView.findViewById(R.id.expandedListItem);
-        expandedListTextView.setText(expandedListText);
+        TextView rate = (TextView) convertView.findViewById(R.id.rate);
+        expandedListTextView.setText("From "+part1+"  Till "+part2);
+        rate.setText("Rate "+part3);
+
         return convertView;
     }
 
