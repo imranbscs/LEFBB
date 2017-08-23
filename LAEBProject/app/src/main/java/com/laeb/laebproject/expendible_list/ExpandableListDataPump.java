@@ -1,17 +1,21 @@
 package com.laeb.laebproject.expendible_list;
 
+import com.laeb.laebproject.testjson.ModelTest1;
+import com.laeb.laebproject.testjson.TestStaticMethod;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ExpandableListDataPump {
     public static HashMap<String, List<String>> getData() {
+
         HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
 
-        List<String> cricket = new ArrayList<String>();
-        cricket.add("India");
-        cricket.add("Pakistan");
-        cricket.add("Australia");
+        List<String> cricket = TestStaticMethod.getSunday();
+//        cricket.add("India");
+//        cricket.add("Pakistan");
+//        cricket.add("Australia");
 
         List<String> football = new ArrayList<String>();
         football.add("Brazil");

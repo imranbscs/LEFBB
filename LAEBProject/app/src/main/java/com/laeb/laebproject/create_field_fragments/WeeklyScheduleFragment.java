@@ -2,6 +2,7 @@ package com.laeb.laebproject.create_field_fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
 import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
+import com.laeb.laebproject.testjson.TestStaticMethod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +42,15 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
 
         View footerView = View.inflate(getActivity(), R.layout.btn_footer, null);
         expandableListView.addFooterView(footerView);
+        footerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gson gson = new Gson();
+                String json = gson.toJson(TestStaticMethod.getAll());
+                Log.v("ppp", "====== "+json);
+                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         expandableListAdapter = new CustomExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
@@ -46,29 +58,21 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getActivity(),
-                        expandableListTitle.get(groupPosition) + " List Expanded.",
-                        Toast.LENGTH_SHORT).show();
             }
         });
 
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
             @Override
             public void onGroupCollapse(int groupPosition) {
             }
         });
-
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 return false;
             }
         });
-
-
         return view;
-
     }
 
     @Override
