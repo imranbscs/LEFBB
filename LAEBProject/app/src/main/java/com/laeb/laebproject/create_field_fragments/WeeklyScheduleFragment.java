@@ -20,10 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by tariq on 8/21/2017.
- */
-
 public class WeeklyScheduleFragment extends Fragment implements View.OnClickListener{
 
     ExpandableListView expandableListView;
