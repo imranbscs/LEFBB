@@ -60,7 +60,7 @@
                             android:id="@+id/ed_contrycode"
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
-                            android:text="+966"
+                            android:text="@string/contryCode"
 
                             android:background="#00000000"
                             android:ems="10"
@@ -75,7 +75,7 @@
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
                             android:background="#00000000"
-                            android:hint="Phone Number"
+                            android:hint="@string/phone_number"
                             android:inputType="number" />
 
                     </LinearLayout>
@@ -99,7 +99,7 @@
                     android:onClick="continueClicked"
                     android:layout_marginTop="30dp"
                     android:textColor="@color/white"
-                    android:text="CONTINUE" />
+                    android:text="@string/continueText" />
 
             </LinearLayout>
         </LinearLayout>

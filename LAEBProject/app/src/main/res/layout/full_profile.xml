@@ -79,7 +79,7 @@
                                     android:textColorHint="@color/textColorHint"
                                     android:gravity="center"
                                     android:background="#00000000"
-                                    android:hint="Your name"
+                                    android:hint="@string/your_name"
                                     android:inputType="text" />
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                                     android:gravity="center"
                                     android:background="#00000000"
                                     android:textColor="@color/textColorHint"
-                                    android:hint="Nick name"
+                                    android:hint="@string/nick_name"
                                     android:inputType="text" />
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
-                                android:hint="District"
+                                android:hint="@string/district"
                                 android:textColor="@color/textColorHint"
                                 android:inputType="text" />
                             <RelativeLayout
@@ -174,7 +174,7 @@
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
-                                android:hint="Date of Birth"
+                                android:hint="@string/date_of_birth"
                                 android:textColor="@color/textColorHint"
                                 android:inputType="none" />
                             <RelativeLayout
@@ -203,7 +203,7 @@
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
-                                android:hint="Height"
+                                android:hint="@string/height"
                                 android:textColor="@color/textColorHint"
                                 android:inputType="number" />
                             <RelativeLayout
@@ -226,7 +226,7 @@
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
                                 android:background="#00000000"
-                                android:hint="Weight"
+                                android:hint="@string/weight"
                                 android:textColor="@color/textColorHint"
                                 android:inputType="number" />
                             <RelativeLayout
@@ -241,17 +241,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <EditText
                             android:id="@+id/ed_local_fvt_club"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:ems="10"
-                            android:textColorHint="@color/textColorHint"
-                            android:gravity="center"
                             android:background="#00000000"
-                            android:hint="Local Fourite Club"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:hint="@string/local_fourite_club"
+                            android:inputType="text"
                             android:textColor="@color/textColorHint"
-                            android:inputType="text" />
+                            android:textColorHint="@color/textColorHint" />
+
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -271,7 +273,7 @@
                             android:gravity="center"
                             android:textColor="@color/textColorHint"
                             android:background="#00000000"
-                            android:hint="International Fourite Club"
+                            android:hint="@string/international_fourite_club"
                             android:inputType="text" />
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -298,7 +300,7 @@
                                 android:gravity="center"
                                 android:drawableLeft="@drawable/tick"
                                 android:background="#00000000"
-                                android:hint="Are you a Player"
+                                android:hint="@string/are_you_a_player"
                                 android:inputType="text" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -352,7 +354,7 @@
                                 android:gravity="center"
                                 android:drawableLeft="@drawable/tick"
                                 android:background="#00000000"
-                                android:hint="Are you a Referee"
+                                android:hint="@string/are_you_a_referee"
                                 android:inputType="text" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -406,7 +408,7 @@
                                 android:gravity="center"
                                 android:textColor="@color/textColorHint"
                                 android:background="#00000000"
-                                android:hint="Your Team"
+                                android:hint="@string/your_team"
                                 android:inputType="text" />
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -430,7 +432,10 @@
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:textColor="@color/white"
-                                    android:text="Create Your Team"/>
+                                    android:text="@string/create_your_team"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentStart="true" />
                             </RelativeLayout>
                         </LinearLayout>
 
@@ -443,7 +448,7 @@
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        android:text="SAVE PROFILE"/>
+                        android:text="@string/save_profile"/>
 
                 </LinearLayout>
 

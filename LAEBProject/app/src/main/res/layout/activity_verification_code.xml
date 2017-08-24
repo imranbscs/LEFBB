@@ -53,7 +53,7 @@
                     android:visibility="invisible"
                     android:layout_marginTop="30dp"
                     android:textColor="@color/white"
-                    android:text="The security code you entered is not correct please try again." />
+                    android:text="@string/invalid_security_code" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     android:textSize="18sp"
                     android:layout_marginTop="30dp"
                     android:textColor="@color/white"
-                    android:text="Enter your 5 degit Code" />
+                    android:text="@string/six_degit_code" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
                             android:background="#00000000"
-                            android:hint="Code"
+                            android:hint="@string/code"
                             android:inputType="number" />
 
                     </LinearLayout>
@@ -106,7 +106,7 @@
                         android:onClick="submitClicked"
                         android:layout_marginTop="30dp"
                         android:textColor="@color/white"
-                        android:text="SUBMIT" />
+                        android:text="@string/submit" />
 
                 </LinearLayout>
             </LinearLayout>

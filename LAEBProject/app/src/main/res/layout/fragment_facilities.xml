@@ -18,7 +18,7 @@
             android:gravity="center"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:text="MARK YOUR FACILITIES AVAILABLE IN YOUR FIELD"/>
+            android:text="@string/mark_your_facilities_available_in_your_field"/>
     </LinearLayout>
     
     <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Water"
+                android:text="@string/water"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Parking"
+                android:text="@string/parking"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Floodlights"
+                android:text="@string/floodlights"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Change Room"
+                android:text="@string/change_room"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Football"
+                android:text="@string/football"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Vests"
+                android:text="@string/vests"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="WC"
+                android:text="@string/wc"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -245,7 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Stand Capacity - 5,000"
+                android:text="@string/stand_capacity"
                 android:textColor="@color/textColorHint" />
 
             <ImageView
@@ -274,7 +274,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="NEXT"
+            android:text="@string/next"
             android:textColor="@color/white" />
     </LinearLayout>
     
