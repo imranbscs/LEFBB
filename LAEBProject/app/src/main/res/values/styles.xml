@@ -6,10 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:typeface">serif</item>
+        <item name="editTextStyle">@style/App_EditTextStyle</item>
+
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+    <style name="App_EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:textSize">20dip</item>
     </style>
 
 </resources>
