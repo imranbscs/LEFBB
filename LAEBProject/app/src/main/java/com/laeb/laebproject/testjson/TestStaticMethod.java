@@ -143,7 +143,7 @@ public class TestStaticMethod {
     public static List<String> getSunday(){
 
         List<String> cricket = new ArrayList<String>();
-        cricket.add("1600-1800-20");
+//        cricket.add("1600-1800-20");
 
         return cricket;
     }
@@ -151,7 +151,7 @@ public class TestStaticMethod {
     public static List<String> getMonday(){
 
         List<String> cricket = new ArrayList<String>();
-        cricket.add("1600-1800-20");
+        //cricket.add("1600-1800-20");
 
         return cricket;
     }
@@ -169,8 +169,8 @@ public class TestStaticMethod {
     public static List<String> getWednesDay(){
 
         List<String> cricket = new ArrayList<String>();
-        cricket.add("1600-1800-20");
-        cricket.add("1900-2100-30");
+//        cricket.add("1600-1800-20");
+//        cricket.add("1900-2100-30");
 
         return cricket;
     }
@@ -178,9 +178,9 @@ public class TestStaticMethod {
     public static List<String> getThursday(){
 
         List<String> cricket = new ArrayList<String>();
-        cricket.add("1600-1800-20");
-        cricket.add("1900-2100-30");
-        cricket.add("1000-1100-80");
+//        cricket.add("1600-1800-20");
+//        cricket.add("1900-2100-30");
+//        cricket.add("1000-1100-80");
 
         return cricket;
     }
@@ -188,7 +188,7 @@ public class TestStaticMethod {
     public static List<String> getFriday(){
 
         List<String> cricket = new ArrayList<String>();
-        cricket.add("1600-1800-20");
+        //cricket.add("1600-1800-20");
 
         return cricket;
     }
