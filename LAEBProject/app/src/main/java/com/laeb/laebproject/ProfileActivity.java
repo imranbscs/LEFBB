@@ -144,7 +144,6 @@ public class ProfileActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 Spinner mySpinner = (Spinner) findViewById(R.id.ed_city);
 
-
                 SpinnerAdapter adap = new ArrayAdapter<String>(ProfileActivity.this, R.layout.spinner_item, worldlist);
 
 
