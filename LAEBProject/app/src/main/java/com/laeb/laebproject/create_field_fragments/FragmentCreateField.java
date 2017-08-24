@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
@@ -26,6 +27,9 @@ import com.laeb.laebproject.model.FieldInfo;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -144,5 +148,31 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         }
     }
 
+    public boolean validation() {
+        boolean b = true;
+        if (ed_name.getText().toString().trim().equals("") || ed_name.getText().toString().trim().length()<1) {
+            ed_name.setError(getString(R.string.invalidName));
+            return false;
+        } else {
+            ed_name.setError(null);
+        }
+
+        if (ed_city.getText().toString().trim().equals("") || ed_city.getText().toString().trim().length()<1) {
+            ed_city.setError(getString(R.string.invalidDistrictName));
+            return false;
+        } else {
+            ed_city.setError(null);
+        }
+
+        if (ed_size.getText().toString().trim().equals("") || ed_size.getText().toString().trim().length()<1) {
+            ed_size.setError(getString(R.string.invalidGroundSize));
+            return false;
+        } else {
+            ed_size.setError(null);
+        }
+
+
+        return true;
+    }
 
 }
