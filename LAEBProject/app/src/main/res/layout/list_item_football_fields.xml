@@ -82,8 +82,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginLeft="20dp"
+                android:id="@+id/txtAddress"
                 android:layout_marginRight="20dp"
-                android:text="Address: 1/820 Forest Rd, Peakurst NSW 2210, Australia"/>
+                android:text=""/>
             <!--<View-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="20dp"-->

@@ -88,10 +88,11 @@ public class FragmentFootballFields extends Fragment {
                     Log.i("asd", response);
                     JSONObject jsonobject = new JSONObject(response);
                     JSONArray jArray = (JSONArray) jsonobject.get("data");
-                    Log.i("asd", "Array  " + jArray);
+                    jsonobject = jArray.getJSONObject(0);
+                    Log.i("asd", "Array  " + jsonobject.get("myFields").toString());
                     Type listType = new TypeToken<ArrayList<FieldInfo>>() {}.getType();
                     Gson og = new Gson();
-                    listItems = og.fromJson(response, listType);
+                    listItems = og.fromJson(jsonobject.get("myFields").toString(), listType);
 
                     return listItems;
                 } catch (IOException ex) {
@@ -104,10 +105,16 @@ public class FragmentFootballFields extends Fragment {
 
             }
 
+            @Override
+            protected void onPostExecute(List<FieldInfo> fieldInfos) {
+                super.onPostExecute(fieldInfos);
+                adapter = new FootBallFieldsAdapter(fieldInfos, getActivity());
+                recyclerView.setAdapter(adapter);
+            }
+
         }.execute("");
 
-        adapter = new FootBallFieldsAdapter(listItems, getActivity());
-        recyclerView.setAdapter(adapter);
+
 
     }
 

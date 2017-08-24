@@ -98,9 +98,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
     public void onMapReady(GoogleMap map) {
         googleMap = map;
         googleMap.setMyLocationEnabled(true);
-        buildGoogleApiClient();
+       // buildGoogleApiClient();
 
-        mGoogleApiClient.connect();
+       // mGoogleApiClient.connect();
 
 
     }
