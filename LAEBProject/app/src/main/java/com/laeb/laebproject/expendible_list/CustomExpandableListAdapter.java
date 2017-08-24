@@ -1,17 +1,22 @@
 package com.laeb.laebproject.expendible_list;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laeb.laebproject.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -94,6 +99,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    addDialog();
                     Toast.makeText(context, "child", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -147,5 +153,31 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int listPosition, int expandedListPosition) {
         return true;
+    }
+
+    public void addDialog(){
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.custom_dialog_new_slot);
+        //dialog.setTitle(R.string.pickup);
+
+
+        dialog.show();
+        TextView okBtn = (TextView) dialog.findViewById(R.id.cencel);
+        TextView cencelBtn = (TextView) dialog.findViewById(R.id.done);
+
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //drawRoute();
+                dialog.dismiss();
+            }
+        });
+
+        cencelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }
