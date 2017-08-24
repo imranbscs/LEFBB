@@ -1,7 +1,10 @@
 package com.laeb.laebproject.adapters;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import com.laeb.laebproject.model.FieldInfo;
 import com.laeb.laebproject.model.UpComingGames;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by tariq on 8/17/2017.
@@ -43,8 +47,7 @@ public class FootBallFieldsAdapter extends RecyclerView.Adapter<FootBallFieldsAd
         final int a = position;
 
         holder.nameTeam.setText(listItem.name);
-        //holder.cityName.setText(listItem.getGameLocation());
-        //holder.gameTime.setText(listItem.getGameTime());
+        holder.address.setText( listItem.city + "    lat:" + listItem.latitude + "   long:" + listItem.longitude);
     }
 
     @Override
@@ -55,14 +58,13 @@ public class FootBallFieldsAdapter extends RecyclerView.Adapter<FootBallFieldsAd
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView nameTeam;
-        public TextView cityName;
-        public TextView gameTime;
+        public TextView address;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameTeam = (TextView) itemView.findViewById(R.id.txtName);
-            //cityName = (TextView) itemView.findViewById(R.id.game_city);
+            address = (TextView) itemView.findViewById(R.id.txtAddress);
             //gameTime = (TextView) itemView.findViewById(R.id.dateTime);
         }
     }

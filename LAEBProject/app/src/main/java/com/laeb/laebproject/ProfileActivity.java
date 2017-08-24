@@ -71,6 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         String user =  channel.getString("user","default");
         JSONObject obj = new JSONObject(user);
         Edt_DOB.setText(obj.getString("dob"));
+        Edt_Email.setText(obj.getString("email"));
         Log.i("asd", "---------------- this is gender : " + obj.getString("gender"));
         Edt_Full_Name.setText(obj.getString("name"));
         mySpinner.setSelection(getIndex(mySpinner,cities.get(obj.getInt("city")).getName()));
