@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -58,7 +59,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
 
 
     ExpandableListView expandableListView;
-    ExpandableListAdapter expandableListAdapter;
+    CustomExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
     CustomBinder oCustom;
@@ -71,6 +72,15 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
         oCustom = (CustomBinder) getArguments().get("complexObject");
         fieldInfo = oCustom.getField();
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
+
+        TextView aaa = (TextView) view.findViewById(R.id.ccc);
+        aaa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Hello "+expandableListAdapter.expandableListDetail,Toast.LENGTH_SHORT).show();
+            }
+        });
+
         expandableListDetail = ExpandableListDataPump.getData();
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
 
@@ -105,6 +115,14 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+//                String temp = "1600-1800-25";
+//                TestStaticMethod.getMonday().add(temp);
+//                expandableListDetail = ExpandableListDataPump.getData();
+//                //invalidateViews();
+//
+//                expandableListAdapter = new CustomExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
+//                expandableListView.setAdapter(expandableListAdapter);
+                //expandableListAdapter;
                 return false;
             }
         });

@@ -2,10 +2,13 @@ package com.laeb.laebproject.expendible_list;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.testjson.TestStaticMethod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +28,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+    public HashMap<String, List<String>> expandableListDetail;
 
     public CustomExpandableListAdapter(Context context, List<String> expandableListTitle, HashMap<String, List<String>> expandableListDetail) {
         this.context = context;
@@ -43,7 +47,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         LayoutInflater layoutInflater;
         layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -66,13 +70,32 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
         if(childPosition == getChildrenCount(groupPosition)-1)
         {
+            final int a = groupPosition;
             convertView = layoutInflater.inflate(R.layout.child_footer,null);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addDialog();
+                    //addDialog();
                     String temp = "1600-1800-25";
-                    Toast.makeText(context, "child", Toast.LENGTH_SHORT).show();
+                    //invalidateViews();
+                    //notifyDataSetInvalidated();
+//                    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                        public void onGlobalLayout() {
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                                v.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                            }
+//
+//                            notifyDataSetChanged();
+//
+                    //setNewItems(expandableListTitle, expandableListDetail);
+                    //notifyDataSetChanged();
+
+                    expandableListDetail.get(expandableListTitle.get(a)).add("l-Mam-o");
+                    notifyDataSetChanged();
+
+
+                    Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "child "+a+"  "+childPosition, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -151,5 +174,15 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+        super.registerDataSetObserver(observer);
+    }
+    public void setNewItems(List<String> listDataHeader,HashMap<String, List<String>> listChildData) {
+        this.expandableListTitle = listDataHeader;
+        this.expandableListDetail = listChildData;
+        notifyDataSetChanged();
     }
 }

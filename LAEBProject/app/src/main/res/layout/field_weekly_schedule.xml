@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
+                android:id="@+id/ccc"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:text="ADD YOUR SCHEDULE FOR ALL DAYS OF THE WEEK"/>

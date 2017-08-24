@@ -139,7 +139,6 @@ public class TestStaticMethod {
         return expendbleItems;
     }
 
-
     public static List<String> getSunday(){
 
         List<String> cricket = new ArrayList<String>();
