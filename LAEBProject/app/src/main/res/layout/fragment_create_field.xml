@@ -11,128 +11,74 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:id="@+id/picture"
-                android:src="@drawable/pic_ground"/>
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:id="@+id/delete"
-                android:src="@drawable/delete"/>
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/addImage"
-                android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/delete"
-                android:src="@drawable/plus_square"/>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:padding="2dp"
-            android:layout_height="20dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/dotfilled"/>
-
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
-            <EditText
-                android:id="@+id/ed_name"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:ems="10"
-                android:textColorHint="@color/textColorHint"
-                android:gravity="center"
-                android:background="#00000000"
-                android:hint="Field name"
-                android:layout_marginTop="5dp"
-                android:inputType="text" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
+<<<<<<< HEAD
                 android:layout_height="30dp">
                 <Spinner
                     android:id="@+id/ed_city"
+=======
+                android:layout_height="140dp">
+
+                <ImageView
+                    android:id="@+id/picture"
+>>>>>>> 1408006222bbc135c8e92a39592c7b4bdc081f56
                     android:layout_width="match_parent"
                     android:popupBackground="@color/colorPrimaryDark"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/white"
-                    android:spinnerMode="dropdown" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"/>
-        </LinearLayout>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/pic_ground" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/ed__district"
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/delete" />
+
+                <ImageView
+                    android:id="@+id/addImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/delete"
+                    android:src="@drawable/plus_square" />
+
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
+<<<<<<< HEAD
                 android:layout_height="40dp"
                 android:ems="10"
                 android:textColor="@color/textColorHint"
                 android:textColorHint="@color/textColorHint"
+=======
+                android:layout_height="20dp"
+>>>>>>> 1408006222bbc135c8e92a39592c7b4bdc081f56
                 android:gravity="center"
-                android:background="#00000000"
-                android:hint="District"
-                android:layout_marginTop="5dp"
-                android:inputType="text" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:padding="2dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/field_size"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dotfilled" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
+<<<<<<< HEAD
                 android:layout_height="40dp"
                 android:ems="10"
                 android:textColor="@color/textColorHint"
@@ -143,22 +89,63 @@
                 android:layout_marginTop="5dp"
                 android:inputType="text" />
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"/>
-        </LinearLayout>
+=======
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-                <Spinner
-                    android:id="@+id/accamodations"
+                <EditText
+                    android:id="@+id/ed_name"
                     android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#00000000"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Field name"
+                    android:inputType="text"
+                    android:textColorHint="@color/textColorHint" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+>>>>>>> 1408006222bbc135c8e92a39592c7b4bdc081f56
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/white"
+                        android:popupBackground="@color/colorPrimaryDark"
+                        android:spinnerMode="dropdown" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/ed__district"
+                    android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:popupBackground="@color/colorPrimaryDark"
                     android:textColor="@color/textColorHint"
                     android:layout_height="match_parent"
@@ -166,108 +153,174 @@
                     android:spinnerMode="dropdown" />
             </RelativeLayout>
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"/>
-        </LinearLayout>
+=======
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#00000000"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="District"
+                    android:inputType="text"
+                    android:textColorHint="@color/textColorHint" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"
-            android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+>>>>>>> 1408006222bbc135c8e92a39592c7b4bdc081f56
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="Field Type"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-            <RelativeLayout
+                <EditText
+                    android:id="@+id/field_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#00000000"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Field Size"
+                    android:inputType="text"
+                    android:textColorHint="@color/textColorHint" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <Spinner
+                        android:id="@+id/accamodations"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/white"
+                        android:popupBackground="@color/colorPrimaryDark"
+                        android:spinnerMode="dropdown" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:id="@+id/grass_pitch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="Grass Pictch Ground"
-                    android:textColor="@color/textColorHint" />
+                    android:gravity="center_vertical"
+                    android:text="Field Type"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imgGrass"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/tick"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
-            </RelativeLayout>
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"/>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-                <TextView
-                    android:id="@+id/clay_pitch"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="Clay Pitch Ground"
-                    android:textColor="@color/textColorHint" />
+                    android:layout_height="30dp">
 
-                <ImageView
-                    android:id="@+id/imgClay"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/tick"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
-            </RelativeLayout>
-            <!--<RelativeLayout-->
+                    <TextView
+                        android:id="@+id/grass_pitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Grass Pictch Ground"
+                        android:textColor="@color/textColorHint" />
+
+                    <ImageView
+                        android:id="@+id/imgGrass"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/tick" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:id="@+id/clay_pitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Clay Pitch Ground"
+                        android:textColor="@color/textColorHint" />
+
+                    <ImageView
+                        android:id="@+id/imgClay"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/tick" />
+                </RelativeLayout>
+                <!--<RelativeLayout-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="1dp"-->
                 <!--android:background="@color/white"/>-->
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:background="@color/darkTransparentBg"
-            android:layout_marginTop="20dp"
-            android:id="@+id/nextBtn"
-            android:layout_marginBottom="30dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="NEXT"
-                android:textColor="@color/white" />
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/nextBtn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/darkTransparentBg"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="NEXT"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

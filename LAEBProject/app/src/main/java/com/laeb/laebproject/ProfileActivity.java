@@ -144,7 +144,6 @@ public class ProfileActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 Spinner mySpinner = (Spinner) findViewById(R.id.ed_city);
 
-
                 SpinnerAdapter adap = new ArrayAdapter<String>(ProfileActivity.this, R.layout.spinner_item, worldlist);
 
 
@@ -245,8 +244,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    public String makePostRequest(String stringUrl, String payload,
-                                  Context context, String Method) throws IOException {
+    public String makePostRequest(String stringUrl, String payload, Context context, String Method) throws IOException {
 
         URL url = new URL(stringUrl);
         HttpURLConnection uc = (HttpURLConnection) url.openConnection();

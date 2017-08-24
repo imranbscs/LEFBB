@@ -2,4 +2,8 @@
     <string name="app_name">LAEBProject</string>
     <string name="english">English</string>
     <string name="arbic">LAEBProject</string>
+    <string name="invalideContryCode">Invalid number or Contry code.</string>
+    <string name="invalidName">Invalid name.</string>
+    <string name="invalidDistrictName">Invalid District name.</string>
+    <string name="invalidGroundSize">Invalid ground size.</string>
 </resources>

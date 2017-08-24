@@ -17,23 +17,37 @@ public class ExpandableListDataPump {
 //        cricket.add("Pakistan");
 //        cricket.add("Australia");
 
-        List<String> football = new ArrayList<String>();
-        football.add("Brazil");
-        football.add("Spain");
-        football.add("Germany");
+        List<String> sunday = TestStaticMethod.getSunday();
+
+        List<String> monday = TestStaticMethod.getMonday();
+
+        List<String> tuesday = TestStaticMethod.getTuesday();
+
+        List<String> wednesday = TestStaticMethod.getWednesDay();
+
+        List<String> thursday = TestStaticMethod.getThursday();
+
+        List<String> friday = TestStaticMethod.getFriday();
+
+        List<String> saturday = TestStaticMethod.getSaturday();
 
         List<String> basketball = new ArrayList<String>();
-        basketball.add("United States");
-        basketball.add("Spain");
-        basketball.add("Argentina");
+        basketball.add("Sunday");
+        basketball.add("Monday");
+        basketball.add("Tuesday");
+        basketball.add("Wednesday");
+        basketball.add("Thursday");
+        basketball.add("Friday");
+        basketball.add("Saturday");
 
-        expandableListDetail.put("Sunday", cricket);
-        expandableListDetail.put("Monday", football);
-        expandableListDetail.put("Tuesday", basketball);
-        expandableListDetail.put("Wednesday", cricket);
-        expandableListDetail.put("Thursday", football);
-        expandableListDetail.put("Friday", basketball);
-        expandableListDetail.put("Saturday", basketball);
+
+        expandableListDetail.put("Sunday", sunday);
+        expandableListDetail.put("Monday", monday);
+        expandableListDetail.put("Tuesday", tuesday);
+        expandableListDetail.put("Wednesday", wednesday);
+        expandableListDetail.put("Thursday", thursday);
+        expandableListDetail.put("Friday", friday);
+        expandableListDetail.put("Saturday", saturday);
 
         return expandableListDetail;
     }
