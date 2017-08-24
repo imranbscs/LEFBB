@@ -378,23 +378,28 @@ public class FragmentProfile extends Fragment {
         } else {
             Place_of_Birth.setError(null);
         }
-
-        float hieght = Float.parseFloat(Edt_Height.getText().toString());
-        if (Edt_Height.getText().toString().trim().equals("") && Edt_Height.getText().toString().length() < 1 && hieght > 10 && hieght < 1) {
-            Edt_Height.setError("Invalid Hieght");
-            return false;
-        } else {
-            Edt_Height.setError(null);
+        if (!Edt_Height.getText().toString().trim().equals("")) {
+            float hieght = Float.parseFloat(Edt_Height.getText().toString());
+            if (Edt_Height.getText().toString().length() < 1 && hieght > 10 && hieght < 1) {
+                Edt_Height.setError("Invalid Height");
+                return false;
+            } else {
+                Edt_Height.setError(null);
+            }
         }
-
-        float wieght = Float.parseFloat(Edt_Weight.getText().toString());
-        if (Edt_Weight.getText().toString().trim().equals("") && Edt_Weight.getText().toString().length() < 1 && wieght > 500 && wieght < 5) {
-            Edt_Weight.setError("Invalid Wieght");
-            return false;
-        } else {
-            Edt_Weight.setError(null);
-        }
-
+        else
+        {Edt_Height.setError("Weight Required");}
+       if(!Edt_Weight.getText().toString().trim().equals("")) {
+           float wieght = Float.parseFloat(Edt_Weight.getText().toString());
+           if (Edt_Weight.getText().toString().trim().equals("") && Edt_Weight.getText().toString().length() < 1 && wieght > 500 && wieght < 5) {
+               Edt_Weight.setError("Invalid Weight");
+               return false;
+           } else {
+               Edt_Weight.setError(null);
+           }
+       }
+       else
+        {Edt_Weight.setError("Weight required");}
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;

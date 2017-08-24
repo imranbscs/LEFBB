@@ -91,8 +91,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <Spinner
-                    android:id="@+id/spinner1"
+                    android:id="@+id/ed_city"
                     android:layout_width="match_parent"
+                    android:popupBackground="@color/colorPrimaryDark"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/white"
                     android:spinnerMode="dropdown" />
@@ -112,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:ems="10"
+                android:textColor="@color/textColorHint"
                 android:textColorHint="@color/textColorHint"
                 android:gravity="center"
                 android:background="#00000000"
@@ -133,6 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:ems="10"
+                android:textColor="@color/textColorHint"
                 android:textColorHint="@color/textColorHint"
                 android:gravity="center"
                 android:background="#00000000"
@@ -156,6 +159,8 @@
                 <Spinner
                     android:id="@+id/accamodations"
                     android:layout_width="match_parent"
+                    android:popupBackground="@color/colorPrimaryDark"
+                    android:textColor="@color/textColorHint"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/white"
                     android:spinnerMode="dropdown" />

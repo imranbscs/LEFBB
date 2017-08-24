@@ -138,10 +138,13 @@ public class AddNumberActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String Code) {
-            Intent i = new Intent(getBaseContext(), VerificationCodeActivity.class);
-            i.putExtra("code", Code);
-            i.putExtra("phone", phoneNumber);
-            startActivity(i);
+            if (!Code.equals("")) {
+                Intent i = new Intent(getBaseContext(), VerificationCodeActivity.class);
+                i.putExtra("code", Code);
+                i.putExtra("phone", phoneNumber);
+                startActivity(i);
+            }
+
         }
     }
 
