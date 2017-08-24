@@ -6,7 +6,10 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="fill_parent"
@@ -39,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="PROFILE"
+                    android:text="@string/profileStr"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
                     android:textSize="22sp"
@@ -111,7 +114,7 @@
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
                             android:background="#00000000"
-                            android:hint="Full name"
+                            android:hint="@string/full_name_hint"
                             android:inputType="text" />
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -149,7 +152,7 @@
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
                             android:background="#00000000"
-                            android:hint="E-Mail"
+                            android:hint="@string/e_mail"
                             android:layout_marginTop="5dp"
                             android:inputType="textEmailAddress" />
                         <RelativeLayout
@@ -167,14 +170,13 @@
                             android:layout_height="40dp"
                             android:ems="10"
                             android:clickable="true"
-                            android:editable="false"
                             android:textColorHint="@color/textColorHint"
                             android:gravity="center"
                             android:textColor="@color/textColorHint"
                             android:inputType="none"
                             android:background="#00000000"
                             android:drawableRight="@drawable/calendaricon"
-                            android:hint="Date of Birth"
+                            android:hint="@string/date_of_birth"
                             android:layout_marginTop="5dp" />
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -192,7 +194,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <TextView
-                                android:text="Male"
+                                android:text="@string/male"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="20dp"
@@ -224,7 +226,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <TextView
-                                android:text="Female"
+                                android:text="@string/female"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
@@ -249,7 +251,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:text="SAVE PROFILE"
+                        android:text="@string/save_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
