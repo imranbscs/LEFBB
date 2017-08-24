@@ -44,15 +44,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
-<<<<<<< HEAD
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-=======
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> 1408006222bbc135c8e92a39592c7b4bdc081f56
 
 
 /**
@@ -164,9 +163,9 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
 
 
                 // Spinner adapter
-//                mySpinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
-//                                android.R.layout.simple_spinner_dropdown_item,
-//                                worldlist));
+                 mySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
+                               android.R.layout.simple_spinner_dropdown_item,
+                               worldlist));
                 mySpinner.setAdapter(adap);
                 // Spinner on item click listener
                 mySpinner
