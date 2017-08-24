@@ -71,7 +71,8 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
     JSONArray jsonarray;
     ArrayList<City> cities;
     ArrayList<String> worldlist;
-
+    Spinner spn_city;
+    Spinner spn_acc;
     private static final int RESULT_OK = -1;
     Bitmap image;
 
@@ -94,6 +95,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         clay_pitch = (TextView) view.findViewById(R.id.clay_pitch);
         profImg = (ImageView) view.findViewById(R.id.picture);
         addImage = (ImageView) view.findViewById(R.id.addImage);
+        spn_acc = (Spinner) view.findViewById(R.id.accamodations);
         grass_pitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,19 +158,19 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
             @Override
             protected void onPostExecute(ArrayList<String> s) {
                 super.onPostExecute(s);
-                Spinner mySpinner = (Spinner) view.findViewById(R.id.ed_city);
+                 spn_city = (Spinner) view.findViewById(R.id.ed_city);
 
 
                 SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
 
 
                 // Spinner adapter
-                 mySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
+                spn_city.setAdapter(new ArrayAdapter<String>(getActivity(),
                                android.R.layout.simple_spinner_dropdown_item,
                                worldlist));
-                mySpinner.setAdapter(adap);
+                spn_city.setAdapter(adap);
                 // Spinner on item click listener
-                mySpinner
+                spn_city
                         .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                             @Override
@@ -200,7 +202,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
                 fieldInfo.name = ed_name.getText().toString();
                 fieldInfo.size = ed_size.getText().toString();
                 fieldInfo.city = mCity_Id + "";
-
+                fieldInfo.capacity = spn_acc.getSelectedItem().toString();
 
                 FieldFacilities fragment = new FieldFacilities();
                 Bundle args = new Bundle();

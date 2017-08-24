@@ -1,13 +1,19 @@
 package com.laeb.laebproject.create_field_fragments;
 
 import android.app.Fragment;
+import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.support.annotation.ColorRes;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -44,15 +50,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
         fieldInfo = oCustom.getField();
         View view = inflater.inflate(R.layout.map_fragment, container, false);
         View b = (View) view.findViewById(R.id.nextMapp);
-        View currloc = (View) view.findViewById(R.id.btnCurrentLocation);
-        currloc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                buildGoogleApiClient();
 
-                mGoogleApiClient.connect();
-            }
-        });
 
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -100,10 +98,48 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
     public void onMapReady(GoogleMap map) {
         googleMap = map;
         googleMap.setMyLocationEnabled(true);
+        buildGoogleApiClient();
+
+        mGoogleApiClient.connect();
 
 
     }
+    protected Marker addMarker(LatLng position,  int color, boolean draggable) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.draggable(draggable);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        markerOptions.position(position);
+        Marker pinnedMarker = googleMap.addMarker(markerOptions);
+        startDropMarkerAnimation(pinnedMarker);
+        return pinnedMarker;
+    }
 
+    private void startDropMarkerAnimation(final Marker marker) {
+        final LatLng target = marker.getPosition();
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        Projection proj = googleMap.getProjection();
+        Point targetPoint = proj.toScreenLocation(target);
+        final long duration = (long) (200 + (targetPoint.y * 0.6));
+        Point startPoint = proj.toScreenLocation(marker.getPosition());
+        startPoint.y = 0;
+        final LatLng startLatLng = proj.fromScreenLocation(startPoint);
+        final Interpolator interpolator = new LinearOutSlowInInterpolator();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed / duration);
+                double lng = t * target.longitude + (1 - t) * startLatLng.longitude;
+                double lat = t * target.latitude + (1 - t) * startLatLng.latitude;
+                marker.setPosition(new LatLng(lat, lng));
+                if (t < 1.0) {
+                    // Post again 16ms later == 60 frames per second
+                    handler.postDelayed(this, 16);
+                }
+            }
+        });
+    }
     @Override
     public void onConnected(Bundle bundle) {
 
@@ -117,7 +153,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
             markerOptions.position(latLng);
             markerOptions.title("Current Position");
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            currLocationMarker = googleMap.addMarker(markerOptions);
+            currLocationMarker = addMarker(latLng,2,true);
         }
 
         mLocationRequest = new LocationRequest();

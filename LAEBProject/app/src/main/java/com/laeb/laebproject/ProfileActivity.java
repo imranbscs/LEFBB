@@ -2,21 +2,21 @@ package com.laeb.laebproject;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.laeb.laebproject.model.City;
 import com.laeb.laebproject.model.Custom;
@@ -63,7 +64,39 @@ public class ProfileActivity extends AppCompatActivity {
     TextView Female;
     int mCity_Id = 0;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    Spinner mySpinner;
+    SharedPreferences channel;
 
+    public void FillTheForm() throws JSONException {
+        String user =  channel.getString("user","default");
+        JSONObject obj = new JSONObject(user);
+        Edt_DOB.setText(obj.getString("dob"));
+        Log.i("asd", "---------------- this is gender : " + obj.getString("gender"));
+        Edt_Full_Name.setText(obj.getString("name"));
+        mySpinner.setSelection(getIndex(mySpinner,cities.get(obj.getInt("city")).getName()));
+        if (obj.getString("gender") == "M")
+        {
+            btnMale(Male);
+        }else
+        {
+            btnFemale(Female);
+        }
+
+
+    }
+
+    private int getIndex(Spinner spinner, String myString)
+    {
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i-1;
+                break;
+            }
+        }
+        return index;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +105,8 @@ public class ProfileActivity extends AppCompatActivity {
         Male = (TextView) findViewById(R.id.txtMale);
         Female = (TextView) findViewById(R.id.txtFemale);
         getSupportActionBar().hide();
+        channel = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
         // perform click event on edit text
         Edt_DOB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
             protected ArrayList<String> doInBackground(String... params) {
                 try {
 
-                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",null, getApplicationContext(), "GET");
+                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities", null, getApplicationContext(), "GET");
 
                     JSONObject jsonobject = new JSONObject(response);
                     cities = new ArrayList<City>();
@@ -142,15 +177,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(ArrayList<String> s) {
                 super.onPostExecute(s);
-                Spinner mySpinner = (Spinner) findViewById(R.id.ed_city);
+                mySpinner = (Spinner) findViewById(R.id.ed_city);
 
                 SpinnerAdapter adap = new ArrayAdapter<String>(ProfileActivity.this, R.layout.spinner_item, worldlist);
 
 
-                // Spinner adapter
-//                mySpinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
-//                                android.R.layout.simple_spinner_dropdown_item,
-//                                worldlist));
                 mySpinner.setAdapter(adap);
                 // Spinner on item click listener
                 mySpinner
@@ -169,6 +200,11 @@ public class ProfileActivity extends AppCompatActivity {
                                 // TODO Auto-generated method stub
                             }
                         });
+                try {
+                    FillTheForm();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
 
@@ -225,7 +261,7 @@ public class ProfileActivity extends AppCompatActivity {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         Intent i = new Intent(getApplicationContext(), MenuActivity.class);
-                        Log.i("asd",param.toString());
+                        Log.i("asd", param.toString());
                         Custom custom = new Custom();
                         custom.setList(param);
                         i.putExtra("user", custom);
@@ -251,7 +287,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         String line;
         StringBuffer jsonString = new StringBuffer();
-        SharedPreferences channel = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
         String strChannel = channel.getString("token", "Default").toString();
         Log.i("asd", "---------------- this is response : " + strChannel);
         uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -287,17 +323,17 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void btnFemale(View view) {
-        RelativeLayout or = (RelativeLayout) findViewById(R.id.male_selector) ;
+        RelativeLayout or = (RelativeLayout) findViewById(R.id.male_selector);
         or.setVisibility(View.INVISIBLE);
-        or = (RelativeLayout) findViewById(R.id.female_delector) ;
+        or = (RelativeLayout) findViewById(R.id.female_delector);
         or.setVisibility(View.VISIBLE);
         gender = "M";
     }
 
     public void btnMale(View view) {
-        RelativeLayout or = (RelativeLayout) findViewById(R.id.male_selector) ;
+        RelativeLayout or = (RelativeLayout) findViewById(R.id.male_selector);
         or.setVisibility(View.VISIBLE);
-        or = (RelativeLayout) findViewById(R.id.female_delector) ;
+        or = (RelativeLayout) findViewById(R.id.female_delector);
         or.setVisibility(View.INVISIBLE);
 
         gender = "F";
@@ -324,13 +360,12 @@ public class ProfileActivity extends AppCompatActivity {
         try {
             date = fmt.parse(Edt_DOB.getText().toString());
             fmt.format(date);
+        } catch (ParseException pe) {
         }
-        catch(ParseException pe) {
-        }
-        int diff1 =new Date().compareTo(date);
+        int diff1 = new Date().compareTo(date);
 
-        if(diff1<0){
-            Toast.makeText(this, "Please select a valid date.",  Toast.LENGTH_LONG).show();
+        if (diff1 < 0) {
+            Toast.makeText(this, "Please select a valid date.", Toast.LENGTH_LONG).show();
             return false;
         }
 

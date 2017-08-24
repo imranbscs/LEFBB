@@ -170,9 +170,12 @@
                         android:id="@+id/accamodations"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColorHint="@color/textColorHint"
                         android:backgroundTint="@color/white"
                         android:popupBackground="@color/colorPrimaryDark"
+                        android:entries="@array/array_accomodation"
                         android:spinnerMode="dropdown" />
+
                 </RelativeLayout>
 
                 <RelativeLayout

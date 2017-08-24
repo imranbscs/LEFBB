@@ -74,9 +74,11 @@ public class FragmentProfile extends Fragment {
     EditText Place_of_Birth;
     EditText fc_International;
     Spinner EDT_City;
+    String Player = "0";
+    String Refree = "0";
     String PlayingRole;
     int mCity_Id = 0;
-
+    Spinner spn_position;
     DatePickerDialog datePickerDialog;
     JSONArray jsonarray;
     ArrayList<City> cities;
@@ -110,7 +112,7 @@ public class FragmentProfile extends Fragment {
         Edt_Full_Name.setText(param.get("name"));
         Edt_DOB.setText(param.get("dob"));
 
-        Spinner spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
+        spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
         spn_position.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));
 
 //        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
@@ -127,7 +129,7 @@ public class FragmentProfile extends Fragment {
                 ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                 imgResource = R.drawable.tick;
                 ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
-                PlayingRole = "Player";
+                Player = "1";
             }
         });
         ed_refree.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +139,7 @@ public class FragmentProfile extends Fragment {
                 ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                 imgResource = R.drawable.tick;
                 ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
-                PlayingRole = "Refree";
+                Refree = "0";
             }
         });
         fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
@@ -265,14 +267,15 @@ public class FragmentProfile extends Fragment {
                 param.put("name", mName);
                 param.put("image", "base64image");
                 param.put("nickname", mNick);
-                param.put("email", "imran@yahoo.com");
                 param.put("city", mCity_Id + "");
                 param.put("dob", mDOB);
                 param.put("gender", "M");
-                param.put("place_of_birth", mDistrict);
+                param.put("district", mDistrict);
                 param.put("height", mHeight);
                 param.put("weight", mWeight);
-                param.put("playing_role", PlayingRole);
+                param.put("playing_role", spn_position.getSelectedItem().toString());
+                param.put("player", Player);
+                param.put("refree", Refree);
                 param.put("fc_local", mLocal);
                 param.put("fc_international", mInter);
 
@@ -284,7 +287,7 @@ public class FragmentProfile extends Fragment {
                     protected String doInBackground(String... params) {
                         try {
 
-                            String response = makePostRequest("http://192.169.138.14:4000/api/profile/update ",
+                            String response = makePostRequest("http://192.169.138.14:4000/api/profile/v2/settings ",
                                     paramss.toString(),
                                     getActivity(), "POST");
                             Log.i("asd", "---------------- this is response : " + response);
@@ -299,8 +302,8 @@ public class FragmentProfile extends Fragment {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         if (s == "Success")
-                            Toast.makeText(getActivity(),"Profile saved successfully", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getActivity(), MenuActivity.class));
+                            Toast.makeText(getActivity(), "Profile saved successfully", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getActivity(), MenuActivity.class));
                     }
 
 
@@ -386,33 +389,32 @@ public class FragmentProfile extends Fragment {
             } else {
                 Edt_Height.setError(null);
             }
+        } else {
+            Edt_Height.setError("Weight Required");
         }
-        else
-        {Edt_Height.setError("Weight Required");}
-       if(!Edt_Weight.getText().toString().trim().equals("")) {
-           float wieght = Float.parseFloat(Edt_Weight.getText().toString());
-           if (Edt_Weight.getText().toString().trim().equals("") && Edt_Weight.getText().toString().length() < 1 && wieght > 500 && wieght < 5) {
-               Edt_Weight.setError("Invalid Weight");
-               return false;
-           } else {
-               Edt_Weight.setError(null);
-           }
-       }
-       else
-        {Edt_Weight.setError("Weight required");}
+        if (!Edt_Weight.getText().toString().trim().equals("")) {
+            float wieght = Float.parseFloat(Edt_Weight.getText().toString());
+            if (Edt_Weight.getText().toString().trim().equals("") && Edt_Weight.getText().toString().length() < 1 && wieght > 500 && wieght < 5) {
+                Edt_Weight.setError("Invalid Weight");
+                return false;
+            } else {
+                Edt_Weight.setError(null);
+            }
+        } else {
+            Edt_Weight.setError("Weight required");
+        }
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
             date = fmt.parse(Edt_DOB.getText().toString());
             fmt.format(date);
+        } catch (ParseException pe) {
         }
-        catch(ParseException pe) {
-        }
-        int diff1 =new Date().compareTo(date);
+        int diff1 = new Date().compareTo(date);
 
-        if(diff1<0){
-            Toast.makeText(getActivity(), "Please select a valid date.",  Toast.LENGTH_LONG).show();
+        if (diff1 < 0) {
+            Toast.makeText(getActivity(), "Please select a valid date.", Toast.LENGTH_LONG).show();
             return false;
         }
 

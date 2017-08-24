@@ -41,4 +41,13 @@
     <string name="wc">WC</string>
     <string name="stand_capacity">Stand Capacity - 5,000</string>
     <string name="next">NEXT</string>
+
+    <string-array name="array_accomodation">
+        <item>6 X 6</item>
+        <item>7 X 7</item>
+        <item>8 X 8</item>
+        <item>9 X 9</item>
+        <item>10 X 10</item>
+        <item>11 X 11</item>
+    </string-array>
 </resources>

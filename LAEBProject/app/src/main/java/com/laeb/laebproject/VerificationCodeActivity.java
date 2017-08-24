@@ -57,15 +57,16 @@ EditText et_Code;
                     JSONObject reader = new JSONObject(response);
                     Log.i("asd", "---------------- this is response : " + response);
                     String token = reader.getString("token");
+                    String user = reader.getString("user");
                     if (!response.contains("ServerInvalidVerificationCode")) {
                         Intent i = new Intent(getBaseContext(), HomeActivity.class);
                         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putString("token", token);
+                        editor.putString("user",user);
                         editor.commit();
                         startActivity(i);
                         Log.i("asd", "---------------- this is response : " + code);
-
                         return "Success";
                     }
                     else

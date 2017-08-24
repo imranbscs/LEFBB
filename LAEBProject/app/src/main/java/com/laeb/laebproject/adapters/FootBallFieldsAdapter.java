@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.model.FieldInfo;
 import com.laeb.laebproject.model.UpComingGames;
 
 import java.util.List;
@@ -19,10 +20,13 @@ import java.util.List;
 
 public class FootBallFieldsAdapter extends RecyclerView.Adapter<FootBallFieldsAdapter.ViewHolder> {
 
-    List<UpComingGames> listItems;
+    List<FieldInfo> listItems;
+
+
     public Context context;
 
-    public FootBallFieldsAdapter(List<UpComingGames> listItems, Context context) {
+    public FootBallFieldsAdapter(List<FieldInfo> listItems, Context context) {
+
         this.listItems = listItems;
         this.context = context;
     }
@@ -35,9 +39,10 @@ public class FootBallFieldsAdapter extends RecyclerView.Adapter<FootBallFieldsAd
 
     @Override
     public void onBindViewHolder(FootBallFieldsAdapter.ViewHolder holder, int position) {
-        UpComingGames listItem = listItems.get(position);
+        FieldInfo listItem = listItems.get(position);
         final int a = position;
-        //holder.nameTeam.setText(listItem.getNameTeam());
+
+        holder.nameTeam.setText(listItem.name);
         //holder.cityName.setText(listItem.getGameLocation());
         //holder.gameTime.setText(listItem.getGameTime());
     }
@@ -56,7 +61,7 @@ public class FootBallFieldsAdapter extends RecyclerView.Adapter<FootBallFieldsAd
 
         public ViewHolder(View itemView) {
             super(itemView);
-            //nameTeam = (TextView) itemView.findViewById(R.id.team_name);
+            nameTeam = (TextView) itemView.findViewById(R.id.txtName);
             //cityName = (TextView) itemView.findViewById(R.id.game_city);
             //gameTime = (TextView) itemView.findViewById(R.id.dateTime);
         }
