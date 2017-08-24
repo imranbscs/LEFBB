@@ -19,7 +19,7 @@ import java.util.List;
 
 public class TestStaticMethod {
 
-    public static ExpendbleItems getAll(){
+    public static ExpendbleItems getAll() {
 
         ExpendbleItems expendbleItems = new ExpendbleItems();
 

@@ -44,36 +44,9 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-//        final String expandedListText = (String) getChild(groupPosition, childPosition);
-//
-//        if (convertView == null) {
-//            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            convertView = layoutInflater.inflate(R.layout.list_item_laeb, null);
-//        }
-//
-//        String string = expandedListText;
-//        String[] parts = string.split("-");
-//        String part1 = parts[0];
-//        String part2 = parts[1];
-//        String part3 = parts[2];
-//
-//        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.expandedListItem);
-//        TextView rate = (TextView) convertView.findViewById(R.id.rate);
-//        expandedListTextView.setText("From "+part1+"  Till "+part2);
-//        rate.setText("Rate "+part3);
 
-
-        //        final String expandedListText = (String) getChild(groupPosition, childPosition);
         LayoutInflater layoutInflater;
-//        if (convertView == null) {
         layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-//        }
-
-//        if(childPosition == 0)
-//        {
-//            convertView = layoutInflater.inflate(R.layout.child_footer, null);
-//        }
 
         if(childPosition<getChildrenCount(groupPosition)-1)
         {
@@ -94,12 +67,11 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         if(childPosition == getChildrenCount(groupPosition)-1)
         {
             convertView = layoutInflater.inflate(R.layout.child_footer,null);
-            //TextView txtFooter = (TextView)convertView.findViewById(R.id.txtFooter);
-            //txtFooter.setText(currentParent.textToFooter);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     addDialog();
+                    String temp = "1600-1800-25";
                     Toast.makeText(context, "child", Toast.LENGTH_SHORT).show();
                 }
             });
