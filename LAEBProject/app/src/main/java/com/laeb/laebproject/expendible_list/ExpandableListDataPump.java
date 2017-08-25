@@ -25,8 +25,6 @@ public class ExpandableListDataPump {
         List<String> friday = TestStaticMethod.getFriday();
 
         List<String> saturday = TestStaticMethod.getSaturday();
-        ;
-
 
         expandableListDetail.put("Sunday", sunday);
         expandableListDetail.put("Monday", monday);

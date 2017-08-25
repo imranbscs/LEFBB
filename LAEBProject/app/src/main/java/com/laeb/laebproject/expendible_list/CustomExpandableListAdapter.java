@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,13 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> expandableListTitle;
     public HashMap<String, List<String>> expandableListDetail;
+    public static List<String> sunday = TestStaticMethod.getSunday();
+    public static List<String> saturdady = TestStaticMethod.getSaturday();
+    public static List<String> monday = TestStaticMethod.getMonday();
+    public static List<String> tuesday = TestStaticMethod.getTuesday();
+    public static List<String> wednesday = TestStaticMethod.getWednesDay();
+    public static List<String> thursday = TestStaticMethod.getThursday();
+    public static List<String> friday = TestStaticMethod.getFriday();
 
     public CustomExpandableListAdapter(Context context, List<String> expandableListTitle, HashMap<String, List<String>> expandableListDetail) {
         this.context = context;
@@ -75,27 +83,28 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //addDialog();
+
                     String temp = "1600-1800-25";
-                    //invalidateViews();
-                    //notifyDataSetInvalidated();
-//                    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//                        public void onGlobalLayout() {
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                                v.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//                            }
-//
-//                            notifyDataSetChanged();
-//
-                    //setNewItems(expandableListTitle, expandableListDetail);
-                    //notifyDataSetChanged();
-
-                    expandableListDetail.get(expandableListTitle.get(a)).add("l-Mam-o");
+                    expandableListDetail.get(expandableListTitle.get(a)).add(temp);
                     notifyDataSetChanged();
+                    //Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
+                    Log.v("ggg", "  " + a + " ==== " +expandableListDetail.get(expandableListTitle.get(a)));
 
-
-                    Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(context, "child "+a+"  "+childPosition, Toast.LENGTH_SHORT).show();
+                    if(a == 0){
+                        saturdady = expandableListDetail.get(expandableListTitle.get(a));
+                    }else if(a == 1){
+                        sunday = expandableListDetail.get(expandableListTitle.get(a));
+                    }else if(a == 2){
+                        thursday = expandableListDetail.get(expandableListTitle.get(a));
+                    }else if(a == 3){
+                        tuesday = expandableListDetail.get(expandableListTitle.get(a));
+                    }else if(a == 4){
+                        friday = expandableListDetail.get(expandableListTitle.get(a));
+                    }else if(a == 5){
+                        wednesday = expandableListDetail.get(expandableListTitle.get(a));
+                    }else if(a == 6){
+                        monday = expandableListDetail.get(expandableListTitle.get(a));
+                    }
                 }
             });
         }
