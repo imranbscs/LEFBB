@@ -170,11 +170,10 @@
                         android:id="@+id/accamodations"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColorHint="@color/textColorHint"
                         android:backgroundTint="@color/white"
                         android:popupBackground="@color/colorPrimaryDark"
-                        android:entries="@array/array_accomodation"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dropdown"
+                        android:textColorHint="@color/textColorHint" />
 
                 </RelativeLayout>
 
@@ -198,6 +197,40 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:id="@+id/artificial_pitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Artificial Pitch Ground"
+                        android:textColor="@color/textColorHint" />
+
+                    <ImageView
+                        android:id="@+id/at_img"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/tick" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -261,10 +294,11 @@
                         android:layout_centerVertical="true"
                         android:src="@drawable/tick" />
                 </RelativeLayout>
-                <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="@color/white"/>-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
             </LinearLayout>
 
             <LinearLayout

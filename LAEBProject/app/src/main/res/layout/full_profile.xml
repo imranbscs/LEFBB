@@ -175,10 +175,11 @@
                                 android:drawableRight="@drawable/calendaricon"
                                 android:textColorHint="@color/textColorHint"
                                 android:gravity="center"
+                                android:inputType="none"
+                                android:textIsSelectable="true"
                                 android:background="#00000000"
                                 android:hint="@string/date_of_birth"
-                                android:textColor="@color/textColorHint"
-                                android:inputType="none" />
+                                android:textColor="@color/textColorHint"/>
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
