@@ -78,8 +78,9 @@
                 android:background="#00000000"
                 android:backgroundTint="@color/white"
                 android:gravity="center"
+                android:inputType="number"
                 android:hint="Rate"
-                android:spinnerMode="dropdown"
+                android:textColor="@color/textColorHintProfile"
                 android:textColorHint="@color/textColorHint" />
 
             <RelativeLayout
