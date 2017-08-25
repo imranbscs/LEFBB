@@ -10,11 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,28 +88,28 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    String temp = "1600-1800-25";
-                    expandableListDetail.get(expandableListTitle.get(a)).add(temp);
-                    notifyDataSetChanged();
-                    //Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
-                    Log.v("ggg", "  " + a + " ==== " +expandableListDetail.get(expandableListTitle.get(a)));
-
-                    if(a == 0){
-                        saturdady = expandableListDetail.get(expandableListTitle.get(a));
-                    }else if(a == 1){
-                        sunday = expandableListDetail.get(expandableListTitle.get(a));
-                    }else if(a == 2){
-                        thursday = expandableListDetail.get(expandableListTitle.get(a));
-                    }else if(a == 3){
-                        tuesday = expandableListDetail.get(expandableListTitle.get(a));
-                    }else if(a == 4){
-                        friday = expandableListDetail.get(expandableListTitle.get(a));
-                    }else if(a == 5){
-                        wednesday = expandableListDetail.get(expandableListTitle.get(a));
-                    }else if(a == 6){
-                        monday = expandableListDetail.get(expandableListTitle.get(a));
-                    }
+                    addDialog(a);
+//                    String temp = "1600-1800-25";
+//                    expandableListDetail.get(expandableListTitle.get(a)).add(temp);
+//                    notifyDataSetChanged();
+//                    //Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
+//                    Log.v("ggg", "  " + a + " ==== " +expandableListDetail.get(expandableListTitle.get(a)));
+//
+//                    if(a == 0){
+//                        saturdady = expandableListDetail.get(expandableListTitle.get(a));
+//                    }else if(a == 1){
+//                        sunday = expandableListDetail.get(expandableListTitle.get(a));
+//                    }else if(a == 2){
+//                        thursday = expandableListDetail.get(expandableListTitle.get(a));
+//                    }else if(a == 3){
+//                        tuesday = expandableListDetail.get(expandableListTitle.get(a));
+//                    }else if(a == 4){
+//                        friday = expandableListDetail.get(expandableListTitle.get(a));
+//                    }else if(a == 5){
+//                        wednesday = expandableListDetail.get(expandableListTitle.get(a));
+//                    }else if(a == 6){
+//                        monday = expandableListDetail.get(expandableListTitle.get(a));
+//                    }
                 }
             });
         }
@@ -159,20 +164,104 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    public void addDialog(){
+    public void addDialog(int b){
+        final int a = b;
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.custom_dialog_new_slot);
         //dialog.setTitle(R.string.pickup);
 
+        final String[] fromStr = {"1000"};
+        final String[] toStr = {"1000"};
+        String rateStr = "1000";
+        String allString = "";
 
         dialog.show();
-        TextView okBtn = (TextView) dialog.findViewById(R.id.cencel);
-        TextView cencelBtn = (TextView) dialog.findViewById(R.id.done);
+        TextView okBtn = (TextView) dialog.findViewById(R.id.done);
+        TextView cencelBtn = (TextView) dialog.findViewById(R.id.cencel);
+        Spinner start = (Spinner) dialog.findViewById(R.id.chose1);
+        Spinner end = (Spinner) dialog.findViewById(R.id.chose2);
+        final EditText rate = (EditText) dialog.findViewById(R.id.rate);
+        rateStr = rate.getText().toString().trim();
 
+        Log.v("edu", rateStr);
+
+        String[] arraySpinner = new String[] {
+                "1600", "1700", "1800", "1900", "2000"
+        };
+
+        final ArrayList<String> aaa = new ArrayList<>();
+        aaa.add("1600");
+        aaa.add("1700");
+        aaa.add("1800");
+        aaa.add("1900");
+        aaa.add("2000");
+        aaa.add("2100");
+
+
+        SpinnerAdapter adap = new ArrayAdapter<String>(context, R.layout.spinner_item, aaa);
+        start.setAdapter(adap);
+
+        start.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0,  View arg1, int position, long arg3) {
+                String string = aaa.get(position);
+                fromStr[0] = string;
+                Log.v("dialog", string);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        SpinnerAdapter adap1 = new ArrayAdapter<String>(context, R.layout.spinner_item, aaa);
+        end.setAdapter(adap1);
+
+        end.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0,  View arg1, int position, long arg3) {
+                String mCity_Id = aaa.get(position);
+                toStr[0] = mCity_Id;
+                Log.v("dialog", mCity_Id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+
+//        final String finalRateStr = rateStr;
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //drawRoute();
+                String sss = fromStr[0] + "-" + toStr[0] + "-" + rate.getText().toString().trim();;
+                ///String temp = "1600-1800-25";
+//                Log.v("edu", sss);
+                expandableListDetail.get(expandableListTitle.get(a)).add(sss);
+                notifyDataSetChanged();
+                Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
+                Log.v("ggg", "  " + a + " ==== " +expandableListDetail.get(expandableListTitle.get(a)));
+
+                if(a == 0){
+                    saturdady = expandableListDetail.get(expandableListTitle.get(a));
+                }else if(a == 1){
+                    sunday = expandableListDetail.get(expandableListTitle.get(a));
+                }else if(a == 2){
+                    thursday = expandableListDetail.get(expandableListTitle.get(a));
+                }else if(a == 3){
+                    tuesday = expandableListDetail.get(expandableListTitle.get(a));
+                }else if(a == 4){
+                    friday = expandableListDetail.get(expandableListTitle.get(a));
+                }else if(a == 5){
+                    wednesday = expandableListDetail.get(expandableListTitle.get(a));
+                }else if(a == 6){
+                    monday = expandableListDetail.get(expandableListTitle.get(a));
+                }
                 dialog.dismiss();
             }
         });
@@ -183,15 +272,5 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 dialog.dismiss();
             }
         });
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-        super.registerDataSetObserver(observer);
-    }
-    public void setNewItems(List<String> listDataHeader,HashMap<String, List<String>> listChildData) {
-        this.expandableListTitle = listDataHeader;
-        this.expandableListDetail = listChildData;
-        notifyDataSetChanged();
     }
 }
