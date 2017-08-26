@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.model.UpComingGames;
 
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -19,10 +21,10 @@ import java.util.List;
 
 public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFacilitiesAdapter.ViewHolder> {
 
-    List<String> listItems;
+    List<Hashtable<String, String>> listItems;
     public Context context;
 
-    public SearchFacilitiesAdapter(List<String> listItems, Context context) {
+    public SearchFacilitiesAdapter(List<Hashtable<String, String>> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
@@ -36,8 +38,12 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
     @Override
     public void onBindViewHolder(SearchFacilitiesAdapter.ViewHolder holder, int position) {
         //UpComingGames listItem = listItems.get(position);
+        Hashtable<String, String> ohash = listItems.get(position);
+
         final int a = position;
-//        holder.nameTeam.setText(listItem.getNameTeam());
+        holder.nameTeam.setText(ohash.get("name"));
+        holder.pitch_type.setText(ohash.get("pitch_type"));
+
 //        holder.cityName.setText(listItem.getGameLocation());
 //        holder.gameTime.setText(listItem.getGameTime());
     }
@@ -52,6 +58,7 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
         public TextView nameTeam;
         public TextView cityName;
         public TextView gameTime;
+        public TextView pitch_type;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
@@ -60,6 +67,7 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
             nameTeam = (TextView) itemView.findViewById(R.id.team_name);
             cityName = (TextView) itemView.findViewById(R.id.game_city);
             gameTime = (TextView) itemView.findViewById(R.id.dateTime);
+            pitch_type = (TextView) itemView.findViewById(R.id.dateTime);
 
         }
     }

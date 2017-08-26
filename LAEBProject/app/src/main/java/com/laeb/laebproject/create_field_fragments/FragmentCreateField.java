@@ -204,7 +204,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
                 fieldInfo.name = ed_name.getText().toString();
                 fieldInfo.size = ed_size.getText().toString();
                 fieldInfo.city = mCity_Id + "";
-                fieldInfo.capacity = spn_acc.getSelectedItem().toString();
+                fieldInfo.capacity = spn_acc.getSelectedItem().toString().substring(0,1);
 
                 FieldFacilities fragment = new FieldFacilities();
                 Bundle args = new Bundle();

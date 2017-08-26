@@ -139,69 +139,257 @@
                         android:weightSum="1.0"
                         >
 
-                        <ImageView
-                            android:id="@+id/imgViw1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:padding="20dp"
-                            app:srcCompat="@mipmap/pitch_selected" />
-                        <ImageView
-                            android:id="@+id/imgViw2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:padding="20dp"
-                            app:srcCompat="@mipmap/pitch_selected" />
-                        <ImageView
-                            android:id="@+id/imgViw3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:padding="20dp"
-                            app:srcCompat="@mipmap/pitch_selected" />
-                        <ImageView
-                            android:id="@+id/imgViw4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:padding="20dp"
-                            app:srcCompat="@mipmap/pitch_selected" />
-                        <ImageView
-                            android:id="@+id/imgViw5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:padding="20dp"
-                            app:srcCompat="@mipmap/pitch_selected" />
+                    <RelativeLayout android:paddingLeft="30dp" android:paddingRight="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
 
                         <ImageView
-                            android:id="@+id/imgViw7"
+                            android:id="@+id/img_pitch_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:padding="20dp"
-                            app:srcCompat="@mipmap/pitch_selected" />
+                            android:layout_alignParentLeft="true"
+                            android:src="@mipmap/pitch" />
 
+                        <TextView
+                            android:id="@+id/lbl_pitch1_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/img_pitch_1"
+                            android:layout_alignParentLeft="true"
+                            android:text="5"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/lbl_pitch1_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignRight="@id/img_pitch_1"
+                            android:layout_alignParentRight="true"
+                            android:text="5"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                    <RelativeLayout android:paddingLeft="30dp" android:paddingRight="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
 
                         <ImageView
-                            android:id="@+id/imgViw8"
+                            android:id="@+id/img_pitch2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:padding="20dp"
-                            app:srcCompat="@mipmap/pitch_selected" />
+                            android:layout_alignParentLeft="true"
+                            android:src="@mipmap/pitch" />
+
+                        <TextView
+                            android:id="@+id/lbl_pitch3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/img_pitch2"
+                            android:layout_alignParentLeft="true"
+                            android:text="6"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/lbl_pitch4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignRight="@id/img_pitch2"
+                            android:layout_alignParentRight="true"
+                            android:text="6"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                    <RelativeLayout android:paddingLeft="30dp" android:paddingRight="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:id="@+id/img_pitch5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:src="@mipmap/pitch" />
+
+                        <TextView
+                            android:id="@+id/lbl_pitch6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/img_pitch5"
+                            android:layout_alignParentLeft="true"
+                            android:text="7"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/lbl_pitch3_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignRight="@id/img_pitch5"
+                            android:layout_alignParentRight="true"
+                            android:text="7"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                    <RelativeLayout android:paddingLeft="30dp" android:paddingRight="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:id="@+id/img_pitch6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:src="@mipmap/pitch" />
+
+                        <TextView
+                            android:id="@+id/lbl_pitch4_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/img_pitch6"
+                            android:layout_alignParentLeft="true"
+                            android:text="8"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/lbl_pitch4_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignRight="@id/img_pitch6"
+                            android:layout_alignParentRight="true"
+                            android:text="8"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                        <RelativeLayout android:paddingLeft="30dp" android:paddingRight="30dp"
+                            android:id="@+id/relative"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <ImageView
+                                android:id="@+id/img_pitch7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:src="@mipmap/pitch_selected" />
+
+                            <TextView
+                                android:id="@+id/textLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/img_pitch7"
+                                android:layout_alignParentLeft="true"
+                                android:text="9"
+                                android:layout_margin="15dp"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textLabel2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignRight="@id/img_pitch7"
+                                android:layout_alignParentRight="true"
+                                android:text="9"
+                                android:layout_margin="15dp"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                        <RelativeLayout android:paddingLeft="30dp" android:paddingRight="30dp"
+                            android:id="@+id/relative2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <ImageView
+                                android:id="@+id/img_pitch8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:src="@mipmap/pitch_selected" />
+
+                            <TextView
+                                android:id="@+id/textLabel22"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/img_pitch8"
+                                android:layout_alignParentLeft="true"
+                                android:text="10"
+                                android:layout_margin="15dp"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textLabel23"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignRight="@id/img_pitch8"
+                                android:layout_alignParentRight="true"
+                                android:text="10"
+                                android:layout_margin="15dp"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <RelativeLayout android:paddingLeft="30dp" android:paddingRight="30dp"
+                            android:id="@+id/relative22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <ImageView
+                                android:id="@+id/img_pitch9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:src="@mipmap/pitch_selected" />
+
+                            <TextView
+                                android:id="@+id/textLabel2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@id/img_pitch9"
+                                android:layout_alignParentLeft="true"
+                                android:text="11"
+                                android:layout_margin="15dp"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textLabel22"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignRight="@id/img_pitch9"
+                                android:layout_alignParentRight="true"
+                                android:text="11"
+                                android:layout_margin="15dp"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
 
                     </LinearLayout>
-
-
                 </HorizontalScrollView>
 
             </RelativeLayout>
