@@ -62,8 +62,6 @@
                     android:layout_below="@+id/dummylayout"
                     android:id="@+id/fragment_layout">
 
-
-
                 </RelativeLayout>
             </RelativeLayout>
 
