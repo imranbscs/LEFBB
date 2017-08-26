@@ -86,6 +86,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/tick_layout"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="30dp"
@@ -98,6 +99,7 @@
                 android:layout_width="120dp"
                 android:background="@color/colorPrimaryDark"
                 android:layout_height="30dp"
+                android:visibility="gone"
                 android:layout_marginRight="20dp"
                 android:layout_toRightOf="@+id/tick_layout"
                 android:layout_alignParentBottom="true"
@@ -112,6 +114,29 @@
                     android:text="Invite"/>
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/checked"/>
+                <RelativeLayout
+                    android:layout_width="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_upcoming_game"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/cancel"/>
+            </LinearLayout>
 
         </RelativeLayout>
 
