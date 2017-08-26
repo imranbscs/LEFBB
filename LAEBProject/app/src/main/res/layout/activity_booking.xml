@@ -62,14 +62,12 @@
                 android:layout_below="@+id/dummylayout"
                 android:id="@+id/fragment_layout">
 
-<<<<<<< HEAD
-                </RelativeLayout>
-=======
+
+            </RelativeLayout>
 
 
->>>>>>> 7fc2503f44dc78e14f3f0dce50ad3022756a968d
+
             </RelativeLayout>
         </RelativeLayout>
 
     </RelativeLayout>
-</RelativeLayout>

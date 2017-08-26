@@ -19,10 +19,7 @@
         <activity android:name=".LanguageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-<<<<<<< HEAD
 
-=======
->>>>>>> 7fc2503f44dc78e14f3f0dce50ad3022756a968d
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,13 +36,13 @@
             android:value="AIzaSyDJB5NeoNB3p_F1-JoSXqGHS2fDPa_PV2g" />
 
         <activity android:name=".BookingActivity">
-<<<<<<< HEAD
-=======
+
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
 
         </activity>
->>>>>>> 7fc2503f44dc78e14f3f0dce50ad3022756a968d
 
-        </activity>
         <activity
             android:name=".MenuActivity"
             android:windowSoftInputMode="adjustPan"></activity>

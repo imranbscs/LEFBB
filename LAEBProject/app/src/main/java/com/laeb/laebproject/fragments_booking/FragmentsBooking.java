@@ -9,10 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.laeb.laebproject.BookingActivity;
+import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.SearchFacilitiesAdapter;
 import com.laeb.laebproject.adapters.UpComingGamesAdapter;
+import com.laeb.laebproject.create_field_fragments.SoicalMediaFragment;
+import com.laeb.laebproject.model.CustomBinder;
 import com.laeb.laebproject.model.FieldInfo;
 import com.laeb.laebproject.model.UpComingGames;
 
@@ -29,6 +34,14 @@ public class FragmentsBooking extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.booking_animation, container, false);
+        TextView searchTv = (TextView) v.findViewById(R.id.search_text);
+        searchTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentSearchFacilities fragment = new FragmentSearchFacilities();
+                ((BookingActivity) getActivity()).addFragment(fragment);
+            }
+        });
         return v;
     }
 }
