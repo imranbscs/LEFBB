@@ -4,9 +4,12 @@
     android:id="@+id/activity_login_registration"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,27 +36,30 @@
             android:layout_marginTop="30dp"
             android:layout_weight="1">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:visibility="visible"
-                    android:id="@+id/signINN">
-                    <include
-                        android:id="@+id/container_signup_lyt"
-                        android:layout_height="wrap_content"
+
+                    <RelativeLayout
                         android:layout_width="fill_parent"
-                        layout="@layout/sign_up_layout"/>
-                </RelativeLayout>
+                        android:layout_height="fill_parent"
+                        android:visibility="visible"
+                        android:id="@+id/signINN">
+                        <include
+                            android:id="@+id/container_signup_lyt"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            layout="@layout/createteam_layout"/>
+                     </RelativeLayout>
+
+                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

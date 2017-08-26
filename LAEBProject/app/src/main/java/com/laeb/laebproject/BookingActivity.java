@@ -134,12 +134,9 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
         }
         System.out.println(weekDay);
 
-
-
-
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-         FragmentsBooking fragmentsBooking= new FragmentsBooking();
+        FragmentsBooking fragmentsBooking= new FragmentsBooking();
         addFragment(fragmentsBooking);
     }
 

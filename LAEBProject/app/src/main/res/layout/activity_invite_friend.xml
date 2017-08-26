@@ -44,7 +44,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@+id/imageView3"
-                    android:text="CREATE YOUR TEAM"
+                    android:text="Invite Friends"
                     android:textColor="@color/white"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -72,3 +72,4 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
