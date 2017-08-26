@@ -1,14 +1,21 @@
 package com.laeb.laebproject;
 
-<<<<<<< HEAD
+
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.laeb.laebproject.fragments_booking.FragmentSearchFacilities;
+import com.laeb.laebproject.fragments_booking.FragmentsBooking;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -44,17 +51,8 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
     TextView lbl_viwDate2;
     TextView lbl_viwDate1;
     TextView lbl_viwDate2_1;
-=======
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.WindowManager;
 
-import com.laeb.laebproject.create_field_fragments.FragmentCreateField;
-import com.laeb.laebproject.fragments_booking.FragmentSearchFacilities;
-import com.laeb.laebproject.fragments_booking.FragmentsBooking;
->>>>>>> 57583ca4a6f4f03f271737a67a22282c0bdc69fa
+
 
 
     @Override
@@ -63,21 +61,21 @@ import com.laeb.laebproject.fragments_booking.FragmentsBooking;
 
         setContentView(R.layout.activity_booking);
 
-        lbl_viwDate4_1 = (TextView) findViewById(R.id.lbl_viwDate4_1);
-        lbl_viwDate4_2 = (TextView) findViewById(R.id.lbl_viwDate4_2);
+       // lbl_viwDate4_1 = (TextView) findViewById(R.id.lbl_viwDate4_1);
+       // lbl_viwDate4_2 = (TextView) findViewById(R.id.lbl_viwDate4_2);
 
-        lbl_viwDate5_1 = (TextView) findViewById(R.id.lbl_viwDate5_1);
-        lbl_viwDate5_2 = (TextView) findViewById(R.id.lbl_viwDate5_2);
+      //  lbl_viwDate5_1 = (TextView) findViewById(R.id.lbl_viwDate5_1);
+      //  lbl_viwDate5_2 = (TextView) findViewById(R.id.lbl_viwDate5_2);
 
-        lbl_viwDate6_1 = (TextView) findViewById(R.id.lbl_viwDate6_1);
-        lbl_viwDate6_2 = (TextView) findViewById(R.id.lbl_viwDate6_2);
+      //  lbl_viwDate6_1 = (TextView) findViewById(R.id.lbl_viwDate6_1);
+     //   lbl_viwDate6_2 = (TextView) findViewById(R.id.lbl_viwDate6_2);
 
-        lbl_viwDate7_1 = (TextView) findViewById(R.id.lbl_viwDate7_1);
-        lbl_viwDate7_2 = (TextView) findViewById(R.id.lbl_viwDate7_2);
+       // lbl_viwDate7_1 = (TextView) findViewById(R.id.lbl_viwDate7_1);
+      //  lbl_viwDate7_2 = (TextView) findViewById(R.id.lbl_viwDate7_2);
 
-        lbl_viwDate2 = (TextView) findViewById(R.id.lbl_viwDate2);
-        lbl_viwDate1 = (TextView) findViewById(R.id.lbl_viwDate1);
-        lbl_viwDate2_1 = (TextView) findViewById(R.id.lbl_viwDate2_1);
+      //  lbl_viwDate2 = (TextView) findViewById(R.id.lbl_viwDate2);
+       // lbl_viwDate1 = (TextView) findViewById(R.id.lbl_viwDate1);
+      //  lbl_viwDate2_1 = (TextView) findViewById(R.id.lbl_viwDate2_1);
 
 
         Calendar cal = Calendar.getInstance();
@@ -113,11 +111,11 @@ import com.laeb.laebproject.fragments_booking.FragmentsBooking;
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             int thisDay1 = calendar.get(Calendar.DAY_OF_MONTH);
 
-            lbl_viwDate4_1.setText("" + thisDay);
-            lbl_viwDate4_2.setText(dayOfWeek);
+//            lbl_viwDate4_1.setText("" + thisDay);
+//            lbl_viwDate4_2.setText(dayOfWeek);
 
-            lbl_viwDate5_1.setText("" + thisDay1);
-            lbl_viwDate5_2.setText("Sun");
+        //    lbl_viwDate5_1.setText("" + thisDay1);
+         //   lbl_viwDate5_2.setText("Sun");
         } else if (
                 Calendar.SUNDAY == dayOfWeek) {
 
@@ -128,11 +126,11 @@ import com.laeb.laebproject.fragments_booking.FragmentsBooking;
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             int thisDay1 = calendar.get(Calendar.DAY_OF_MONTH);
 
-            lbl_viwDate4_1.setText("" + thisDay);
-            lbl_viwDate4_2.setText(dayOfWeek);
+         //   lbl_viwDate4_1.setText("" + thisDay);
+          //  lbl_viwDate4_2.setText(dayOfWeek);
 
-            lbl_viwDate5_1.setText("j");
-            lbl_viwDate5_2.setText("Mon");
+        //    lbl_viwDate5_1.setText("j");
+        //    lbl_viwDate5_2.setText("Mon");
         }
         System.out.println(weekDay);
 
@@ -141,7 +139,7 @@ import com.laeb.laebproject.fragments_booking.FragmentsBooking;
 
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        FragmentSearchFacilities fragmentsBooking = new FragmentSearchFacilities();
+         FragmentsBooking fragmentsBooking= new FragmentsBooking();
         addFragment(fragmentsBooking);
     }
 
@@ -168,17 +166,6 @@ import com.laeb.laebproject.fragments_booking.FragmentsBooking;
         int imgResource = R.drawable.tickselected;
         oImage.setImageResource(imgResource);
 
-        switch (v.getId()) {
-            case R.id.img_pitch_1:
-
-
-                break;
-            case R.id.img_pitch_2:
-
-                break;
-            case R.id.img_pitch_3:
-                break;
-        }
 
     }
 }

@@ -7,6 +7,8 @@ package com.laeb.laebproject.model;
 public class FieldInfo {
     public String name;
 
+
+
     public String getName() {
         return name;
     }

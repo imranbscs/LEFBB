@@ -20,7 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LanguageActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
@@ -35,10 +38,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDJB5NeoNB3p_F1-JoSXqGHS2fDPa_PV2g"/>
         <activity android:name=".BookingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
