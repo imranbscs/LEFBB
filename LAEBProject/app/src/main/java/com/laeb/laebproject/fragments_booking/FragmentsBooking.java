@@ -24,12 +24,15 @@ import com.laeb.laebproject.model.UpComingGames;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.loopj.android.http.AsyncHttpClient.log;
+
 /**
  * Created by tariq on 8/26/2017.
  */
 
-public class FragmentsBooking extends Fragment {
-
+public class FragmentsBooking extends Fragment implements   View.OnClickListener {
+   int capacity;
+    //capacity = 6 , date = 2017-08-04, start = 19:00
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -38,10 +41,46 @@ public class FragmentsBooking extends Fragment {
         searchTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentSearchFacilities fragment = new FragmentSearchFacilities();
+                FragmentSearchFacilities fragment = new  FragmentSearchFacilities();
+                Bundle bundle = new Bundle();
+                log.i("asd",capacity + "");
+                bundle.putInt("capacity", capacity);
+                bundle.putString("date", "2017-08-26");
+                bundle.putString("start", "18:00");
+                fragment.setArguments(bundle);
+
                 ((BookingActivity) getActivity()).addFragment(fragment);
             }
         });
         return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.img_pitch_1:
+                capacity = 6;
+                break;
+            case R.id.img_pitch2:
+                capacity = 7;
+                break;
+
+            case R.id.img_pitch5:
+                capacity = 8;
+                break;
+            case R.id.img_pitch6:
+                capacity = 9;
+                break;
+            case R.id.img_pitch7:
+                capacity = 10;
+                break;
+            case R.id.img_pitch8:
+                capacity = 11;
+                break;
+
+
+
+        }
     }
 }
