@@ -19,17 +19,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
+
             <Spinner
                 android:id="@+id/chose1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:popupBackground="@color/colorPrimaryDark"
                 android:backgroundTint="@color/white"
                 android:spinnerMode="dropdown" />
 
@@ -38,7 +41,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/chose1"
                 android:layout_marginRight="20dp"
-                android:background="@color/white"/>
+                android:background="@color/white" />
         </RelativeLayout>
 
 
@@ -46,35 +49,46 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="5dp">
+
             <Spinner
                 android:id="@+id/chose2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:popupBackground="@color/colorPrimaryDark"
                 android:backgroundTint="@color/white"
                 android:spinnerMode="dropdown" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@+id/chose2"
                 android:layout_marginRight="20dp"
-                android:background="@color/white"/>
+                android:background="@color/white" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginTop="5dp">
-            <Spinner
+
+            <EditText
                 android:id="@+id/rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#00000000"
                 android:backgroundTint="@color/white"
-                android:spinnerMode="dropdown" />
+                android:gravity="center"
+                android:inputType="number"
+                android:hint="Rate"
+                android:textColor="@color/textColorHintProfile"
+                android:textColorHint="@color/textColorHint" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@+id/rate"
                 android:layout_marginRight="20dp"
-                android:background="@color/white"/>
+                android:background="@color/white" />
         </RelativeLayout>
     </LinearLayout>
 

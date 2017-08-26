@@ -1,5 +1,9 @@
 package com.laeb.laebproject.testjson;
 
+import android.util.Log;
+
+import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
+import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
 import com.laeb.laebproject.model_expendible.ExpendbleItems;
 import com.laeb.laebproject.model_expendible.Friday;
 import com.laeb.laebproject.model_expendible.Monday;
@@ -11,6 +15,7 @@ import com.laeb.laebproject.model_expendible.Tuesday;
 import com.laeb.laebproject.model_expendible.Wednesday;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,11 +28,15 @@ public class TestStaticMethod {
 
         ExpendbleItems expendbleItems = new ExpendbleItems();
 
+        HashMap<String, List<String>> expandableListDetail = ExpandableListDataPump.getData();
+
         Saturday saturday = new Saturday();
         saturday.setAvailable(1);
+        List<String> strings = CustomExpandableListAdapter.saturdady;
+        Log.v("www", "==== "+strings);
         ArrayList<Slot> satSlots = new ArrayList<>();
-        for(int i = 0; i < TestStaticMethod.getSaturday().size(); i++) {
-            String s = TestStaticMethod.getSaturday().get(i);
+        for(int i = 0; i < strings.size(); i++) {
+            String s = strings.get(i);
             String[] values = TestStaticMethod.getArrayy(s);
             Slot slot = new Slot();
             slot.setFrom(values[0]);
@@ -40,9 +49,11 @@ public class TestStaticMethod {
 
         Sunday sunday = new Sunday();
         sunday.setAvailable(1);
+        List<String> sundayList = CustomExpandableListAdapter.sunday;
+        Log.v("www", "==== "+sundayList);
         ArrayList<Slot> sunSlots = new ArrayList<>();
-        for(int i = 0; i < TestStaticMethod.getSunday().size(); i++) {
-            String s = TestStaticMethod.getSunday().get(i);
+        for(int i = 0; i < sundayList.size(); i++) {
+            String s = sundayList.get(i);
             String[] values = TestStaticMethod.getArrayy(s);
             Slot slot = new Slot();
             slot.setFrom(values[0]);
@@ -53,11 +64,13 @@ public class TestStaticMethod {
 
         sunday.setSlots(sunSlots);
 
+
         Monday monday = new Monday();
         monday.setAvailable(1);
+        List<String> mon = CustomExpandableListAdapter.monday;
         ArrayList<Slot> monSlots = new ArrayList<>();
-        for(int i = 0; i < TestStaticMethod.getMonday().size(); i++) {
-            String s = TestStaticMethod.getMonday().get(i);
+        for(int i = 0; i < mon.size(); i++) {
+            String s = mon.get(i);
             String[] values = TestStaticMethod.getArrayy(s);
             Slot slot = new Slot();
             slot.setFrom(values[0]);
@@ -70,9 +83,10 @@ public class TestStaticMethod {
 
         Tuesday tuesday = new Tuesday();
         tuesday.setAvailable(1);
+        List<String> tues = CustomExpandableListAdapter.tuesday;
         ArrayList<Slot> tusSlots = new ArrayList<>();
-        for(int i = 0; i < TestStaticMethod.getTuesday().size(); i++) {
-            String s = TestStaticMethod.getTuesday().get(i);
+        for(int i = 0; i < tues.size(); i++) {
+            String s = tues.get(i);
             String[] values = TestStaticMethod.getArrayy(s);
             Slot slot = new Slot();
             slot.setFrom(values[0]);
@@ -85,9 +99,10 @@ public class TestStaticMethod {
 
         Wednesday wednesday = new Wednesday();
         wednesday.setAvailable(1);
+        List<String> wed = CustomExpandableListAdapter.wednesday;
         ArrayList<Slot> wedSlots = new ArrayList<>();
-        for(int i = 0; i < TestStaticMethod.getWednesDay().size(); i++) {
-            String s = TestStaticMethod.getWednesDay().get(i);
+        for(int i = 0; i < wed.size(); i++) {
+            String s = wed.get(i);
             String[] values = TestStaticMethod.getArrayy(s);
             Slot slot = new Slot();
             slot.setFrom(values[0]);
@@ -100,9 +115,10 @@ public class TestStaticMethod {
 
         Thursday thursday = new Thursday();
         thursday.setAvailable(1);
+        List<String> thr = CustomExpandableListAdapter.thursday;
         ArrayList<Slot> thrSlots = new ArrayList<>();
-        for(int i = 0; i < TestStaticMethod.getThursday().size(); i++) {
-            String s = TestStaticMethod.getThursday().get(i);
+        for(int i = 0; i < thr.size(); i++) {
+            String s = thr.get(i);
             String[] values = TestStaticMethod.getArrayy(s);
             Slot slot = new Slot();
             slot.setFrom(values[0]);
@@ -115,9 +131,10 @@ public class TestStaticMethod {
 
         Friday friday = new Friday();
         friday.setAvailable(1);
+        List<String> fri = CustomExpandableListAdapter.friday;
         ArrayList<Slot> friSlots = new ArrayList<>();
-        for(int i = 0; i < TestStaticMethod.getFriday().size(); i++) {
-            String s = TestStaticMethod.getFriday().get(i);
+        for(int i = 0; i < fri.size(); i++) {
+            String s = fri.get(i);
             String[] values = TestStaticMethod.getArrayy(s);
             Slot slot = new Slot();
             slot.setFrom(values[0]);
@@ -128,6 +145,9 @@ public class TestStaticMethod {
 
         friday.setSlots(friSlots);
 
+
+
+
         expendbleItems.setSunday(sunday);
         expendbleItems.setMonday(monday);
         expendbleItems.setTuesday(tuesday);
@@ -135,6 +155,119 @@ public class TestStaticMethod {
         expendbleItems.setThursday(thursday);
         expendbleItems.setFriday(friday);
         expendbleItems.setSaturday(saturday);
+
+//        Saturday saturday = new Saturday();
+//        saturday.setAvailable(1);
+//        ArrayList<Slot> satSlots = new ArrayList<>();
+//        for(int i = 0; i < TestStaticMethod.getSaturday().size(); i++) {
+//            String s = TestStaticMethod.getSaturday().get(i);
+//            String[] values = TestStaticMethod.getArrayy(s);
+//            Slot slot = new Slot();
+//            slot.setFrom(values[0]);
+//            slot.setTo(values[1]);
+//            slot.setRate(values[2]);
+//            satSlots.add(slot);
+//        }
+//        saturday.setSlots(satSlots);
+//
+//
+//        Sunday sunday = new Sunday();
+//        sunday.setAvailable(1);
+//        ArrayList<Slot> sunSlots = new ArrayList<>();
+//        for(int i = 0; i < TestStaticMethod.getSunday().size(); i++) {
+//            String s = TestStaticMethod.getSunday().get(i);
+//            String[] values = TestStaticMethod.getArrayy(s);
+//            Slot slot = new Slot();
+//            slot.setFrom(values[0]);
+//            slot.setTo(values[1]);
+//            slot.setRate(values[2]);
+//            sunSlots.add(slot);
+//        }
+//
+//        sunday.setSlots(sunSlots);
+//
+//        Monday monday = new Monday();
+//        monday.setAvailable(1);
+//        ArrayList<Slot> monSlots = new ArrayList<>();
+//        for(int i = 0; i < TestStaticMethod.getMonday().size(); i++) {
+//            String s = TestStaticMethod.getMonday().get(i);
+//            String[] values = TestStaticMethod.getArrayy(s);
+//            Slot slot = new Slot();
+//            slot.setFrom(values[0]);
+//            slot.setTo(values[1]);
+//            slot.setRate(values[2]);
+//            monSlots.add(slot);
+//        }
+//
+//        monday.setSlots(monSlots);
+//
+//        Tuesday tuesday = new Tuesday();
+//        tuesday.setAvailable(1);
+//        ArrayList<Slot> tusSlots = new ArrayList<>();
+//        for(int i = 0; i < TestStaticMethod.getTuesday().size(); i++) {
+//            String s = TestStaticMethod.getTuesday().get(i);
+//            String[] values = TestStaticMethod.getArrayy(s);
+//            Slot slot = new Slot();
+//            slot.setFrom(values[0]);
+//            slot.setTo(values[1]);
+//            slot.setRate(values[2]);
+//            tusSlots.add(slot);
+//        }
+//
+//        tuesday.setSlots(tusSlots);
+//
+//        Wednesday wednesday = new Wednesday();
+//        wednesday.setAvailable(1);
+//        ArrayList<Slot> wedSlots = new ArrayList<>();
+//        for(int i = 0; i < TestStaticMethod.getWednesDay().size(); i++) {
+//            String s = TestStaticMethod.getWednesDay().get(i);
+//            String[] values = TestStaticMethod.getArrayy(s);
+//            Slot slot = new Slot();
+//            slot.setFrom(values[0]);
+//            slot.setTo(values[1]);
+//            slot.setRate(values[2]);
+//            wedSlots.add(slot);
+//        }
+//
+//        wednesday.setSlots(wedSlots);
+//
+//        Thursday thursday = new Thursday();
+//        thursday.setAvailable(1);
+//        ArrayList<Slot> thrSlots = new ArrayList<>();
+//        for(int i = 0; i < TestStaticMethod.getThursday().size(); i++) {
+//            String s = TestStaticMethod.getThursday().get(i);
+//            String[] values = TestStaticMethod.getArrayy(s);
+//            Slot slot = new Slot();
+//            slot.setFrom(values[0]);
+//            slot.setTo(values[1]);
+//            slot.setRate(values[2]);
+//            thrSlots.add(slot);
+//        }
+//
+//        thursday.setSlots(thrSlots);
+//
+//        Friday friday = new Friday();
+//        friday.setAvailable(1);
+//        ArrayList<Slot> friSlots = new ArrayList<>();
+//        for(int i = 0; i < TestStaticMethod.getFriday().size(); i++) {
+//            String s = TestStaticMethod.getFriday().get(i);
+//            String[] values = TestStaticMethod.getArrayy(s);
+//            Slot slot = new Slot();
+//            slot.setFrom(values[0]);
+//            slot.setTo(values[1]);
+//            slot.setRate(values[2]);
+//            friSlots.add(slot);
+//        }
+//
+//        friday.setSlots(friSlots);
+//
+//        expendbleItems.setSunday(sunday);
+//        expendbleItems.setMonday(monday);
+//        expendbleItems.setTuesday(tuesday);
+//        expendbleItems.setWednesday(wednesday);
+//        expendbleItems.setThursday(thursday);
+//        expendbleItems.setFriday(friday);
+//        expendbleItems.setSaturday(saturday);
 
         return expendbleItems;
     }
@@ -159,9 +292,9 @@ public class TestStaticMethod {
     public static List<String> getTuesday(){
 
         List<String> cricket = new ArrayList<String>();
-        cricket.add("1600-1800-20");
-        cricket.add("1900-2100-30");
-        cricket.add("1000-1100-80");
+//        cricket.add("1600-1800-20");
+//        cricket.add("1900-2100-30");
+//        cricket.add("1000-1100-80");
 
         return cricket;
     }
@@ -188,7 +321,7 @@ public class TestStaticMethod {
     public static List<String> getFriday(){
 
         List<String> cricket = new ArrayList<String>();
-        //cricket.add("1600-1800-20");
+//        cricket.add("1600-1800-20");
 
         return cricket;
     }
@@ -196,9 +329,9 @@ public class TestStaticMethod {
     public static List<String> getSaturday(){
 
         List<String> cricket = new ArrayList<String>();
-        cricket.add("1600-1800-20");
-        cricket.add("1900-2100-30");
-        cricket.add("1000-1100-80");
+//        cricket.add("1600-1800-20");
+//        cricket.add("1900-2100-30");
+//        cricket.add("1000-1100-80");
 
         return cricket;
     }

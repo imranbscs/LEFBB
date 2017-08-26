@@ -1,5 +1,6 @@
 package com.laeb.laebproject;
 
+<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -43,6 +44,17 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
     TextView lbl_viwDate2;
     TextView lbl_viwDate1;
     TextView lbl_viwDate2_1;
+=======
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.WindowManager;
+
+import com.laeb.laebproject.create_field_fragments.FragmentCreateField;
+import com.laeb.laebproject.fragments_booking.FragmentSearchFacilities;
+import com.laeb.laebproject.fragments_booking.FragmentsBooking;
+>>>>>>> 57583ca4a6f4f03f271737a67a22282c0bdc69fa
 
 
     @Override
@@ -128,6 +140,15 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
 
 
         getSupportActionBar().hide();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        FragmentSearchFacilities fragmentsBooking = new FragmentSearchFacilities();
+        addFragment(fragmentsBooking);
+    }
+
+    public void addFragment(Fragment f){
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_layout, f);
+        fragmentTransaction.commit();
     }
 
     public void saveClicked(View view) {

@@ -12,11 +12,6 @@ public class ExpandableListDataPump {
 
         HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
 
-        List<String> cricket = TestStaticMethod.getSunday();
-//        cricket.add("India");
-//        cricket.add("Pakistan");
-//        cricket.add("Australia");
-
         List<String> sunday = TestStaticMethod.getSunday();
 
         List<String> monday = TestStaticMethod.getMonday();
@@ -31,16 +26,6 @@ public class ExpandableListDataPump {
 
         List<String> saturday = TestStaticMethod.getSaturday();
 
-        List<String> basketball = new ArrayList<String>();
-        basketball.add("Sunday");
-        basketball.add("Monday");
-        basketball.add("Tuesday");
-        basketball.add("Wednesday");
-        basketball.add("Thursday");
-        basketball.add("Friday");
-        basketball.add("Saturday");
-
-
         expandableListDetail.put("Sunday", sunday);
         expandableListDetail.put("Monday", monday);
         expandableListDetail.put("Tuesday", tuesday);
@@ -50,5 +35,9 @@ public class ExpandableListDataPump {
         expandableListDetail.put("Saturday", saturday);
 
         return expandableListDetail;
+    }
+
+    private void getalll(){
+
     }
 }

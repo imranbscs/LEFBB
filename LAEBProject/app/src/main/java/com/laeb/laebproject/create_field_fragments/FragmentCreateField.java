@@ -96,6 +96,11 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         profImg = (ImageView) view.findViewById(R.id.picture);
         addImage = (ImageView) view.findViewById(R.id.addImage);
         spn_acc = (Spinner) view.findViewById(R.id.accamodations);
+
+
+        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, groundSize());
+        spn_acc.setAdapter(adap);
+
         grass_pitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,13 +170,10 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
 
 
                 // Spinner adapter
-                spn_city.setAdapter(new ArrayAdapter<String>(getActivity(),
-                               android.R.layout.simple_spinner_dropdown_item,
-                               worldlist));
+                //spn_city.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,worldlist));
                 spn_city.setAdapter(adap);
                 // Spinner on item click listener
-                spn_city
-                        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                spn_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                             @Override
                             public void onItemSelected(AdapterView<?> arg0,
@@ -310,8 +312,18 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
             ed_size.setError(null);
         }
 
-
         return true;
+    }
+
+    public ArrayList<String> groundSize(){
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("6 X 6");
+        strings.add("7 X 7");
+        strings.add("8 X 8");
+        strings.add("9 X 9");
+        strings.add("10 X 10");
+        strings.add("11 X 11");
+        return strings;
     }
 
 }

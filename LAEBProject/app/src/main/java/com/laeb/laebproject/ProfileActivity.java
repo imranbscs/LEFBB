@@ -82,8 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
         {
             btnFemale(Female);
         }
-
-
     }
 
     private int getIndex(Spinner spinner, String myString)

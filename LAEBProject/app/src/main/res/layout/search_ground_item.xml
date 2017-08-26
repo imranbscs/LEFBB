@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/toplayout"
+            android:layout_height="45dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="22sp"
+                    android:textColor="@color/textColorHint"
+                    android:text="Anfield, Man Unt" />
+
+                <RelativeLayout
+                    android:layout_width="80dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="20dp">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true">
+                        <TextView
+                            android:text="4.3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:visibility="visible"
+                            android:id="@+id/rating_num" />
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="17dp"
+                            android:visibility="visible"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toRightOf="@+id/rating_num"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:id="@+id/ratingBar" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toplayout"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/slotsLayout"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/roundeges"
+            android:layout_above="@+id/bottomlayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slots"
+                android:textColor="@color/textColorHint"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toplayout"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_toLeftOf="@+id/slotsLayout"
+            android:layout_marginRight="10dp"
+            android:layout_above="@+id/bottomlayout">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Grass Pitch"
+                android:textSize="15sp"
+                android:id="@+id/pitch_type"
+                android:textColor="@color/textColorHint"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingTop="8dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/locationicon"
+                    android:id="@+id/imageView4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+                <TextView
+                    android:text="1/820 Forest Rd, Peakhurst NSW 2210, Australia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColorHint"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/address" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:id="@+id/bottomlayout"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/bottle"
+                android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/parking"
+                android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/light"
+                android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/hanger"
+                android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/football"
+                android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/jacket"
+                android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/toilet"
+                android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/sitting"
+                android:layout_marginLeft="5dp"/>
+
+
+        </LinearLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
