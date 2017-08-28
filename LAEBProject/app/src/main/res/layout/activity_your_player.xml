@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Your Schedule"
+            android:text="Your Player"
             android:layout_toRightOf="@+id/imageView3"
             android:layout_alignParentBottom="true"
             android:textColor="@color/white"
@@ -41,52 +41,12 @@
         android:layout_below="@+id/topBarLayout"
         android:background="@color/white"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/schedule_invi"
-        android:layout_below="@+id/dummylayout"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <TextView
-            android:text="Schedule"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:id="@+id/loginText"
-            android:gravity="right"
-            android:textColor="@color/textColorHint"
-            android:textSize="17sp" />
-
-        <RelativeLayout
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/textColorHint"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:text="Invitation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:textColor="@color/textColorHint"
-            android:id="@+id/regText"
-            android:onClick="showSignUpClicked"
-            android:textSize="17sp" />
-
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/schedule_invi"
+        android:layout_below="@+id/dummylayout"
         android:id="@+id/fragment_layout"
         android:layout_above="@+id/bottomBar">
-
     </RelativeLayout>
 
     <RelativeLayout
