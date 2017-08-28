@@ -6,16 +6,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:background="@drawable/bg_white">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/playerpic"
-            android:layout_centerVertical="true"
-            android:src="@drawable/pic"/>
+            android:src="@drawable/image_square"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,15 +83,17 @@
             android:layout_alignParentRight="true">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/tick_layout"
                 android:visibility="gone"
-                android:layout_height="wrap_content">
+                android:background="@color/colorPrimaryDark"
+                android:layout_height="30dp">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerInParent="true"
                     android:id="@+id/invite_img"
                     android:src="@drawable/plus"/>
             </RelativeLayout>
@@ -122,24 +121,25 @@
             <LinearLayout
                 android:layout_width="120dp"
                 android:layout_height="30dp"
+                android:visibility="visible"
                 android:orientation="horizontal"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="10dp"
                 android:gravity="center">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/checked"/>
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/tick_green"/>
                 <RelativeLayout
                     android:layout_width="1dp"
                     android:layout_marginLeft="10dp"
                     android:layout_height="match_parent"
-                    android:background="@color/black_upcoming_game"/>
+                    android:background="@color/colorPrimaryDark"/>
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/cancel"/>
+                    android:src="@drawable/cross"/>
             </LinearLayout>
 
         </RelativeLayout>

@@ -8,8 +8,25 @@
         android:layout_width="match_parent"
         android:id="@+id/toplayout"
         android:orientation="horizontal"
+        android:gravity="right"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
         android:layout_height="50dp">
-
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/sort"
+                android:layout_centerVertical="true"
+                android:src="@drawable/sort"/>
+            <RelativeLayout
+                android:layout_width="1dp"
+                android:layout_height="35dp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_toLeftOf="@+id/sort"
+                android:layout_centerVertical="true"
+                android:src="@drawable/filter"/>
     </LinearLayout>
 
     <LinearLayout
@@ -17,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toplayout"
         android:layout_above="@+id/doneBtn"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView

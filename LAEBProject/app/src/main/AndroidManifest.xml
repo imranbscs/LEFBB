@@ -40,18 +40,17 @@
         <activity
             android:name=".MenuActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".CreateTeamActivity"></activity>
+        <activity android:name=".CreateTeamActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".InviteFriendActivity" />
         <activity android:name=".YourTeamActivity" />
         <activity android:name=".YourScheduleActivity" />
         <activity android:name=".InvitePlayerActivity">
 
-        </activity>
-        <activity android:name=".YourPlayerActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

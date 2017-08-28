@@ -4,9 +4,11 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.laeb.laebproject.team_fragments.FragmentCreateTeam;
+import com.laeb.laebproject.team_fragments.FragmentYourPlayer;
 import com.laeb.laebproject.team_fragments.FragmentYourTeam;
 
 public class YourTeamActivity extends AppCompatActivity {
@@ -25,5 +27,12 @@ public class YourTeamActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_layout, f);
         fragmentTransaction.commit();
+    }
+
+    public void multiPlayer(View view) {
+
+        FragmentYourPlayer fragmentsBooking = new FragmentYourPlayer();
+        addFragment(fragmentsBooking);
+
     }
 }

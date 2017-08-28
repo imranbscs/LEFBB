@@ -23,10 +23,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/flag1"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/parking" />
+                    android:src="@drawable/image_wide" />
             </RelativeLayout>
 
             <LinearLayout
@@ -34,15 +38,15 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -69,7 +73,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:layout_marginTop="20dp"
-                                android:background="@color/textColorHint" />
+                                android:background="#cc0000" />
 
                             <EditText
                                 android:id="@+id/email"
@@ -84,7 +88,10 @@
                                 android:textColor="@color/textColorHint"
                                 android:textColorHint="@color/textColorHint" />
 
-
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
 
                             <Spinner
                                 android:id="@+id/password"
@@ -113,7 +120,6 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="150dp"
-                                android:layout_marginTop="20dp"
                                 android:orientation="horizontal">
 
                                 <RelativeLayout
@@ -132,7 +138,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_alignParentRight="true"
-                                            android:src="@drawable/blackimg"/>
+                                            android:src="@drawable/shirt1"/>
                                     </RelativeLayout>
 
                                     <TextView
@@ -161,7 +167,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_alignParentRight="true"
-                                            android:src="@drawable/blackimg"/>
+                                            android:src="@drawable/shirt2"/>
                                     </RelativeLayout>
 
                                     <TextView
