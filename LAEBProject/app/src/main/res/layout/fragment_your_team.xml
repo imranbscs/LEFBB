@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login_registration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/parking" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:visibility="visible"
+                        android:id="@+id/signINN">
+                        <LinearLayout
+                            android:id="@+id/signuplyout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="@color/textColorHint"
+                                android:text="Jaddah Warriors"/>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_marginTop="20dp"
+                                android:background="@color/textColorHint" />
+
+                            <EditText
+                                android:id="@+id/email"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="20dp"
+                                android:background="#00000000"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="Coach: Al Yousuf"
+                                android:inputType="text"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+
+
+                            <Spinner
+                                android:id="@+id/password"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <Spinner
+                                android:id="@+id/c_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_marginTop="20dp"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <RelativeLayout
+                                        android:id="@+id/relativeLayoutImg"
+                                        android:layout_width="90dp"
+                                        android:layout_height="90dp"
+                                        android:layout_centerInParent="true">
+
+                                        <ImageView
+                                            android:id="@+id/addPic"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_alignParentRight="true"
+                                            android:src="@drawable/blackimg"/>
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_below="@+id/relativeLayoutImg"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="10dp"
+                                        android:text="Home Shirt"
+                                        android:textColor="@color/textColorHint" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <RelativeLayout
+                                        android:id="@+id/relativeLayoutImg1"
+                                        android:layout_width="90dp"
+                                        android:layout_height="90dp"
+                                        android:layout_centerInParent="true">
+                                        <ImageView
+                                            android:id="@+id/addPic2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_alignParentRight="true"
+                                            android:src="@drawable/blackimg"/>
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_below="@+id/relativeLayoutImg1"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="10dp"
+                                        android:text="Away Shirt"
+                                        android:textColor="@color/textColorHint" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

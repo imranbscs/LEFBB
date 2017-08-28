@@ -2,6 +2,7 @@ package com.laeb.laebproject.team_fragments;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.laeb.laebproject.BookingActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.fragments_booking.FragmentSearchFacilities;
 
 import java.util.ArrayList;
@@ -52,10 +54,8 @@ public class FragmentCreateTeam extends Fragment {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                    dialog.dismiss();
-
+                dialog.dismiss();
+                startActivity(new Intent(getActivity(), YourTeamActivity.class));
             }
         });
 

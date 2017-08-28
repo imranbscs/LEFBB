@@ -9,4 +9,5 @@
     <color name="black_upcoming_game">#D8000000</color>
     <color name="footBallFieldWhiteBg">#CCFFFFFF</color>
     <color name="darkTransparentBg">#66000000</color>
+    <color name="colorRed">#ff0000</color>
 </resources>
