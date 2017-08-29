@@ -133,7 +133,6 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnNext:
-<<<<<<< HEAD
                 Gson gson = new Gson();
                 String json = gson.toJson(TestStaticMethod.getAll());
                 Log.v("ppp", "====== "+json);
@@ -142,14 +141,12 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
                 fieldInfo.city = "1";
                 fieldInfo.nearby = "E11";
                 String s = gson.toJson(fieldInfo);
-=======
                 Gson g = new Gson();
                 json= g.toJson(TestStaticMethod.getAll());
                 fieldInfo.city = "1";
                 fieldInfo.nearby = "E11";
 
-                String s = g.toJson(fieldInfo);
->>>>>>> 7da7d351f5dfc5f8023414efa22474b9eebe0450
+                s = g.toJson(fieldInfo);
                 final RequestParams paramss = new RequestParams();
                 paramss.put("fieldInfo", s);
                 paramss.put("pictures", " [{\"image\":\"base64string1\"},{\"image\":\"base64string3\"}]");
