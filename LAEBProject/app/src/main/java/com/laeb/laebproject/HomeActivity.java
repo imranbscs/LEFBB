@@ -20,4 +20,8 @@ public class HomeActivity extends AppCompatActivity {
     public void bookingClicked(View view) {
         startActivity(new Intent(this, BookingActivity.class));
     }
+
+    public void addTeamClicked(View view) {
+        startActivity(new Intent(this, CreateTeamActivity.class));
+    }
 }

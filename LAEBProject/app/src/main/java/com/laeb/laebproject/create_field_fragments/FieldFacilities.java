@@ -122,7 +122,6 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.nextBtn:
-
                 MapFragment fragment = new MapFragment();
                 Bundle args = new Bundle();
                 CustomBinder oCustom = new CustomBinder();

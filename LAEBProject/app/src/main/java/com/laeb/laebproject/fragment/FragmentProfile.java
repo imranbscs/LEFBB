@@ -219,9 +219,9 @@ public class FragmentProfile extends Fragment {
 
 
                 // Spinner adapter
-                mySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_spinner_dropdown_item,
-                                worldlist));
+//                mySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
+//                                android.R.layout.simple_spinner_dropdown_item,
+//                                worldlist));
                 SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
                 mySpinner.setAdapter(adap);
                 // Spinner on item click listener

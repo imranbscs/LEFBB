@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login_registration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:id="@+id/team_logo"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/plus_team" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/signINN"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:id="@+id/signuplyout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <EditText
+                                android:id="@+id/team_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#00000000"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="Your team name"
+                                android:inputType="text"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <EditText
+                                android:id="@+id/team_color"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#00000000"
+                                android:drawableRight="@drawable/color_picker"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="Pick your team color"
+                                android:inputType="text"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <EditText
+                                android:id="@+id/coach_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#00000000"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="Coach name"
+                                android:inputType="text"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <EditText
+                                android:id="@+id/fvt_ground"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#00000000"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="Favorite ground"
+                                android:inputType="text"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <Spinner
+                                android:id="@+id/city_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_marginTop="20dp"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <RelativeLayout
+                                        android:id="@+id/relativeLayoutImg"
+                                        android:layout_width="90dp"
+                                        android:layout_height="90dp"
+                                        android:layout_centerInParent="true">
+
+                                        <ImageView
+                                            android:id="@+id/home_shirt"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="fill_parent"
+                                            android:padding="1dp"
+                                            android:src="@drawable/blackimg" />
+
+                                        <ImageView
+                                            android:id="@+id/add_home_shirt"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_marginRight="4dp"
+                                            android:layout_marginTop="4dp"
+                                            android:src="@drawable/plusicon_white" />
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_below="@+id/relativeLayoutImg"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="10dp"
+                                        android:text="Home Shirt"
+                                        android:textColor="@color/textColorHint" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <RelativeLayout
+                                        android:id="@+id/relativeLayoutImg1"
+                                        android:layout_width="90dp"
+                                        android:layout_height="90dp"
+                                        android:layout_centerInParent="true">
+
+                                        <ImageView
+                                            android:id="@+id/away_shirt"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="fill_parent"
+                                            android:padding="1dp"
+                                            android:src="@drawable/blackimg" />
+
+                                        <ImageView
+                                            android:id="@+id/add_away_shirt"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_marginRight="4dp"
+                                            android:layout_marginTop="4dp"
+                                            android:src="@drawable/plusicon_white" />
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_below="@+id/relativeLayoutImg1"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="10dp"
+                                        android:text="Away Shirt"
+                                        android:textColor="@color/textColorHint" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/creatBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="30dp"
+                                android:layout_marginTop="20dp"
+                                android:background="@color/darkTransparentBg"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:text="CREAT YOUR TEAM"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
