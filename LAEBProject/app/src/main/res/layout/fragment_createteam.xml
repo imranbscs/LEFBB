@@ -12,49 +12,53 @@
         android:layout_height="wrap_content"
         android:fillViewport="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4">
-            <ImageView
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/images" />
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/plus_team"/>
-        </RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_marginTop="30dp"
-            android:layout_weight="1">
+            android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:id="@+id/team_logo"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/plus_team" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical">
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="vertical">
+
                     <RelativeLayout
+                        android:id="@+id/signINN"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:visibility="visible"
-                        android:id="@+id/signINN">
+                        android:visibility="visible">
+
                         <LinearLayout
                             android:id="@+id/signuplyout"
                             android:layout_width="match_parent"
@@ -62,7 +66,7 @@
                             android:orientation="vertical">
 
                             <EditText
-                                android:id="@+id/f_name"
+                                android:id="@+id/team_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="#00000000"
@@ -79,13 +83,13 @@
                                 android:background="@color/textColorHint" />
 
                             <EditText
-                                android:id="@+id/l_name"
+                                android:id="@+id/team_color"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="#00000000"
+                                android:drawableRight="@drawable/color_picker"
                                 android:ems="10"
                                 android:gravity="center"
-                                android:drawableRight="@drawable/color_picker"
                                 android:hint="Pick your team color"
                                 android:inputType="text"
                                 android:textColor="@color/textColorHint"
@@ -97,7 +101,24 @@
                                 android:background="@color/textColorHint" />
 
                             <EditText
-                                android:id="@+id/email"
+                                android:id="@+id/coach_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#00000000"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="Coach name"
+                                android:inputType="text"
+                                android:textColor="@color/textColorHint"
+                                android:textColorHint="@color/textColorHint" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textColorHint" />
+
+                            <EditText
+                                android:id="@+id/fvt_ground"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="#00000000"
@@ -113,25 +134,8 @@
                                 android:layout_height="1dp"
                                 android:background="@color/textColorHint" />
 
-                            <EditText
-                                android:id="@+id/password"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:background="#00000000"
-                                android:ems="10"
-                                android:gravity="center"
-                                android:hint="Password"
-                                android:inputType="text"
-                                android:textColor="@color/textColorHint"
-                                android:textColorHint="@color/textColorHint" />
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/textColorHint" />
-
                             <Spinner
-                                android:id="@+id/c_password"
+                                android:id="@+id/city_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:ems="10"
@@ -162,20 +166,20 @@
                                         android:layout_centerInParent="true">
 
                                         <ImageView
-                                            android:id="@+id/imageView81"
+                                            android:id="@+id/home_shirt"
                                             android:layout_width="fill_parent"
                                             android:layout_height="fill_parent"
                                             android:padding="1dp"
                                             android:src="@drawable/blackimg" />
 
                                         <ImageView
-                                            android:id="@+id/addPic"
+                                            android:id="@+id/add_home_shirt"
                                             android:layout_width="25dp"
                                             android:layout_height="25dp"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="4dp"
                                             android:layout_marginTop="4dp"
-                                            android:src="@drawable/plusicon_white"/>
+                                            android:src="@drawable/plusicon_white" />
                                     </RelativeLayout>
 
                                     <TextView
@@ -201,14 +205,14 @@
                                         android:layout_centerInParent="true">
 
                                         <ImageView
-                                            android:id="@+id/imageView811"
+                                            android:id="@+id/away_shirt"
                                             android:layout_width="fill_parent"
                                             android:layout_height="fill_parent"
                                             android:padding="1dp"
                                             android:src="@drawable/blackimg" />
 
                                         <ImageView
-                                            android:id="@+id/addPic1"
+                                            android:id="@+id/add_away_shirt"
                                             android:layout_width="25dp"
                                             android:layout_height="25dp"
                                             android:layout_alignParentRight="true"
@@ -230,7 +234,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/nextBtn"
+                                android:id="@+id/creatBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginBottom="30dp"
@@ -250,13 +254,13 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"/>
+                                android:layout_height="20dp" />
 
                         </LinearLayout>
 
-                     </RelativeLayout>
+                    </RelativeLayout>
 
-                 </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 

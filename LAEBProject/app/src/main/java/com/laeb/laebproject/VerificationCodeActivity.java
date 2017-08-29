@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.laeb.laebproject.general.Prefs;
 import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs";
-EditText et_Code;
+    EditText et_Code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ EditText et_Code;
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putString("token", token);
                         editor.putString("user",user);
+                        Prefs.putString(getBaseContext(), Prefs.auth_key, token);
                         editor.commit();
                         startActivity(i);
                         Log.i("asd", "---------------- this is response : " + code);
