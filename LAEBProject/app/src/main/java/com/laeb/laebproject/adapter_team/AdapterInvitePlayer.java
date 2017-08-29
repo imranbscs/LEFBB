@@ -36,6 +36,7 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     @Override
     public AdapterInvitePlayer.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.invite_friend_list_item, parent, false);
+       //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ztest, parent, false);
         return new AdapterInvitePlayer.ViewHolder(view);
     }
 
