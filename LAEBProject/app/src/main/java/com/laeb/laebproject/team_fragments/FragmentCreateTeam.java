@@ -33,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.laeb.laebproject.BookingActivity;
 import com.laeb.laebproject.CreateFieldActivity;
+import com.laeb.laebproject.InvitePlayerActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.create_field_fragments.MapFragment;
@@ -62,18 +63,23 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
     LinearLayout createBtn;
     ImageView homeShirt, awayShirt, addHome, addAway, teamLogo;
     EditText teamName, colorName, coachName, groundName, teamCity;
+    Spinner citySpinner;
     public final int IMG_REQUEST = 1;
     public Bitmap bitmap;
     public Bitmap bitmaplogo;
     public Bitmap bitmapAwayShirt;
     public Bitmap bitmapHomeShirt;
     public int des;
+    List<String> cityStr;
+    int mCity_Id = 0;
     List<City> cities;
     public String logoBitmap = "fgd", homeImgBitmap = "dfg", awayShirtBitmap = "dfgd";
     //public List<City> cities;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Log.v("wsa", Prefs.getString(getActivity(), Prefs.auth_key));
 
         View v = inflater.inflate(R.layout.fragment_createteam, container, false);
         LinearLayout createBtn = (LinearLayout) v.findViewById(R.id.creatBtn);
@@ -89,6 +95,8 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
         //teamCity  =  (EditText) v.findViewById(R.id.team_);
 
         cities = new ArrayList<>();
+        cityStr = new ArrayList<>();
+        getData();
 
         teamLogo.setOnClickListener(this);
         homeShirt.setOnClickListener(this);
@@ -136,7 +144,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 int _status = sucessResponse.status;
                 Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
                 if(_status == 200){
-
+                    startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
                 }else {
 
                 }
@@ -178,6 +186,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 params.put("avg_age", "14");
                 params.put("city_flexible", "0");
                 params.put("field_flexible", "0");
+                params.put("field_id", "5");
                 return params;
             }
         };;
@@ -250,7 +259,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
         progressDialog.show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Globels.URL+"/api/teams/getCities", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/teams/getCities", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.v("qwe", response);
@@ -259,7 +268,16 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 AllCities sucessResponse = gson.fromJson(response, AllCities.class);
                 int _status = sucessResponse.getStatus();
                 cities = sucessResponse.getCities();
-                Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
+                Log.v("edc", "==== "+cities.size());
+                getCityStr();
+
+//                for (int i = 0; i < cities.size(); i++) {
+//                    City city = new City();
+//                    cityStr.
+//                    worldlist.add(jsonobject.optString("city_name"));
+//                }
+
+                Toast.makeText(getActivity(), "sucessful "+cities.get(2).getCityName(), Toast.LENGTH_LONG).show();
                 if(_status == 200){
 
                 }else {
@@ -292,5 +310,32 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
         };;
 
         requestQueue.add(stringRequest);
+    }
+
+    void getCityStr(){
+
+        final List<City> cc = cities;
+        Toast.makeText(getActivity(), cities.size()+"  ", Toast.LENGTH_SHORT).show();
+        for(int i = 0; i < cities.size(); i++){
+            cityStr.add(cities.get(i).getCityName());
+        }
+        citySpinner = (Spinner) getView().findViewById(R.id.city_name);
+        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, cityStr);
+        citySpinner.setAdapter(adap);
+        // Spinner on item click listener
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                        City areaName = (City) cc.get(position);
+                        mCity_Id = areaName.getCityId();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
     }
 }

@@ -229,8 +229,7 @@ public class FragmentProfile extends Fragment {
                         .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                             @Override
-                            public void onItemSelected(AdapterView<?> arg0,
-                                                       View arg1, int position, long arg3) {
+                            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                                 City areaName = (City) cities.get(position);
                                 mCity_Id = areaName.getId();
                             }
