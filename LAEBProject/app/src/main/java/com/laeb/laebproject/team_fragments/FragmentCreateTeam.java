@@ -3,11 +3,13 @@ package com.laeb.laebproject.team_fragments;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,19 +33,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.laeb.laebproject.BookingActivity;
-import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.InvitePlayerActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.YourTeamActivity;
-import com.laeb.laebproject.create_field_fragments.MapFragment;
-import com.laeb.laebproject.fragments_booking.FragmentSearchFacilities;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
-import com.laeb.laebproject.model.CustomBinder;
-import com.laeb.laebproject.model_create_team.AllCities;
-import com.laeb.laebproject.model_create_team.City;
 import com.laeb.laebproject.model_create_team.SucessResponse;
+import com.laeb.laebproject.model_create_team.list_city_and_fields.AllCitiesFields;
+import com.laeb.laebproject.model_create_team.list_city_and_fields.City;
+import com.laeb.laebproject.model_create_team.list_city_and_fields.MyCityField;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,6 +49,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -61,9 +61,9 @@ import static android.app.Activity.RESULT_OK;
 public class FragmentCreateTeam extends Fragment implements View.OnClickListener{
 
     LinearLayout createBtn;
-    ImageView homeShirt, awayShirt, addHome, addAway, teamLogo;
-    EditText teamName, colorName, coachName, groundName, teamCity;
-    Spinner citySpinner;
+    ImageView homeShirt, awayShirt, addHome, addAway, teamLogo, home, away;
+    EditText teamName, colorName, coachName, teamCity;
+    Spinner citySpinner, groundName;
     public final int IMG_REQUEST = 1;
     public Bitmap bitmap;
     public Bitmap bitmaplogo;
@@ -71,15 +71,20 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
     public Bitmap bitmapHomeShirt;
     public int des;
     List<String> cityStr;
+    List<String> fieldStr;
     int mCity_Id = 0;
+    int mField_Id = 0;
     List<City> cities;
+    List<MyCityField> fields;
     public String logoBitmap = "fgd", homeImgBitmap = "dfg", awayShirtBitmap = "dfgd";
+    private int currentColor;
     //public List<City> cities;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         Log.v("wsa", Prefs.getString(getActivity(), Prefs.auth_key));
+        currentColor = ContextCompat.getColor(getActivity(), R.color.colorAccent);
 
         View v = inflater.inflate(R.layout.fragment_createteam, container, false);
         LinearLayout createBtn = (LinearLayout) v.findViewById(R.id.creatBtn);
@@ -91,22 +96,30 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
         teamName  =  (EditText) v.findViewById(R.id.team_name);
         colorName  =  (EditText) v.findViewById(R.id.team_color);
         coachName  =  (EditText) v.findViewById(R.id.coach_name);
-        groundName  =  (EditText) v.findViewById(R.id.fvt_ground);
+        //groundName  =  (Spinner) v.findViewById(R.id.fvt_ground);
+        home  =  (ImageView) v.findViewById(R.id.home_shirt);
+        away  =  (ImageView) v.findViewById(R.id.away_shirt);
         //teamCity  =  (EditText) v.findViewById(R.id.team_);
+        //citySpinner = (Spinner) getView().findViewById(R.id.city_name);
 
         cities = new ArrayList<>();
         cityStr = new ArrayList<>();
-        getData();
+        fieldStr = new ArrayList<>();
+        //getData();
+        getCitiesAndField();
+        //GlobelList.getCities(getActivity());
 
         teamLogo.setOnClickListener(this);
         homeShirt.setOnClickListener(this);
         awayShirt.setOnClickListener(this);
+        colorName.setOnClickListener(this);
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createTeam();
             }
         });
+
         return v;
     }
 
@@ -127,6 +140,10 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
     }
 
     public void createTeam(){
+
+        if(!(validation())){
+            return;
+        }
 
         final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -170,14 +187,18 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                //EditText teamName, colorName, coachName, groundName, teamCity;
-//                params.put("team_name", teamName.getText().toString());
-//                params.put("color", colorName.getText().toString());
-//                params.put("coach", coachName.getText().toString());
-                params.put("team_name", "dsfs");
-                params.put("color", "sdvs");
-                params.put("coach", "dsfs");
-                params.put("city", "1");
+                //EditText teamName, colorName, coachName, groundName, teamCity;ss
+
+                Log.v("kkk", "city===="+mCity_Id);
+                Log.v("jjj", "Field===="+mField_Id);
+
+                params.put("team_name", teamName.getText().toString());
+                params.put("color", currentColor+"");
+                params.put("coach", coachName.getText().toString());
+//                params.put("team_name", "dsfs");
+//                params.put("color", ""+currentColor);
+//                params.put("coach", "dsfs");
+                params.put("city", ""+mCity_Id);
                 params.put("shirt_home", homeImgBitmap);
                 params.put("shirt_away", awayShirtBitmap);
                 params.put("logo", logoBitmap);
@@ -186,7 +207,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 params.put("avg_age", "14");
                 params.put("city_flexible", "0");
                 params.put("field_flexible", "0");
-                params.put("field_id", "5");
+                params.put("field_id", ""+mField_Id);
                 return params;
             }
         };;
@@ -209,15 +230,15 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
             try {
                 if(des == 1) {
                     bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
-                    //imageView.setImageBitmap(bitmap);
+                    teamLogo.setImageBitmap(bitmap);
                     logoBitmap = imageToString(bitmap);
                 }else if(des == 2){
                     bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
-                    //imageView.setImageBitmap(bitmap);
+                    home.setImageBitmap(bitmap);
                     homeImgBitmap = imageToString(bitmap);
                 }else{
                     bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
-                    //imageView.setImageBitmap(bitmap);
+                    away.setImageBitmap(bitmap);
                     awayShirtBitmap = imageToString(bitmap);
                 }
                 //Log.v("ttt", pp);
@@ -249,68 +270,71 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 des = 3;
                 getImageFromGallery();
                 break;
+            case R.id.team_color:
+                openDialog(false);
+                break;
         }
     }
 
-    public void getData(){
-
-        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/teams/getCities", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.v("qwe", response);
-                progressDialog.dismiss();
-                Gson gson = new Gson();
-                AllCities sucessResponse = gson.fromJson(response, AllCities.class);
-                int _status = sucessResponse.getStatus();
-                cities = sucessResponse.getCities();
-                Log.v("edc", "==== "+cities.size());
-                getCityStr();
-
-//                for (int i = 0; i < cities.size(); i++) {
-//                    City city = new City();
-//                    cityStr.
-//                    worldlist.add(jsonobject.optString("city_name"));
+//    public void getData(){
+//
+//        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.show();
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/teams/getCities", new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.v("qwe", response);
+//                progressDialog.dismiss();
+//                Gson gson = new Gson();
+//                AllCities sucessResponse = gson.fromJson(response, AllCities.class);
+//                int _status = sucessResponse.getStatus();
+//                cities = sucessResponse.getCities();
+//                Log.v("edc", "==== "+cities.size());
+//                getCityStr();
+//
+////                for (int i = 0; i < cities.size(); i++) {
+////                    City city = new City();
+////                    cityStr.
+////                    worldlist.add(jsonobject.optString("city_name"));
+////                }
+//
+//                Toast.makeText(getActivity(), "sucessful "+cities.get(2).getCityName(), Toast.LENGTH_LONG).show();
+//                if(_status == 200){
+//
+//                }else {
+//
 //                }
-
-                Toast.makeText(getActivity(), "sucessful "+cities.get(2).getCityName(), Toast.LENGTH_LONG).show();
-                if(_status == 200){
-
-                }else {
-
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Log.v("wsx", "========   "+error+"");
-                Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
-                headers.put("locale", Globels.LOCAL);
-                headers.put("Content-Type", Globels.CONTENT_TYPE);
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };;
-
-        requestQueue.add(stringRequest);
-    }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                progressDialog.dismiss();
+//                Log.v("wsx", "========   "+error+"");
+//                Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
+//            }
+//        }){
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("x-access-key", Globels.ACCESS_KEY);
+//                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+//                headers.put("locale", Globels.LOCAL);
+//                headers.put("Content-Type", Globels.CONTENT_TYPE);
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                return params;
+//            }
+//        };;
+//
+//        requestQueue.add(stringRequest);
+//    }
 
     void getCityStr(){
 
@@ -322,7 +346,6 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
         citySpinner = (Spinner) getView().findViewById(R.id.city_name);
         SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, cityStr);
         citySpinner.setAdapter(adap);
-        // Spinner on item click listener
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                     @Override
@@ -338,4 +361,196 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                     }
                 });
     }
+
+    void getFieldStr(){
+        final List<MyCityField> cc = fields;
+        Toast.makeText(getActivity(), cities.size()+"  ", Toast.LENGTH_SHORT).show();
+        for(int i = 0; i < fields.size(); i++){
+            fieldStr.add(fields.get(i).getName());
+        }
+        groundName = (Spinner) getView().findViewById(R.id.fvt_ground);
+        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, fieldStr);
+        groundName.setAdapter(adap);
+        // Spinner on item click listener
+        groundName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                MyCityField areaName = (MyCityField) cc.get(position);
+                mField_Id = areaName.getFieldId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+    }
+
+    public boolean validation() {
+
+
+        // teamName, colorName, coachName, groundName, teamCity;
+
+        boolean b = true;
+        if (teamName.getText().toString().trim().equals("") || teamName.getText().toString().trim().length()<1) {
+            teamName.setError(getString(R.string.invalidName));
+            return false;
+        } else {
+            teamName.setError(null);
+        }
+
+        if (coachName.getText().toString().trim().equals("") || coachName.getText().toString().trim().length()<1) {
+            coachName.setError(getString(R.string.invalidDistrictName));
+            return false;
+        } else {
+            coachName.setError(null);
+        }
+
+        if (colorName.getText().toString().trim().equals("") || colorName.getText().toString().trim().length()<1) {
+            colorName.setError(getString(R.string.invalidGroundSize));
+            return false;
+        } else {
+            colorName.setError(null);
+        }
+
+        return true;
+    }
+
+    private void openDialog(boolean supportsAlpha) {
+        AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(), currentColor, supportsAlpha, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                currentColor = color;
+                Log.v("fds", " ===== "+currentColor);
+                colorName.setText(""+currentColor);
+                //colorLayout.setBackgroundColor(color);
+            }
+
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+                Toast.makeText(getActivity(), "Action canceled!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
+    }
+
+    void getCitiesAndField(){
+
+        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        final Context con = getActivity();
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/teams/getCitiesAndFields", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.v("qwe", response);
+                progressDialog.dismiss();
+                Gson gson = new Gson();
+                AllCitiesFields sucessResponse = gson.fromJson(response, AllCitiesFields.class);
+                int _status = sucessResponse.getStatus();
+                cities = sucessResponse.getCities();
+                fields = sucessResponse.getMyCityFields();
+                getCityStr();
+                getFieldStr();
+                Log.v("edc", "==== "+cities.size());
+
+                Toast.makeText(con, "sucessful "+cities.get(2).getCityName(), Toast.LENGTH_LONG).show();
+                if(_status == 200){
+
+                }else {
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.v("wsx", "========   "+error+"");
+                Toast.makeText(con, "Unable to connect...", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("x-access-key", Globels.ACCESS_KEY);
+                headers.put("x-access-token", Prefs.getString(con, Prefs.auth_key));
+                headers.put("locale", Globels.LOCAL);
+                headers.put("Content-Type", Globels.CONTENT_TYPE);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };;
+
+        requestQueue.add(stringRequest);
+    }
+
+//    public void getFields(){
+//
+//        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.show();
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/fields/home", new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.v("qwe", response);
+//                progressDialog.dismiss();
+//                Gson gson = new Gson();
+//                AllFields sucessResponse = gson.fromJson(response, AllFields.class);
+//                int _status = sucessResponse.getStatus();
+//                cities = sucessResponse.getCities();
+//                Log.v("edc", "==== "+cities.size());
+//                getCityStr();
+//
+////                for (int i = 0; i < cities.size(); i++) {
+////                    City city = new City();
+////                    cityStr.
+////                    worldlist.add(jsonobject.optString("city_name"));
+////                }
+//
+//                Toast.makeText(getActivity(), "sucessful "+cities.get(2).getCityName(), Toast.LENGTH_LONG).show();
+//                if(_status == 200){
+//
+//                }else {
+//
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                progressDialog.dismiss();
+//                Log.v("wsx", "========   "+error+"");
+//                Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
+//            }
+//        }){
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("x-access-key", Globels.ACCESS_KEY);
+//                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+//                headers.put("locale", Globels.LOCAL);
+//                headers.put("Content-Type", Globels.CONTENT_TYPE);
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                return params;
+//            }
+//        };;
+//
+//        requestQueue.add(stringRequest);
+//    }
 }
