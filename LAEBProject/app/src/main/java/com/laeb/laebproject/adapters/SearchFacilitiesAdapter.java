@@ -40,6 +40,7 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
     public void onBindViewHolder(SearchFacilitiesAdapter.ViewHolder holder, int position) {
         //UpComingGames listItem = listItems.get(position);
         Hashtable<String, String> ohash = listItems.get(position);
+        Log.i("asd","abc");
         final int a = position;
         holder.nameTeam.setText(ohash.get("Name"));
         holder.pitch_type.setText(ohash.get("type"));
@@ -64,10 +65,10 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
         public ViewHolder(View itemView) {
             super(itemView);
 
-            nameTeam = (TextView) itemView.findViewById(R.id.team_name);
-            cityName = (TextView) itemView.findViewById(R.id.game_city);
-            gameTime = (TextView) itemView.findViewById(R.id.dateTime);
-            pitch_type = (TextView) itemView.findViewById(R.id.dateTime);
+            nameTeam = (TextView) itemView.findViewById(R.id.textView3);
+            //cityName = (TextView) itemView.findViewById(R.id.game_city);
+           // gameTime = (TextView) itemView.findViewById(R.id.dateTime);
+            pitch_type = (TextView) itemView.findViewById(R.id.pitch_type);
 
         }
     }
