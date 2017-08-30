@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.booking_models.Datum;
 import com.laeb.laebproject.model.UpComingGames;
 
 import java.util.HashMap;
@@ -22,10 +23,10 @@ import java.util.List;
 
 public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFacilitiesAdapter.ViewHolder> {
 
-    List<Hashtable<String, String>> listItems;
+    List<Datum> listItems;
     public Context context;
 
-    public SearchFacilitiesAdapter(List<Hashtable<String, String>> listItems, Context context) {
+    public SearchFacilitiesAdapter(List<Datum> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
@@ -39,14 +40,15 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
     @Override
     public void onBindViewHolder(SearchFacilitiesAdapter.ViewHolder holder, int position) {
         //UpComingGames listItem = listItems.get(position);
-        Hashtable<String, String> ohash = listItems.get(position);
+        Datum listItem = listItems.get(position);
         Log.i("asd","abc");
         final int a = position;
-        holder.nameTeam.setText(ohash.get("Name"));
-        holder.pitch_type.setText(ohash.get("type"));
+//        holder.nameTeam.setText(ohash.get("Name"));
+//        holder.pitch_type.setText(ohash.get("type"));
 
-//        holder.cityName.setText(listItem.getGameLocation());
-//        holder.gameTime.setText(listItem.getGameTime());
+        holder.nameTeam.setText(listItem.getName());
+        holder.pitch_type.setText(listItem.getType());
+        holder.cityName.setText(listItem.getCity());
     }
 
     @Override
@@ -66,7 +68,7 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
             super(itemView);
 
             nameTeam = (TextView) itemView.findViewById(R.id.textView3);
-            //cityName = (TextView) itemView.findViewById(R.id.game_city);
+            cityName = (TextView) itemView.findViewById(R.id.address);
            // gameTime = (TextView) itemView.findViewById(R.id.dateTime);
             pitch_type = (TextView) itemView.findViewById(R.id.pitch_type);
 

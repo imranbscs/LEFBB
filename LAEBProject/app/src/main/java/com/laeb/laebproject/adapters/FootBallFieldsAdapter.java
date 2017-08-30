@@ -25,8 +25,6 @@ import java.util.Locale;
 public class FootBallFieldsAdapter extends RecyclerView.Adapter<FootBallFieldsAdapter.ViewHolder> {
 
     List<FieldInfo> listItems;
-
-
     public Context context;
 
     public FootBallFieldsAdapter(List<FieldInfo> listItems, Context context) {

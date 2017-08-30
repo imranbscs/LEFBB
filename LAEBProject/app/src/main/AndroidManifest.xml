@@ -17,25 +17,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LanguageActivity">
-<<<<<<< HEAD
+
 
         </activity>
         <activity android:name=".AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
         <activity android:name=".HomeActivity" >
-
-=======
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
->>>>>>> 6aa133fd43f6cab943bf169e345436b942f59ac8
         </activity>
-        <activity android:name=".AddNumberActivity" />
-        <activity android:name=".VerificationCodeActivity" />
-        <activity android:name=".HomeActivity" >
+        <!--<activity android:name=".AddNumberActivity" />-->
+        <!--<activity android:name=".VerificationCodeActivity" />-->
+        <!--<activity android:name=".HomeActivity" >-->
+        <!--</activity>-->
 
-        </activity>
         <activity android:name=".ProfileActivity" />
 
         <!-- <activity android:name=".UpComingGamesActivity" /> -->

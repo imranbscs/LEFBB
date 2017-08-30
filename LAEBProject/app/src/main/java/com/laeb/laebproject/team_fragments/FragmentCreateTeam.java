@@ -161,7 +161,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 int _status = sucessResponse.status;
                 Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
                 if(_status == 200){
-                    startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
+                    //startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
                 }else {
 
                 }
