@@ -53,10 +53,10 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
         Picasso.with(context).load(listItem.getPicture()).into(holder.pic);
         Log.v("ww",listItem.getStars().toString());
         if(!(listItem.getStars().equals(""))) {
-            float star = (float) listItem.getStars();
-            int qwa = Integer.parseInt(listItem.getStars().toString());
-            Float b = (float)qwa;
-            holder.ratingBar.setRating(star);
+            //float star = (float) listItem.getStars();
+            //int qwa = Integer.parseInt(listItem.getStars().toString());
+            //Float b = (float)qwa;
+            //holder.ratingBar.setRating(star);
         }
         //holder.gameTime.setText(listItem.getGameTime());
     }
