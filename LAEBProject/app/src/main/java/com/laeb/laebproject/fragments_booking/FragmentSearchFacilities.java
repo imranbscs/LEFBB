@@ -1,6 +1,7 @@
 package com.laeb.laebproject.fragments_booking;
 
 import android.app.Fragment;
+import android.app.job.JobInfo;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -42,7 +43,7 @@ public class FragmentSearchFacilities extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<Hashtable<String,String>> listItems;
+    private List<Hashtable<String, String>> listItems;
     SharedPreferences channel;
     private int cap;
     private String date;
@@ -63,6 +64,7 @@ public class FragmentSearchFacilities extends Fragment {
         View v = inflater.inflate(R.layout.fragment_booking_search, container, false);
         return v;
     }
+
     public String makePostRequest(String stringUrl, String payload,
                                   Context context, String Method) throws IOException {
 
@@ -107,6 +109,7 @@ public class FragmentSearchFacilities extends Fragment {
         uc.disconnect();
         return jsonString.toString();
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -121,11 +124,9 @@ public class FragmentSearchFacilities extends Fragment {
                 try {
 
                     String response = makePostRequest("http://192.169.138.14:4000/api/Fields/searching",
-                            "capacity="+ cap +"&date=" + date + "&start=" + start, getActivity(),"POST");
+                            "capacity=&date=" + date + "&start=" + start, getActivity(), "POST");
                     JSONObject reader = new JSONObject(response);
-                    String code = reader.getString("data");
-                    Log.i("asd", "---------------- this is response : " + code);
-                    return code;
+                    return response;
                 } catch (IOException ex) {
                     ex.printStackTrace();
 
@@ -137,24 +138,29 @@ public class FragmentSearchFacilities extends Fragment {
 
             @Override
             protected void onPostExecute(String json) {
+                Log.d("asd", "onPostExecute:asd");
                 super.onPostExecute(json);
                 try {
-                    JSONArray JArray = new JSONArray(json);
+                    JSONObject JObj = new JSONObject(json);
 
-                    for(int i=0; i<JArray.length(); i++){
-                        Hashtable<String,String> ohash = new Hashtable<String, String>();
-                        JSONObject j =JArray.getJSONObject(i);
-                        ohash.put("Name",j.getString("name"));
-                        ohash.put("capacity",j.getString("capacity"));
-                        ohash.put("type",j.getString("type"));
+                    JSONArray JArray = new JSONArray( JObj.get("data").toString());
+                    Log.d("asd", "onPostExecute:asd");
+                    listItems = new ArrayList<Hashtable<String, String>>();
+                    for (int i = 0; i < JArray.length(); i++) {
+                        Hashtable<String, String> ohash = new Hashtable<String, String>();
+
+                        JSONObject j = JArray.getJSONObject(i);
+                        ohash.put("Name", j.getString("name"));
+                        Log.d("asd", "onPostExecute: " + j.getString("name"));
+                        ohash.put("capacity", j.getString("capacity"));
+                        ohash.put("type", j.getString("type"));
+                        listItems.add(ohash);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                listItems = new ArrayList<Hashtable<String,String>>();
-
-
+                listItems = new ArrayList<Hashtable<String, String>>();
 
                 adapter = new SearchFacilitiesAdapter(listItems, getActivity());
                 recyclerView.setAdapter(adapter);
@@ -163,8 +169,6 @@ public class FragmentSearchFacilities extends Fragment {
 
 
         }.execute("");
-
-
 
     }
 }

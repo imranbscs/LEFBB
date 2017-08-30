@@ -65,6 +65,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
     CustomBinder oCustom;
     FieldInfo fieldInfo;
     String json;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.field_weekly_schedule, container, false);
@@ -77,7 +78,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
         aaa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Hello "+expandableListAdapter.expandableListDetail,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Hello " + expandableListAdapter.expandableListDetail, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,8 +93,8 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
             @Override
             public void onClick(View view) {
                 Gson gson = new Gson();
-                 json= gson.toJson(TestStaticMethod.getAll());
-                Log.i("asd", "====== "+json);
+                json = gson.toJson(TestStaticMethod.getAll());
+                Log.i("asd", "====== " + json);
                 Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
             }
         });
@@ -133,26 +134,39 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnNext:
+
                 Gson gson = new Gson();
                 String json = gson.toJson(TestStaticMethod.getAll());
-                Log.v("ppp", "====== "+json);
+                Log.v("ppp", "====== " + json);
                 Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
 
                 fieldInfo.city = "1";
                 fieldInfo.nearby = "E11";
                 String s = gson.toJson(fieldInfo);
+
+
                 Gson g = new Gson();
-                json= g.toJson(TestStaticMethod.getAll());
+                json = g.toJson(TestStaticMethod.getAll());
                 fieldInfo.city = "1";
                 fieldInfo.nearby = "E11";
+                fieldInfo.capacity = "6";
+
+                String ss = g.toJson(fieldInfo);
 
                 s = g.toJson(fieldInfo);
+
                 final RequestParams paramss = new RequestParams();
-                paramss.put("fieldInfo", s);
+                paramss.put("fieldInfo", ss);
                 paramss.put("pictures", " [{\"image\":\"base64string1\"},{\"image\":\"base64string3\"}]");
-                paramss.put("operating", json);
+                paramss.put("operating", "{\"sunday\":{\"available\":1,\"slots\":[{\"from\":\"1600\",\"to\":\"1700\",\"rate\":\"50\"},{\"from\":\"1700\",\"to\":\"1800\",\"rate\":\"60\"},{\"from\":\"1800\",\"to\":\"2000\",\"rate\":\"200\"},{\"from\":\"2000\",\"to\":\"2100\",\"rate\":\"100\"}]},\n" +
+                        "\"monday\":{\"available\":1,\"slots\":[{\"from\":\"1600\",\"to\":\"1700\",\"rate\":\"50\"},{\"from\":\"1700\",\"to\":\"1800\",\"rate\":\"60\"},{\"from\":\"1800\",\"to\":\"2000\",\"rate\":\"200\"},{\"from\":\"2000\",\"to\":\"2100\",\"rate\":\"100\"}]},\n" +
+                        "\"tuesday\":{\"available\":0,\"slots\":[{\"from\":\"1600\",\"to\":\"1700\",\"rate\":\"50\"},{\"from\":\"1700\",\"to\":\"1800\",\"rate\":\"60\"},{\"from\":\"1800\",\"to\":\"2000\",\"rate\":\"200\"},{\"from\":\"2000\",\"to\":\"2100\",\"rate\":\"100\"}]},\n" +
+                        "\"wednesday\":{\"available\":1,\"slots\":[{\"from\":\"1600\",\"to\":\"1700\",\"rate\":\"50\"},{\"from\":\"1700\",\"to\":\"1800\",\"rate\":\"60\"},{\"from\":\"1800\",\"to\":\"2000\",\"rate\":\"200\"},{\"from\":\"2000\",\"to\":\"2100\",\"rate\":\"100\"}]},\n" +
+                        "\"thursday\":{\"available\":1,\"slots\":[{\"from\":\"1600\",\"to\":\"1700\",\"rate\":\"50\"},{\"from\":\"1700\",\"to\":\"1800\",\"rate\":\"60\"},{\"from\":\"1800\",\"to\":\"2000\",\"rate\":\"200\"},{\"from\":\"2000\",\"to\":\"2100\",\"rate\":\"100\"}]},\n" +
+                        "\"friday\":{\"available\":1,\"slots\":[{\"from\":\"1600\",\"to\":\"1700\",\"rate\":\"50\"},{\"from\":\"1700\",\"to\":\"1800\",\"rate\":\"60\"},{\"from\":\"1800\",\"to\":\"2000\",\"rate\":\"200\"},{\"from\":\"2000\",\"to\":\"2100\",\"rate\":\"100\"}]},\n" +
+                        "\"saturday\":{\"available\":1,\"slots\":[{\"from\":\"1600\",\"to\":\"1700\",\"rate\":\"50\"},{\"from\":\"1700\",\"to\":\"1800\",\"rate\":\"60\"},{\"from\":\"1800\",\"to\":\"2000\",\"rate\":\"200\"},{\"from\":\"2000\",\"to\":\"2100\",\"rate\":\"100\"}]}}");
                 paramss.put("stand_capacity", 5000);
-                Log.i("asd", "---------------- this is response : " +  paramss.toString());
+                Log.i("asd", "---------------- this is response : " + paramss.toString());
                 new AsyncTask<String, String, String>() {
 
                     @Override
