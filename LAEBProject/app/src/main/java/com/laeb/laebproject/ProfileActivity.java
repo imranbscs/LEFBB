@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -68,34 +69,32 @@ public class ProfileActivity extends AppCompatActivity {
     SharedPreferences channel;
 
     public void FillTheForm() throws JSONException {
-        String user =  channel.getString("user","default");
+        String user = channel.getString("user", "default");
         JSONObject obj = new JSONObject(user);
         Edt_DOB.setText(obj.getString("dob"));
         Edt_Email.setText(obj.getString("email"));
         Log.i("asd", "---------------- this is gender : " + obj.getString("gender"));
         Edt_Full_Name.setText(obj.getString("name"));
-        mySpinner.setSelection(getIndex(mySpinner,cities.get(obj.getInt("city")).getName()));
-        if (obj.getString("gender") == "M")
-        {
+        mySpinner.setSelection(getIndex(mySpinner, cities.get(obj.getInt("city")).getName()));
+        if (obj.getString("gender") == "M") {
             btnMale(Male);
-        }else
-        {
+        } else {
             btnFemale(Female);
         }
     }
 
-    private int getIndex(Spinner spinner, String myString)
-    {
+    private int getIndex(Spinner spinner, String myString) {
         int index = 0;
 
-        for (int i=0;i<spinner.getCount();i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
-                index = i-1;
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                index = i - 1;
                 break;
             }
         }
         return index;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +104,9 @@ public class ProfileActivity extends AppCompatActivity {
         Female = (TextView) findViewById(R.id.txtFemale);
         getSupportActionBar().hide();
         channel = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+        ImageView btn_choose_photo = (ImageView) findViewById(R.id.addPic); // Replace with id of your button.
+        btn_choose_photo.setOnClickListener(btnChoosePhotoPressed);
 
         // perform click event on edit text
         Edt_DOB.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +175,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
 
+
             @Override
             protected void onPostExecute(ArrayList<String> s) {
                 super.onPostExecute(s);
@@ -208,6 +211,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         }.execute("");
+
 
         Edt_Full_Name = (EditText) findViewById(R.id.ed_fumm_name);
 
@@ -278,7 +282,15 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-
+    public View.OnClickListener btnChoosePhotoPressed = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            final int ACTIVITY_SELECT_IMAGE = 1234;
+            startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
+        }
+    };
     public String makePostRequest(String stringUrl, String payload, Context context, String Method) throws IOException {
 
         URL url = new URL(stringUrl);
