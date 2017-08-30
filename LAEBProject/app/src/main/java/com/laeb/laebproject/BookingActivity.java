@@ -162,7 +162,12 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
         ImageView oImage = (ImageView) v;
         int imgResource = R.drawable.tickselected;
         oImage.setImageResource(imgResource);
-
+        switch (v.getId()) {
+            case R.id.rlvPitch1:
+               // capacity = 6;
+                Log.i("asd", "6");
+                break;
+        }
 
     }
 }

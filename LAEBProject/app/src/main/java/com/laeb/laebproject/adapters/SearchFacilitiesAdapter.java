@@ -2,6 +2,7 @@ package com.laeb.laebproject.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +40,9 @@ public class SearchFacilitiesAdapter extends RecyclerView.Adapter<SearchFaciliti
     public void onBindViewHolder(SearchFacilitiesAdapter.ViewHolder holder, int position) {
         //UpComingGames listItem = listItems.get(position);
         Hashtable<String, String> ohash = listItems.get(position);
-
         final int a = position;
-        holder.nameTeam.setText(ohash.get("name"));
-        holder.pitch_type.setText(ohash.get("pitch_type"));
+        holder.nameTeam.setText(ohash.get("Name"));
+        holder.pitch_type.setText(ohash.get("type"));
 
 //        holder.cityName.setText(listItem.getGameLocation());
 //        holder.gameTime.setText(listItem.getGameTime());
