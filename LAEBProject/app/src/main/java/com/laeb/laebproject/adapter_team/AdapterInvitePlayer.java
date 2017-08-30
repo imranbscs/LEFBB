@@ -5,13 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.ScheduleRefreeAdapter;
 import com.laeb.laebproject.model.UpComingGames;
+import com.laeb.laebproject.model_create_team.Datum;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,11 +24,11 @@ import java.util.List;
 
 public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlayer.ViewHolder> {
 
-    List<UpComingGames> listItems;
+    List<Datum> listItems;
     public Context context;
 
 
-    public AdapterInvitePlayer(List<UpComingGames> listItems, Context context) {
+    public AdapterInvitePlayer(List<Datum> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
@@ -32,15 +36,18 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     @Override
     public AdapterInvitePlayer.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.invite_friend_list_item, parent, false);
+       //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ztest, parent, false);
         return new AdapterInvitePlayer.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(AdapterInvitePlayer.ViewHolder holder, int position) {
-        UpComingGames listItem = listItems.get(position);
+        Datum listItem = listItems.get(position);
         final int a = position;
-        //holder.nameTeam.setText(listItem.getNameTeam());
-        //holder.cityName.setText(listItem.getGameLocation());
+        holder.name.setText(listItem.getName());
+        holder.role.setText(listItem.getPlayingRole());
+       // holder.pic
+        Picasso.with(context).load(listItem.getPicture()).into(holder.pic);
         //holder.gameTime.setText(listItem.getGameTime());
     }
 
@@ -51,15 +58,17 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nameTeam;
-        public TextView cityName;
+        public TextView name;
+        public TextView role;
         public TextView gameTime;
+        public ImageView pic;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            //nameTeam = (TextView) itemView.findViewById(R.id.team_name);
-            //cityName = (TextView) itemView.findViewById(R.id.game_city);
+            name = (TextView) itemView.findViewById(R.id.playername);
+            role = (TextView) itemView.findViewById(R.id.role);
+            pic = (ImageView) itemView.findViewById(R.id.playerpic);
             //gameTime = (TextView) itemView.findViewById(R.id.dateTime);
         }
     }
