@@ -49,16 +49,17 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
         int a = position;
         holder.name.setText(listItem.getName());
         holder.role.setText(listItem.getPlayingRole());
+        holder.ratingBar.setRating(1);
        // holder.pic
         Picasso.with(context).load(listItem.getPicture()).into(holder.pic);
         Log.v("ww",listItem.getStars().toString());
         if(!(listItem.getStars().equals(""))) {
-            float star = (float) listItem.getStars();
+            //float star = (float) listItem.getStars();
             int qwa = Integer.parseInt(listItem.getStars().toString());
             Float b = (float)qwa;
-            holder.ratingBar.setRating(star);
+            holder.ratingBar.setRating(b);
         }
-        //holder.gameTime.setText(listItem.getGameTime());
+        holder.ratingValue.setText(listItem.getStars().toString());
     }
 
     @Override
@@ -74,6 +75,7 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
         public ImageView pic;
         public LinearLayout linearLayout;
         public RatingBar ratingBar;
+        public TextView ratingValue;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -81,6 +83,7 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
             role = (TextView) itemView.findViewById(R.id.role);
             pic = (ImageView) itemView.findViewById(R.id.playerpic);
             ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
+            ratingValue = (TextView) itemView.findViewById(R.id.rating_num);
         }
     }
 }

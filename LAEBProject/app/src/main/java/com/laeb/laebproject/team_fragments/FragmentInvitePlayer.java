@@ -54,19 +54,7 @@ public class FragmentInvitePlayer extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-
         getAllplayers();
-
-
-
-
-//        for(int i = 0; i < 10; i++){
-//            listItems.add(new UpComingGames("RMD", "Riyadh", "Aug 16,2014 | 17:15"));
-//        }
-
-
     }
 
     public void getAllplayers(){

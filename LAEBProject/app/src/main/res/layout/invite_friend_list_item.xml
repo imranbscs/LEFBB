@@ -68,55 +68,62 @@
 
 
                 <RelativeLayout
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp">
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true">
+                        android:layout_centerVertical="true">
                         <TextView
                             android:text="4.3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorPrimaryDark"
                             android:visibility="visible"
+                            android:layout_alignParentLeft="true"
                             android:layout_alignParentBottom="true"
                             android:id="@+id/rating_num" />
                         <RatingBar
                             android:layout_width="wrap_content"
-                            android:layout_height="17dp"
-                            android:visibility="visible"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:layout_toRightOf="@+id/rating_num"
+                            android:layout_gravity="center"
+                            android:max="5"
                             style="?android:attr/ratingBarStyleSmall"
+                            android:numStars="5"
+                            android:stepSize="0.1"
+                            android:isIndicator="true"
                             android:id="@+id/ratingBar" />
                     </RelativeLayout>
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="30dp"
+                    android:layout_width="20dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="10dp"
                     android:id="@+id/tick_layout"
-                    android:visibility="gone"
+                    android:visibility="visible"
+                    android:layout_toLeftOf="@+id/invitely"
                     android:background="@color/colorPrimaryDark"
                     android:layout_height="30dp">
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_centerInParent="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:id="@+id/invite_img"
                         android:src="@drawable/plus"/>
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="120dp"
+                    android:layout_width="60dp"
                     android:background="@color/colorPrimaryDark"
                     android:layout_height="30dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
+                    android:id="@+id/invitely"
                     android:layout_marginRight="20dp"
-                    android:layout_toRightOf="@+id/tick_layout"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="10dp">
 
@@ -133,7 +140,7 @@
                 <LinearLayout
                     android:layout_width="120dp"
                     android:layout_height="30dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
