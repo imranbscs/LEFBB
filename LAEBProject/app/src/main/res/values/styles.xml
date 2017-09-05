@@ -13,12 +13,15 @@
 
 
     </style>
-
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+    </style>
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
     <style name="App_EditTextStyle" parent="@android:style/Widget.EditText">
         <item name="android:textSize">20dip</item>
+        <item name="android:textColor">@color/textColorHint</item>
     </style>
 
 </resources>

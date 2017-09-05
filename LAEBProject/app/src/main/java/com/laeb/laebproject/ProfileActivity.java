@@ -6,11 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 
 import android.view.View;
@@ -30,6 +36,7 @@ import android.widget.Toast;
 import com.laeb.laebproject.model.City;
 import com.laeb.laebproject.model.Custom;
 import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +44,11 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -48,6 +59,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -67,19 +80,28 @@ public class ProfileActivity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     Spinner mySpinner;
     SharedPreferences channel;
+    String mImage;
+    ImageView img;
 
-    public void FillTheForm() throws JSONException {
+    public void FillTheForm() throws JSONException, ParseException {
         String user = channel.getString("user", "default");
+
         JSONObject obj = new JSONObject(user);
-        Edt_DOB.setText(obj.getString("dob"));
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+        Edt_DOB.setText(input.format(input.parse(obj.getString("dob"))));
+        img = (ImageView) findViewById(R.id.imageView81);
         Edt_Email.setText(obj.getString("email"));
+        Picasso.with(this).load(obj.getString("picture")).into(img);
         Log.i("asd", "---------------- this is gender : " + obj.getString("gender"));
         Edt_Full_Name.setText(obj.getString("name"));
         mySpinner.setSelection(getIndex(mySpinner, cities.get(obj.getInt("city")).getName()));
-        if (obj.getString("gender") == "M") {
+
+        if (obj.getString("gender").toString().equals("M")) {
             btnMale(Male);
+
         } else {
             btnFemale(Female);
+
         }
     }
 
@@ -175,7 +197,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
 
-
             @Override
             protected void onPostExecute(ArrayList<String> s) {
                 super.onPostExecute(s);
@@ -206,6 +227,8 @@ public class ProfileActivity extends AppCompatActivity {
                     FillTheForm();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -235,7 +258,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String mDOB = Edt_DOB.getText().toString();
                 final HashMap<String, String> param = new HashMap<String, String>();
                 param.put("name", mName);
-                param.put("image", "base64image");
+                param.put("image", mImage);
                 param.put("email", mEmail);
                 param.put("city", mCity_Id + "");
                 param.put("dob", mDOB);
@@ -281,7 +304,70 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
+    public String imageToString(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        switch (requestCode) {
+            case 1234:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    InputStream imageStream;
+                    Bitmap yourSelectedImage;
+                    try {
+                        imageStream = getContentResolver().openInputStream(selectedImage);
+                        yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+                        CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
+                        imageView.setImageBitmap(yourSelectedImage);
+                        yourSelectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                        mImage=  imageToString(yourSelectedImage);
+                       // mImage = myBase64Image;
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String filePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+
+                    // ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    //  yourSelectedImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                    //  byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+
+                    // String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    // mImage = encoded;
+                }
+        }
+
+    }
+
+    ;
+    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality)
+    {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedBytes = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
     public View.OnClickListener btnChoosePhotoPressed = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -291,6 +377,7 @@ public class ProfileActivity extends AppCompatActivity {
             startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
         }
     };
+
     public String makePostRequest(String stringUrl, String payload, Context context, String Method) throws IOException {
 
         URL url = new URL(stringUrl);
@@ -338,7 +425,7 @@ public class ProfileActivity extends AppCompatActivity {
         or.setVisibility(View.INVISIBLE);
         or = (RelativeLayout) findViewById(R.id.female_delector);
         or.setVisibility(View.VISIBLE);
-        gender = "M";
+        gender = "F";
     }
 
     public void btnMale(View view) {
@@ -346,8 +433,7 @@ public class ProfileActivity extends AppCompatActivity {
         or.setVisibility(View.VISIBLE);
         or = (RelativeLayout) findViewById(R.id.female_delector);
         or.setVisibility(View.INVISIBLE);
-
-        gender = "F";
+        gender = "M";
     }
 
     public boolean validation() {

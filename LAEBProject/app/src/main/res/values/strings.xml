@@ -50,4 +50,7 @@
         <item>10 X 10</item>
         <item>11 X 11</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
