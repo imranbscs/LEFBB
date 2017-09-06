@@ -9,11 +9,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -28,7 +26,6 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,21 +39,10 @@ import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.City;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,11 +51,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-
-//import com.laeb.laebproject.model.City;
-
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -77,10 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText Edt_Email;
     EditText Edt_DOB;
     DatePickerDialog datePickerDialog;
-    JSONArray jsonarray;
-    ArrayList<City> cities;
     List<City> citis;
-    ArrayList<String> worldlist;
     TextView SaveProfile;
     String gender = "M";
     TextView Male;
@@ -90,41 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
     Spinner mySpinner;
     SharedPreferences channel;
     String mImage = "image";
-    ImageView img;
     List<String> cityStr;
-
-    public void FillTheForm() throws JSONException, ParseException {
-        String user = channel.getString("user", "default");
-
-        JSONObject obj = new JSONObject(user);
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-        Edt_DOB.setText(input.format(input.parse(obj.getString("dob"))));
-        img = (ImageView) findViewById(R.id.imageView81);
-        Edt_Email.setText(obj.getString("email"));
-        Picasso.with(this).load(obj.getString("picture")).into(img);
-        Log.i("asd", "---------------- this is gender : " + obj.getString("gender"));
-        Edt_Full_Name.setText(obj.getString("name"));
-        //mySpinner.setSelection(getIndex(mySpinner, cities.get(obj.getInt("city")).getName()));
-
-        if (obj.getString("gender").toString().equals("M")) {
-            btnMale(Male);
-        } else {
-            btnFemale(Female);
-
-        }
-    }
-
-    private int getIndex(Spinner spinner, String myString) {
-        int index = 0;
-
-        for (int i = 0; i < spinner.getCount(); i++) {
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
-                index = i - 1;
-                break;
-            }
-        }
-        return index;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,79 +122,9 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-//        new AsyncTask<String, String, ArrayList<String>>() {
-//
-//            @Override
-//            protected ArrayList<String> doInBackground(String... params) {
-//                try {
-//
-//                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities", null, getApplicationContext(), "GET");
-//
-//                    JSONObject jsonobject = new JSONObject(response);
-//                    cities = new ArrayList<City>();
-//
-//                    jsonarray = jsonobject.getJSONArray("cities");
-//                    worldlist = new ArrayList<String>();
-//                    for (int i = 0; i < jsonarray.length(); i++) {
-//                        jsonobject = jsonarray.getJSONObject(i);
-//                        City city = new City();
-//                        city.setName(jsonobject.optString("city_name"));
-//                        city.setId(jsonobject.optInt("city_id"));
-//                        cities.add(city);
-//
-//                        worldlist.add(jsonobject.optString("city_name"));
-//                    }
-//                    return worldlist;
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                    return null;
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//
-//            }
-//
-//            @Override
-//            protected void onPostExecute(ArrayList<String> s) {
-//                super.onPostExecute(s);
-//                mySpinner = (Spinner) findViewById(R.id.ed_city);
-//                SpinnerAdapter adap = new ArrayAdapter<String>(ProfileActivity.this, R.layout.spinner_item, worldlist);
-//                mySpinner.setAdapter(adap);
-//                // Spinner on item click listener
-//                mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//
-//                            @Override
-//                            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-//
-//                                City areaName = (City) cities.get(position);
-//                                mCity_Id = areaName.getId();
-//                            }
-//
-//                            @Override
-//                            public void onNothingSelected(AdapterView<?> arg0) {
-//
-//                            }
-//                        });
-//                try {
-//                    FillTheForm();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//
-//        }.execute("");
-
-
-
-
         SaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //saveClicked();
                 if (!validation()) {
                     return;
                 }
@@ -307,72 +182,19 @@ public class ProfileActivity extends AppCompatActivity {
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
 
-
                         Log.v("gggg",mName+"==="+mImage+"==="+mEmail+"===="+mCity_Id+"===="+mDOB+"===="+gender);
-
                         params.put("name", mName);
                         params.put("image", mImage);
                         params.put("email", mEmail);
                         params.put("city", mCity_Id + "");
                         params.put("dob", mDOB);
                         params.put("gender", gender);
-
-
-
                         return params;
                     }
                 };;
 
                 requestQueue.add(stringRequest);
 
-//
-//                final HashMap<String, String> param = new HashMap<String, String>();
-//                param.put("name", mName);
-//                param.put("image", mImage);
-//                param.put("email", mEmail);
-//                param.put("city", mCity_Id + "");
-//                param.put("dob", mDOB);
-//                param.put("gender", gender);
-//
-//
-//                Prefs.putString(ProfileActivity.this, "name", mName);
-//                Prefs.putString(ProfileActivity.this, "image", mImage);
-//                Prefs.putString(ProfileActivity.this, "email", mEmail);
-//                Prefs.putString(ProfileActivity.this, "city", mCity_Id+"");
-//                Prefs.putString(ProfileActivity.this, "dob", mDOB);
-//
-//
-//                final RequestParams paramss = new RequestParams(param);
-//
-//                new AsyncTask<String, String, String>() {
-//
-//                    @Override
-//                    protected String doInBackground(String... params) {
-//                        try {
-//                            String response = makePostRequest("http://192.169.138.14:4000/api/profile/v2/basic",
-//                                    paramss.toString(),
-//                                    getApplicationContext(), "POST");
-//                            Log.i("asd", "---------------- this is response : " + response);
-//                            return "Success";
-//                        } catch (IOException ex) {
-//                            ex.printStackTrace();
-//                            return "";
-//                        }
-//                    }
-//
-//                    @Override
-//                    protected void onPostExecute(String s) {
-//                        super.onPostExecute(s);
-////                        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
-////                        Log.i("asd", param.toString());
-////                        Custom custom = new Custom();
-////                        custom.setList(param);
-////                        i.putExtra("user", custom);
-//                        startActivity(new Intent(ProfileActivity.this, MenuActivity.class));
-//                    }
-//
-//                }.execute("");
-//                getSupportActionBar().hide();
             }
         });
 
@@ -431,47 +253,6 @@ public class ProfileActivity extends AppCompatActivity {
             startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
         }
     };
-
-    public String makePostRequest(String stringUrl, String payload, Context context, String Method) throws IOException {
-
-        URL url = new URL(stringUrl);
-        HttpURLConnection uc = (HttpURLConnection) url.openConnection();
-
-        String line;
-        StringBuffer jsonString = new StringBuffer();
-
-        String strChannel = channel.getString("token", "Default").toString();
-        Log.i("asd", "---------------- this is response : " + strChannel);
-        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        uc.setRequestProperty("x-access-token", strChannel);
-        uc.setRequestProperty("locale", "en");
-        String android_id = Settings.Secure.getString(this.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
-        // uc.setRequestProperty("device", android_id);
-        uc.setRequestMethod(Method);
-        uc.setDoInput(true);
-        uc.setInstanceFollowRedirects(false);
-        uc.connect();
-        if (payload != null) {
-            OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
-            writer.write(payload);
-            writer.close();
-        }
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while ((line = br.readLine()) != null) {
-                jsonString.append(line);
-                Log.i("asd", line);
-            }
-            br.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        uc.disconnect();
-        return jsonString.toString();
-    }
 
     public void btnFemale(View view) {
         RelativeLayout or = (RelativeLayout) findViewById(R.id.male_selector);
@@ -548,5 +329,4 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 }
