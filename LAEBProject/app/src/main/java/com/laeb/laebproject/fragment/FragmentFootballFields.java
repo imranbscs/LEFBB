@@ -114,8 +114,6 @@ public class FragmentFootballFields extends Fragment {
 
         }.execute("");
 
-
-
     }
 
     public String makePostRequest(String stringUrl, String payload, Context context, String Method) throws IOException {

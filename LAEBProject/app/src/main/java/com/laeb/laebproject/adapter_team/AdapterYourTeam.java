@@ -1,7 +1,6 @@
 package com.laeb.laebproject.adapter_team;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import com.google.gson.Gson;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.model_create_team.Datum;
 import com.laeb.laebproject.model_create_team.ListInvite;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;

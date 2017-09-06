@@ -1,7 +1,5 @@
 package com.laeb.laebproject.model;
 
-import java.util.Arrays;
-
 /**
  * Created by imrankhan on 8/22/2017.
  */

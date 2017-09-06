@@ -9,4 +9,5 @@ public class Globels {
     public static String ACCESS_KEY = "ADBB-6CA3-15AE-359E";
     public static String CONTENT_TYPE = "application/x-www-form-urlencoded";
     public static String LOCAL = "en";
+    public static String URL_MY_PROFILE = "/api/profile/v2/basic";
 }

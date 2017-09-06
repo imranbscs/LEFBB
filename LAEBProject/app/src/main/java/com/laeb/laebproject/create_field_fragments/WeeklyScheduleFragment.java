@@ -22,9 +22,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 
+import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
 import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
+import com.laeb.laebproject.fragment.FragmentFootballFields;
 import com.laeb.laebproject.model.Custom;
 import com.laeb.laebproject.model.CustomBinder;
 import com.laeb.laebproject.model.Days;
@@ -89,15 +91,6 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
         View b = (View) footerView.findViewById(R.id.btnNext);
         b.setOnClickListener(this);
         expandableListView.addFooterView(footerView);
-        footerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Gson gson = new Gson();
-                json = gson.toJson(TestStaticMethod.getAll());
-                Log.i("asd", "====== " + json);
-                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         expandableListAdapter = new CustomExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
@@ -116,14 +109,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                String temp = "1600-1800-25";
-//                TestStaticMethod.getMonday().add(temp);
-//                expandableListDetail = ExpandableListDataPump.getData();
-//                //invalidateViews();
-//
-//                expandableListAdapter = new CustomExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
-//                expandableListView.setAdapter(expandableListAdapter);
-                //expandableListAdapter;
+
                 return false;
             }
         });
@@ -178,6 +164,9 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
                     @Override
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
+//                        FragmentFootballFields fragment = new FragmentFootballFields();
+//                        ((CreateFieldActivity) getActivity()).addFragment(fragment);
+                        getActivity().finish();
                         Log.i("asd", "---------------- this is response : " + s);
                     }
                 }.execute("");
@@ -188,8 +177,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
 
     }
 
-    public String makePostRequest(String stringUrl, String payload,
-                                  Context context, String Method) throws IOException {
+    public String makePostRequest(String stringUrl, String payload, Context context, String Method) throws IOException {
 
         URL url = new URL(stringUrl);
         HttpURLConnection uc = (HttpURLConnection) url.openConnection();

@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.laeb.laebproject.general.GlobelList;
+import com.laeb.laebproject.general.Globels;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -12,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         getSupportActionBar().hide();
+        GlobelList.getCities(this);
     }
 
     public void profileClicked(View view) {
@@ -24,5 +28,9 @@ public class HomeActivity extends AppCompatActivity {
     public void addTeamClicked(View view) {
         //startActivity(new Intent(this, CreateTeamActivity.class));
         startActivity(new Intent(this, InvitePlayerActivity.class));
+    }
+
+    public void notificationClicked(View view) {
+//        GlobelList.getCities(this);
     }
 }

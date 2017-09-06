@@ -25,7 +25,7 @@ public class FragmentPaymentChoice extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_payment_details, container, false);
-v.setOnClickListener(new OnClickListener() {
+        v.setOnClickListener(new OnClickListener() {
     @Override
     public void onClick(View v) {
         FragmentScratch fragment = new FragmentScratch();

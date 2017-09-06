@@ -33,7 +33,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.laeb.laebproject.InvitePlayerActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.general.Globels;
@@ -389,10 +388,6 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
     }
 
     public boolean validation() {
-
-
-        // teamName, colorName, coachName, groundName, teamCity;
-
         boolean b = true;
         if (teamName.getText().toString().trim().equals("") || teamName.getText().toString().trim().length()<1) {
             teamName.setError(getString(R.string.invalidName));
@@ -419,6 +414,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
     }
 
     private void openDialog(boolean supportsAlpha) {
+
         AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(), currentColor, supportsAlpha, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {

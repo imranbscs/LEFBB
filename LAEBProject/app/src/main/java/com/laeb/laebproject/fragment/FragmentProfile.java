@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +33,7 @@ import com.laeb.laebproject.MultiSelectionSpinner;
 import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
+import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model.City;
 import com.laeb.laebproject.model.Custom;
 import com.laeb.laebproject.model.Days;
@@ -55,6 +59,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by tariq on 8/17/2017.
@@ -94,7 +100,6 @@ public class FragmentProfile extends Fragment {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
         TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
 
-
         Edt_Full_Name = (EditText) v.findViewById(R.id.ed__name);
         Edt_DOB = (EditText) v.findViewById(R.id.ed_dob);
         Edt_Nick = (EditText) v.findViewById(R.id.ed_nick_name);
@@ -104,15 +109,28 @@ public class FragmentProfile extends Fragment {
         Place_of_Birth = (EditText) v.findViewById(R.id.ed__district);
         ed_player = (TextView) v.findViewById(R.id.ed_you_player);
         ed_refree = (TextView) v.findViewById(R.id.ed_refree);
+        CircleImageView circleView = (CircleImageView) v.findViewById(R.id.imageView81);
+        //circleView.setImageBitmap(yourSelectedImage);
 
-        Intent i = getActivity().getIntent();
-        Custom custom = (Custom) i.getSerializableExtra("user");
-        HashMap<String, String> param = custom.getList();
+        if(Prefs.getString(getActivity(), "image").length()>10) {
+            byte[] decodedString = Base64.decode(Prefs.getString(getActivity(), "image"), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            circleView.setImageBitmap(decodedByte);
+        }
+//
+//        Intent i = getActivity().getIntent();
+//        Custom custom = (Custom) i.getSerializableExtra("user");
+//        HashMap<String, String> param = custom.getList();
+//
 
-        Edt_Full_Name.setText(param.get("name"));
+
+
+
+        Edt_Full_Name.setText(Prefs.getString(getActivity(), "name"));
+
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Edt_DOB.setText(input.format(input.parse(param.get("dob"))));
+            Edt_DOB.setText(input.format(input.parse(Prefs.getString(getActivity(), "dob"))));
         } catch (ParseException e) {
             e.printStackTrace();
         }
