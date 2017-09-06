@@ -103,7 +103,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="10dp"
                     android:id="@+id/tick_layout"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_toLeftOf="@+id/invitely"
                     android:background="@color/colorPrimaryDark"
                     android:layout_height="30dp">
@@ -118,7 +118,7 @@
 
                 <RelativeLayout
                     android:layout_width="60dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="#ccffcc"
                     android:layout_height="30dp"
                     android:visibility="visible"
                     android:id="@+id/invitely"
@@ -131,8 +131,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textColor="@color/textColorHint"
+                        android:textColor="@color/black_upcoming_game"
                         android:layout_marginLeft="15dp"
+                        android:id="@+id/inviteText"
                         android:text="Invite"/>
 
                 </RelativeLayout>

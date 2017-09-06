@@ -24,6 +24,7 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/search"
                 android:layout_toLeftOf="@+id/sort"
                 android:layout_centerVertical="true"
                 android:src="@drawable/filter"/>
@@ -33,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toplayout"
-        android:layout_above="@+id/doneBtn"
+        android:layout_above="@+id/doneBtnInvite"
         android:layout_marginBottom="5dp"
         android:orientation="vertical">
 
@@ -46,7 +47,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/doneBtn"
+        android:id="@+id/doneBtnInvite"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginBottom="20dp"
