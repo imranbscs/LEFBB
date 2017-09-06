@@ -486,13 +486,15 @@
                                     android:id="@+id/lbl_viwDate2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignRight="@id/imgViwdate1"
-                                    android:layout_alignParentRight="true"
                                     android:text="6"
-                                    android:layout_margin="20dp"
                                     android:textSize="15sp"
                                     android:textColor="@color/white"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_alignRight="@+id/lbl_viwDate1"
+                                    android:layout_alignEnd="@+id/lbl_viwDate1" />
                             </RelativeLayout>
                             <RelativeLayout
                                 android:layout_width="wrap_content"
@@ -525,10 +527,14 @@
                                     android:layout_alignRight="@id/imgViwdate2"
                                     android:layout_alignParentRight="true"
                                     android:text="6"
-                                    android:layout_margin="20dp"
                                     android:textSize="15sp"
                                     android:textColor="@color/white"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_alignLeft="@+id/lbl_viwDate3"
+                                    android:layout_alignStart="@+id/lbl_viwDate3" />
                             </RelativeLayout>
                             <RelativeLayout
                                 android:layout_width="wrap_content"
@@ -561,10 +567,14 @@
                                     android:layout_alignRight="@id/imgViwdate3"
                                     android:layout_alignParentRight="true"
                                     android:text="6"
-                                    android:layout_margin="20dp"
                                     android:textSize="15sp"
                                     android:textColor="@color/white"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_alignLeft="@+id/lbl_viwDate5"
+                                    android:layout_alignStart="@+id/lbl_viwDate5" />
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -598,10 +608,12 @@
                                     android:layout_alignRight="@id/imgViwdate4"
                                     android:layout_alignParentRight="true"
                                     android:text="6"
-                                    android:layout_margin="20dp"
                                     android:textSize="15sp"
                                     android:textColor="@color/white"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="20dp" />
                             </RelativeLayout>
 
                             <RelativeLayout

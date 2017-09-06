@@ -145,41 +145,49 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imgbottle"
                 android:src="@drawable/bottle"
                 android:layout_marginLeft="5dp"/>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imgparking"
                 android:src="@drawable/parking"
                 android:layout_marginLeft="5dp"/>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imglight"
                 android:src="@drawable/light"
                 android:layout_marginLeft="5dp"/>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imghanger"
                 android:src="@drawable/hanger"
                 android:layout_marginLeft="5dp"/>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imgfootball"
                 android:src="@drawable/football"
                 android:layout_marginLeft="5dp"/>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imgjacket"
                 android:src="@drawable/jacket"
                 android:layout_marginLeft="5dp"/>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imgtoilet"
                 android:src="@drawable/toilet"
                 android:layout_marginLeft="5dp"/>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:id="@+id/imgsittings"
                 android:src="@drawable/sitting"
                 android:layout_marginLeft="5dp"/>
 

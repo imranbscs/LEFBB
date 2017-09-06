@@ -110,7 +110,12 @@ public class FragmentProfile extends Fragment {
         HashMap<String, String> param = custom.getList();
 
         Edt_Full_Name.setText(param.get("name"));
-        Edt_DOB.setText(param.get("dob"));
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Edt_DOB.setText(input.format(input.parse(param.get("dob"))));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
         spn_position.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));

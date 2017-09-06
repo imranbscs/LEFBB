@@ -78,7 +78,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
       //  lbl_viwDate2_1 = (TextView) findViewById(R.id.lbl_viwDate2_1);
 
 
-        Calendar cal = Calendar.getInstance();
+       /* Calendar cal = Calendar.getInstance();
         Integer Day_OF_Week = cal.DAY_OF_MONTH;
 
         String[] weekdayArray = {"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun", "Sun"};
@@ -97,14 +97,14 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
         else if (Calendar.WEDNESDAY == dayOfWeek) weekDay = "Wen";
         else if (Calendar.THURSDAY == dayOfWeek) weekDay = "Thu";
         else if (Calendar.FRIDAY == dayOfWeek) weekDay = "Fri";
-        else if (Calendar.SATURDAY == dayOfWeek) {
-            Calendar calendar = Calendar.getInstance();
+        else if (Calendar.SATURDAY == dayOfWeek) {*/
+            /*Calendar calendar = Calendar.getInstance();
 
-                /*int thisYear = calendar.get(Calendar.YEAR);
+                *//*int thisYear = calendar.get(Calendar.YEAR);
                 Log.i("","thisYear" +thisYear);
 
                 int thisMonth = calendar.get(Calendar.MONTH);
-                Log.i("", "@ thisMonth : " + thisMonth);*/
+                Log.i("", "@ thisMonth : " + thisMonth);*//*
 
             int thisDay = calendar.get(Calendar.DAY_OF_MONTH);
             Log.i("", "$ thisDay : " + thisDay);
@@ -132,7 +132,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
         //    lbl_viwDate5_1.setText("j");
         //    lbl_viwDate5_2.setText("Mon");
         }
-        System.out.println(weekDay);
+        System.out.println(weekDay);*/
 
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

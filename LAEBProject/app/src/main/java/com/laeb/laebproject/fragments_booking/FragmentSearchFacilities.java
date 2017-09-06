@@ -179,8 +179,13 @@ public class FragmentSearchFacilities extends Fragment {
                         datum.setName(j.getString("name"));
                         datum.setType( j.getString("type"));
                         datum.setCity(j.getString("city"));
-                        //datum.setSlotId(j.getString("city"));
-                        //datum.setCity(j.getString("city"));
+                        datum.setFloodlights(j.getInt("floodlights"));
+                        datum.setChangeRoom(j.getInt("change_room"));
+                        datum.setFootball(j.getString("football"));
+                        datum.setVests(j.getString("vests"));
+                        datum.setWater(j.getInt("water"));
+                        datum.setWc(j.getString("wc"));
+                        datum.setParking(j.getInt("parking"));
 
                         //ohash.put("Name", j.getString("name"));
                         //Log.d("asd", "onPostExecute: " + j.getString("name"));

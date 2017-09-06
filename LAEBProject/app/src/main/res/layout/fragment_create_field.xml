@@ -100,6 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/white"
+                        android:textColorHint="@color/textColorHint"
                         android:popupBackground="@color/colorPrimaryDark"
                         android:spinnerMode="dropdown" />
                 </RelativeLayout>
