@@ -64,7 +64,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
     EditText ed_name;
     EditText ed_city;
     EditText ed_size;
-    TextView grass_pitch;
+    TextView grass_pitch, artificialPitch;
     ImageView addImage;
     TextView clay_pitch;
     int mCity_Id = 0;
@@ -75,14 +75,12 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
     Spinner spn_acc;
     private static final int RESULT_OK = -1;
     Bitmap image;
-
     private static int RESULT_LOAD_IMAGE = 1;
-
-
     View myView;
     private ImageView profImg;
-
     final FieldInfo fieldInfo = new FieldInfo();
+    ImageView imageViewArtifitial, imageViewClay, imageViewGrass;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_create_field, container, false);
@@ -93,33 +91,36 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         ed_size = (EditText) view.findViewById(R.id.field_size);
         grass_pitch = (TextView) view.findViewById(R.id.grass_pitch);
         clay_pitch = (TextView) view.findViewById(R.id.clay_pitch);
+        artificialPitch = (TextView) view.findViewById(R.id.artificial_pitch);
         profImg = (ImageView) view.findViewById(R.id.picture);
         addImage = (ImageView) view.findViewById(R.id.addImage);
         spn_acc = (Spinner) view.findViewById(R.id.accamodations);
+
+        imageViewArtifitial = (ImageView) view.findViewById(R.id.at_img);
+        imageViewClay = (ImageView) view.findViewById(R.id.imgClay);
+        imageViewGrass = (ImageView) view.findViewById(R.id.imgGrass);
 
 
         SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, groundSize());
         spn_acc.setAdapter(adap);
 
+
+        artificialPitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPitchType(imageViewArtifitial, "Artificial");
+            }
+        });
         grass_pitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ImageView imageView = (ImageView) getView().findViewById(R.id.imgGrass);
-                imageView.setImageResource(R.drawable.tickselected);
-                ImageView imageView2 = (ImageView) getView().findViewById(R.id.imgClay);
-                imageView2.setImageResource(R.drawable.tick);
-                fieldInfo.type  = "Grass";
+                getPitchType(imageViewGrass, "Grass");
             }
         });
         clay_pitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView imageView = (ImageView) getView().findViewById(R.id.imgClay);
-                imageView.setImageResource(R.drawable.tickselected);
-                ImageView imageView2 = (ImageView) getView().findViewById(R.id.imgGrass);
-                imageView2.setImageResource(R.drawable.tick);
-                fieldInfo.type  = "Clay";
+                getPitchType(imageViewClay, "Clay");
             }
         });
 
@@ -168,7 +169,6 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
 
                 SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
 
-
                 // Spinner adapter
                 //spn_city.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,worldlist));
                 spn_city.setAdapter(adap);
@@ -176,9 +176,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
                 spn_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                             @Override
-                            public void onItemSelected(AdapterView<?> arg0,
-                                                       View arg1, int position, long arg3) {
-
+                            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                                 City areaName = (City) cities.get(position);
                                 mCity_Id = areaName.getId();
                             }
@@ -189,7 +187,6 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
                             }
                         });
             }
-
 
         }.execute("");
         return view;
@@ -281,7 +278,6 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-
             profImg.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
         }
@@ -309,7 +305,6 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         } else {
             ed_size.setError(null);
         }
-
         return true;
     }
 
@@ -322,6 +317,14 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         strings.add("10 X 10");
         strings.add("11 X 11");
         return strings;
+    }
+
+    public void getPitchType(ImageView img, String pitchType){
+        imageViewArtifitial.setImageResource(R.drawable.tick);
+        imageViewClay.setImageResource(R.drawable.tick);
+        imageViewGrass.setImageResource(R.drawable.tick);
+        img.setImageResource(R.drawable.tickselected);
+        fieldInfo.type  = pitchType;
     }
 
 }
