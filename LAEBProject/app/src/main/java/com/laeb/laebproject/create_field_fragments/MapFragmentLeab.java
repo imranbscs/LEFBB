@@ -79,8 +79,8 @@ public class MapFragmentLeab extends Fragment implements View.OnClickListener, O
         switch (view.getId()) {
             case R.id.nextMapp:
 
-                //fieldInfo.latitude = latLng.latitude;
-                //fieldInfo.longitude = latLng.longitude;
+                fieldInfo.latitude = latLng.latitude;
+                fieldInfo.longitude = latLng.longitude;
 
                 //Toast.makeText(getActivity(), latLng.latitude +"   "+latLng.latitude, Toast.LENGTH_SHORT).show();
                 SoicalMediaFragment fragment = new SoicalMediaFragment();
@@ -98,9 +98,9 @@ public class MapFragmentLeab extends Fragment implements View.OnClickListener, O
     public void onMapReady(GoogleMap map) {
         googleMap = map;
         googleMap.setMyLocationEnabled(true);
-       // buildGoogleApiClient();
+        buildGoogleApiClient();
 
-       // mGoogleApiClient.connect();
+        mGoogleApiClient.connect();
 
     }
     protected Marker addMarker(LatLng position,  int color, boolean draggable) {
