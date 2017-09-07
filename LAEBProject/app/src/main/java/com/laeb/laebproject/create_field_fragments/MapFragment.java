@@ -7,9 +7,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.support.annotation.ColorRes;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +19,15 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.*;
-
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.model.CustomBinder;
@@ -78,11 +82,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                 //fieldInfo.latitude = latLng.latitude;
                 //fieldInfo.longitude = latLng.longitude;
 
-//              fieldInfo.latitude = latLng.latitude;
-//                fieldInfo.longitude = latLng.longitude;
-
-
-                Toast.makeText(getActivity(), fieldInfo.name, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), latLng.latitude +"   "+latLng.latitude, Toast.LENGTH_SHORT).show();
                 SoicalMediaFragment fragment = new SoicalMediaFragment();
                 Bundle args = new Bundle();
                 CustomBinder oCustom = new CustomBinder();
@@ -102,19 +102,20 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
 
        // mGoogleApiClient.connect();
 
-
     }
     protected Marker addMarker(LatLng position,  int color, boolean draggable) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.draggable(draggable);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         markerOptions.position(position);
+        Toast.makeText(getActivity(), position.latitude +"   "+position.latitude, Toast.LENGTH_SHORT).show();
         Marker pinnedMarker = googleMap.addMarker(markerOptions);
         startDropMarkerAnimation(pinnedMarker);
         return pinnedMarker;
     }
 
     private void startDropMarkerAnimation(final Marker marker) {
+        Toast.makeText(getActivity(), marker.getPosition().latitude +"   "+marker.getPosition().latitude, Toast.LENGTH_SHORT).show();
         final LatLng target = marker.getPosition();
         final Handler handler = new Handler();
         final long start = SystemClock.uptimeMillis();
@@ -132,6 +133,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                 float t = interpolator.getInterpolation((float) elapsed / duration);
                 double lng = t * target.longitude + (1 - t) * startLatLng.longitude;
                 double lat = t * target.latitude + (1 - t) * startLatLng.latitude;
+
+                Toast.makeText(getActivity(), lng+"===="+lat, Toast.LENGTH_SHORT).show();
                 marker.setPosition(new LatLng(lat, lng));
                 if (t < 1.0) {
                     // Post again 16ms later == 60 frames per second
@@ -191,9 +194,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         currLocationMarker = googleMap.addMarker(markerOptions);
-
-
-        //zoom to current position:
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
 
 

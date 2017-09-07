@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,6 +40,7 @@ import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.City;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -51,6 +53,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -60,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText Edt_DOB;
     DatePickerDialog datePickerDialog;
     List<City> citis;
+    List<String> cityStr;
     TextView SaveProfile;
     String gender = "M";
     TextView Male;
@@ -69,7 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
     Spinner mySpinner;
     SharedPreferences channel;
     String mImage = "image";
-    List<String> cityStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         ImageView btn_choose_photo = (ImageView) findViewById(R.id.addPic); // Replace with id of your button.
         btn_choose_photo.setOnClickListener(btnChoosePhotoPressed);
-        getCityStr();
+
+        getCityStr();           //get the city name and map them in the city spinner.
+
         // perform click event on edit text
         Edt_DOB.setOnClickListener(new View.OnClickListener() {
             @Override

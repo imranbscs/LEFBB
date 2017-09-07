@@ -39,7 +39,7 @@
     <string name="football">Football</string>
     <string name="vests">Vests</string>
     <string name="wc">WC</string>
-    <string name="stand_capacity">Stand Capacity - 5,000</string>
+    <string name="stand_capacity">Stand Capacity</string>
     <string name="next">NEXT</string>
 
     <string-array name="array_accomodation">

@@ -21,16 +21,13 @@ import com.google.gson.reflect.TypeToken;
 import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
-import com.laeb.laebproject.model.City;
 import com.laeb.laebproject.model.FieldInfo;
-import com.laeb.laebproject.model.UpComingGames;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;

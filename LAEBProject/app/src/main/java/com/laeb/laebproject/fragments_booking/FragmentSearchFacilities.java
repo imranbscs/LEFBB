@@ -14,11 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.adapters.SearchFacilitiesAdapter;
 import com.laeb.laebproject.booking_models.Datum;
-import com.laeb.laebproject.booking_models.SearchModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;

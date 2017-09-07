@@ -1,38 +1,21 @@
 package com.laeb.laebproject.fragments_booking;
 
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.laeb.laebproject.BookingActivity;
-import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
-import com.laeb.laebproject.adapters.SearchFacilitiesAdapter;
-import com.laeb.laebproject.adapters.UpComingGamesAdapter;
-import com.laeb.laebproject.create_field_fragments.SoicalMediaFragment;
-import com.laeb.laebproject.model.CustomBinder;
-import com.laeb.laebproject.model.FieldInfo;
-import com.laeb.laebproject.model.UpComingGames;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-import static com.laeb.laebproject.R.mipmap.date;
 import static com.loopj.android.http.AsyncHttpClient.log;
 
 /**

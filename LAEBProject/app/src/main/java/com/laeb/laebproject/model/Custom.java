@@ -2,7 +2,6 @@ package com.laeb.laebproject.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 /**
  * Created by imrankhan on 8/22/2017.
