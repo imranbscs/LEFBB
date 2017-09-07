@@ -50,22 +50,34 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
         tv_water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fieldInfo.water = fieldInfo.water == 0 ? 1 : 0;
+                int imgResource;
+                if (fieldInfo.water==0)
+                    imgResource   = R.drawable.tick;
+                else
+                 imgResource = R.drawable.tickselected;
+
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-                int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.water = 1;
+
             }
 
         });
         tv_parking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fieldInfo.parking = fieldInfo.parking == 0 ? 1 : 0;
+                int imgResource;
+                if (fieldInfo.parking==0)
+                    imgResource   = R.drawable.tick;
+                else
+                    imgResource = R.drawable.tickselected;
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-                int imgResource = R.drawable.tickselected;
+
                 i.setImageResource(imgResource);
-                fieldInfo.parking = 1;
+
             }
 
         });
@@ -77,7 +89,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                 ImageView i = (ImageView) container.getChildAt(1);
                 int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.football = 1;
+                fieldInfo.football = fieldInfo.football == 0 ? 1 : 0;
             }
 
         });
@@ -88,7 +100,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                 ImageView i = (ImageView) container.getChildAt(1);
                 int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.vests = 1;
+                fieldInfo.vests = fieldInfo.vests == 0 ? 1 : 0;
             }
 
         });
@@ -99,7 +111,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                 ImageView i = (ImageView) container.getChildAt(1);
                 int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.change_room = 1;
+                fieldInfo.change_room = fieldInfo.change_room == 0 ? 1 : 0;
             }
 
         });
@@ -110,7 +122,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                 ImageView i = (ImageView) container.getChildAt(1);
                 int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.wc = 1;
+                fieldInfo.wc = fieldInfo.wc == 0 ? 1 : 0;
             }
 
         });
