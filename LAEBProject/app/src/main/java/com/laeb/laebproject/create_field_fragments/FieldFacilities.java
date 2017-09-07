@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.model.CustomBinder;
 import com.laeb.laebproject.model.FieldInfo;
 
@@ -137,9 +138,11 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.nextBtn:
                 if(capacity.getText().toString().length()<1){
-                    fieldInfo.capacity = "0";
+                    //fieldInfo.capacity = "0";
+                    Globels.CAPASITY = "0";
                 }else{
-                    fieldInfo.capacity = capacity.getText().toString();
+                    //fieldInfo.capacity = capacity.getText().toString();
+                    Globels.CAPASITY = capacity.getText().toString();
                 }
                 MapFragment fragment = new MapFragment();
                 Bundle args = new Bundle();

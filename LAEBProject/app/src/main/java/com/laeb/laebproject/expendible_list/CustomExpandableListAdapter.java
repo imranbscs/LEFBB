@@ -83,27 +83,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 @Override
                 public void onClick(View view) {
                     addDialog(a);
-//                    String temp = "1600-1800-25";
-//                    expandableListDetail.get(expandableListTitle.get(a)).add(temp);
-//                    notifyDataSetChanged();
-//                    //Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
-//                    Log.v("ggg", "  " + a + " ==== " +expandableListDetail.get(expandableListTitle.get(a)));
-//
-//                    if(a == 0){
-//                        saturdady = expandableListDetail.get(expandableListTitle.get(a));
-//                    }else if(a == 1){
-//                        sunday = expandableListDetail.get(expandableListTitle.get(a));
-//                    }else if(a == 2){
-//                        thursday = expandableListDetail.get(expandableListTitle.get(a));
-//                    }else if(a == 3){
-//                        tuesday = expandableListDetail.get(expandableListTitle.get(a));
-//                    }else if(a == 4){
-//                        friday = expandableListDetail.get(expandableListTitle.get(a));
-//                    }else if(a == 5){
-//                        wednesday = expandableListDetail.get(expandableListTitle.get(a));
-//                    }else if(a == 6){
-//                        monday = expandableListDetail.get(expandableListTitle.get(a));
-//                    }
                 }
             });
         }
@@ -166,8 +145,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
         final String[] fromStr = {"1000"};
         final String[] toStr = {"1000"};
-        String rateStr = "1000";
-        String allString = "";
 
         dialog.show();
         TextView okBtn = (TextView) dialog.findViewById(R.id.done);
@@ -190,6 +167,24 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         aaa.add("1900");
         aaa.add("2000");
         aaa.add("2100");
+        aaa.add("2000");
+        aaa.add("2300");
+        aaa.add("0000");
+        aaa.add("0100");
+        aaa.add("0200");
+        aaa.add("0300");
+        aaa.add("0400");
+        aaa.add("0500");
+        aaa.add("0600");
+        aaa.add("0700");
+        aaa.add("0800");
+        aaa.add("0900");
+        aaa.add("1000");
+        aaa.add("1100");
+        aaa.add("1200");
+        aaa.add("1300");
+        aaa.add("1400");
+        aaa.add("1500");
 
 
         SpinnerAdapter adap = new ArrayAdapter<String>(context, R.layout.spinner_item, aaa);

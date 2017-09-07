@@ -1,7 +1,9 @@
 package com.laeb.laebproject.create_field_fragments;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,12 +16,24 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.laeb.laebproject.MenuActivity;
+import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
 import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
+import com.laeb.laebproject.general.Globels;
+import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model.CustomBinder;
 import com.laeb.laebproject.model.FieldInfo;
+import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.testjson.TestStaticMethod;
 import com.loopj.android.http.RequestParams;
 
@@ -32,6 +46,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -90,58 +105,132 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
         switch (view.getId()) {
             case R.id.btnNext:
 
-                Gson gson = new Gson();
-                String json = gson.toJson(TestStaticMethod.getAll());
-                Log.v("ppp", "====== " + json);
+//                Gson gson = new Gson();
+//                String json = gson.toJson(TestStaticMethod.getAll());
+//                Log.v("ppp", "====== " + json);
                 Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
 
-                fieldInfo.nearby = "E11";
-                String s = gson.toJson(fieldInfo);
-
+//                fieldInfo.nearby = "E11";
+//                String s = gson.toJson(fieldInfo);
+//
 
                 Gson g = new Gson();
                 json = g.toJson(TestStaticMethod.getAll());
                 fieldInfo.nearby = "E11";
 
                 String ss = g.toJson(fieldInfo);
+                final String ssString = ss;
+                String s = g.toJson(fieldInfo);
 
-                s = g.toJson(fieldInfo);
 
-                final RequestParams paramss = new RequestParams();
-                paramss.put("fieldInfo", ss);
-                paramss.put("pictures", " [{\"image\":\"base64string1\"},{\"image\":\"base64string3\"}]");
-                paramss.put("operating", json);
-                paramss.put("stand_capacity", 5000);
-                Log.i("asd", "---------------- this is response : " + paramss.toString());
-                new AsyncTask<String, String, String>() {
+                final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
 
+                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.169.138.14:4000/api/fields/add", new Response.Listener<String>() {
                     @Override
-                    protected String doInBackground(String... params) {
-                        try {
+                    public void onResponse(String response) {
+                        Log.v("qwe", response);
+                        progressDialog.dismiss();
+                        Gson gson = new Gson();
+                        AllPlayers sucessResponse = gson.fromJson(response, AllPlayers.class);
+                        int _status = sucessResponse.getStatus();
 
-                            String response = makePostRequest("http://192.169.138.14:4000/api/fields/add",
-                                    paramss.toString(),
-                                    getActivity(), "POST");
-                            Log.i("asd", "---------------- this is response : " + response);
-                            return "Success";
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            return "";
+                        if(_status == 200){
+                            Toast.makeText(getActivity(), "Sucess " +_status, Toast.LENGTH_LONG).show();
+                        }else {
+
                         }
                     }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Log.v("wsx", "========   "+error+"");
+                        Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
+                    }
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("x-access-key", Globels.ACCESS_KEY);
+                        headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+                        headers.put("locale", Globels.LOCAL);
+                        headers.put("Content-Type", Globels.CONTENT_TYPE);
+                        return headers;
+                    }
 
                     @Override
-                    protected void onPostExecute(String s) {
-                        super.onPostExecute(s);
-//                        FragmentFootballFields fragment = new FragmentFootballFields();
-//                        ((CreateFieldActivity) getActivity()).addFragment(fragment);
-                        getActivity().finish();
-                        Log.i("asd", "---------------- this is response : " + s);
-                    }
-                }.execute("");
-                Log.i("asd", s);
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
 
+                        params.put("fieldInfo", ssString);
+                        params.put("pictures", Globels.CREATE_FIELD_IMAGE);
+                        params.put("operating", json);
+                        params.put("stand_capacity", Globels.CAPASITY);
+                        return params;
+                    }
+                };;
+                requestQueue.add(stringRequest);
                 break;
+
+
+
+
+
+
+
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//                final RequestParams paramss = new RequestParams();
+//                paramss.put("fieldInfo", ss);
+//                paramss.put("pictures", " [{\"image\":\"base64string1\"},{\"image\":\"base64string3\"}]");
+//                paramss.put("operating", json);
+//                paramss.put("stand_capacity", 5000);
+//                Log.i("asd", "---------------- this is response : " + paramss.toString());
+//                new AsyncTask<String, String, String>() {
+//
+//                    @Override
+//                    protected String doInBackground(String... params) {
+//                        try {
+//
+//                            String response = makePostRequest("http://192.169.138.14:4000/api/fields/add",
+//                                    paramss.toString(),
+//                                    getActivity(), "POST");
+//                            Log.i("asd", "---------------- this is response : " + response);
+//                            return "Success";
+//                        } catch (IOException ex) {
+//                            ex.printStackTrace();
+//                            return "";
+//                        }
+//                    }
+//
+//                    @Override
+//                    protected void onPostExecute(String s) {
+//                        super.onPostExecute(s);
+////                        FragmentFootballFields fragment = new FragmentFootballFields();
+////                        ((CreateFieldActivity) getActivity()).addFragment(fragment);
+//                        getActivity().finish();
+//                        Log.i("asd", "---------------- this is response : " + s);
+//                    }
+//                }.execute("");
+//                Log.i("asd", s);
+//
+//                break;
+
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
         }
 
     }
@@ -188,6 +277,60 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
 
         uc.disconnect();
         return jsonString.toString();
+    }
+
+    public void addAlotAndField(){
+//        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.show();
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.169.138.14:4000/api/fields/add", new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.v("qwe", response);
+//                progressDialog.dismiss();
+//                Gson gson = new Gson();
+//                AllPlayers sucessResponse = gson.fromJson(response, AllPlayers.class);
+//                int _status = sucessResponse.getStatus();
+//
+//                if(_status == 200){
+//                    Toast.makeText(getActivity(), "Sucess " +_status, Toast.LENGTH_LONG).show();
+//                }else {
+//
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                progressDialog.dismiss();
+//                Log.v("wsx", "========   "+error+"");
+//                Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
+//            }
+//        }){
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("x-access-key", Globels.ACCESS_KEY);
+//                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+//                headers.put("locale", Globels.LOCAL);
+//                headers.put("Content-Type", Globels.CONTENT_TYPE);
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//
+//                params.put("fieldInfo", s);
+//                params.put("pictures", "");
+//                params.put("operating", "");
+//                params.put("stand_capacity", "");
+//                return params;
+//            }
+//        };;
+//
+//        requestQueue.add(stringRequest);
     }
 
 }

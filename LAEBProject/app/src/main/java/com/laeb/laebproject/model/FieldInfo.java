@@ -150,6 +150,4 @@ public class FieldInfo {
         this.vests = vests;
     }
 
-
-
 }
