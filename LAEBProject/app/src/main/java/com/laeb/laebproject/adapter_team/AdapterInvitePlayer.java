@@ -1,9 +1,7 @@
 package com.laeb.laebproject.adapter_team;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.renderscript.Long4;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,34 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.laeb.laebproject.R;
-import com.laeb.laebproject.adapters.ScheduleRefreeAdapter;
-import com.laeb.laebproject.general.Globels;
-import com.laeb.laebproject.general.Prefs;
-import com.laeb.laebproject.model.UpComingGames;
 import com.laeb.laebproject.model_create_team.Datum;
 import com.laeb.laebproject.model_create_team.ListInvite;
-import com.laeb.laebproject.model_create_team.SucessResponse;
-import com.laeb.laebproject.team_fragments.FragmentInvitePlayer;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by tariq on 8/28/2017.

@@ -6,6 +6,21 @@ package com.laeb.laebproject.model;
 
 public class FieldInfo {
     public String name;
+    public String city;
+    public double latitude;
+    public double longitude;
+    public String size;
+    public String capacity;
+    public String type;
+    public int light;
+    public int change_room;
+    public int parking;
+    public int wifi;
+    public String nearby;
+    public int water;
+    public int wc;
+    public int football;
+    public int vests;
 
     public String getName() {
         return name;
@@ -111,19 +126,6 @@ public class FieldInfo {
         this.water = water;
     }
 
-    public String city;
-    public double latitude;
-    public double longitude;
-    public String size;
-    public String capacity;
-    public String type;
-    public int light;
-    public int change_room;
-    public int parking;
-    public int wifi;
-    public String nearby;
-    public int water;
-
     public int getWc() {
         return wc;
     }
@@ -148,9 +150,6 @@ public class FieldInfo {
         this.vests = vests;
     }
 
-    public int wc;
-    public int football;
-    public int vests;
 
 
 }

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.laeb.laebproject.R;
-import com.laeb.laebproject.adapter_team.AdapterInvitePlayer;
 import com.laeb.laebproject.adapter_team.AdapterYourPlayer;
 import com.laeb.laebproject.model.UpComingGames;
 

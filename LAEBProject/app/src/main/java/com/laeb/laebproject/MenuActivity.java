@@ -3,8 +3,8 @@ package com.laeb.laebproject;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.laeb.laebproject.fragment.FragmentFootballFields;

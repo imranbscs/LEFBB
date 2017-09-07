@@ -1,20 +1,12 @@
 package com.laeb.laebproject.create_field_fragments;
 
 import android.app.Fragment;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.util.Log;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,31 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laeb.laebproject.CreateFieldActivity;
-import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
-import com.laeb.laebproject.model.City;
+import com.laeb.laebproject.general.GlobelList;
+import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.model.CustomBinder;
 import com.laeb.laebproject.model.FieldInfo;
 
-import org.apache.commons.lang3.SerializationUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Serializable;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.util.List;
 
 /**
  * Created by tariq on 8/19/2017.
@@ -68,16 +45,17 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
     ImageView addImage;
     TextView clay_pitch;
     int mCity_Id = 0;
-    JSONArray jsonarray;
-    ArrayList<City> cities;
-    ArrayList<String> worldlist;
+    public final int IMG_REQUEST = 1;
     Spinner spn_city;
-    Spinner spn_acc;
+    Spinner spn_acc;List<com.laeb.laebproject.model_create_team.list_city_and_fields.City> citis;
+    List<String> cityStr;
     private static final int RESULT_OK = -1;
     Bitmap image;
+    public Bitmap bitmap;
     private static int RESULT_LOAD_IMAGE = 1;
     View myView;
     private ImageView profImg;
+    String image64String = "";
     final FieldInfo fieldInfo = new FieldInfo();
     ImageView imageViewArtifitial, imageViewClay, imageViewGrass;
 
@@ -95,6 +73,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         profImg = (ImageView) view.findViewById(R.id.picture);
         addImage = (ImageView) view.findViewById(R.id.addImage);
         spn_acc = (Spinner) view.findViewById(R.id.accamodations);
+        spn_city = (Spinner) view.findViewById(R.id.ed_city);
 
         imageViewArtifitial = (ImageView) view.findViewById(R.id.at_img);
         imageViewClay = (ImageView) view.findViewById(R.id.imgClay);
@@ -104,6 +83,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, groundSize());
         spn_acc.setAdapter(adap);
 
+        getCityStr();           //get the city name and map them in the city spinner.
 
         artificialPitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,159 +107,41 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         b.setOnClickListener(this);
         addImage.setOnClickListener(this);
 
-        new AsyncTask<String, String, ArrayList<String>>() {
-
-            @Override
-            protected ArrayList<String> doInBackground(String... params) {
-                try {
-
-                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",null, getActivity(), "GET");
-
-                    JSONObject jsonobject = new JSONObject(response);
-                    cities = new ArrayList<City>();
-
-                    jsonarray = jsonobject.getJSONArray("cities");
-                    worldlist = new ArrayList<String>();
-                    for (int i = 0; i < jsonarray.length(); i++) {
-                        jsonobject = jsonarray.getJSONObject(i);
-                        City city = new City();
-                        city.setName(jsonobject.optString("city_name"));
-                        city.setId(jsonobject.optInt("city_id"));
-                        cities.add(city);
-
-                        worldlist.add(jsonobject.optString("city_name"));
-                    }
-                    return worldlist;
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    return null;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-
-            }
-
-
-            @Override
-            protected void onPostExecute(ArrayList<String> s) {
-                super.onPostExecute(s);
-                 spn_city = (Spinner) view.findViewById(R.id.ed_city);
-
-
-                SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
-
-                // Spinner adapter
-                //spn_city.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,worldlist));
-                spn_city.setAdapter(adap);
-                // Spinner on item click listener
-                spn_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                            @Override
-                            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                                City areaName = (City) cities.get(position);
-                                mCity_Id = areaName.getId();
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> arg0) {
-                                // TODO Auto-generated method stub
-                            }
-                        });
-            }
-
-        }.execute("");
         return view;
-
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.nextBtn:
+                if(!(validation())) {
+                    return;
+                }
+                    fieldInfo.name = ed_name.getText().toString();
+                    fieldInfo.size = ed_size.getText().toString();
+                    fieldInfo.city = mCity_Id + "";
+                    fieldInfo.capacity = spn_acc.getSelectedItem().toString().substring(0, 1);
 
-                fieldInfo.name = ed_name.getText().toString();
-                fieldInfo.size = ed_size.getText().toString();
-                fieldInfo.city = mCity_Id + "";
-                fieldInfo.capacity = spn_acc.getSelectedItem().toString().substring(0,1);
-
-                FieldFacilities fragment = new FieldFacilities();
-                Bundle args = new Bundle();
-                CustomBinder oCustom = new CustomBinder();
-                oCustom.setList(fieldInfo);
-                args.putSerializable("complexObject", oCustom);
-                fragment.setArguments(args);
-                ((CreateFieldActivity) getActivity()).addFragment(fragment);
-                break;
+                    FieldFacilities fragment = new FieldFacilities();
+                    Bundle args = new Bundle();
+                    CustomBinder oCustom = new CustomBinder();
+                    oCustom.setList(fieldInfo);
+                    args.putSerializable("complexObject", oCustom);
+                    fragment.setArguments(args);
+                    ((CreateFieldActivity) getActivity()).addFragment(fragment);
+                    break;
 
             case R.id.addImage:
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+//                Intent i = new Intent(
+//                        Intent.ACTION_PICK,
+//                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//
+//                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, IMG_REQUEST);
                 break;
-        }
-    }
-
-    public String makePostRequest(String stringUrl, String payload,
-                                  Context context, String Method) throws IOException {
-
-        URL url = new URL(stringUrl);
-        HttpURLConnection uc = (HttpURLConnection) url.openConnection();
-
-        String line;
-        StringBuffer jsonString = new StringBuffer();
-        SharedPreferences channel = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String strChannel = channel.getString("token", "Default").toString();
-        Log.i("asd", "---------------- this is response : " + strChannel);
-        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        uc.setRequestProperty("x-access-token", strChannel);
-        uc.setRequestProperty("locale", "en");
-        String android_id = Settings.Secure.getString(getActivity().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
-        // uc.setRequestProperty("device", android_id);
-        uc.setRequestMethod(Method);
-        uc.setDoInput(true);
-        uc.setInstanceFollowRedirects(false);
-        uc.connect();
-        if (payload != null) {
-            OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
-            writer.write(payload);
-            writer.close();
-        }
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while ((line = br.readLine()) != null) {
-                jsonString.append(line);
-                Log.i("asd", line);
-            }
-            br.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        uc.disconnect();
-        return jsonString.toString();
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = this.getActivity().getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            profImg.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
         }
     }
 
@@ -327,4 +189,52 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         fieldInfo.type  = pitchType;
     }
 
+    void getCityStr(){
+        citis = GlobelList.cities;
+        cityStr = new ArrayList<>();
+        final List<com.laeb.laebproject.model_create_team.list_city_and_fields.City> cc = GlobelList.cities;
+        Toast.makeText(getActivity(), GlobelList.cities.size()+"  ", Toast.LENGTH_SHORT).show();
+        for(int i = 0; i < GlobelList.cities.size(); i++){
+            cityStr.add(GlobelList.cities.get(i).getCityName());
+        }
+        //spn_city = (Spinner) getView().findViewById(R.id.ed_city);
+        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, cityStr);
+        spn_city.setAdapter(adap);
+        spn_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                com.laeb.laebproject.model_create_team.list_city_and_fields.City areaName = (com.laeb.laebproject.model_create_team.list_city_and_fields.City) cc.get(position);
+                mCity_Id = areaName.getCityId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null){
+            Uri path = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
+                profImg.setImageBitmap(bitmap);
+                image64String = imageToString(bitmap);
+                Globels.CREATE_FIELD_IMAGE = image64String;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String imageToString(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
 }

@@ -17,18 +17,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 
-import com.laeb.laebproject.BookingActivity;
 import com.laeb.laebproject.HomeActivity;
 import com.laeb.laebproject.R;
-import com.laeb.laebproject.adapters.SearchFacilitiesAdapter;
-import com.laeb.laebproject.booking_models.Datum;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,11 +30,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-
-import static com.loopj.android.http.AsyncHttpClient.log;
 
 /**
  * Created by Imran on 9/3/2017.

@@ -1,36 +1,26 @@
 package com.laeb.laebproject.create_field_fragments;
 
-import android.app.DownloadManager;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.provider.Settings;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-
-import com.laeb.laebproject.CreateFieldActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
 import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
-import com.laeb.laebproject.fragment.FragmentFootballFields;
-import com.laeb.laebproject.model.Custom;
 import com.laeb.laebproject.model.CustomBinder;
-import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.FieldInfo;
+import com.laeb.laebproject.testjson.TestStaticMethod;
 import com.loopj.android.http.RequestParams;
 
 import java.io.BufferedReader;
@@ -39,16 +29,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import com.laeb.laebproject.R;
-import com.laeb.laebproject.expendible_list.CustomExpandableListAdapter;
-import com.laeb.laebproject.expendible_list.ExpandableListDataPump;
-import com.laeb.laebproject.testjson.TestStaticMethod;
-
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -101,18 +82,6 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
             }
         });
 
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-            }
-        });
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-                return false;
-            }
-        });
         return view;
     }
 

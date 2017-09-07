@@ -1,17 +1,15 @@
 package com.laeb.laebproject;
 
-        import android.app.AlertDialog;
-        import android.content.Context;
-        import android.content.DialogInterface;
-        import android.util.AttributeSet;
-        import android.widget.ArrayAdapter;
-        import android.widget.SpinnerAdapter;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.util.AttributeSet;
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 
-        import com.laeb.laebproject.model.Days;
-
-        import java.util.Arrays;
-        import java.util.LinkedList;
-        import java.util.List;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSpinner implements

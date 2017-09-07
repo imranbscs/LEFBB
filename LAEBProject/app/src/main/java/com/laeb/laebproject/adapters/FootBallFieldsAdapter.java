@@ -1,10 +1,7 @@
 package com.laeb.laebproject.adapters;
 
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +10,8 @@ import android.widget.TextView;
 
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.model.FieldInfo;
-import com.laeb.laebproject.model.UpComingGames;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by tariq on 8/17/2017.

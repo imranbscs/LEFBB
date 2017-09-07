@@ -1,7 +1,6 @@
 package com.laeb.laebproject.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,22 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.laeb.laebproject.BookingActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.booking_models.Datum;
 import com.laeb.laebproject.fragments_booking.FragmentMap;
-import com.laeb.laebproject.fragments_booking.FragmentPaymentChoice;
-import com.laeb.laebproject.fragments_booking.FragmentScratch;
-import com.laeb.laebproject.fragments_booking.FragmentSearchFacilities;
-import com.laeb.laebproject.model.UpComingGames;
 
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-
-import static com.loopj.android.http.AsyncHttpClient.log;
 
 /**
  * Created by tariq on 8/26/2017.

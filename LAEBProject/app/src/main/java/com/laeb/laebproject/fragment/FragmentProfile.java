@@ -3,17 +3,12 @@ package com.laeb.laebproject.fragment;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,17 +23,12 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.laeb.laebproject.MenuActivity;
 import com.laeb.laebproject.MultiSelectionSpinner;
-import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
-import com.laeb.laebproject.adapters.FootBallFieldsAdapter;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model.City;
-import com.laeb.laebproject.model.Custom;
 import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.PlayerPosition;
-import com.laeb.laebproject.model.UpComingGames;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -58,7 +48,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
