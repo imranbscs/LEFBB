@@ -37,7 +37,7 @@ import com.laeb.laebproject.model.FieldInfo;
  * Created by tariq on 8/18/2017.
  */
 
-public class MapFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MapFragmentLeab extends Fragment implements View.OnClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private MapView mapView;
     private GoogleMap googleMap;
@@ -89,7 +89,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                 oCustom.setList(fieldInfo);
                 args.putSerializable("complexObject", oCustom);
                 fragment.setArguments(args);
-                ((CreateFieldActivity) getActivity()).addFragment(fragment);
+                //((CreateFieldActivity) getActivity()).addFragment(fragment);
                 break;
         }
     }

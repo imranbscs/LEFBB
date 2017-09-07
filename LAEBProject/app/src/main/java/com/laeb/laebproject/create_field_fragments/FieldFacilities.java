@@ -144,7 +144,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                     //fieldInfo.capacity = capacity.getText().toString();
                     Globels.CAPASITY = capacity.getText().toString();
                 }
-                MapFragment fragment = new MapFragment();
+                MapFragmentLeab fragment = new MapFragmentLeab();
                 Bundle args = new Bundle();
                 CustomBinder oCustom = new CustomBinder();
                 oCustom.setList(fieldInfo);
