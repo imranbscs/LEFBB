@@ -92,8 +92,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int listPosition) {
-        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .size()+1;
+        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition)).size()+1;
     }
 
     @Override
@@ -152,14 +151,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         Spinner start = (Spinner) dialog.findViewById(R.id.chose1);
         Spinner end = (Spinner) dialog.findViewById(R.id.chose2);
         final EditText rate = (EditText) dialog.findViewById(R.id.rate);
-        //rateStr = rate.getText().toString().trim();
-
-        //Log.v("edu", rateStr);
-
-        String[] arraySpinner = new String[] {
-                "1600", "1700", "1800", "1900", "2000"
-        };
-
         final ArrayList<String> aaa = new ArrayList<>();
         aaa.add("1600");
         aaa.add("1700");
@@ -228,13 +219,9 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(rate.getText().toString().trim().length()>0) {
-
+                int rateValueInt = Integer.parseInt(rate.getText().toString().trim());
+                if(rate.getText().toString().trim().length()>0 && rateValueInt<6) {
                     String sss = fromStr[0] + "-" + toStr[0] + "-" + rate.getText().toString().trim();
-                    ;
-                    ///String temp = "1600-1800-25";
-//                Log.v("edu", sss);
                     expandableListDetail.get(expandableListTitle.get(a)).add(sss);
                     notifyDataSetChanged();
                     Toast.makeText(context, expandableListTitle.get(a), Toast.LENGTH_SHORT).show();
@@ -257,7 +244,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                     }
                     dialog.dismiss();
                 }else {
-                    //rate.setError("Invalid Rating.");
                     dialog.dismiss();
                     Toast.makeText(context, "Invalid Rate..", Toast.LENGTH_SHORT).show();
                 }

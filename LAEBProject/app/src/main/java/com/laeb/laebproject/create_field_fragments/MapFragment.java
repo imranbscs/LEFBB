@@ -82,10 +82,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                 //fieldInfo.latitude = latLng.latitude;
                 //fieldInfo.longitude = latLng.longitude;
 
-//              fieldInfo.latitude = latLng.latitude;
-//              fieldInfo.longitude = latLng.longitude;
-
-
                 //Toast.makeText(getActivity(), latLng.latitude +"   "+latLng.latitude, Toast.LENGTH_SHORT).show();
                 SoicalMediaFragment fragment = new SoicalMediaFragment();
                 Bundle args = new Bundle();
@@ -106,19 +102,20 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
 
        // mGoogleApiClient.connect();
 
-
     }
     protected Marker addMarker(LatLng position,  int color, boolean draggable) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.draggable(draggable);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         markerOptions.position(position);
+        Toast.makeText(getActivity(), position.latitude +"   "+position.latitude, Toast.LENGTH_SHORT).show();
         Marker pinnedMarker = googleMap.addMarker(markerOptions);
         startDropMarkerAnimation(pinnedMarker);
         return pinnedMarker;
     }
 
     private void startDropMarkerAnimation(final Marker marker) {
+        Toast.makeText(getActivity(), marker.getPosition().latitude +"   "+marker.getPosition().latitude, Toast.LENGTH_SHORT).show();
         final LatLng target = marker.getPosition();
         final Handler handler = new Handler();
         final long start = SystemClock.uptimeMillis();
@@ -197,7 +194,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         currLocationMarker = googleMap.addMarker(markerOptions);
-
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
 
 
