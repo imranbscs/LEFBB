@@ -36,6 +36,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         oCustom = (CustomBinder) getArguments().get("complexObject");
+        if (oCustom !=null)
         fieldInfo = oCustom.getField();
         Log.i("asd",fieldInfo.name);
         View view = inflater.inflate(R.layout.fragment_facilities, container, false);
