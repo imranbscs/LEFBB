@@ -139,7 +139,9 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     public void addDialog(int b){
         final int a = b;
         final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_new_slot);
+        //dialog.requestWindowFeature(context.Window.FEATURE_NO_TITLE);
         //dialog.setTitle(R.string.pickup);
 
         final String[] fromStr = {"1000"};
