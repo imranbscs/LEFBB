@@ -83,10 +83,10 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                 //fieldInfo.longitude = latLng.longitude;
 
 //              fieldInfo.latitude = latLng.latitude;
-//                fieldInfo.longitude = latLng.longitude;
+//              fieldInfo.longitude = latLng.longitude;
 
 
-                Toast.makeText(getActivity(), fieldInfo.name, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), latLng.latitude +"   "+latLng.latitude, Toast.LENGTH_SHORT).show();
                 SoicalMediaFragment fragment = new SoicalMediaFragment();
                 Bundle args = new Bundle();
                 CustomBinder oCustom = new CustomBinder();
@@ -136,6 +136,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                 float t = interpolator.getInterpolation((float) elapsed / duration);
                 double lng = t * target.longitude + (1 - t) * startLatLng.longitude;
                 double lat = t * target.latitude + (1 - t) * startLatLng.latitude;
+
+                Toast.makeText(getActivity(), lng+"===="+lat, Toast.LENGTH_SHORT).show();
                 marker.setPosition(new LatLng(lat, lng));
                 if (t < 1.0) {
                     // Post again 16ms later == 60 frames per second
@@ -196,8 +198,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         currLocationMarker = googleMap.addMarker(markerOptions);
 
-
-        //zoom to current position:
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
 
 
