@@ -89,7 +89,7 @@ public class MapFragmentLeab extends Fragment implements View.OnClickListener, O
                 oCustom.setList(fieldInfo);
                 args.putSerializable("complexObject", oCustom);
                 fragment.setArguments(args);
-                //((CreateFieldActivity) getActivity()).addFragment(fragment);
+                ((CreateFieldActivity) getActivity()).addFragment(fragment);
                 break;
         }
     }
