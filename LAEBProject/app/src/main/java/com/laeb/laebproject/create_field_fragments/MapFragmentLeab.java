@@ -108,14 +108,14 @@ public class MapFragmentLeab extends Fragment implements View.OnClickListener, O
         markerOptions.draggable(draggable);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         markerOptions.position(position);
-        Toast.makeText(getActivity(), position.latitude +"   "+position.latitude, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), position.latitude +"   "+position.latitude, Toast.LENGTH_SHORT).show();
         Marker pinnedMarker = googleMap.addMarker(markerOptions);
         startDropMarkerAnimation(pinnedMarker);
         return pinnedMarker;
     }
 
     private void startDropMarkerAnimation(final Marker marker) {
-        Toast.makeText(getActivity(), marker.getPosition().latitude +"   "+marker.getPosition().latitude, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), marker.getPosition().latitude +"   "+marker.getPosition().latitude, Toast.LENGTH_SHORT).show();
         final LatLng target = marker.getPosition();
         final Handler handler = new Handler();
         final long start = SystemClock.uptimeMillis();
@@ -134,7 +134,7 @@ public class MapFragmentLeab extends Fragment implements View.OnClickListener, O
                 double lng = t * target.longitude + (1 - t) * startLatLng.longitude;
                 double lat = t * target.latitude + (1 - t) * startLatLng.latitude;
 
-                Toast.makeText(getActivity(), lng+"===="+lat, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), lng+"===="+lat, Toast.LENGTH_SHORT).show();
                 marker.setPosition(new LatLng(lat, lng));
                 if (t < 1.0) {
                     // Post again 16ms later == 60 frames per second
