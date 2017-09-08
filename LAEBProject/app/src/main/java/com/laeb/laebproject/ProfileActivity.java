@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,8 +56,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileActivity extends AppCompatActivity {
 
     EditText Edt_Full_Name;
@@ -79,6 +78,12 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+//        TextView t = (TextView) findViewById(R.id.profileTitle);
+//        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/avenir-roman.ttf");
+//        t.setTypeface(font);
+
+
         Edt_DOB = (EditText) findViewById(R.id.ed_dob);
         Male = (TextView) findViewById(R.id.txtMale);
         Female = (TextView) findViewById(R.id.txtFemale);
@@ -338,4 +343,5 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 }

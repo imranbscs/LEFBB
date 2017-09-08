@@ -5,10 +5,13 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.laeb.laebproject.create_field_fragments.FragmentCreateField;
 
 public class CreateFieldActivity extends AppCompatActivity {
+
+    public TextView screenTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,7 @@ public class CreateFieldActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_field);
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        screenTitle = (TextView) findViewById(R.id.screenTitle);
         FragmentCreateField fragmentProfile = new FragmentCreateField();
         addFragment(fragmentProfile);
     }

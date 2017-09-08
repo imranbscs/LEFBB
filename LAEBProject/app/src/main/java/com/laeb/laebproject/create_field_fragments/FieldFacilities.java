@@ -33,11 +33,12 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
     EditText capacity;
     CustomBinder oCustom;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        View view = inflater.inflate(R.layout.fragment_facilities, container, false);
+
         oCustom = (CustomBinder) getArguments().get("complexObject");
         fieldInfo = oCustom.getField();
         Log.i("asd",fieldInfo.name);
-        View view = inflater.inflate(R.layout.fragment_facilities, container, false);
+
         View b = (View) view.findViewById(R.id.nextBtn);
         b.setOnClickListener(this);
         tv_water = (TextView) view.findViewById(R.id.tv_water);

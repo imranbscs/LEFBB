@@ -42,7 +42,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
     EditText ed_city;
     EditText ed_size;
     TextView grass_pitch, artificialPitch;
-    ImageView addImage;
+    ImageView addImage, deleteImg;
     TextView clay_pitch;
     int mCity_Id = 0;
     public final int IMG_REQUEST = 1;
@@ -74,6 +74,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         addImage = (ImageView) view.findViewById(R.id.addImage);
         spn_acc = (Spinner) view.findViewById(R.id.accamodations);
         spn_city = (Spinner) view.findViewById(R.id.ed_city);
+        deleteImg = (ImageView) view.findViewById(R.id.delete);
 
         imageViewArtifitial = (ImageView) view.findViewById(R.id.at_img);
         imageViewClay = (ImageView) view.findViewById(R.id.imgClay);
@@ -105,6 +106,7 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
         });
 
         b.setOnClickListener(this);
+        deleteImg.setOnClickListener(this);
         addImage.setOnClickListener(this);
 
         return view;
@@ -136,6 +138,12 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, IMG_REQUEST);
+                break;
+
+            case R.id.delete:
+                Globels.CREATE_FIELD_IMAGE = "[{\"image\":\"base64string1\"}]";
+                profImg.setImageResource(R.drawable.pic_ground);
+                Toast.makeText(getActivity(), "No Image selected..", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
