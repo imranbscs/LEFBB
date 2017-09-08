@@ -40,6 +40,7 @@ import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.City;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -225,8 +226,11 @@ public class ProfileActivity extends AppCompatActivity {
                     try {
                         imageStream = getContentResolver().openInputStream(selectedImage);
                         yourSelectedImage = BitmapFactory.decodeStream(imageStream);
-                        CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
+
+                        CircularImageView imageView = (CircularImageView)findViewById(R.id.imageView81);
+                        //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
                         imageView.setImageBitmap(yourSelectedImage);
+
                         yourSelectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                         mImage=  imageToString(yourSelectedImage);
                        // mImage = myBase64Image;

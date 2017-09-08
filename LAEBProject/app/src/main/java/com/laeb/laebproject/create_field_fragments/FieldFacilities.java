@@ -32,8 +32,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
     FieldInfo fieldInfo;
     EditText capacity;
     CustomBinder oCustom;
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         oCustom = (CustomBinder) getArguments().get("complexObject");
         fieldInfo = oCustom.getField();
@@ -77,9 +76,9 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
                     imgResource   = R.drawable.tick;
                 else
                     imgResource = R.drawable.tickselected;
+
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-
                 i.setImageResource(imgResource);
 
             }
@@ -89,58 +88,106 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
         tv_football.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                ViewGroup container = (ViewGroup) view.getParent();
+//                ImageView i = (ImageView) container.getChildAt(1);
+//                int imgResource = R.drawable.tickselected;
+//                i.setImageResource(imgResource);
+                fieldInfo.football = fieldInfo.football == 0 ? 1 : 0;
+                int imgResource;
+                if (fieldInfo.football==0)
+                    imgResource   = R.drawable.tick;
+                else
+                    imgResource = R.drawable.tickselected;
+
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-                int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.football = fieldInfo.football == 0 ? 1 : 0;
             }
 
         });
+
         tv_vest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                ViewGroup container = (ViewGroup) view.getParent();
+//                ImageView i = (ImageView) container.getChildAt(1);
+//                int imgResource = R.drawable.tickselected;
+//                i.setImageResource(imgResource);
+                fieldInfo.vests = fieldInfo.vests == 0 ? 1 : 0;
+                int imgResource;
+                if (fieldInfo.vests==0)
+                    imgResource   = R.drawable.tick;
+                else
+                    imgResource = R.drawable.tickselected;
+
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-                int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.vests = fieldInfo.vests == 0 ? 1 : 0;
             }
 
         });
         tv_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                ViewGroup container = (ViewGroup) view.getParent();
+//                ImageView i = (ImageView) container.getChildAt(1);
+//                int imgResource = R.drawable.tickselected;
+//                i.setImageResource(imgResource);
+                fieldInfo.change_room = fieldInfo.change_room == 0 ? 1 : 0;
+                int imgResource;
+                if (fieldInfo.change_room==0)
+                    imgResource   = R.drawable.tick;
+                else
+                    imgResource = R.drawable.tickselected;
+
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-                int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.change_room = fieldInfo.change_room == 0 ? 1 : 0;
             }
 
         });
         tv_wc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                ViewGroup container = (ViewGroup) view.getParent();
+//                ImageView i = (ImageView) container.getChildAt(1);
+//                int imgResource = R.drawable.tickselected;
+//                i.setImageResource(imgResource);
+                fieldInfo.wc = fieldInfo.wc == 0 ? 1 : 0;
+                int imgResource;
+                if (fieldInfo.wc==0)
+                    imgResource   = R.drawable.tick;
+                else
+                    imgResource = R.drawable.tickselected;
+
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-                int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.wc = fieldInfo.wc == 0 ? 1 : 0;
             }
 
         });
+
         floodLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                ViewGroup container = (ViewGroup) view.getParent();
+//                ImageView i = (ImageView) container.getChildAt(1);
+//                int imgResource = R.drawable.tickselected;
+//                i.setImageResource(imgResource);
+                fieldInfo.light = fieldInfo.light == 0 ? 1 : 0;
+                int imgResource;
+                if (fieldInfo.light==0)
+                    imgResource   = R.drawable.tick;
+                else
+                    imgResource = R.drawable.tickselected;
+
                 ViewGroup container = (ViewGroup) view.getParent();
                 ImageView i = (ImageView) container.getChildAt(1);
-                int imgResource = R.drawable.tickselected;
                 i.setImageResource(imgResource);
-                fieldInfo.light = 1;
             }
 
         });
+
         return view;
 
     }
@@ -167,9 +214,4 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
         }
     }
 
-//    void addFragment(Fragment f){
-//        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_layout, f);
-//        fragmentTransaction.commit();
-//    }
 }
