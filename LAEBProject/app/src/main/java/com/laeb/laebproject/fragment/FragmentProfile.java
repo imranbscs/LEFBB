@@ -4,12 +4,16 @@ import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,13 +48,17 @@ import com.laeb.laebproject.model.PlayerPosition;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.Datum;
 import com.loopj.android.http.RequestParams;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -279,7 +287,7 @@ public class FragmentProfile extends Fragment {
                 mInter = fc_International.getText().toString();
                 mDistrict = Place_of_Birth.getText().toString();
 
-                HashMap<String, String> param = new HashMap<String, String>();
+               /*HashMap<String, String> param = new HashMap<String, String>();
                 param.put("name", mName);
                 param.put("image", "base64image");
                 param.put("nickname", mNick);
@@ -293,9 +301,9 @@ public class FragmentProfile extends Fragment {
                 param.put("player", Player);
                 param.put("refree", Refree);
                 param.put("fc_local", mLocal);
-                param.put("fc_international", mInter);
+                param.put("fc_international", mInter);*/
 
-                final RequestParams paramss = new RequestParams(param);
+              //  final RequestParams paramss = new RequestParams(param);
 
                /* new AsyncTask<String, String, String>() {
 
@@ -364,6 +372,7 @@ public class FragmentProfile extends Fragment {
 
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
+                        Log.i("asd",mHeight);
                         Map<String, String> param = new HashMap<>();
                         param.put("name", mName);
                         param.put("image", "base64image");
@@ -389,6 +398,12 @@ public class FragmentProfile extends Fragment {
         return v;
     }
 
+    public String imageToString(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
     private void GetProfile() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -585,4 +600,6 @@ public class FragmentProfile extends Fragment {
 
         return true;
     }
+
+
 }
