@@ -21,14 +21,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void profileClicked(View view) throws JSONException {
-//        Intent i = getIntent();
-//        String s =  i.getStringExtra("user");
-//        JSONObject j = new JSONObject(s);
-//        String name = (String) j.get("name");
-//        if (name.equals(""))
+        Intent i = getIntent();
+        String s =  i.getStringExtra("user");
+        JSONObject j = new JSONObject(s);
+       String name = (String) j.get("name");
+        if (name.equals(""))
         startActivity(new Intent(this, ProfileActivity.class));
-//        else
-//            startActivity(new Intent(this, MenuActivity.class));
+        else
+            startActivity(new Intent(this, MenuActivity.class));
     }
     public void bookingClicked(View view) {
         startActivity(new Intent(this, BookingActivity.class));
