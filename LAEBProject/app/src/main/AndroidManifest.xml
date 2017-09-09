@@ -16,12 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".LeabApp"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.laeb.laebproject.LanguageActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+
         </activity>
         <activity android:name="com.laeb.laebproject.AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
@@ -31,10 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".AddNumberActivity" />-->
-        <!--<activity android:name=".VerificationCodeActivity" />-->
-        <!--<activity android:name=".HomeActivity" >-->
-        <!--</activity>-->
 
         <activity android:name=".ProfileActivity">
 
