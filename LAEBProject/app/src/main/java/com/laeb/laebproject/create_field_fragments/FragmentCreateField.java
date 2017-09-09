@@ -47,7 +47,8 @@ public class FragmentCreateField extends Fragment implements View.OnClickListene
     int mCity_Id = 0;
     public final int IMG_REQUEST = 1;
     Spinner spn_city;
-    Spinner spn_acc;List<com.laeb.laebproject.model_create_team.list_city_and_fields.City> citis;
+    Spinner spn_acc;
+    List<com.laeb.laebproject.model_create_team.list_city_and_fields.City> citis;
     List<String> cityStr;
     private static final int RESULT_OK = -1;
     Bitmap image;

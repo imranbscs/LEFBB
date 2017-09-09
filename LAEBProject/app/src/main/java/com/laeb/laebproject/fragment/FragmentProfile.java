@@ -41,6 +41,7 @@ import com.google.gson.JsonElement;
 import com.laeb.laebproject.MultiSelectionSpinner;
 import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.general.GlobelList;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model.City;
@@ -50,6 +51,7 @@ import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.Datum;
 import com.loopj.android.http.RequestParams;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,6 +65,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -75,6 +78,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * Created by tariq on 8/17/2017.
@@ -89,6 +93,7 @@ public class FragmentProfile extends Fragment {
     Spinner mySpinner;
     TextView ed_player;
     TextView ed_refree;
+    Bitmap bitmap;
     EditText fc_local;
     EditText Place_of_Birth;
     EditText fc_International;
@@ -102,6 +107,8 @@ public class FragmentProfile extends Fragment {
     JSONArray jsonarray;
     ArrayList<City> cities;
     ArrayList<String> worldlist;
+    List<com.laeb.laebproject.model_create_team.list_city_and_fields.City> citis;
+    List<String> cityStr;
     TextView SaveProfile;
     String mName;
     String mDOB;
@@ -111,10 +118,11 @@ public class FragmentProfile extends Fragment {
     String mLocal;
     String mInter;
     String mDistrict;
-    CircleImageView circleView;
+    CircularImageView circleView;
     ImageView addpic;
-    SpinnerAdapter adap;
+    ArrayAdapter adap;
     String mImage;
+    ArrayAdapter oad;
 
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
@@ -133,8 +141,10 @@ public class FragmentProfile extends Fragment {
         Edt_Weight = (EditText) v.findViewById(R.id.ed_weight);
         Place_of_Birth = (EditText) v.findViewById(R.id.ed__district);
         ed_player = (TextView) v.findViewById(R.id.ed_you_player);
+        spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
+        mySpinner = (Spinner) v.findViewById(R.id.selectCity);
         ed_refree = (TextView) v.findViewById(R.id.ed_refree);
-        circleView = (CircleImageView) v.findViewById(R.id.imageView82);
+        circleView = (CircularImageView) v.findViewById(R.id.imageView82);
         fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
         fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
         //circleView.setImageBitmap(yourSelectedImage);
@@ -142,13 +152,14 @@ public class FragmentProfile extends Fragment {
         addpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, 1234);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1234);
             }
         });
         GetProfile();
-
+        getCityStr();
         List<String> listOfPlayerRoles = new ArrayList<String>();
         listOfPlayerRoles.add("Defender");
         listOfPlayerRoles.add("Goal Keeper");
@@ -156,8 +167,9 @@ public class FragmentProfile extends Fragment {
         listOfPlayerRoles.add("Striker");
 
 
-        spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
-        spn_position.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles));
+        // spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
+        oad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles);
+        spn_position.setAdapter(oad);
 
 
         MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
@@ -220,67 +232,7 @@ public class FragmentProfile extends Fragment {
 
             }
         });
-        new AsyncTask<String, String, ArrayList<String>>() {
 
-            @Override
-            protected ArrayList<String> doInBackground(String... params) {
-                try {
-
-                    String response = makePostRequest("http://192.169.138.14:4000/api/teams/getCities",
-                            null,
-                            getActivity(), "GET");
-
-                    JSONObject jsonobject = new JSONObject(response);
-                    cities = new ArrayList<City>();
-                    jsonarray = jsonobject.getJSONArray("cities");
-                    worldlist = new ArrayList<String>();
-                    for (int i = 0; i < jsonarray.length(); i++) {
-                        jsonobject = jsonarray.getJSONObject(i);
-                        City city = new City();
-                        city.setName(jsonobject.optString("city_name"));
-                        city.setId(jsonobject.optInt("city_id"));
-                        cities.add(city);
-
-                        worldlist.add(jsonobject.optString("city_name"));
-                    }
-                    return worldlist;
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    return null;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-
-            }
-
-
-            @Override
-            protected void onPostExecute(ArrayList<String> s) {
-                super.onPostExecute(s);
-                mySpinner = (Spinner) v.findViewById(R.id.selectCity);
-
-
-                adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
-                mySpinner.setAdapter(adap);
-                // Spinner on item click listener
-                mySpinner
-                        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                            @Override
-                            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                                City areaName = (City) cities.get(position);
-                                mCity_Id = areaName.getId();
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> arg0) {
-                                // TODO Auto-generated method stub
-
-                            }
-                        });
-            }
-        }.execute("");
 
         saveprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -315,7 +267,7 @@ public class FragmentProfile extends Fragment {
                 param.put("fc_local", mLocal);
                 param.put("fc_international", mInter);*/
 
-              //  final RequestParams paramss = new RequestParams(param);
+                //  final RequestParams paramss = new RequestParams(param);
 
                /* new AsyncTask<String, String, String>() {
 
@@ -355,14 +307,10 @@ public class FragmentProfile extends Fragment {
                         Log.v("qwe", response);
                         progressDialog.dismiss();
                         Gson gson = new Gson();
-                        AllPlayers sucessResponse = gson.fromJson(response, AllPlayers.class);
-                        int _status = sucessResponse.getStatus();
+                        // Datum sucessResponse = gson.fromJson(response, Datum.class);
+                        // int _status = sucessResponse.getStatus();
 
-                        if (_status == 200) {
-                            Toast.makeText(getActivity(), "Sucess " + _status, Toast.LENGTH_LONG).show();
-                        } else {
 
-                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -384,10 +332,10 @@ public class FragmentProfile extends Fragment {
 
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
-                        Log.i("asd",mHeight);
+                        Log.i("asd", mHeight);
                         Map<String, String> param = new HashMap<>();
                         param.put("name", mName);
-                        param.put("image", mImage);
+                        param.put("image", "im");
                         param.put("nickname", mNick);
                         param.put("city", mCity_Id + "");
                         param.put("dob", mDOB);
@@ -409,54 +357,31 @@ public class FragmentProfile extends Fragment {
         });
         return v;
     }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case 1234:
-                if (resultCode == getActivity().RESULT_OK) {
-                    Log.i("asd","Image");
-                    Uri selectedImage = data.getData();
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                    InputStream imageStream;
-                    Bitmap yourSelectedImage;
-                    try {
-                        imageStream =getActivity().getContentResolver().openInputStream(selectedImage);
-                        yourSelectedImage = BitmapFactory.decodeStream(imageStream);
-
-
-                        //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
-
-
-                        yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                        circleView.setImageBitmap(yourSelectedImage);
-                       // mImage=  imageToString(yourSelectedImage);
-                        Log.i("asd",mImage);
-                        // mImage = myBase64Image;
-
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Cursor cursor = getActivity(). getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    cursor.moveToFirst();
-
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String filePath = cursor.getString(columnIndex);
-                    cursor.close();
-
-                }
+        if (requestCode == 1234 && resultCode == getActivity().RESULT_OK && data != null) {
+            Uri path = data.getData();
+            try {
+                Log.i("asd", "Image");
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
+                circleView.setImageBitmap(bitmap);
+                mImage = imageToString(bitmap);
+                //Globels.CREATE_FIELD_IMAGE = image64String;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
 
-    };
-    public String imageToString(Bitmap bitmap){
+    public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
+
     private void GetProfile() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -488,9 +413,15 @@ public class FragmentProfile extends Fragment {
                     Edt_Weight.setText(sucessResponse.getWeight().toString());
                     Edt_Nick.setText(sucessResponse.getNick());
                     Place_of_Birth.setText(sucessResponse.getDistrict());
+                   // Picasso.with(getActivity()).load(sucessResponse.getPicture()).into(circleView);
                     fc_local.setText(sucessResponse.getFcLocal());
                     fc_International.setText(sucessResponse.getFcInternational());
-                 //   EDT_City.setSelection(getIndex(mySpinner, sucessResponse.getCity()));
+                    spn_position.setSelection(oad.getPosition(sucessResponse.getPlayingRole()));
+                    Player = sucessResponse.getPlayer() + "";
+                    Refree = sucessResponse.getRefree() + "";
+                    mySpinner.setSelection(adap.getPosition(sucessResponse.getCity()));
+
+                        //   EDT_City.setSelection(getIndex(mySpinner, sucessResponse.getCity()));
                     Edt_Full_Name.setText(sucessResponse.getName());
                     if (sucessResponse.getPlayer() == 1) {
                         int imgResource = R.drawable.tickselected;
@@ -505,7 +436,12 @@ public class FragmentProfile extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                   // InputStream imageStream;
+                   // Bitmap yourSelectedImage;
 
+                   // imageStream = getActivity(). getContentResolver().openInputStream(Uri.parse(sucessResponse.getPicture()));
+                  //  yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+                  //  circleView.setImageBitmap(yourSelectedImage);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -654,5 +590,30 @@ public class FragmentProfile extends Fragment {
         return true;
     }
 
+    void getCityStr() {
+        citis = GlobelList.cities;
+        cityStr = new ArrayList<>();
+        final List<com.laeb.laebproject.model_create_team.list_city_and_fields.City> cc = GlobelList.cities;
+        Toast.makeText(getActivity(), GlobelList.cities.size() + "  ", Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < GlobelList.cities.size(); i++) {
+            cityStr.add(GlobelList.cities.get(i).getCityName());
+        }
+        //spn_city = (Spinner) getView().findViewById(R.id.ed_city);
+        adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, cityStr);
 
+        mySpinner.setAdapter(adap);
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                com.laeb.laebproject.model_create_team.list_city_and_fields.City areaName = (com.laeb.laebproject.model_create_team.list_city_and_fields.City) cc.get(position);
+                mCity_Id = areaName.getCityId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+    }
 }

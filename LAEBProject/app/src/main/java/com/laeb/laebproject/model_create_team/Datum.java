@@ -102,6 +102,19 @@ public class Datum {
     @Expose
     private Age age;
 
+    public int getRefree() {
+        return Refree;
+    }
+
+    public void setRefree(int refree) {
+        Refree = refree;
+    }
+
+    @SerializedName("refree")
+    @Expose
+    private int Refree;
+
+
     public Integer getUserId() {
         return userId;
     }
