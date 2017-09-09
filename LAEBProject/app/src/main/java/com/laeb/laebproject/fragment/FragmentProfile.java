@@ -104,6 +104,7 @@ public class FragmentProfile extends Fragment {
     String mDistrict;
     CircleImageView circleView;
     SpinnerAdapter adap;
+
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
     }
@@ -128,25 +129,16 @@ public class FragmentProfile extends Fragment {
         //circleView.setImageBitmap(yourSelectedImage);
         GetProfile();
 
-        List<String> listOfPlayerRoles= new ArrayList<String>();
+        List<String> listOfPlayerRoles = new ArrayList<String>();
         listOfPlayerRoles.add("Defender");
         listOfPlayerRoles.add("Goal Keeper");
         listOfPlayerRoles.add("Midfielder");
         listOfPlayerRoles.add("Striker");
-        // Edt_Full_Name.setText(Prefs.getString(getActivity(), "name"));
 
-       /* SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Edt_DOB.setText(input.format(input.parse(Prefs.getString(getActivity(), "dob"))));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
 
         spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
         spn_position.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles));
 
-//        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
-//        spn_position.setAdapter(adap);
 
         MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
 
@@ -249,11 +241,7 @@ public class FragmentProfile extends Fragment {
                 mySpinner = (Spinner) v.findViewById(R.id.selectCity);
 
 
-                // Spinner adapter
-//                mySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
-//                                android.R.layout.simple_spinner_dropdown_item,
-//                                worldlist));
-                 adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
+                adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
                 mySpinner.setAdapter(adap);
                 // Spinner on item click listener
                 mySpinner
@@ -434,13 +422,12 @@ public class FragmentProfile extends Fragment {
                     Place_of_Birth.setText(sucessResponse.getDistrict());
                     fc_local.setText(sucessResponse.getFcLocal());
                     fc_International.setText(sucessResponse.getFcInternational());
-                    EDT_City.setSelection(getIndex(mySpinner,sucessResponse.getCity()));
+                 //   EDT_City.setSelection(getIndex(mySpinner, sucessResponse.getCity()));
                     Edt_Full_Name.setText(sucessResponse.getName());
                     if (sucessResponse.getPlayer() == 1) {
                         int imgResource = R.drawable.tickselected;
                         ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
-                    }else
-                    {
+                    } else {
                         int imgResource = R.drawable.tickselected;
                         ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                     }
@@ -478,17 +465,19 @@ public class FragmentProfile extends Fragment {
         };
         requestQueue.add(stringRequest);
     }
-    private int getIndex(Spinner spinner, String myString){
+
+    private int getIndex(Spinner spinner, String myString) {
 
         int index = 0;
 
-        for (int i=0;i<spinner.getCount();i++){
-            if (spinner.getItemAtPosition(i).equals(myString)){
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(myString)) {
                 index = i;
             }
         }
         return index;
     }
+
     public String makePostRequest(String stringUrl, String payload,
                                   Context context, String Method) throws IOException {
 
