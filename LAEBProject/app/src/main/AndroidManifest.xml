@@ -19,31 +19,22 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.laeb.laebproject.LanguageActivity">
-<<<<<<< HEAD
 
-        </activity>
-        <activity android:name="com.laeb.laebproject.AddNumberActivity" />
-        <activity android:name=".VerificationCodeActivity" />
-        <activity android:name="com.laeb.laebproject.HomeActivity" >
-=======
->>>>>>> 59f062c3c2ae19f8a181082651692112f489d005
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-=======
         <activity android:name="com.laeb.laebproject.AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
         <activity android:name="com.laeb.laebproject.HomeActivity" >
-
         </activity>
+
+
         <!--<activity android:name=".AddNumberActivity" />-->
         <!--<activity android:name=".VerificationCodeActivity" />-->
         <!--<activity android:name=".HomeActivity" >-->
-        <!--</activity>-->
->>>>>>> 59f062c3c2ae19f8a181082651692112f489d005
+
 
         <activity android:name=".ProfileActivity">
 
