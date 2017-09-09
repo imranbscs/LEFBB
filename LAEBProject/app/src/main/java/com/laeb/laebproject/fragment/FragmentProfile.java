@@ -423,9 +423,9 @@ public class FragmentProfile extends Fragment {
                         imageStream =getActivity().getContentResolver().openInputStream(selectedImage);
                         yourSelectedImage = BitmapFactory.decodeStream(imageStream);
 
-                        CircularImageView imageView = (CircularImageView)getView().findViewById(R.id.imageView82);
+
                         //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
-                        imageView.setImageBitmap(yourSelectedImage);
+                        circleView.setImageBitmap(yourSelectedImage);
 
                         yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                         mImage=  imageToString(yourSelectedImage);
