@@ -414,7 +414,8 @@ public class FragmentProfile extends Fragment {
 
         switch (requestCode) {
             case 1234:
-                if (resultCode == 1234) {
+                if (resultCode == getActivity().RESULT_OK) {
+                    Log.i("asd","Image");
                     Uri selectedImage = data.getData();
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
                     InputStream imageStream;
@@ -425,10 +426,12 @@ public class FragmentProfile extends Fragment {
 
 
                         //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
-                        circleView.setImageBitmap(yourSelectedImage);
+
 
                         yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                        mImage=  imageToString(yourSelectedImage);
+                        circleView.setImageBitmap(yourSelectedImage);
+                       // mImage=  imageToString(yourSelectedImage);
+                        Log.i("asd",mImage);
                         // mImage = myBase64Image;
 
                     } catch (FileNotFoundException e) {
