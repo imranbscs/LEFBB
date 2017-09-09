@@ -20,11 +20,20 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.laeb.laebproject.LanguageActivity">
 
+<<<<<<< HEAD
+=======
+        </activity>
+        <activity android:name="com.laeb.laebproject.AddNumberActivity" />
+        <activity android:name=".VerificationCodeActivity" />
+        <activity android:name="com.laeb.laebproject.HomeActivity" >
+
+>>>>>>> 1807487c0c193f23f42aa30f636563dc6a89641e
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name="com.laeb.laebproject.AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
         <activity android:name="com.laeb.laebproject.HomeActivity" >
@@ -34,6 +43,8 @@
         <!--<activity android:name=".AddNumberActivity" />-->
         <!--<activity android:name=".VerificationCodeActivity" />-->
         <!--<activity android:name=".HomeActivity" >-->
+=======
+>>>>>>> 1807487c0c193f23f42aa30f636563dc6a89641e
 
 
         <activity android:name=".ProfileActivity">
