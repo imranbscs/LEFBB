@@ -69,6 +69,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.field_weekly_schedule, container, false);
 
         oCustom = (CustomBinder) getArguments().get("complexObject");
+        if (oCustom !=null)
         fieldInfo = oCustom.getField();
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
 
@@ -181,7 +182,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
                         params.put("stand_capacity", Globels.CAPASITY);
                         return params;
                     }
-                };;
+                };
                 requestQueue.add(stringRequest);
                 break;
         }

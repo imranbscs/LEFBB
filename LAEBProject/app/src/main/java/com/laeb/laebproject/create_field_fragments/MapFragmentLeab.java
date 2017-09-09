@@ -51,6 +51,7 @@ public class MapFragmentLeab extends Fragment implements View.OnClickListener, O
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         oCustom = (CustomBinder) getArguments().get("complexObject");
+        if (oCustom !=null)
         fieldInfo = oCustom.getField();
         View view = inflater.inflate(R.layout.map_fragment, container, false);
         View b = (View) view.findViewById(R.id.nextMapp);

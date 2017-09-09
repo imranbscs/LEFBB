@@ -11,7 +11,10 @@
         <!--<item name="flFont">avenir-roman.ttf</item>-->
         <item name="editTextStyle">@style/App_EditTextStyle</item>
 
-
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+    </style>
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/white</item>
     </style>
     <style name="customRatingBar"
         parent="android:style/Widget.Material.RatingBar.Small">

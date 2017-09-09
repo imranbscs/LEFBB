@@ -2,6 +2,7 @@ package com.laeb.laebproject.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -23,12 +24,25 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.laeb.laebproject.MultiSelectionSpinner;
+import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model.City;
 import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.PlayerPosition;
+import com.laeb.laebproject.model_create_team.AllPlayers;
+import com.laeb.laebproject.model_create_team.Datum;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -48,6 +62,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -58,11 +74,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FragmentProfile extends Fragment {
     EditText Edt_Full_Name;
     EditText Edt_DOB;
-    EditText ed_image;
-    EditText ed_gender;
     EditText Edt_Nick;
     EditText Edt_Height;
     EditText Edt_Weight;
+    Spinner mySpinner;
     TextView ed_player;
     TextView ed_refree;
     EditText fc_local;
@@ -79,6 +94,16 @@ public class FragmentProfile extends Fragment {
     ArrayList<City> cities;
     ArrayList<String> worldlist;
     TextView SaveProfile;
+    String mName;
+    String mDOB;
+    String mNick;
+    String mHeight;
+    String mWeight;
+    String mLocal;
+    String mInter;
+    String mDistrict;
+    CircleImageView circleView;
+    SpinnerAdapter adap;
 
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
@@ -98,37 +123,22 @@ public class FragmentProfile extends Fragment {
         Place_of_Birth = (EditText) v.findViewById(R.id.ed__district);
         ed_player = (TextView) v.findViewById(R.id.ed_you_player);
         ed_refree = (TextView) v.findViewById(R.id.ed_refree);
-        CircleImageView circleView = (CircleImageView) v.findViewById(R.id.imageView81);
+        circleView = (CircleImageView) v.findViewById(R.id.imageView81);
+        fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
+        fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
         //circleView.setImageBitmap(yourSelectedImage);
+        GetProfile();
 
-        if(Prefs.getString(getActivity(), "image").length()>10) {
-            byte[] decodedString = Base64.decode(Prefs.getString(getActivity(), "image"), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            circleView.setImageBitmap(decodedByte);
-        }
-//
-//        Intent i = getActivity().getIntent();
-//        Custom custom = (Custom) i.getSerializableExtra("user");
-//        HashMap<String, String> param = custom.getList();
-//
+        List<String> listOfPlayerRoles = new ArrayList<String>();
+        listOfPlayerRoles.add("Defender");
+        listOfPlayerRoles.add("Goal Keeper");
+        listOfPlayerRoles.add("Midfielder");
+        listOfPlayerRoles.add("Striker");
 
-
-
-
-        Edt_Full_Name.setText(Prefs.getString(getActivity(), "name"));
-
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Edt_DOB.setText(input.format(input.parse(Prefs.getString(getActivity(), "dob"))));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
-        spn_position.setAdapter(new ArrayAdapter<PlayerPosition>(getActivity(), android.R.layout.simple_spinner_item, PlayerPosition.values()));
+        spn_position.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles));
 
-//        SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
-//        spn_position.setAdapter(adap);
 
         MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
 
@@ -142,6 +152,7 @@ public class FragmentProfile extends Fragment {
                 imgResource = R.drawable.tick;
                 ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                 Player = "1";
+                Refree = "0";
             }
         });
         ed_refree.setOnClickListener(new View.OnClickListener() {
@@ -151,11 +162,11 @@ public class FragmentProfile extends Fragment {
                 ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                 imgResource = R.drawable.tick;
                 ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
-                Refree = "0";
+                Refree = "1";
+                Player = "0";
             }
         });
-        fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
-        fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
+
 
         Edt_DOB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,14 +238,10 @@ public class FragmentProfile extends Fragment {
             @Override
             protected void onPostExecute(ArrayList<String> s) {
                 super.onPostExecute(s);
-                Spinner mySpinner = (Spinner) v.findViewById(R.id.selectCity);
+                mySpinner = (Spinner) v.findViewById(R.id.selectCity);
 
 
-                // Spinner adapter
-//                mySpinner.setAdapter(new ArrayAdapter<String>(getActivity(),
-//                                android.R.layout.simple_spinner_dropdown_item,
-//                                worldlist));
-                SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
+                adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, worldlist);
                 mySpinner.setAdapter(adap);
                 // Spinner on item click listener
                 mySpinner
@@ -263,15 +270,14 @@ public class FragmentProfile extends Fragment {
                     return;
                 }
 
-                String mName = Edt_Full_Name.getText().toString();
-                String mDOB = Edt_DOB.getText().toString();
-                String mNick = Edt_Nick.getText().toString();
-                String mHeight = Edt_Height.getText().toString();
-                String mWeight = Edt_Weight.getText().toString();
-                String mLocal = fc_local.getText().toString();
-                String mInter = fc_International.getText().toString();
-                String mDistrict = Place_of_Birth.getText().toString();
-
+                mName = Edt_Full_Name.getText().toString();
+                mDOB = Edt_DOB.getText().toString();
+                mNick = Edt_Nick.getText().toString();
+                mHeight = Edt_Height.getText().toString();
+                mWeight = Edt_Weight.getText().toString();
+                mLocal = fc_local.getText().toString();
+                mInter = fc_International.getText().toString();
+                mDistrict = Place_of_Birth.getText().toString();
 
                 HashMap<String, String> param = new HashMap<String, String>();
                 param.put("name", mName);
@@ -291,7 +297,7 @@ public class FragmentProfile extends Fragment {
 
                 final RequestParams paramss = new RequestParams(param);
 
-                new AsyncTask<String, String, String>() {
+               /* new AsyncTask<String, String, String>() {
 
                     @Override
                     protected String doInBackground(String... params) {
@@ -317,10 +323,159 @@ public class FragmentProfile extends Fragment {
                     }
 
 
-                }.execute("");
+                }.execute("");*/
+                final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
+
+                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.169.138.14:4000/api/profile/v2/settings", new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.v("qwe", response);
+                        progressDialog.dismiss();
+                        Gson gson = new Gson();
+                        AllPlayers sucessResponse = gson.fromJson(response, AllPlayers.class);
+                        int _status = sucessResponse.getStatus();
+
+                        if (_status == 200) {
+                            Toast.makeText(getActivity(), "Sucess " + _status, Toast.LENGTH_LONG).show();
+                        } else {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Log.v("wsx", "========   " + error + "");
+                        Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
+                    }
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("x-access-key", Globels.ACCESS_KEY);
+                        headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+                        headers.put("locale", "en");
+                        headers.put("Content-Type", "application/x-www-form-urlencoded");
+                        return headers;
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> param = new HashMap<>();
+                        param.put("name", mName);
+                        param.put("image", "base64image");
+                        param.put("nickname", mNick);
+                        param.put("city", mCity_Id + "");
+                        param.put("dob", mDOB);
+                        param.put("gender", "M");
+                        param.put("district", mDistrict);
+                        param.put("height", mHeight);
+                        param.put("weight", mWeight);
+                        param.put("playing_role", spn_position.getSelectedItem().toString());
+                        param.put("player", Player);
+                        param.put("refree", Refree);
+                        param.put("fc_local", mLocal);
+                        param.put("fc_international", mInter);
+                        return param;
+                    }
+                };
+                requestQueue.add(stringRequest);
+
             }
         });
         return v;
+    }
+
+    private void GetProfile() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/profile/getProfile", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.v("asd", response);
+                JSONObject jSon = null;
+                progressDialog.dismiss();
+                try {
+                    jSon = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Gson gson = new Gson();
+                Datum sucessResponse = null;
+                try {
+                    sucessResponse = gson.fromJson(jSon.get("data").toString(), Datum.class);
+                    if (sucessResponse.getPicture().length() > 10) {
+                        byte[] decodedString = Base64.decode(sucessResponse.getPicture(), Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        circleView.setImageBitmap(decodedByte);
+                    }
+
+                    Edt_Height.setText(sucessResponse.getHeight().toString());
+                    Edt_Weight.setText(sucessResponse.getWeight().toString());
+                    Edt_Nick.setText(sucessResponse.getNick());
+                    Place_of_Birth.setText(sucessResponse.getDistrict());
+                    fc_local.setText(sucessResponse.getFcLocal());
+                    fc_International.setText(sucessResponse.getFcInternational());
+                 //   EDT_City.setSelection(getIndex(mySpinner, sucessResponse.getCity()));
+                    Edt_Full_Name.setText(sucessResponse.getName());
+                    if (sucessResponse.getPlayer() == 1) {
+                        int imgResource = R.drawable.tickselected;
+                        ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
+                    } else {
+                        int imgResource = R.drawable.tickselected;
+                        ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
+                    }
+                    SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        Edt_DOB.setText(input.format(input.parse(sucessResponse.getDob())));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.v("wsx", "========   " + error + "");
+                Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("x-access-key", Globels.ACCESS_KEY);
+                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+                headers.put("locale", "en");
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+
+        int index = 0;
+
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(myString)) {
+                index = i;
+            }
+        }
+        return index;
     }
 
     public String makePostRequest(String stringUrl, String payload,

@@ -36,6 +36,7 @@ public class FieldFacilities extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_facilities, container, false);
 
         oCustom = (CustomBinder) getArguments().get("complexObject");
+        if (oCustom !=null)
         fieldInfo = oCustom.getField();
         Log.i("asd",fieldInfo.name);
 

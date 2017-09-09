@@ -9,9 +9,68 @@ public class Datum {
     @SerializedName("user_id")
     @Expose
     private Integer userId;
+
+    public String getFcLocal() {
+        return fcLocal;
+    }
+
+    public void setFcLocal(String fcLocal) {
+        this.fcLocal = fcLocal;
+    }
+
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("fc_local")
+    @Expose
+    private String fcLocal;
+
+    public int getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(int player) {
+        this.player = player;
+    }
+
+    @SerializedName("player")
+    @Expose
+    private int player;
+
+    public String getFcInternational() {
+        return fcInternational;
+    }
+
+    public void setFcInternational(String fcInternational) {
+        this.fcInternational = fcInternational;
+    }
+
+    @SerializedName("fc_international")
+    @Expose
+    private String fcInternational;
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    @SerializedName("district")
+    @Expose
+    private String district;
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    @SerializedName("nickname")
+    @Expose
+    private String nick;
     @SerializedName("picture")
     @Expose
     private String picture;
