@@ -12,4 +12,5 @@ public class Globels {
     public static String URL_MY_PROFILE = "/api/profile/v2/basic";
     public static String CREATE_FIELD_IMAGE = "[{\"image\":\"base64string1\"}]";
     public static String CAPASITY = "0";
+    public static String DUMMY_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMzksInVzZXJuYW1lIjoiIDk2NjU1NTk5OTg4IiwiaWF0IjoxNTA0NjkxMjM1fQ.Mf0o1tylz47mIyCphSZFHo8guwWEL2D91qqiMCkhhQc";
 }

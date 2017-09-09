@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.laeb.laebproject.general.GlobelList;
+import com.laeb.laebproject.general.Prefs;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         getSupportActionBar().hide();
+        Prefs.putString(this, Prefs.TEAM_NAME, "EEEEEEEEE");
         GlobelList.getCities(this);
     }
 
@@ -24,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent i = getIntent();
         String s =  i.getStringExtra("user");
         JSONObject j = new JSONObject(s);
-       String name = (String) j.get("name");
+        String name = (String) j.get("name");
         if (name.equals(""))
         startActivity(new Intent(this, ProfileActivity.class));
         else
@@ -35,8 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void addTeamClicked(View view) {
+        startActivity(new Intent(this, YourTeamActivity.class));
         //startActivity(new Intent(this, CreateTeamActivity.class));
-        startActivity(new Intent(this, CreateTeamActivity.class));
     }
 
     public void notificationClicked(View view) {

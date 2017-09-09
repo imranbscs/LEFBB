@@ -39,7 +39,7 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     public AdapterInvitePlayer(List<Datum> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
-        listHash = new HashMap<String, List<Integer>>();
+        listHash = new HashMap<>();
         invitedList = new ArrayList<>();
     }
 

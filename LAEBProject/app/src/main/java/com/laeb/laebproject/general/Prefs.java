@@ -10,6 +10,18 @@ public class Prefs {
     public static final String ACTIVE_ID = "ACTIVE_ID";
     public static final  String FAMILY_ID = "FAMILY_ID";
 
+    ////////////////// Team Prefs ///////////////////
+
+    public static final String TEAM_LOGO ="logo";
+    public static final String HOME_SHIRT = "h_shirt";
+    public static final  String AWAY_SHIRT = "a_shirt";
+    public static final String TEAM_NAME="team_name";
+    public static final String COACH = "coach_name";
+    public static final  String COLOR = "t_color";
+    public static final String CITY_ID = "t_city_id";
+    public static final  String FIELD_ID = "i_field_id";
+
+
     public static void putString(Context ctx, String key, String value){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
         SharedPreferences.Editor editor = preferences.edit();

@@ -10,64 +10,42 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".LeabApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".LeabApp"
-        android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.laeb.laebproject.LanguageActivity">
-
+        <activity android:name=".LanguageActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.laeb.laebproject.AddNumberActivity" />
+        <activity android:name=".AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
-        <activity android:name="com.laeb.laebproject.HomeActivity" >
-
-
+        <activity android:name=".HomeActivity">
 
         </activity>
-
-
-
-
-        <!--<activity android:name=".AddNumberActivity" />-->
-        <!--<activity android:name=".VerificationCodeActivity" />-->
-        <!--<activity android:name=".HomeActivity" >-->
-
-
-
-        <activity android:name=".ProfileActivity">
-
-        </activity>
+        <activity android:name=".ProfileActivity"></activity>
         <!-- <activity android:name=".UpComingGamesActivity" /> -->
-        <activity android:name="com.laeb.laebproject.CreateFieldActivity" >
+        <activity android:name=".CreateFieldActivity"></activity>
 
-        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDJB5NeoNB3p_F1-JoSXqGHS2fDPa_PV2g" />
-        <activity android:name="com.laeb.laebproject.BookingActivity" />
+
+        <activity android:name=".BookingActivity" />
         <activity
             android:name=".MenuActivity"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
-
-        <activity android:name="com.laeb.laebproject.CreateTeamActivity">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".CreateTeamActivity"></activity>
         <activity android:name=".InviteFriendActivity" />
-        <activity android:name="com.laeb.laebproject.YourTeamActivity" >
-        </activity>
-        <activity android:name="com.laeb.laebproject.YourScheduleActivity" />
-        <activity android:name="com.laeb.laebproject.InvitePlayerActivity">
-
-        </activity>
+        <activity android:name=".YourTeamActivity"></activity>
+        <activity android:name=".YourScheduleActivity" />
+        <activity android:name=".InvitePlayerActivity"></activity>
     </application>
 
 </manifest>

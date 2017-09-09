@@ -47,8 +47,8 @@ public class FragmentInvitationSended extends Fragment {
             listItems.add(new UpComingGames("RMD", "Riyadh", "Aug 16,2014 | 17:15"));
         }
 
-        adapter = new AdapterYourPlayer(listItems, getActivity());
-        recyclerView.setAdapter(adapter);
+//        adapter = new AdapterYourPlayer(listItems, getActivity());
+//        recyclerView.setAdapter(adapter);
     }
 
 }

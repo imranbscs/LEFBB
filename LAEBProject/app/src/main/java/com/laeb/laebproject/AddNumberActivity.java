@@ -149,8 +149,7 @@ public class AddNumberActivity extends AppCompatActivity {
 
         uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         uc.setRequestProperty("locale", "en");
-        String android_id = Settings.Secure.getString(this.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
+        String android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
         uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
         // uc.setRequestProperty("device", android_id);
         uc.setRequestMethod("POST");
