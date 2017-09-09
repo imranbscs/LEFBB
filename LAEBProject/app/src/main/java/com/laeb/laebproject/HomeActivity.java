@@ -7,6 +7,9 @@ import android.view.View;
 
 import com.laeb.laebproject.general.GlobelList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -17,8 +20,15 @@ public class HomeActivity extends AppCompatActivity {
         GlobelList.getCities(this);
     }
 
-    public void profileClicked(View view) {
+    public void profileClicked(View view) throws JSONException {
+        Intent i = getIntent();
+        String s =  i.getStringExtra("user");
+        JSONObject j = new JSONObject(s);
+       String name = (String) j.get("name");
+        if (name.equals(""))
         startActivity(new Intent(this, ProfileActivity.class));
+        else
+            startActivity(new Intent(this, MenuActivity.class));
     }
     public void bookingClicked(View view) {
         startActivity(new Intent(this, BookingActivity.class));

@@ -66,7 +66,8 @@ public class VerificationCodeActivity extends AppCompatActivity {
                         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putString("token", token);
-                        editor.putString("user",user);
+                       // editor.putString("user",user);
+                        i.putExtra("user",user);
                         Prefs.putString(getBaseContext(), Prefs.auth_key, token);
                         editor.commit();
                         startActivity(i);
