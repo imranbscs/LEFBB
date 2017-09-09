@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -111,7 +112,9 @@ public class FragmentProfile extends Fragment {
     String mInter;
     String mDistrict;
     CircleImageView circleView;
+    ImageView addpic;
     SpinnerAdapter adap;
+    String mImage;
 
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
@@ -131,10 +134,19 @@ public class FragmentProfile extends Fragment {
         Place_of_Birth = (EditText) v.findViewById(R.id.ed__district);
         ed_player = (TextView) v.findViewById(R.id.ed_you_player);
         ed_refree = (TextView) v.findViewById(R.id.ed_refree);
-        circleView = (CircleImageView) v.findViewById(R.id.imageView81);
+        circleView = (CircleImageView) v.findViewById(R.id.imageView82);
         fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
         fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
         //circleView.setImageBitmap(yourSelectedImage);
+        addpic = (ImageView) v.findViewById(R.id.addPic);
+        addpic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 1234);
+            }
+        });
         GetProfile();
 
         List<String> listOfPlayerRoles = new ArrayList<String>();
@@ -375,7 +387,7 @@ public class FragmentProfile extends Fragment {
                         Log.i("asd",mHeight);
                         Map<String, String> param = new HashMap<>();
                         param.put("name", mName);
-                        param.put("image", "base64image");
+                        param.put("image", mImage);
                         param.put("nickname", mNick);
                         param.put("city", mCity_Id + "");
                         param.put("dob", mDOB);
@@ -397,7 +409,45 @@ public class FragmentProfile extends Fragment {
         });
         return v;
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        switch (requestCode) {
+            case 1234:
+                if (resultCode == 1234) {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    InputStream imageStream;
+                    Bitmap yourSelectedImage;
+                    try {
+                        imageStream =getActivity().getContentResolver().openInputStream(selectedImage);
+                        yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+
+                        CircularImageView imageView = (CircularImageView)getView().findViewById(R.id.imageView82);
+                        //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
+                        imageView.setImageBitmap(yourSelectedImage);
+
+                        yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                        mImage=  imageToString(yourSelectedImage);
+                        // mImage = myBase64Image;
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Cursor cursor = getActivity(). getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String filePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                }
+        }
+
+    };
     public String imageToString(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);

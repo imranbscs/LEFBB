@@ -39,7 +39,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:padding="1dp"
-                            android:id="@+id/imageView81"
+                            android:id="@+id/imageView82"
                             android:src="@drawable/pic"
                             app:civ_border_width="1dp"
                             app:civ_border_color="#000"/>
