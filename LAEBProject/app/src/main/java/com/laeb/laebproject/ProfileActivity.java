@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,6 +41,7 @@ import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.City;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -53,8 +55,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -78,6 +78,12 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+//        TextView t = (TextView) findViewById(R.id.profileTitle);
+//        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/avenir-roman.ttf");
+//        t.setTypeface(font);
+
+
         Edt_DOB = (EditText) findViewById(R.id.ed_dob);
         Male = (TextView) findViewById(R.id.txtMale);
         Female = (TextView) findViewById(R.id.txtFemale);
@@ -225,8 +231,11 @@ public class ProfileActivity extends AppCompatActivity {
                     try {
                         imageStream = getContentResolver().openInputStream(selectedImage);
                         yourSelectedImage = BitmapFactory.decodeStream(imageStream);
-                        CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
+
+                        CircularImageView imageView = (CircularImageView)findViewById(R.id.imageView81);
+                        //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
                         imageView.setImageBitmap(yourSelectedImage);
+
                         yourSelectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                         mImage=  imageToString(yourSelectedImage);
                        // mImage = myBase64Image;
@@ -334,4 +343,5 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 }

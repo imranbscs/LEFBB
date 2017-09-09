@@ -149,6 +149,7 @@ public class WeeklyScheduleFragment extends Fragment implements View.OnClickList
 
                         if(_status == 200){
                             Toast.makeText(getActivity(), "Sucess " +_status, Toast.LENGTH_LONG).show();
+                            getActivity().finish();
                         }else {
 
                         }

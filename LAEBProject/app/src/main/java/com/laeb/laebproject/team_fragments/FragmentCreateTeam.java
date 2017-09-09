@@ -33,11 +33,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.laeb.laebproject.InvitePlayerActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.SucessResponse;
+import com.laeb.laebproject.model_create_team.TeamSucessWithId;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.AllCitiesFields;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.City;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.MyCityField;
@@ -155,12 +157,13 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 Log.v("qwe", response);
                 progressDialog.dismiss();
                 Gson gson = new Gson();
-                SucessResponse sucessResponse = gson.fromJson(response, SucessResponse.class);
-                String _message = sucessResponse.messege;
-                int _status = sucessResponse.status;
-                Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
+                TeamSucessWithId sucessResponse = gson.fromJson(response, TeamSucessWithId.class);
+                String _message = sucessResponse.getMessage();
+                int _status = sucessResponse.getStatus();
+                int teamId = sucessResponse.getTeamId();
+                Toast.makeText(getActivity(), _status+": "+_message+" "+teamId, Toast.LENGTH_LONG).show();
                 if(_status == 200){
-                    //startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
+                    startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
                 }else {
 
                 }
@@ -274,66 +277,6 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 break;
         }
     }
-
-//    public void getData(){
-//
-//        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.show();
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/teams/getCities", new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.v("qwe", response);
-//                progressDialog.dismiss();
-//                Gson gson = new Gson();
-//                AllCities sucessResponse = gson.fromJson(response, AllCities.class);
-//                int _status = sucessResponse.getStatus();
-//                cities = sucessResponse.getCities();
-//                Log.v("edc", "==== "+cities.size());
-//                getCityStr();
-//
-////                for (int i = 0; i < cities.size(); i++) {
-////                    City city = new City();
-////                    cityStr.
-////                    worldlist.add(jsonobject.optString("city_name"));
-////                }
-//
-//                Toast.makeText(getActivity(), "sucessful "+cities.get(2).getCityName(), Toast.LENGTH_LONG).show();
-//                if(_status == 200){
-//
-//                }else {
-//
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                progressDialog.dismiss();
-//                Log.v("wsx", "========   "+error+"");
-//                Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
-//            }
-//        }){
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String, String> headers = new HashMap<>();
-//                headers.put("x-access-key", Globels.ACCESS_KEY);
-//                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
-//                headers.put("locale", Globels.LOCAL);
-//                headers.put("Content-Type", Globels.CONTENT_TYPE);
-//                return headers;
-//            }
-//
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                return params;
-//            }
-//        };;
-//
-//        requestQueue.add(stringRequest);
-//    }
 
     void getCityStr(){
 
