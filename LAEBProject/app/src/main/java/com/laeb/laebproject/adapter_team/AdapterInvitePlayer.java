@@ -39,7 +39,7 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     public AdapterInvitePlayer(List<Datum> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
-        listHash = new HashMap<String, List<Integer>>();
+        listHash = new HashMap<>();
         invitedList = new ArrayList<>();
     }
 
@@ -68,6 +68,9 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
         }
         final Datum tempDatum = listItem;
         holder.ratingValue.setText(listItem.getStars().toString());
+        holder.inviteLayout.setBackgroundColor(Color.parseColor("#EDFCEA"));
+        holder.inText.setText("INVITE");
+//        holder.inText.setTextColor(Color.parseColor("#000"));
 
         holder.inviteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +80,9 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
                 invitedList.add(listInvite);
 //                listHash.put("player_id", tempDatum.getUserId());
                 holder.inviteLayout.setBackgroundColor(Color.parseColor("#90BE47"));
-                holder.inText.setTextColor(Color.parseColor("#fff"));
+//                holder.inText.setTextColor(Color.parseColor("#fff"));
                 holder.inText.setText("Invited");
+                holder.tick_layout.setVisibility(View.VISIBLE);
             }
         });
 
@@ -91,14 +95,14 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name;
+        public TextView name, inviteText;
         public TextView role;
         public TextView gameTime;
         public ImageView pic;
         public LinearLayout linearLayout;
         public RatingBar ratingBar;
         public TextView ratingValue;
-        RelativeLayout inviteLayout;
+        private RelativeLayout inviteLayout, tick_layout;
         public TextView inText;
 
         public ViewHolder(View itemView) {
@@ -110,6 +114,8 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
             ratingValue = (TextView) itemView.findViewById(R.id.rating_num);
             inviteLayout = (RelativeLayout) itemView.findViewById(R.id.invitely);
             inText = (TextView) itemView.findViewById(R.id.inviteText);
+            //inviteText = (TextView) itemView.findViewById(R.id.inviteText);
+            tick_layout = (RelativeLayout) itemView.findViewById(R.id.tick_layout);
         }
     }
 

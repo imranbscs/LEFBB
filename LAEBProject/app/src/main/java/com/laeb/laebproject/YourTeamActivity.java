@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.laeb.laebproject.team_fragments.FragmentYourPlayer;
 import com.laeb.laebproject.team_fragments.FragmentYourTeam;
 
 public class YourTeamActivity extends AppCompatActivity {
+
+    public TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,7 @@ public class YourTeamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_your_team);
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        title = (TextView) findViewById(R.id.titleText);
         FragmentYourTeam fragmentsBooking = new FragmentYourTeam();
         addFragment(fragmentsBooking);
     }

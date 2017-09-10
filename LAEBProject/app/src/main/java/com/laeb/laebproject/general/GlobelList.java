@@ -70,8 +70,9 @@ public class GlobelList {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
+                Log.v("sx", "========   "+Globels.ACCESS_KEY+"========"+Prefs.getString(con, Prefs.auth_key)+"========"+Globels.LOCAL+"========"+Globels.CONTENT_TYPE);
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", Prefs.getString(con, Prefs.auth_key));
+                headers.put("x-access-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMzksInVzZXJuYW1lIjoiIDk2NjU1NTk5OTg4IiwiaWF0IjoxNTA0NjkxMjM1fQ.Mf0o1tylz47mIyCphSZFHo8guwWEL2D91qqiMCkhhQc");
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;
