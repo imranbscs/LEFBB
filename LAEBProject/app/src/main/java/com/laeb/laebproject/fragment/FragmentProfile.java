@@ -10,10 +10,10 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,8 +76,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -152,14 +150,14 @@ public class FragmentProfile extends Fragment {
         addpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, 1234);
+                Intent i = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                final int ACTIVITY_SELECT_IMAGE = 1234;
+                startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
             }
         });
-        GetProfile();
-        getCityStr();
+
+
         List<String> listOfPlayerRoles = new ArrayList<String>();
         listOfPlayerRoles.add("Defender");
         listOfPlayerRoles.add("Goal Keeper");
@@ -169,10 +167,11 @@ public class FragmentProfile extends Fragment {
 
         // spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
         oad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles);
+        oad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles);
         spn_position.setAdapter(oad);
 
 
-        MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
+        final MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
 
         spn_days.setItems(names());
 
@@ -353,25 +352,139 @@ public class FragmentProfile extends Fragment {
                 };
                 requestQueue.add(stringRequest);
 
+                if (Refree == "1") {
+                    requestQueue = Volley.newRequestQueue(getActivity());
+                    stringRequest = new StringRequest(Request.Method.POST, "http://192.169.138.14:4000/api/profile/v2/refereeSchedule", new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.v("qwe", response);
+                            progressDialog.dismiss();
+                            Gson gson = new Gson();
+                            // Datum sucessResponse = gson.fromJson(response, Datum.class);
+                            // int _status = sucessResponse.getStatus();
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.dismiss();
+                            Log.v("wsx", "========   " + error + "");
+                            Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            HashMap<String, String> headers = new HashMap<>();
+                            headers.put("x-access-key", Globels.ACCESS_KEY);
+                            headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+                            headers.put("locale", "en");
+                            headers.put("Content-Type", "application/x-www-form-urlencoded");
+                            return headers;
+                        }
+
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+
+                            Map<String, String> param = new HashMap<>();
+                            Log.i("asd", spn_days.getSelectedItemsAsString() + "");
+                            String operating = "{";
+
+                                if (spn_days.getSelectedItemsAsString().contains("Sunday"))
+                                    operating += " sun=1,";
+                                else
+                                    operating += "sun=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Monday"))
+                                operating += " mon=1,";
+                            else
+                                operating += " mon=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Tuesday"))
+                                operating += " tue=1,";
+                            else
+                                operating += "tue=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Wednesday"))
+                                operating += " wed=1,";
+                            else
+                                operating += " wed=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Thursday"))
+                                operating += " thu=1,";
+                            else
+                                operating += "thu=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Friday"))
+                                operating += " fri=1,";
+                            else
+                                operating += "fri=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Saturday"))
+                                operating += " sat=1,";
+                            else
+                                operating += "sat=0,";
+
+operating+= "}";
+                            operating = operating.replace(",}","}");
+Log.i("asd",operating);
+                            try {
+                                JSONObject j = new JSONObject(operating);
+                                param.put("operating", j.toString() );
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            return param;
+                        }
+                    };
+                    requestQueue.add(stringRequest);
+                }
             }
         });
         return v;
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        GetProfile();
+        getCityStr();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1234 && resultCode == getActivity().RESULT_OK && data != null) {
-            Uri path = data.getData();
-            try {
-                Log.i("asd", "Image");
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
-                circleView.setImageBitmap(bitmap);
-                mImage = imageToString(bitmap);
-                //Globels.CREATE_FIELD_IMAGE = image64String;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        switch (requestCode) {
+            case 1234:
+                if (resultCode == getActivity().RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    InputStream imageStream;
+                    Bitmap yourSelectedImage;
+                    try {
+                        imageStream = getActivity().getContentResolver().openInputStream(selectedImage);
+                        yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+
+                        CircularImageView imageView = (CircularImageView) getView().findViewById(R.id.imageView82);
+                        //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
+                        imageView.setImageResource(R.drawable.image_square);
+                        //imageView.setImageBitmap(yourSelectedImage);
+
+                        yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                        mImage = imageToString(yourSelectedImage);
+                        // mImage = myBase64Image;
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String filePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                }
         }
     }
 
@@ -391,7 +504,7 @@ public class FragmentProfile extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/profile/getProfile", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.v("asd", response);
+                Log.v("asd", "----abc " + response);
                 JSONObject jSon = null;
                 progressDialog.dismiss();
                 try {
@@ -413,7 +526,7 @@ public class FragmentProfile extends Fragment {
                     Edt_Weight.setText(sucessResponse.getWeight().toString());
                     Edt_Nick.setText(sucessResponse.getNick());
                     Place_of_Birth.setText(sucessResponse.getDistrict());
-                   // Picasso.with(getActivity()).load(sucessResponse.getPicture()).into(circleView);
+                    // Picasso.with(getActivity()).load(sucessResponse.getPicture()).into(circleView);
                     fc_local.setText(sucessResponse.getFcLocal());
                     fc_International.setText(sucessResponse.getFcInternational());
                     spn_position.setSelection(oad.getPosition(sucessResponse.getPlayingRole()));
@@ -421,7 +534,7 @@ public class FragmentProfile extends Fragment {
                     Refree = sucessResponse.getRefree() + "";
                     mySpinner.setSelection(adap.getPosition(sucessResponse.getCity()));
 
-                        //   EDT_City.setSelection(getIndex(mySpinner, sucessResponse.getCity()));
+                    //   EDT_City.setSelection(getIndex(mySpinner, sucessResponse.getCity()));
                     Edt_Full_Name.setText(sucessResponse.getName());
                     if (sucessResponse.getPlayer() == 1) {
                         int imgResource = R.drawable.tickselected;
@@ -436,12 +549,12 @@ public class FragmentProfile extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                   // InputStream imageStream;
-                   // Bitmap yourSelectedImage;
+                    // InputStream imageStream;
+                    // Bitmap yourSelectedImage;
 
-                   // imageStream = getActivity(). getContentResolver().openInputStream(Uri.parse(sucessResponse.getPicture()));
-                  //  yourSelectedImage = BitmapFactory.decodeStream(imageStream);
-                  //  circleView.setImageBitmap(yourSelectedImage);
+                    // imageStream = getActivity(). getContentResolver().openInputStream(Uri.parse(sucessResponse.getPicture()));
+                    //  yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+                    //  circleView.setImageBitmap(yourSelectedImage);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

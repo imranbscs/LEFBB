@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.services.sns.AmazonSNSClient;
@@ -114,6 +115,7 @@ public class AddNumberActivity extends AppCompatActivity {
                 smsAttributes.put("AWS.SNS.SMS.SMSType", new MessageAttributeValue()
                         .withStringValue("Promotional") //Sets the type to promotional.
                         .withDataType("String"));
+
               //  PublishResult oresult = snsClient.publish(new PublishRequest()
                 //       .withMessage(message)
                //         .withPhoneNumber(phoneNumber)
@@ -130,6 +132,7 @@ public class AddNumberActivity extends AppCompatActivity {
 
         protected void onPostExecute(String Code) {
             if (!Code.equals("")) {
+                Toast.makeText(getApplicationContext(),Code,Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getBaseContext(), VerificationCodeActivity.class);
                 i.putExtra("code", Code);
                 i.putExtra("phone", phoneNumber);
