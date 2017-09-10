@@ -18,6 +18,7 @@ import com.laeb.laebproject.model.UpComingGames;
 import com.laeb.laebproject.model_create_team.Datum;
 import com.laeb.laebproject.model_create_team.ListInvite;
 import com.laeb.laebproject.model_create_team.your_player_model.InvitedPlayer;
+import com.laeb.laebproject.model_create_team.your_player_model.SelectedPlayer;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,13 +31,13 @@ import java.util.List;
 
 public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.ViewHolder> {
 
-    List<InvitedPlayer> listItems;
+    List<Object> listItems;
     public Context context;
     public static List<ListInvite> invitedList;
     public static HashMap<String, List<Integer>> listHash;
     public static String j;
 
-    public AdapterYourPlayer(List<InvitedPlayer> listItems, Context context) {
+    public AdapterYourPlayer(List<Object> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
         listHash = new HashMap<>();
@@ -51,20 +52,46 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
 
     @Override
     public void onBindViewHolder(AdapterYourPlayer.ViewHolder holder, int position) {
-        InvitedPlayer listItem = listItems.get(position);
+        Object obj = listItems.get(position);
         int a = position;
-        holder.name.setText(listItem.getName());
-        holder.role.setText("");
-        holder.ratingBar.setRating(1);
-        Picasso.with(context).load(listItem.getPicture()).into(holder.pic);
-        if(!(listItem.getStars().equals(""))) {
-            //float star = (float) listItem.getStars();
-            int qwa = Integer.parseInt(listItem.getStars().toString());
-            Float b = (float)qwa;
-            holder.ratingBar.setRating(b);
+        if(a<1){
+            SelectedPlayer listItem = (SelectedPlayer)obj;
+            holder.name.setText(listItem.getName());
+            holder.role.setText("");
+            holder.ratingBar.setRating(1);
+            Picasso.with(context).load(listItem.getPicture()).into(holder.pic);
+            if(!(listItem.getStars().equals(""))) {
+                //float star = (float) listItem.getStars();
+                int qwa = Integer.parseInt(listItem.getStars().toString());
+                Float b = (float)qwa;
+                holder.ratingBar.setRating(b);
+            }
+            //final Datum tempDatum = listItem;
+            holder.ratingValue.setText(listItem.getStars().toString());
+            holder.inviteLayout.setVisibility(View.GONE);
+            holder.selectedLy.setVisibility(View.VISIBLE);
+        }else {
+            InvitedPlayer listItem = (InvitedPlayer) obj;
+            holder.name.setText(listItem.getName());
+            holder.role.setText("");
+            holder.ratingBar.setRating(1);
+            Picasso.with(context).load(listItem.getPicture()).into(holder.pic);
+            if(!(listItem.getStars().equals(""))) {
+                //float star = (float) listItem.getStars();
+                int qwa = Integer.parseInt(listItem.getStars().toString());
+                Float b = (float)qwa;
+                holder.ratingBar.setRating(b);
+            }
+            //final Datum tempDatum = listItem;
+            holder.ratingValue.setText(listItem.getStars().toString());
+            holder.selectedLy.setVisibility(View.GONE);
+            holder.inviteLayout.setVisibility(View.VISIBLE);
+            holder.inviteLayout.setBackgroundColor(Color.parseColor("#90BE47"));
+            holder.inviteText.setText("INVITED");
+            holder.inviteText.setTextColor(Color.parseColor("#ffffff"));
         }
-        //final Datum tempDatum = listItem;
-        holder.ratingValue.setText(listItem.getStars().toString());
+
+
 
 //        holder.inviteLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -80,6 +107,7 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
 //        });
     }
 
+
     @Override
     public int getItemCount() {
         return listItems.size();
@@ -87,16 +115,16 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name;
+        public TextView name, inviteText;
         public TextView role;
         public TextView gameTime;
         public ImageView pic;
         public LinearLayout linearLayout;
         public RatingBar ratingBar;
         public TextView ratingValue;
-        RelativeLayout inviteLayout;
+        public RelativeLayout inviteLayout;
         public TextView inText;
-        public LinearLayout dummy;
+        public LinearLayout dummy, selectedLy;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -106,9 +134,11 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
             ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
             ratingValue = (TextView) itemView.findViewById(R.id.rating_num);
             inviteLayout = (RelativeLayout) itemView.findViewById(R.id.invitely);
+            selectedLy = (LinearLayout) itemView.findViewById(R.id.selected);
             inText = (TextView) itemView.findViewById(R.id.inviteText);
             dummy = (LinearLayout) itemView.findViewById(R.id.dummylinear);
             dummy.setVisibility(View.GONE);
+            inviteText = (TextView) itemView.findViewById(R.id.inviteText);
         }
     }
 }

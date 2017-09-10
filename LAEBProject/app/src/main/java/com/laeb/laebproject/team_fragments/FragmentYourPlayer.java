@@ -2,6 +2,7 @@ package com.laeb.laebproject.team_fragments;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.laeb.laebproject.InvitePlayerActivity;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.adapter_team.AdapterInvitePlayer;
@@ -29,6 +32,7 @@ import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model.UpComingGames;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.your_player_model.InvitedPlayer;
+import com.laeb.laebproject.model_create_team.your_player_model.SelectedPlayer;
 import com.laeb.laebproject.model_create_team.your_player_model.TeamYourPlayer;
 
 import java.util.ArrayList;
@@ -45,11 +49,19 @@ public class FragmentYourPlayer extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<InvitedPlayer> listItems;
+    private List<SelectedPlayer> listItemSelect;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_your_player, container, false);
+        LinearLayout inviteMore = (LinearLayout) v.findViewById(R.id.inviteMore);
         ((YourTeamActivity) getActivity()).title.setText("YOUR PLAYERS");
+        inviteMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
+            }
+        });
         return v;
     }
 
@@ -74,9 +86,14 @@ public class FragmentYourPlayer extends Fragment {
                 TeamYourPlayer sucessResponse = gson.fromJson(response, TeamYourPlayer.class);
                 int _status = sucessResponse.getStatus();
 
+                listItemSelect = new ArrayList<>();
                 listItems = new ArrayList<>();
+                listItemSelect = sucessResponse.getSelectedPlayers();
                 listItems = sucessResponse.getInvitedPlayers();
-                Toast.makeText(getActivity(), "Sucess"+"=="+_status, Toast.LENGTH_LONG).show();
+
+                List<Object> listItemObj = new ArrayList<Object>(listItemSelect);
+                listItemObj.addAll(listItems);
+                Toast.makeText(getActivity(), "Sucess"+"=="+_status+"===="+listItemObj.size(), Toast.LENGTH_LONG).show();
 
                 if(_status == 200){
                     recyclerView = (RecyclerView) getView().findViewById(R.id.recylerView);
@@ -87,7 +104,7 @@ public class FragmentYourPlayer extends Fragment {
 
                     Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
 
-                    adapter = new AdapterYourPlayer(listItems, getActivity());
+                    adapter = new AdapterYourPlayer(listItemObj, getActivity());
                     recyclerView.setAdapter(adapter);
                 }else {
 
