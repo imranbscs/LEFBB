@@ -211,4 +211,6 @@ public class Datum {
         this.age = age;
     }
 
+    public boolean isSlected;
+
 }

@@ -32,14 +32,12 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     List<Datum> listItems;
     public Context context;
     public static List<ListInvite> invitedList;
-    public static HashMap<String, List<Integer>> listHash;
     public static String j;
 
 
     public AdapterInvitePlayer(List<Datum> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
-        listHash = new HashMap<>();
         invitedList = new ArrayList<>();
     }
 
@@ -51,9 +49,10 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     }
 
     @Override
-    public void onBindViewHolder(final AdapterInvitePlayer.ViewHolder holder, int position) {
+    public void onBindViewHolder(final AdapterInvitePlayer.ViewHolder holder, final int position) {
         Datum listItem = listItems.get(position);
         int a = position;
+
         holder.name.setText(listItem.getName());
         holder.role.setText(listItem.getPlayingRole());
         holder.ratingBar.setRating(1);
@@ -72,12 +71,23 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
         holder.inText.setText("INVITE");
 //        holder.inText.setTextColor(Color.parseColor("#000"));
 
+        if(listItems.get(position).isSlected == true){
+            holder.inviteLayout.setBackgroundColor(Color.parseColor("#90BE47"));
+//                holder.inText.setTextColor(Color.parseColor("#fff"));
+            holder.inText.setText("Invited");
+            holder.tick_layout.setVisibility(View.VISIBLE);
+        }else {
+            holder.inText.setText("Invite");
+            holder.tick_layout.setVisibility(View.GONE);
+        }
+
         holder.inviteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ListInvite listInvite = new ListInvite();
                 listInvite.setPlayerId(tempDatum.getUserId());
                 invitedList.add(listInvite);
+                listItems.get(position).isSlected = true;
 //                listHash.put("player_id", tempDatum.getUserId());
                 holder.inviteLayout.setBackgroundColor(Color.parseColor("#90BE47"));
 //                holder.inText.setTextColor(Color.parseColor("#fff"));
