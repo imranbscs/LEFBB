@@ -54,4 +54,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="invite_more_player">INVITE MORE PLAYER</string>
+    <string name="schedule">Schedule</string>
+    <string name="invitations">Invitations</string>
+    <string name="recived">Recived</string>
+    <string name="sent">Sent</string>
 </resources>

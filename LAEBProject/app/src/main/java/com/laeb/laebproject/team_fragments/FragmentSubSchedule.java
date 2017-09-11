@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.YourTeamActivity;
+import com.laeb.laebproject.adapter_team.AdapterSchedule;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.model_create_team.team_schedule.Datum;
 import com.laeb.laebproject.model_create_team.team_schedule.TeamSchedule;
@@ -34,10 +36,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by tariq on 8/28/2017.
+ * Created by tariq on 9/11/2017.
  */
 
-public class FragmentSchedule extends Fragment{
+public class FragmentSubSchedule extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Datum> scheduleItems;
@@ -47,38 +49,19 @@ public class FragmentSchedule extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_your_schedule, container, false);
-        ((YourTeamActivity) getActivity()).title.setText("YOUR PLAYERS");
-        texInvi = (TextView) v.findViewById(R.id.texInvi);
-        male_selector = (RelativeLayout) v.findViewById(R.id.male_selector);
-        female_delector1  = (RelativeLayout) v.findViewById(R.id.female_delector);
-        txtMale = (TextView) v.findViewById(R.id.txtMale);
-        texInvi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                male_selector.setVisibility(View.GONE);
-                female_delector1.setVisibility(View.VISIBLE);
-                FragmentInvitations f = new FragmentInvitations();
-                addFragment(f);
-            }
-        });
-        txtMale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                male_selector.setVisibility(View.VISIBLE);
-                female_delector1.setVisibility(View.GONE);
-                FragmentSubSchedule f = new FragmentSubSchedule();
-                addFragment(f);
-            }
-        });
-
+        View v = inflater.inflate(R.layout.fragment_sub_schedule, container, false);
+//        ((YourTeamActivity) getActivity()).title.setText("YOUR PLAYERS");
+//        texInvi = (TextView) v.findViewById(R.id.texInvi);
+//        male_selector = (RelativeLayout) v.findViewById(R.id.male_selector);
+//        female_delector1  = (RelativeLayout) v.findViewById(R.id.female_delector);
+//        txtMale = (TextView) v.findViewById(R.id.txtMale);
         return v;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //getAllplayers();
+        getAllplayers();
     }
 
     public void getAllplayers(){
@@ -101,16 +84,16 @@ public class FragmentSchedule extends Fragment{
                 scheduleItems = sucessResponse.getData();
 
                 if(_status == 200){
-//                    recyclerView = (RecyclerView) getView().findViewById(R.id.recylerView);
-//                    recyclerView.setHasFixedSize(true);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//
-//                    Log.v("qwe", scheduleItems.size()+"======"+scheduleItems);
-//
-//                    Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
-//
-//                    adapter = new AdapterSchedule(scheduleItems, getActivity());
-//                    recyclerView.setAdapter(adapter);
+                    recyclerView = (RecyclerView) getView().findViewById(R.id.recylerView);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                    Log.v("qwe", scheduleItems.size()+"======"+scheduleItems);
+
+                    Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
+
+                    adapter = new AdapterSchedule(scheduleItems, getActivity());
+                    recyclerView.setAdapter(adapter);
                 }else {
 
                 }
@@ -144,9 +127,4 @@ public class FragmentSchedule extends Fragment{
         requestQueue.add(stringRequest);
     }
 
-    public void addFragment(Fragment f) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragSchedule, f);
-        fragmentTransaction.commit();
-    }
 }

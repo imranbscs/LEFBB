@@ -5,12 +5,13 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +25,12 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.YourTeamActivity;
+import com.laeb.laebproject.adapter_team.AdapterSabRecivedInvitation;
+import com.laeb.laebproject.adapter_team.AdapterSabSentInvitation;
+import com.laeb.laebproject.adapter_team.AdapterSchedule;
 import com.laeb.laebproject.general.Globels;
-import com.laeb.laebproject.model_create_team.team_schedule.Datum;
+import com.laeb.laebproject.model_create_team.recived_invi.Datum;
+import com.laeb.laebproject.model_create_team.recived_invi.RecivedInvitations;
 import com.laeb.laebproject.model_create_team.team_schedule.TeamSchedule;
 
 import java.util.ArrayList;
@@ -34,43 +39,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by tariq on 8/28/2017.
+ * Created by tariq on 9/11/2017.
  */
 
-public class FragmentSchedule extends Fragment{
+public class FragmentSabSent extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Datum> scheduleItems;
-    TextView texInvi, txtMale;
-    RelativeLayout male_selector, female_delector1;
+    TextView texInvi;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_your_schedule, container, false);
-        ((YourTeamActivity) getActivity()).title.setText("YOUR PLAYERS");
-        texInvi = (TextView) v.findViewById(R.id.texInvi);
-        male_selector = (RelativeLayout) v.findViewById(R.id.male_selector);
-        female_delector1  = (RelativeLayout) v.findViewById(R.id.female_delector);
-        txtMale = (TextView) v.findViewById(R.id.txtMale);
-        texInvi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                male_selector.setVisibility(View.GONE);
-                female_delector1.setVisibility(View.VISIBLE);
-                FragmentInvitations f = new FragmentInvitations();
-                addFragment(f);
-            }
-        });
-        txtMale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                male_selector.setVisibility(View.VISIBLE);
-                female_delector1.setVisibility(View.GONE);
-                FragmentSubSchedule f = new FragmentSubSchedule();
-                addFragment(f);
-            }
-        });
+        View v = inflater.inflate(R.layout.fragment_sab_sent, container, false);
 
         return v;
     }
@@ -78,40 +59,40 @@ public class FragmentSchedule extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //getAllplayers();
+        getAllplayers();
     }
 
-    public void getAllplayers(){
-        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
+    public void getAllplayers() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/match/userScheduledMatches", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/match/invitationSent", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.v("qwe", response);
                 progressDialog.dismiss();
                 Gson gson = new Gson();
-                TeamSchedule sucessResponse = gson.fromJson(response, TeamSchedule.class);
+                RecivedInvitations sucessResponse = gson.fromJson(response, RecivedInvitations.class);
                 int _status = sucessResponse.getStatus();
 
-                Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "sucess"+_status, Toast.LENGTH_SHORT).show();
                 scheduleItems = new ArrayList<>();
                 scheduleItems = sucessResponse.getData();
+                Toast.makeText(getActivity(), "sucess"+_status+scheduleItems.size(), Toast.LENGTH_SHORT).show();
+                if (_status == 200) {
+                    recyclerView = (RecyclerView) getView().findViewById(R.id.recylerView);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                if(_status == 200){
-//                    recyclerView = (RecyclerView) getView().findViewById(R.id.recylerView);
-//                    recyclerView.setHasFixedSize(true);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//
-//                    Log.v("qwe", scheduleItems.size()+"======"+scheduleItems);
-//
-//                    Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
-//
-//                    adapter = new AdapterSchedule(scheduleItems, getActivity());
-//                    recyclerView.setAdapter(adapter);
-                }else {
+                    //Log.v("qwe", scheduleItems.size() + "======" + scheduleItems);
+
+                    Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
+
+                    adapter = new AdapterSabSentInvitation(scheduleItems, getActivity());
+                    recyclerView.setAdapter(adapter);
+                } else {
 
                 }
             }
@@ -119,10 +100,10 @@ public class FragmentSchedule extends Fragment{
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Log.v("wsx", "========   "+error+"");
+                Log.v("wsx", "========   " + error + "");
                 Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
@@ -139,14 +120,9 @@ public class FragmentSchedule extends Fragment{
                 params.put("team_id", "22");
                 return params;
             }
-        };;
-
+        };
+        ;
         requestQueue.add(stringRequest);
     }
 
-    public void addFragment(Fragment f) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragSchedule, f);
-        fragmentTransaction.commit();
-    }
 }
