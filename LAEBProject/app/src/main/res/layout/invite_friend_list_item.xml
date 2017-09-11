@@ -155,6 +155,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:id="@+id/tick"
                         android:src="@drawable/tick_green"/>
                     <RelativeLayout
                         android:layout_width="1dp"
@@ -165,6 +166,7 @@
                         android:layout_width="17dp"
                         android:layout_height="17dp"
                         android:layout_marginLeft="10dp"
+                        android:id="@+id/cross"
                         android:src="@drawable/cross"/>
                 </LinearLayout>
 

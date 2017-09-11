@@ -91,6 +91,8 @@ public class FragmentYourPlayer extends Fragment {
                 listItemSelect = sucessResponse.getSelectedPlayers();
                 listItems = sucessResponse.getInvitedPlayers();
 
+                int selectedPlayers = listItemSelect.size();
+
                 List<Object> listItemObj = new ArrayList<Object>(listItemSelect);
                 listItemObj.addAll(listItems);
                 Toast.makeText(getActivity(), "Sucess"+"=="+_status+"===="+listItemObj.size(), Toast.LENGTH_LONG).show();
@@ -104,7 +106,7 @@ public class FragmentYourPlayer extends Fragment {
 
                     Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
 
-                    adapter = new AdapterYourPlayer(listItemObj, getActivity());
+                    adapter = new AdapterYourPlayer(listItemObj, getActivity(), selectedPlayers);
                     recyclerView.setAdapter(adapter);
                 }else {
 

@@ -208,7 +208,8 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
                 SucessResponse sucessResponse = gson.fromJson(response, SucessResponse.class);
                 String _message = sucessResponse.messege;
                 int _status = sucessResponse.status;
-                Toast.makeText(getActivity(), "sucessful====  "+_status, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "sucessful====  "+_status+" "+_message, Toast.LENGTH_LONG).show();
+                Log.v("qwe", response+" "+_status);
                 if(_status == 200){
                     //startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
                 }else {
@@ -227,7 +228,7 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
+                headers.put("x-access-token", Globels.DUMMY_TOKEN);
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;
@@ -236,7 +237,7 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("player", listofPlayer);
+                params.put("player", "[{\"player_id\":40},{\"player_id\":46},{\"player_id\":47}]");
                 return params;
             }
         };;
