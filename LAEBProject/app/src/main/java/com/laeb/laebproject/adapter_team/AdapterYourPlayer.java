@@ -26,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.laeb.laebproject.R;
 import com.laeb.laebproject.general.Globels;
+import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model.UpComingGames;
 import com.laeb.laebproject.model_create_team.Datum;
 import com.laeb.laebproject.model_create_team.ListInvite;
@@ -190,7 +191,7 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", Globels.DUMMY_TOKEN);
+                headers.put("x-access-token", Prefs.getString(context, Prefs.auth_key));
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;

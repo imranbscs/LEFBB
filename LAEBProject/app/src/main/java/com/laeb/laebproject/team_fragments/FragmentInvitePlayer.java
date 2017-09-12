@@ -125,7 +125,7 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", Globels.DUMMY_TOKEN);
+                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;
@@ -146,7 +146,6 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
         switch (view.getId()) {
             case R.id.doneBtnInvite:
                 listofPlayer = AdapterInvitePlayer.doneInvitation();
-
                 Log.v("jabar", "========   "+listofPlayer+"");
                 sendInvitation();
                 break;
@@ -220,11 +219,13 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
                     //startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
                     if(Prefs.getString(getActivity(), Prefs.DIALOGDECISSION).equals("1")){
                         Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+
                     }else{
                         Toast.makeText(getActivity(), "pppppp", Toast.LENGTH_SHORT).show();
                         Prefs.putString(getActivity(), Prefs.DIALOGDECISSION, "0");
                         CreateTeamActivity.myActivity.finish();
-                        //FragmentProfile.myFragment.
+                        FragmentProfile.myTv.setText("Manage Team");
+                        Prefs.putString(getActivity(), Prefs.CREATE_TEAM, "Manage Team");
                         getActivity().finish();
                     }
                 }else {

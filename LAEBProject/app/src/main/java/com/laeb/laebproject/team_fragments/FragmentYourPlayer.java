@@ -122,7 +122,7 @@ public class FragmentYourPlayer extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", Globels.DUMMY_TOKEN);
+                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;

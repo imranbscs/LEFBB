@@ -125,7 +125,7 @@ public class FragmentProfile extends Fragment {
     String mImage;
     ArrayAdapter oad;
     public TextView createText;
-    public static Fragment myFragment;
+    public static TextView myTv;
 
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
@@ -134,9 +134,10 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
-        myFragment = this;
-        TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
 
+        createText = (TextView) v.findViewById(R.id.createText);
+        myTv = createText;
+        TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
         RelativeLayout createYourTeam = (RelativeLayout) v.findViewById(R.id.createYourTeam);
         Edt_Full_Name = (EditText) v.findViewById(R.id.ed__name);
         Edt_DOB = (EditText) v.findViewById(R.id.ed_dob);
@@ -152,7 +153,9 @@ public class FragmentProfile extends Fragment {
         circleView = (CircularImageView) v.findViewById(R.id.imageView82);
         fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
         fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
-        createText = (TextView) v.findViewById(R.id.createText);
+
+        createText.setText(Prefs.getString(getActivity(), Prefs.CREATE_TEAM));
+
         //circleView.setImageBitmap(yourSelectedImage);
         addpic = (ImageView) v.findViewById(R.id.addPic);
         addpic.setOnClickListener(new View.OnClickListener() {
@@ -169,14 +172,12 @@ public class FragmentProfile extends Fragment {
             public void onClick(View view) {
 
                 //startActivity(new Intent(getActivity(), YourTeamActivity.class));
-                if(Prefs.getString(getActivity(), Prefs.DIALOGDECISSION).equals("1")){
+                if (!(Prefs.getString(getActivity(), Prefs.CREATE_TEAM).equals("Create Your Team"))) {
                     startActivity(new Intent(getActivity(), YourTeamActivity.class));
                     Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(getActivity(), "pppppp", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getActivity(), CreateTeamActivity.class));
-                    //FragmentProfile.myFragment.
-                    //getActivity().finish();
                 }
             }
         });
@@ -706,5 +707,16 @@ public class FragmentProfile extends Fragment {
                 // TODO Auto-generated method stub
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Prefs.getString(getActivity(), Prefs.CREATE_TEAM).equals("Create Your Team")) {
+            createText.setText(Prefs.getString(getActivity(), Prefs.CREATE_TEAM));
+        } else {
+            createText.setText(Prefs.getString(getActivity(), Prefs.CREATE_TEAM));
+        }
+
     }
 }

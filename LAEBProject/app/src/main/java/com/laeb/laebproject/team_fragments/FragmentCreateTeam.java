@@ -150,8 +150,8 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 TeamSucessWithId sucessResponse = gson.fromJson(response, TeamSucessWithId.class);
                 String _message = sucessResponse.getMessage();
                 int _status = sucessResponse.getStatus();
-                int teamId = sucessResponse.getTeamId();
-                Toast.makeText(getActivity(), _status+": "+_message+" "+teamId, Toast.LENGTH_LONG).show();
+                //int teamId = sucessResponse.getTeamId();
+                //Toast.makeText(getActivity(), _status+": "+_message+" "+teamId, Toast.LENGTH_LONG).show();
                 if(_status == 200){
                     Toast.makeText(getActivity(), _status+": "+_message+" ", Toast.LENGTH_LONG).show();
                     Prefs.putString(getActivity(), Prefs.TEAM_LOGO, logoBitmap);
@@ -180,7 +180,6 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
                 headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
-//                headers.put("x-access-token", Globels.DUMMY_TOKEN);
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;

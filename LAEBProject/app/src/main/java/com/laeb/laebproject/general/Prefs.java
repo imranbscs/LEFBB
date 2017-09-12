@@ -10,6 +10,7 @@ public class Prefs {
     public static final String ACTIVE_ID = "ACTIVE_ID";
     public static final  String FAMILY_ID = "FAMILY_ID";
     public static final String DIALOGDECISSION = "decission";
+    public static final String CREATE_TEAM = "creat_team";
 
     ////////////////// Team Prefs ///////////////////
 
