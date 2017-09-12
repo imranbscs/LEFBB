@@ -429,12 +429,14 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:id="@+id/createYourTeam"
                                 android:background="@drawable/roundeges">
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:textColor="@color/white"
+                                    android:id="@+id/createText"
                                     android:text="@string/create_your_team"
                                     android:layout_alignParentTop="true"
                                     android:layout_alignParentLeft="true"

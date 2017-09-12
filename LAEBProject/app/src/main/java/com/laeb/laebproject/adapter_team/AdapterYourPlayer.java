@@ -51,6 +51,7 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
     public static List<ListInvite> invitedList;
     public static String j;
     int selectedPlayers;
+    int squadID;
 
     public AdapterYourPlayer(List<Object> listItems, Context context, int selectedPlayers) {
         this.listItems = listItems;
@@ -74,6 +75,7 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
             holder.name.setText(listItem.getName());
             holder.role.setText("");
             holder.ratingBar.setRating(1);
+            squadID = listItem.getSquadId();
             Picasso.with(context).load(listItem.getPicture()).into(holder.pic);
             if(!(listItem.getStars().equals(""))) {
                 //float star = (float) listItem.getStars();
@@ -197,7 +199,7 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("squad_id", "22");
+                params.put("squad_id", squadID+"");
                 return params;
             }
         };;

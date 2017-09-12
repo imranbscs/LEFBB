@@ -9,6 +9,7 @@ public class Prefs {
     public static final String auth_key="auth_key";
     public static final String ACTIVE_ID = "ACTIVE_ID";
     public static final  String FAMILY_ID = "FAMILY_ID";
+    public static final String DIALOGDECISSION = "decission";
 
     ////////////////// Team Prefs ///////////////////
 

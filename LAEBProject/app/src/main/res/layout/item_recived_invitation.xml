@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,81 +18,88 @@
 
             <LinearLayout
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:paddingLeft="15dp"
-                android:layout_height="match_parent">
+                android:paddingLeft="15dp">
+
                 <RelativeLayout
+                    android:id="@+id/relativeLayoutImg"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/relativeLayoutImg">
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/dateDay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="25sp"
+                        android:text="3"
                         android:textColor="@color/black_upcoming_game"
-                        android:text="3" />
+                        android:textSize="25sp" />
+
                     <TextView
                         android:id="@+id/month"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:layout_marginLeft="3dp"
                         android:layout_alignBottom="@+id/dateDay"
+                        android:layout_marginLeft="3dp"
                         android:layout_toRightOf="@+id/dateDay"
                         android:paddingBottom="2dp"
+                        android:text="April"
                         android:textColor="@color/black_upcoming_game"
-                        android:text="April" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
+
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textSize="20sp"
                     android:gravity="center"
-                    android:text="19:00" />
+                    android:text="19:00"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
+                android:orientation="vertical">
+
                 <LinearLayout
+                    android:id="@+id/relativeLayoutImg1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="right"
                     android:layout_marginRight="15dp"
-                    android:id="@+id/relativeLayoutImg1">
+                    android:gravity="right"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/clubname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:text="Yumbo Dolphins"
                         android:textColor="@color/black_upcoming_game"
-                        android:text="Yumbo Dolphins" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/std_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:textSize="13sp"
                         android:gravity="center"
-                        android:text="Ethihad Stadium Jaddah" />
+                        android:text="Ethihad Stadium Jaddah"
+                        android:textSize="13sp" />
+
                     <TextView
                         android:id="@+id/std_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:textSize="20sp"
                         android:gravity="center"
-                        android:text="7x7"/>
+                        android:text="7x7"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -102,9 +109,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:background="@color/colorPrimaryDark"/>
+            android:layout_marginRight="15dp"
+            android:background="@color/colorPrimaryDark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,74 +119,79 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/btn_Ly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_Ly"
                 android:visibility="visible">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="35dp"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:gravity="center_vertical"
-                        android:background="@color/colorRed"
-                        android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/dateTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            android:layout_marginLeft="10dp"
-                            android:gravity="center"
-                            android:text="DECLINE!" />
+                <LinearLayout
+                    android:id="@+id/decline"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorRed"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/dateTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="DECLINE!"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
-                    <LinearLayout
-                android:layout_width="5dp"
-                android:layout_height="match_parent"/>
-            
-                    <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/colorPrimaryDark"
-                android:gravity="center"
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/game_contry"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/accept"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:text="Accepet" />
-            </LinearLayout>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/game_contry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Accepet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="35dp"
                 android:id="@+id/btn_text"
-                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp">
+                android:orientation="horizontal"
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="Accepted"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>

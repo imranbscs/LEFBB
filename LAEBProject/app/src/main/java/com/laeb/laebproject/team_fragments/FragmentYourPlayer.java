@@ -103,9 +103,7 @@ public class FragmentYourPlayer extends Fragment {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
                     Log.v("qwe", listItems.size()+"======"+listItems);
-
                     Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
-
                     adapter = new AdapterYourPlayer(listItemObj, getActivity(), selectedPlayers);
                     recyclerView.setAdapter(adapter);
                 }else {

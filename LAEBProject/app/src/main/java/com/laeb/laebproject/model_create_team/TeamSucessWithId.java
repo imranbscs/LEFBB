@@ -32,11 +32,11 @@ public class TeamSucessWithId {
         this.message = message;
     }
 
-    public Integer getTeamId() {
+    public int getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(Integer teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
 

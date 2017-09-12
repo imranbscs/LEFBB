@@ -37,8 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void addTeamClicked(View view) {
-        startActivity(new Intent(this, YourTeamActivity.class));
-        //startActivity(new Intent(this, CreateTeamActivity.class));
+        //startActivity(new Intent(this, YourTeamActivity.class));
+        startActivity(new Intent(this, CreateTeamActivity.class));
     }
 
     public void notificationClicked(View view) {

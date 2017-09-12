@@ -70,6 +70,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                        // editor.putString("user",user);
                         i.putExtra("user",user);
                         Prefs.putString(getBaseContext(), Prefs.auth_key, token);
+                        Log.v("poi", Prefs.getString(getBaseContext(), Prefs.auth_key) + "===" + token);
                         editor.commit();
                         startActivity(i);
                         Log.i("asd", "---------------- this is response : " + code);
@@ -99,7 +100,6 @@ public class VerificationCodeActivity extends AppCompatActivity {
             }
 
         }.execute("");
-
 
     }
 
@@ -134,7 +134,6 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
         uc.disconnect();
         return jsonString.toString();
-
 
     }
 }

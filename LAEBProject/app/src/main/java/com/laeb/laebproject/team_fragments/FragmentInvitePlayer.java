@@ -25,8 +25,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.laeb.laebproject.CreateTeamActivity;
+import com.laeb.laebproject.InvitePlayerActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.adapter_team.AdapterInvitePlayer;
+import com.laeb.laebproject.fragment.FragmentProfile;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.AllPlayers;
@@ -142,6 +146,8 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
         switch (view.getId()) {
             case R.id.doneBtnInvite:
                 listofPlayer = AdapterInvitePlayer.doneInvitation();
+
+                Log.v("jabar", "========   "+listofPlayer+"");
                 sendInvitation();
                 break;
             case R.id.sort:
@@ -212,6 +218,15 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
                 Log.v("qwe", response+" "+_status);
                 if(_status == 200){
                     //startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
+                    if(Prefs.getString(getActivity(), Prefs.DIALOGDECISSION).equals("1")){
+                        Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getActivity(), "pppppp", Toast.LENGTH_SHORT).show();
+                        Prefs.putString(getActivity(), Prefs.DIALOGDECISSION, "0");
+                        CreateTeamActivity.myActivity.finish();
+                        //FragmentProfile.myFragment.
+                        getActivity().finish();
+                    }
                 }else {
 
                 }
@@ -228,7 +243,7 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", Globels.DUMMY_TOKEN);
+                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;
@@ -237,11 +252,11 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("player", "[{\"player_id\":40},{\"player_id\":46},{\"player_id\":47}]");
+                params.put("player", listofPlayer);
                 return params;
             }
         };;
-
+//        "[{"player_id":40},{"player_id":46},{"player_id":47}]"
         requestQueue.add(stringRequest);
     }
 

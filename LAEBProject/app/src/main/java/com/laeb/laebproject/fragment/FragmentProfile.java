@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -38,9 +39,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.laeb.laebproject.CreateTeamActivity;
 import com.laeb.laebproject.MultiSelectionSpinner;
 import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.general.GlobelList;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
@@ -121,6 +124,8 @@ public class FragmentProfile extends Fragment {
     ArrayAdapter adap;
     String mImage;
     ArrayAdapter oad;
+    public TextView createText;
+    public static Fragment myFragment;
 
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
@@ -129,8 +134,10 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
+        myFragment = this;
         TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
 
+        RelativeLayout createYourTeam = (RelativeLayout) v.findViewById(R.id.createYourTeam);
         Edt_Full_Name = (EditText) v.findViewById(R.id.ed__name);
         Edt_DOB = (EditText) v.findViewById(R.id.ed_dob);
         Edt_Nick = (EditText) v.findViewById(R.id.ed_nick_name);
@@ -145,6 +152,7 @@ public class FragmentProfile extends Fragment {
         circleView = (CircularImageView) v.findViewById(R.id.imageView82);
         fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
         fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
+        createText = (TextView) v.findViewById(R.id.createText);
         //circleView.setImageBitmap(yourSelectedImage);
         addpic = (ImageView) v.findViewById(R.id.addPic);
         addpic.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +164,22 @@ public class FragmentProfile extends Fragment {
                 startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
             }
         });
+        createYourTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                //startActivity(new Intent(getActivity(), YourTeamActivity.class));
+                if(Prefs.getString(getActivity(), Prefs.DIALOGDECISSION).equals("1")){
+                    startActivity(new Intent(getActivity(), YourTeamActivity.class));
+                    Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(), "pppppp", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity(), CreateTeamActivity.class));
+                    //FragmentProfile.myFragment.
+                    //getActivity().finish();
+                }
+            }
+        });
 
         List<String> listOfPlayerRoles = new ArrayList<String>();
         listOfPlayerRoles.add("Defender");
@@ -250,51 +273,6 @@ public class FragmentProfile extends Fragment {
                 mInter = fc_International.getText().toString();
                 mDistrict = Place_of_Birth.getText().toString();
 
-               /*HashMap<String, String> param = new HashMap<String, String>();
-                param.put("name", mName);
-                param.put("image", "base64image");
-                param.put("nickname", mNick);
-                param.put("city", mCity_Id + "");
-                param.put("dob", mDOB);
-                param.put("gender", "M");
-                param.put("district", mDistrict);
-                param.put("height", mHeight);
-                param.put("weight", mWeight);
-                param.put("playing_role", spn_position.getSelectedItem().toString());
-                param.put("player", Player);
-                param.put("refree", Refree);
-                param.put("fc_local", mLocal);
-                param.put("fc_international", mInter);*/
-
-                //  final RequestParams paramss = new RequestParams(param);
-
-               /* new AsyncTask<String, String, String>() {
-
-                    @Override
-                    protected String doInBackground(String... params) {
-                        try {
-
-                            String response = makePostRequest("http://192.169.138.14:4000/api/profile/v2/settings ",
-                                    paramss.toString(),
-                                    getActivity(), "POST");
-                            Log.i("asd", "---------------- this is response : " + response);
-                            return "Success";
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            return "";
-                        }
-                    }
-
-                    @Override
-                    protected void onPostExecute(String s) {
-                        super.onPostExecute(s);
-                        if (s == "Success")
-                            Toast.makeText(getActivity(), "Profile saved successfully", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getActivity(), MenuActivity.class));
-                    }
-
-
-                }.execute("");*/
                 final ProgressDialog progressDialog = new ProgressDialog(getActivity());
                 progressDialog.setMessage("Loading...");
                 progressDialog.show();
@@ -390,10 +368,10 @@ public class FragmentProfile extends Fragment {
                             Log.i("asd", spn_days.getSelectedItemsAsString() + "");
                             String operating = "{";
 
-                                if (spn_days.getSelectedItemsAsString().contains("Sunday"))
-                                    operating += " sun=1,";
-                                else
-                                    operating += "sun=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Sunday"))
+                                operating += " sun=1,";
+                            else
+                                operating += "sun=0,";
                             if (spn_days.getSelectedItemsAsString().contains("Monday"))
                                 operating += " mon=1,";
                             else
@@ -419,12 +397,12 @@ public class FragmentProfile extends Fragment {
                             else
                                 operating += "sat=0,";
 
-operating+= "}";
-                            operating = operating.replace(",}","}");
-Log.i("asd",operating);
+                            operating += "}";
+                            operating = operating.replace(",}", "}");
+                            Log.i("asd", operating);
                             try {
                                 JSONObject j = new JSONObject(operating);
-                                param.put("operating", j.toString() );
+                                param.put("operating", j.toString());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
