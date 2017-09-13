@@ -441,10 +441,10 @@ public class FragmentProfile extends Fragment {
                         imageStream = getActivity().getContentResolver().openInputStream(selectedImage);
                         yourSelectedImage = BitmapFactory.decodeStream(imageStream);
 
-                        CircularImageView imageView = (CircularImageView) getView().findViewById(R.id.imageView82);
+                        //CircularImageView imageView = (CircularImageView) getView().findViewById(R.id.imageView82);
                         //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
-                        imageView.setImageResource(R.drawable.image_square);
-                        //imageView.setImageBitmap(yourSelectedImage);
+                        //imageView.setImageResource(R.drawable.image_square);
+                        circleView.setImageBitmap(yourSelectedImage);
 
                         yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                         mImage = imageToString(yourSelectedImage);
@@ -574,44 +574,6 @@ public class FragmentProfile extends Fragment {
         return index;
     }
 
-    public String makePostRequest(String stringUrl, String payload,
-                                  Context context, String Method) throws IOException {
-
-        URL url = new URL(stringUrl);
-        HttpURLConnection uc = (HttpURLConnection) url.openConnection();
-
-        String line;
-        StringBuffer jsonString = new StringBuffer();
-        SharedPreferences channel = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String strChannel = channel.getString("token", "Default").toString();
-        Log.i("asd", "---------------- this is response : " + strChannel);
-        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        uc.setRequestProperty("x-access-token", strChannel);
-        uc.setRequestProperty("locale", "en");
-        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
-        uc.setRequestMethod(Method);
-        uc.setDoInput(true);
-        uc.setInstanceFollowRedirects(false);
-        uc.connect();
-        if (payload != null) {
-            OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
-            writer.write(payload);
-            writer.close();
-        }
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while ((line = br.readLine()) != null) {
-                jsonString.append(line);
-                Log.i("asd", line);
-            }
-            br.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        uc.disconnect();
-        return jsonString.toString();
-    }
 
     public boolean validation() {
         boolean b = true;

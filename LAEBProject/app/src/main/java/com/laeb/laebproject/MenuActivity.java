@@ -19,8 +19,8 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_layout);
         getSupportActionBar().hide();
-//        FragmentProfile fragmentProfile = new FragmentProfile();
-//        addFragment(fragmentProfile);
+        FragmentProfile fragmentProfile = new FragmentProfile();
+        addFragment(fragmentProfile);
     }
 
     public void userProfile(View view) {
@@ -54,10 +54,9 @@ public class MenuActivity extends AppCompatActivity {
         addFragment(myfragment);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        FragmentProfile fragmentProfile = new FragmentProfile();
-        addFragment(fragmentProfile);
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//    }
 }

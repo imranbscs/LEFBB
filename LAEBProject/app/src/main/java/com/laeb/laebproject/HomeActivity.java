@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         getSupportActionBar().hide();
-        Prefs.putString(this, Prefs.TEAM_NAME, "EEEEEEEEE");
+        //Prefs.putString(this, Prefs.TEAM_NAME, "EEEEEEEEE");
         GlobelList.getCities(this);
     }
 

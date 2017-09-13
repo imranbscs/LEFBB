@@ -23,15 +23,10 @@
         </activity>
         <activity android:name=".AddNumberActivity" />
         <activity android:name=".VerificationCodeActivity" />
-        <activity android:name=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <!-- <activity android:name=".UpComingGamesActivity" /> -->
-        <activity android:name=".CreateFieldActivity"></activity>
+        <activity android:name=".CreateFieldActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -40,14 +35,18 @@
         <activity android:name=".BookingActivity" />
         <activity
             android:name=".MenuActivity"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
-        <activity android:name=".CreateTeamActivity"></activity>
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".CreateTeamActivity" />
         <activity android:name=".InviteFriendActivity" />
-        <activity android:name=".YourTeamActivity"></activity>
+        <activity android:name=".YourTeamActivity" />
         <activity android:name=".YourScheduleActivity" />
-        <activity android:name=".InvitePlayerActivity"></activity>
+        <activity android:name=".InvitePlayerActivity" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
