@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.MessageAttributeValue;
+import com.amazonaws.services.sns.model.PublishRequest;
+import com.amazonaws.services.sns.model.PublishResult;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,9 +29,6 @@ import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.SucessResponse;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -96,54 +95,55 @@ public class AddNumberActivity extends AppCompatActivity {
 
     }
 
-//    class AWSTask extends AsyncTask<String, Void, String> {
-//
-//        private Exception exception;
-//
-//        protected String doInBackground(String... urls) {
-//            try {
-//                AWSCredentials oCredentials = new AWSCredentials() {
-//                    @Override
-//                    public String getAWSAccessKeyId() {
-//                        return "aa";
-//                    }
-//
-//                    @Override
-//                    public String getAWSSecretKey() {
-//                        return "aaa";
-//                    }
-//                };
-//                snsClient = new AmazonSNSClient(oCredentials);
-//
-//                String message = "Your verification code is " + urls[0];
-//
-//                Map<String, MessageAttributeValue> smsAttributes =
-//                        new HashMap<String, MessageAttributeValue>();
-//                smsAttributes.put("AWS.SNS.SMS.SenderID", new MessageAttributeValue()
-//                        .withStringValue("mySenderID") //The sender ID shown on the device.
-//                        .withDataType("String"));
-//                smsAttributes.put("AWS.SNS.SMS.MaxPrice", new MessageAttributeValue()
-//                        .withStringValue("0.01") //Sets the max price to 0.50 USD.
-//                        .withDataType("Number"));
-//                smsAttributes.put("AWS.SNS.SMS.SMSType", new MessageAttributeValue()
-//                        .withStringValue("Promotional") //Sets the type to promotional.
-//                        .withDataType("String"));
-//
-//              //  PublishResult oresult = snsClient.publish(new PublishRequest()
-//                //       .withMessage(message)
-//               //         .withPhoneNumber(phoneNumber)
-//               //        .withMessageAttributes(smsAttributes));
-//             //   Log.i("ERR", oresult.toString());
-//                return urls[0];
-//
-//            } catch (Exception e) {
-//                this.exception = e;
-//                Log.e("ABC", e.getMessage());
-//                return null;
-//            }
-//        }
-//
-//        protected void onPostExecute(String Code) {
+    class AWSTask extends AsyncTask<String, Void, String> {
+
+        private Exception exception;
+
+        protected String doInBackground(String... urls) {
+            try {
+                AWSCredentials oCredentials = new AWSCredentials() {
+                    @Override
+                    public String getAWSAccessKeyId() {
+                        return "aa";
+                    }
+
+                    @Override
+                    public String getAWSSecretKey() {
+                        return "aaa";
+                    }
+                };
+                snsClient = new AmazonSNSClient(oCredentials);
+
+                String message = "Your verification code is " + urls[0];
+
+                Map<String, MessageAttributeValue> smsAttributes =
+                        new HashMap<String, MessageAttributeValue>();
+                smsAttributes.put("AWS.SNS.SMS.SenderID", new MessageAttributeValue()
+                        .withStringValue("mySenderID") //The sender ID shown on the device.
+                        .withDataType("String"));
+                smsAttributes.put("AWS.SNS.SMS.MaxPrice", new MessageAttributeValue()
+                        .withStringValue("0.01") //Sets the max price to 0.50 USD.
+                        .withDataType("Number"));
+                smsAttributes.put("AWS.SNS.SMS.SMSType", new MessageAttributeValue()
+                        .withStringValue("Promotional") //Sets the type to promotional.
+                        .withDataType("String"));
+
+                PublishResult oresult = snsClient.publish(new PublishRequest()
+                       .withMessage(message)
+                        .withPhoneNumber(phoneNumber)
+                       .withMessageAttributes(smsAttributes));
+
+                Log.i("ERR", oresult.toString());
+                return urls[0];
+
+            } catch (Exception e) {
+                this.exception = e;
+                Log.e("ABC", e.getMessage());
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String Code) {
 //            if (!Code.equals("")) {
 //                Toast.makeText(getApplicationContext(),Code,Toast.LENGTH_LONG).show();
 //                Intent i = new Intent(getBaseContext(), VerificationCodeActivity.class);
@@ -151,43 +151,43 @@ public class AddNumberActivity extends AppCompatActivity {
 //                i.putExtra("phone", phoneNumber);
 //                startActivity(i);
 //            }
-//
-//        }
-//    }
-//
-//    public String makePostRequest(String stringUrl, String payload, Context context) throws IOException {
-//        URL url = new URL(stringUrl);
-//        HttpURLConnection uc = (HttpURLConnection) url.openConnection();
-//
-//        String line;
-//        StringBuffer jsonString = new StringBuffer();
-//
-//        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-//        uc.setRequestProperty("locale", "en");
-//        String android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
-//        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
-//        // uc.setRequestProperty("device", android_id);
-//        uc.setRequestMethod("POST");
-//        uc.setDoInput(true);
-//        uc.setInstanceFollowRedirects(false);
-//        uc.connect();
-//        OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
-//        writer.write(payload);
-//        writer.close();
-//        try {
-//            BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-//            while ((line = br.readLine()) != null) {
-//                jsonString.append(line);
-//                Log.i("asd", line);
-//            }
-//            br.close();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        uc.disconnect();
-//        return jsonString.toString();
-//    }
+
+        }
+    }
+
+    public String makePostRequest(String stringUrl, String payload, Context context) throws IOException {
+        URL url = new URL(stringUrl);
+        HttpURLConnection uc = (HttpURLConnection) url.openConnection();
+
+        String line;
+        StringBuffer jsonString = new StringBuffer();
+
+        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        uc.setRequestProperty("locale", "en");
+        String android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
+        // uc.setRequestProperty("device", android_id);
+        uc.setRequestMethod("POST");
+        uc.setDoInput(true);
+        uc.setInstanceFollowRedirects(false);
+        uc.connect();
+        OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
+        writer.write(payload);
+        writer.close();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            while ((line = br.readLine()) != null) {
+                jsonString.append(line);
+                Log.i("asd", line);
+            }
+            br.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        uc.disconnect();
+        return jsonString.toString();
+    }
 
     public boolean validation(){
         boolean b = true;
@@ -222,6 +222,8 @@ public class AddNumberActivity extends AppCompatActivity {
                     Toast.makeText(AddNumberActivity.this, "Sucess "+code, Toast.LENGTH_LONG).show();
                     Intent i = new Intent(getBaseContext(), VerificationCodeActivity.class);
                     i.putExtra("code", code);
+                    //messege(code+"");
+                    //new AWSTask().execute(code+"");
                     i.putExtra("phone", phoneNumber);
                     startActivity(i);
                 }else {
@@ -253,6 +255,50 @@ public class AddNumberActivity extends AppCompatActivity {
             }
         };;
         requestQueue.add(stringRequest);
+    }
+
+    void messege(final String code){
+        try {
+            AWSCredentials oCredentials = new AWSCredentials() {
+                @Override
+                public String getAWSAccessKeyId() {
+                    return "AKIAJNMY7QQPKRVK33BQ";
+                }
+
+                @Override
+                public String getAWSSecretKey() {
+                    return "pT+nmZm/oZ2yYbCPXycJdj7PiE59S/4htyzapYp8";
+                }
+            };
+            snsClient = new AmazonSNSClient(oCredentials);
+
+            String message = "Your verification code is " + code;
+
+            Map<String, MessageAttributeValue> smsAttributes =
+                    new HashMap<String, MessageAttributeValue>();
+            smsAttributes.put("AWS.SNS.SMS.SenderID", new MessageAttributeValue()
+                    .withStringValue("mySenderID") //The sender ID shown on the device.
+                    .withDataType("String"));
+            smsAttributes.put("AWS.SNS.SMS.MaxPrice", new MessageAttributeValue()
+                    .withStringValue("0.01") //Sets the max price to 0.50 USD.
+                    .withDataType("Number"));
+            smsAttributes.put("AWS.SNS.SMS.SMSType", new MessageAttributeValue()
+                    .withStringValue("Promotional") //Sets the type to promotional.
+                    .withDataType("String"));
+
+            PublishResult oresult = snsClient.publish(new PublishRequest()
+                    .withMessage(message)
+                    .withPhoneNumber(phoneNumber)
+                    .withMessageAttributes(smsAttributes));
+
+            Log.i("ERR", oresult.toString());
+
+
+        } catch (Exception e) {
+            //this.exception = e;
+            //Log.e("ABC", e.getMessage());
+
+        }
     }
 
 }

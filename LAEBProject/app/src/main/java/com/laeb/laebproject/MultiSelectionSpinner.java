@@ -33,7 +33,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         super(context, attrs);
 
         simple_adapter = new ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item);
+                R.layout.spinner_item);
         super.setAdapter(simple_adapter);
     }
 

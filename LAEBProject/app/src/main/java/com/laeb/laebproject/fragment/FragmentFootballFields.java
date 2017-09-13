@@ -70,7 +70,6 @@ public class FragmentFootballFields extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         recyclerView = (RecyclerView) getView().findViewById(R.id.recylerView);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -152,5 +151,9 @@ public class FragmentFootballFields extends Fragment {
 
         uc.disconnect();
         return jsonString.toString();
+    }
+
+    public void getData(){
+
     }
 }
