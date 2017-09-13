@@ -83,7 +83,6 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //Log.v("wsa", Prefs.getString(getActivity(), Prefs.auth_key));
         currentColor = ContextCompat.getColor(getActivity(), R.color.colorAccent);
 
         View v = inflater.inflate(R.layout.fragment_createteam, container, false);
@@ -124,14 +123,14 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
     }
 
     public void createTeam(){
-        Prefs.putString(getActivity(), Prefs.TEAM_LOGO, logoBitmap);
-        Prefs.putString(getActivity(), Prefs.HOME_SHIRT, homeImgBitmap);
-        Prefs.putString(getActivity(), Prefs.AWAY_SHIRT, awayShirtBitmap);
-        Prefs.putString(getActivity(), Prefs.TEAM_NAME, teamName.getText().toString());
-        Prefs.putString(getActivity(), Prefs.COACH, coachName.getText().toString());
-        Prefs.putString(getActivity(), Prefs.COLOR, currentColor+"");
-        Prefs.putString(getActivity(), Prefs.CITY_ID, mCity_Id+"");
-        Prefs.putString(getActivity(), Prefs.FIELD_ID, ""+mField_Id);
+//        Prefs.putString(getActivity(), Prefs.TEAM_LOGO, logoBitmap);
+//        Prefs.putString(getActivity(), Prefs.HOME_SHIRT, homeImgBitmap);
+//        Prefs.putString(getActivity(), Prefs.AWAY_SHIRT, awayShirtBitmap);
+//        Prefs.putString(getActivity(), Prefs.TEAM_NAME, teamName.getText().toString());
+//        Prefs.putString(getActivity(), Prefs.COACH, coachName.getText().toString());
+//        Prefs.putString(getActivity(), Prefs.COLOR, currentColor+"");
+//        Prefs.putString(getActivity(), Prefs.CITY_ID, mCity_Id+"");
+//        Prefs.putString(getActivity(), Prefs.FIELD_ID, ""+mField_Id);
 
         if(!(validation())){
             return;
@@ -152,9 +151,9 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 String _message = sucessResponse.getMessage();
                 int _status = sucessResponse.getStatus();
                 int teamId = sucessResponse.getTeamId();
-                Toast.makeText(getActivity(), _status+": "+_message+" "+teamId, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), _status+": "+_message+" "+teamId, Toast.LENGTH_LONG).show();
                 if(_status == 200){
-                    //Toast.makeText(getActivity(), _status+": "+_message+" ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), _status+": "+_message+" ", Toast.LENGTH_LONG).show();
                     Prefs.putString(getActivity(), Prefs.TEAM_LOGO, logoBitmap);
                     Prefs.putString(getActivity(), Prefs.HOME_SHIRT, homeImgBitmap);
                     Prefs.putString(getActivity(), Prefs.AWAY_SHIRT, awayShirtBitmap);
@@ -163,7 +162,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                     Prefs.putString(getActivity(), Prefs.COLOR, currentColor+"");
                     Prefs.putString(getActivity(), Prefs.CITY_ID, mCity_Id+"");
                     Prefs.putString(getActivity(), Prefs.FIELD_ID, ""+mField_Id);
-
+                    Prefs.putString(getActivity(), Prefs.TEAM_ID, teamId+"");
                     startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
                 }else {
 
@@ -181,8 +180,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-//                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
-                headers.put("x-access-token", Globels.DUMMY_TOKEN);
+                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;
@@ -208,7 +206,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 params.put("logo", logoBitmap);
                 params.put("found_date", "2017-05-15");
                 params.put("country", "1");
-                params.put("avg_age", "14");
+                params.put("avg_age", "");
                 params.put("city_flexible", "0");
                 params.put("field_flexible", "0");
                 params.put("field_id", ""+mField_Id);
@@ -418,8 +416,9 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
+                Log.v("prfe", Prefs.getString(getActivity(), Prefs.auth_key));
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMzksInVzZXJuYW1lIjoiIDk2NjU1NTk5OTg4IiwiaWF0IjoxNTA0NjkxMjM1fQ.Mf0o1tylz47mIyCphSZFHo8guwWEL2D91qqiMCkhhQc");
+                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;

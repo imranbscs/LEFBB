@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -38,9 +39,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.laeb.laebproject.CreateTeamActivity;
 import com.laeb.laebproject.MultiSelectionSpinner;
 import com.laeb.laebproject.ProfileActivity;
 import com.laeb.laebproject.R;
+import com.laeb.laebproject.YourTeamActivity;
 import com.laeb.laebproject.general.GlobelList;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
@@ -49,6 +52,7 @@ import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.PlayerPosition;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.Datum;
+import com.laeb.laebproject.model_create_team.SucessResponse;
 import com.loopj.android.http.RequestParams;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -119,8 +123,10 @@ public class FragmentProfile extends Fragment {
     CircularImageView circleView;
     ImageView addpic;
     ArrayAdapter adap;
-    String mImage;
+    String mImage = "";
     ArrayAdapter oad;
+    public TextView createText;
+    public static TextView myTv;
 
     public static String[] names() {
         return Arrays.toString(Days.values()).replaceAll("^.|.$", "").split(", ");
@@ -129,8 +135,11 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.full_profile, container, false);
-        TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
 
+        createText = (TextView) v.findViewById(R.id.createText);
+        myTv = createText;
+        TextView saveprofile = (TextView) v.findViewById(R.id.tv_save);
+        RelativeLayout createYourTeam = (RelativeLayout) v.findViewById(R.id.createYourTeam);
         Edt_Full_Name = (EditText) v.findViewById(R.id.ed__name);
         Edt_DOB = (EditText) v.findViewById(R.id.ed_dob);
         Edt_Nick = (EditText) v.findViewById(R.id.ed_nick_name);
@@ -145,6 +154,9 @@ public class FragmentProfile extends Fragment {
         circleView = (CircularImageView) v.findViewById(R.id.imageView82);
         fc_local = (EditText) v.findViewById(R.id.ed_local_fvt_club);
         fc_International = (EditText) v.findViewById(R.id.ed_intl_fvt_club);
+
+        createText.setText(Prefs.getString(getActivity(), Prefs.CREATE_TEAM));
+
         //circleView.setImageBitmap(yourSelectedImage);
         addpic = (ImageView) v.findViewById(R.id.addPic);
         addpic.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +168,20 @@ public class FragmentProfile extends Fragment {
                 startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
             }
         });
+        createYourTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                //startActivity(new Intent(getActivity(), YourTeamActivity.class));
+                if (!(Prefs.getString(getActivity(), Prefs.CREATE_TEAM).equals("Create Your Team"))) {
+                    startActivity(new Intent(getActivity(), YourTeamActivity.class));
+                    Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "pppppp", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity(), CreateTeamActivity.class));
+                }
+            }
+        });
 
         List<String> listOfPlayerRoles = new ArrayList<String>();
         listOfPlayerRoles.add("Defender");
@@ -250,51 +275,6 @@ public class FragmentProfile extends Fragment {
                 mInter = fc_International.getText().toString();
                 mDistrict = Place_of_Birth.getText().toString();
 
-               /*HashMap<String, String> param = new HashMap<String, String>();
-                param.put("name", mName);
-                param.put("image", "base64image");
-                param.put("nickname", mNick);
-                param.put("city", mCity_Id + "");
-                param.put("dob", mDOB);
-                param.put("gender", "M");
-                param.put("district", mDistrict);
-                param.put("height", mHeight);
-                param.put("weight", mWeight);
-                param.put("playing_role", spn_position.getSelectedItem().toString());
-                param.put("player", Player);
-                param.put("refree", Refree);
-                param.put("fc_local", mLocal);
-                param.put("fc_international", mInter);*/
-
-                //  final RequestParams paramss = new RequestParams(param);
-
-               /* new AsyncTask<String, String, String>() {
-
-                    @Override
-                    protected String doInBackground(String... params) {
-                        try {
-
-                            String response = makePostRequest("http://192.169.138.14:4000/api/profile/v2/settings ",
-                                    paramss.toString(),
-                                    getActivity(), "POST");
-                            Log.i("asd", "---------------- this is response : " + response);
-                            return "Success";
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            return "";
-                        }
-                    }
-
-                    @Override
-                    protected void onPostExecute(String s) {
-                        super.onPostExecute(s);
-                        if (s == "Success")
-                            Toast.makeText(getActivity(), "Profile saved successfully", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getActivity(), MenuActivity.class));
-                    }
-
-
-                }.execute("");*/
                 final ProgressDialog progressDialog = new ProgressDialog(getActivity());
                 progressDialog.setMessage("Loading...");
                 progressDialog.show();
@@ -306,9 +286,12 @@ public class FragmentProfile extends Fragment {
                         Log.v("qwe", response);
                         progressDialog.dismiss();
                         Gson gson = new Gson();
-                        // Datum sucessResponse = gson.fromJson(response, Datum.class);
-                        // int _status = sucessResponse.getStatus();
+                        SucessResponse sucessResponse = gson.fromJson(response, SucessResponse.class);
+                        int _status = sucessResponse.status;
 
+                        if(_status == 200){
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -334,7 +317,7 @@ public class FragmentProfile extends Fragment {
                         Log.i("asd", mHeight);
                         Map<String, String> param = new HashMap<>();
                         param.put("name", mName);
-                        param.put("image", "im");
+                        param.put("image", mImage);
                         param.put("nickname", mNick);
                         param.put("city", mCity_Id + "");
                         param.put("dob", mDOB);
@@ -462,12 +445,12 @@ public class FragmentProfile extends Fragment {
                         imageStream = getActivity().getContentResolver().openInputStream(selectedImage);
                         yourSelectedImage = BitmapFactory.decodeStream(imageStream);
 
-                        CircularImageView imageView = (CircularImageView) getView().findViewById(R.id.imageView82);
+                        //CircularImageView imageView = (CircularImageView) getView().findViewById(R.id.imageView82);
                         //CircleImageView imageView = (CircleImageView) findViewById(R.id.imageView81);
-                        imageView.setImageResource(R.drawable.image_square);
-                        //imageView.setImageBitmap(yourSelectedImage);
+                        //imageView.setImageResource(R.drawable.image_square);
+                        circleView.setImageBitmap(yourSelectedImage);
 
-                        yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                        //yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                         mImage = imageToString(yourSelectedImage);
                         // mImage = myBase64Image;
 
@@ -490,7 +473,7 @@ public class FragmentProfile extends Fragment {
 
     public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100/100, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
@@ -516,17 +499,17 @@ public class FragmentProfile extends Fragment {
                 Datum sucessResponse = null;
                 try {
                     sucessResponse = gson.fromJson(jSon.get("data").toString(), Datum.class);
-                    if (sucessResponse.getPicture().length() > 10) {
-                        byte[] decodedString = Base64.decode(sucessResponse.getPicture(), Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        circleView.setImageBitmap(decodedByte);
-                    }
+//                    if (sucessResponse.getPicture().length() > 10) {
+//                        byte[] decodedString = Base64.decode(sucessResponse.getPicture(), Base64.DEFAULT);
+//                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                        circleView.setImageBitmap(decodedByte);
+//                    }
 
                     Edt_Height.setText(sucessResponse.getHeight().toString());
                     Edt_Weight.setText(sucessResponse.getWeight().toString());
                     Edt_Nick.setText(sucessResponse.getNick());
                     Place_of_Birth.setText(sucessResponse.getDistrict());
-                    // Picasso.with(getActivity()).load(sucessResponse.getPicture()).into(circleView);
+                    Picasso.with(getActivity()).load(sucessResponse.getPicture()).into(circleView);
                     fc_local.setText(sucessResponse.getFcLocal());
                     fc_International.setText(sucessResponse.getFcInternational());
                     spn_position.setSelection(oad.getPosition(sucessResponse.getPlayingRole()));
@@ -595,44 +578,6 @@ public class FragmentProfile extends Fragment {
         return index;
     }
 
-    public String makePostRequest(String stringUrl, String payload,
-                                  Context context, String Method) throws IOException {
-
-        URL url = new URL(stringUrl);
-        HttpURLConnection uc = (HttpURLConnection) url.openConnection();
-
-        String line;
-        StringBuffer jsonString = new StringBuffer();
-        SharedPreferences channel = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String strChannel = channel.getString("token", "Default").toString();
-        Log.i("asd", "---------------- this is response : " + strChannel);
-        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        uc.setRequestProperty("x-access-token", strChannel);
-        uc.setRequestProperty("locale", "en");
-        uc.setRequestProperty("x-access-key", "ADBB-6CA3-15AE-359E");
-        uc.setRequestMethod(Method);
-        uc.setDoInput(true);
-        uc.setInstanceFollowRedirects(false);
-        uc.connect();
-        if (payload != null) {
-            OutputStreamWriter writer = new OutputStreamWriter(uc.getOutputStream(), "UTF-8");
-            writer.write(payload);
-            writer.close();
-        }
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while ((line = br.readLine()) != null) {
-                jsonString.append(line);
-                Log.i("asd", line);
-            }
-            br.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        uc.disconnect();
-        return jsonString.toString();
-    }
 
     public boolean validation() {
         boolean b = true;
@@ -728,5 +673,16 @@ public class FragmentProfile extends Fragment {
                 // TODO Auto-generated method stub
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Prefs.getString(getActivity(), Prefs.CREATE_TEAM).equals("Create Your Team")) {
+            createText.setText(Prefs.getString(getActivity(), Prefs.CREATE_TEAM));
+        } else {
+            createText.setText(Prefs.getString(getActivity(), Prefs.CREATE_TEAM));
+        }
+
     }
 }

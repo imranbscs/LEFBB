@@ -18,18 +18,18 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         getSupportActionBar().hide();
-        Prefs.putString(this, Prefs.TEAM_NAME, "EEEEEEEEE");
+        //Prefs.putString(this, Prefs.TEAM_NAME, "EEEEEEEEE");
         GlobelList.getCities(this);
     }
 
     public void profileClicked(View view) throws JSONException {
-        Intent i = getIntent();
-        String s =  i.getStringExtra("user");
-        JSONObject j = new JSONObject(s);
-        String name = (String) j.get("name");
-        if (name.equals(""))
-        startActivity(new Intent(this, ProfileActivity.class));
-        else
+//        Intent i = getIntent();
+//        String s =  i.getStringExtra("user");
+//        JSONObject j = new JSONObject(s);
+//        String name = (String) j.get("name");
+//        if (name.equals(""))
+//        startActivity(new Intent(this, ProfileActivity.class));
+//        else
             startActivity(new Intent(this, MenuActivity.class));
     }
     public void bookingClicked(View view) {
@@ -37,8 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void addTeamClicked(View view) {
-        startActivity(new Intent(this, YourTeamActivity.class));
-        //startActivity(new Intent(this, CreateTeamActivity.class));
+        //startActivity(new Intent(this, YourTeamActivity.class));
+        startActivity(new Intent(this, CreateTeamActivity.class));
     }
 
     public void notificationClicked(View view) {

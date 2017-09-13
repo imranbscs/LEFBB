@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.laeb.laebproject.team_fragments.FragmentSchedule;
+import com.laeb.laebproject.team_fragments.FragmentTeamStats;
 import com.laeb.laebproject.team_fragments.FragmentYourPlayer;
 import com.laeb.laebproject.team_fragments.FragmentYourTeam;
 
@@ -33,9 +35,22 @@ public class YourTeamActivity extends AppCompatActivity {
     }
 
     public void multiPlayer(View view) {
-
         FragmentYourPlayer fragmentsBooking = new FragmentYourPlayer();
         addFragment(fragmentsBooking);
+    }
 
+    public void profileClicked(View view) {
+        FragmentSchedule f = new FragmentSchedule();
+        addFragment(f);
+    }
+
+    public void homeClicked(View view) {
+        FragmentYourTeam fragmentsBooking = new FragmentYourTeam();
+        addFragment(fragmentsBooking);
+    }
+
+    public void teamStatus(View view) {
+        FragmentTeamStats fragmentsBooking = new FragmentTeamStats();
+        addFragment(fragmentsBooking);
     }
 }

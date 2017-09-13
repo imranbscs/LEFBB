@@ -4,9 +4,11 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +69,7 @@ public class FragmentYourTeam extends Fragment {
     int mField_Id = 0;
     List<City> cities;
     List<MyCityField> fields;
+    RelativeLayout color_team;
     public String logoBitmap = "fgd", homeImgBitmap = "dfg", awayShirtBitmap = "dfgd";
     private int currentColor;
 
@@ -79,9 +83,18 @@ public class FragmentYourTeam extends Fragment {
         teamName  =  (TextView) v.findViewById(R.id.teme_name);
         groundName  =  (Spinner) v.findViewById(R.id.spinner_field);
         coachName  =  (EditText) v.findViewById(R.id.coah_name);
-        groundName  =  (Spinner) v.findViewById(R.id.spinner_city);
+        citySpinner  =  (Spinner) v.findViewById(R.id.spinner_city);
+        color_team =  (RelativeLayout) v.findViewById(R.id.color_team);
 
         teamName.setText(Prefs.getString(getActivity(), Prefs.TEAM_NAME));
+        coachName.setText(Prefs.getString(getActivity(), Prefs.COACH));
+        decodeClicked(logo, Prefs.getString(getActivity(), Prefs.TEAM_LOGO));
+        decodeClicked(homeShirt, Prefs.getString(getActivity(), Prefs.HOME_SHIRT));
+        decodeClicked(awayShirt, Prefs.getString(getActivity(), Prefs.AWAY_SHIRT));
+        int colorInt = Integer.parseInt(Prefs.getString(getActivity(), Prefs.COLOR));
+        //String hexColor = String.format("#%06X", (0xFFFFFF & colorInt));
+        color_team.setBackgroundColor(colorInt);
+        //logo.set
 
         teamName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +105,12 @@ public class FragmentYourTeam extends Fragment {
         });
 
         return v;
+    }
+
+    public void decodeClicked(ImageView img, String bcode) {
+        byte[] decodedString = Base64.decode(bcode, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        img.setImageBitmap(decodedByte);
     }
 
 

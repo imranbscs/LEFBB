@@ -32,14 +32,12 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     List<Datum> listItems;
     public Context context;
     public static List<ListInvite> invitedList;
-    public static HashMap<String, List<Integer>> listHash;
     public static String j;
 
 
     public AdapterInvitePlayer(List<Datum> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
-        listHash = new HashMap<>();
         invitedList = new ArrayList<>();
     }
 
@@ -51,9 +49,10 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
     }
 
     @Override
-    public void onBindViewHolder(final AdapterInvitePlayer.ViewHolder holder, int position) {
+    public void onBindViewHolder(final AdapterInvitePlayer.ViewHolder holder, final int position) {
         Datum listItem = listItems.get(position);
         int a = position;
+
         holder.name.setText(listItem.getName());
         holder.role.setText(listItem.getPlayingRole());
         holder.ratingBar.setRating(1);
@@ -69,8 +68,18 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
         final Datum tempDatum = listItem;
         holder.ratingValue.setText(listItem.getStars().toString());
         holder.inviteLayout.setBackgroundColor(Color.parseColor("#EDFCEA"));
-        holder.inText.setText("INVITE");
+        holder.inText.setText("invite");
 //        holder.inText.setTextColor(Color.parseColor("#000"));
+
+        if(listItems.get(position).isSlected == true){
+            holder.inviteLayout.setBackgroundColor(Color.parseColor("#90BE47"));
+//                holder.inText.setTextColor(Color.parseColor("#fff"));
+            holder.inText.setText("Invited");
+            holder.tick_layout.setVisibility(View.VISIBLE);
+        }else {
+            holder.inText.setText("Invite");
+            holder.tick_layout.setVisibility(View.GONE);
+        }
 
         holder.inviteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +87,8 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
                 ListInvite listInvite = new ListInvite();
                 listInvite.setPlayerId(tempDatum.getUserId());
                 invitedList.add(listInvite);
-//                listHash.put("player_id", tempDatum.getUserId());
+                listItems.get(position).isSlected = true;
                 holder.inviteLayout.setBackgroundColor(Color.parseColor("#90BE47"));
-//                holder.inText.setTextColor(Color.parseColor("#fff"));
                 holder.inText.setText("Invited");
                 holder.tick_layout.setVisibility(View.VISIBLE);
             }
@@ -114,79 +122,17 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
             ratingValue = (TextView) itemView.findViewById(R.id.rating_num);
             inviteLayout = (RelativeLayout) itemView.findViewById(R.id.invitely);
             inText = (TextView) itemView.findViewById(R.id.inviteText);
-            //inviteText = (TextView) itemView.findViewById(R.id.inviteText);
             tick_layout = (RelativeLayout) itemView.findViewById(R.id.tick_layout);
         }
     }
 
     public static String doneInvitation() {
 
-//        Gson gson = new GsonBuilder().create();
-//        JsonArray myCustomArray = gson.toJsonTree(listHash).getAsJsonArray();
-//        JsonObject jsonObject = new JsonObject();
-//        jsonObject.add("player_id", myCustomArray);
-//        String jsonStr = jsonObject.toString();
-
-
-        //listHash.put("player_id", invitedList);
-
         Gson gson = new Gson();
         j = gson.toJson(invitedList);
-
-//        if(!(validation())){
-//            return;
-//        }
-
         Log.v("jsonn", j);
         return j;
-//
-//        final ProgressDialog progressDialog =  new ProgressDialog(context);
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.show();
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(context);
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.169.138.14:4000/api/teams/invitePlayers", new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.v("qwe", response);
-//                progressDialog.dismiss();
-//                Gson gson = new Gson();
-//                SucessResponse sucessResponse = gson.fromJson(response, SucessResponse.class);
-//                String _message = sucessResponse.messege;
-//                int _status = sucessResponse.status;
-//                Toast.makeText(context, "sucessful", Toast.LENGTH_LONG).show();
-//                if(_status == 200){
-//                    //startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
-//                }else {
-//
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                progressDialog.dismiss();
-//                Log.v("wsx", "========   "+error+"");
-//                Toast.makeText(context, "Unable to connect...", Toast.LENGTH_LONG).show();
-//            }
-//        }){
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String, String> headers = new HashMap<>();
-//                headers.put("x-access-key", Globels.ACCESS_KEY);
-//                headers.put("x-access-token", Prefs.getString(context, Prefs.auth_key));
-//                headers.put("locale", Globels.LOCAL);
-//                headers.put("Content-Type", Globels.CONTENT_TYPE);
-//                return headers;
-//            }
-//
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                return params;
-//            }
-//        };;
-//
-//        requestQueue.add(stringRequest);
+
     }
 
 }

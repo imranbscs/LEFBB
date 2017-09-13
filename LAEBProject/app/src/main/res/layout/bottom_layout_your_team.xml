@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/playerstats"
             android:id="@+id/refPro"
-            android:onClick="refreeClicked"
+            android:onClick="teamStatus"
             android:layout_weight="1" />
     </LinearLayout>
 

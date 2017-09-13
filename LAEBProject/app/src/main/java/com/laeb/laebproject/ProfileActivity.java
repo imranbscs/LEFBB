@@ -41,6 +41,8 @@ import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.list_city_and_fields.City;
+import com.laeb.laebproject.model_register.User;
+import com.laeb.laebproject.model_register.VerifiedNumberModel;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.io.ByteArrayOutputStream;
@@ -82,7 +84,6 @@ public class ProfileActivity extends AppCompatActivity {
 //        TextView t = (TextView) findViewById(R.id.profileTitle);
 //        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/avenir-roman.ttf");
 //        t.setTypeface(font);
-
 
         Edt_DOB = (EditText) findViewById(R.id.ed_dob);
         Male = (TextView) findViewById(R.id.txtMale);
@@ -165,7 +166,7 @@ public class ProfileActivity extends AppCompatActivity {
                             Prefs.putString(ProfileActivity.this, "email", mEmail);
                             Prefs.putString(ProfileActivity.this, "city", mCity_Id+"");
                             Prefs.putString(ProfileActivity.this, "dob", mDOB);
-                            startActivity(new Intent(ProfileActivity.this, MenuActivity.class));
+                            startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
 
                         }else {
 
@@ -318,12 +319,12 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     void getCityStr(){
-        citis = GlobelList.cities;
+        citis = SplashActivity.citiesV2;
         cityStr = new ArrayList<>();
-        final List<City> cc = GlobelList.cities;
-        Toast.makeText(this, GlobelList.cities.size()+"  ", Toast.LENGTH_SHORT).show();
-        for(int i = 0; i < GlobelList.cities.size(); i++){
-            cityStr.add(GlobelList.cities.get(i).getCityName());
+        final List<City> cc = SplashActivity.citiesV2;
+//        Toast.makeText(this, GlobelList.cities.size()+"  ", Toast.LENGTH_SHORT).show();
+        for(int i = 0; i < SplashActivity.citiesV2.size(); i++){
+            cityStr.add(SplashActivity.citiesV2.get(i).getCityName());
         }
         mySpinner = (Spinner) findViewById(R.id.ed_city);
         SpinnerAdapter adap = new ArrayAdapter<String>(this, R.layout.spinner_item, cityStr);

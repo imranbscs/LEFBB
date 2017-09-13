@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragSchedule"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/recivedAndSent"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/recivedImg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/recivedTv"
+                    android:src="@drawable/tick" />
+
+                <TextView
+                    android:id="@+id/recivedTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/recived"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/white" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/sentImg"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/tick"
+                    android:layout_alignBottom="@+id/sentTv"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp" />
+
+                <TextView
+                    android:id="@+id/sentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/sentImg"
+                    android:text="@string/sent"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/inviteMore"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/f_layout"
+            android:orientation="vertical">
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recylerView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+            <!--</android.support.v7.widget.RecyclerView>-->
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

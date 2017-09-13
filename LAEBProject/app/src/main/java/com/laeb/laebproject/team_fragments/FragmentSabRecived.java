@@ -2,7 +2,6 @@ package com.laeb.laebproject.team_fragments;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,18 +21,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.laeb.laebproject.InvitePlayerActivity;
 import com.laeb.laebproject.R;
-import com.laeb.laebproject.YourTeamActivity;
-import com.laeb.laebproject.adapter_team.AdapterInvitePlayer;
-import com.laeb.laebproject.adapter_team.AdapterYourPlayer;
+import com.laeb.laebproject.adapter_team.AdapterSabRecivedInvitation;
+import com.laeb.laebproject.adapter_team.AdapterSchedule;
 import com.laeb.laebproject.general.Globels;
 import com.laeb.laebproject.general.Prefs;
-import com.laeb.laebproject.model.UpComingGames;
-import com.laeb.laebproject.model_create_team.AllPlayers;
-import com.laeb.laebproject.model_create_team.your_player_model.InvitedPlayer;
-import com.laeb.laebproject.model_create_team.your_player_model.SelectedPlayer;
-import com.laeb.laebproject.model_create_team.your_player_model.TeamYourPlayer;
+import com.laeb.laebproject.model_create_team.recived_invi.Datum;
+import com.laeb.laebproject.model_create_team.recived_invi.RecivedInvitations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,27 +35,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by tariq on 8/28/2017.
+ * Created by tariq on 9/11/2017.
  */
 
-public class FragmentYourPlayer extends Fragment {
-
+public class FragmentSabRecived extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<InvitedPlayer> listItems;
-    private List<SelectedPlayer> listItemSelect;
+    private List<Datum> scheduleItems;
+    TextView texInvi;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_your_player, container, false);
-        LinearLayout inviteMore = (LinearLayout) v.findViewById(R.id.inviteMore);
-        ((YourTeamActivity) getActivity()).title.setText("YOUR PLAYERS");
-        inviteMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
-            }
-        });
+
+        View v = inflater.inflate(R.layout.fragment_sab_recived, container, false);
         return v;
     }
 
@@ -71,42 +57,37 @@ public class FragmentYourPlayer extends Fragment {
         getAllplayers();
     }
 
-    public void getAllplayers(){
-        final ProgressDialog progressDialog =  new ProgressDialog(getActivity());
+    public void getAllplayers() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.169.138.14:4000/api/teams/v2/playerStatus", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.169.138.14:4000/api/match/invitationReceived", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.v("qwe", response);
                 progressDialog.dismiss();
                 Gson gson = new Gson();
-                TeamYourPlayer sucessResponse = gson.fromJson(response, TeamYourPlayer.class);
+                RecivedInvitations sucessResponse = gson.fromJson(response, RecivedInvitations.class);
                 int _status = sucessResponse.getStatus();
 
-                listItemSelect = new ArrayList<>();
-                listItems = new ArrayList<>();
-                listItemSelect = sucessResponse.getSelectedPlayers();
-                listItems = sucessResponse.getInvitedPlayers();
+                Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
+                scheduleItems = new ArrayList<>();
+                scheduleItems = sucessResponse.getData();
 
-                int selectedPlayers = listItemSelect.size();
-
-                List<Object> listItemObj = new ArrayList<Object>(listItemSelect);
-                listItemObj.addAll(listItems);
-                Toast.makeText(getActivity(), "Sucess"+"=="+_status+"===="+listItemObj.size(), Toast.LENGTH_LONG).show();
-
-                if(_status == 200){
+                if (_status == 200) {
                     recyclerView = (RecyclerView) getView().findViewById(R.id.recylerView);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                    Log.v("qwe", listItems.size()+"======"+listItems);
+                    //Log.v("qwe", scheduleItems.size() + "======" + scheduleItems);
+
                     Toast.makeText(getActivity(), "sucessful", Toast.LENGTH_LONG).show();
-                    adapter = new AdapterYourPlayer(listItemObj, getActivity(), selectedPlayers);
+
+                    adapter = new AdapterSabRecivedInvitation(scheduleItems, getActivity());
                     recyclerView.setAdapter(adapter);
-                }else {
+                } else {
 
                 }
             }
@@ -114,10 +95,10 @@ public class FragmentYourPlayer extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Log.v("wsx", "========   "+error+"");
+                Log.v("wsx", "========   " + error + "");
                 Toast.makeText(getActivity(), "Unable to connect...", Toast.LENGTH_LONG).show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
@@ -131,10 +112,11 @@ public class FragmentYourPlayer extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("team_id", Prefs.getString(getActivity(), Prefs.TEAM_ID));
+                params.put("team_id", "22");
                 return params;
             }
-        };;
+        };
+        ;
 
         requestQueue.add(stringRequest);
     }

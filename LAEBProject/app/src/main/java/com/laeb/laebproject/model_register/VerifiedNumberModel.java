@@ -1,10 +1,10 @@
 
-package com.laeb.laebproject.model_create_team;
+package com.laeb.laebproject.model_register;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TeamSucessWithId {
+public class VerifiedNumberModel {
 
     @SerializedName("status")
     @Expose
@@ -12,9 +12,12 @@ public class TeamSucessWithId {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("team_id")
+    @SerializedName("token")
     @Expose
-    private Integer teamId;
+    private String token;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
     public Integer getStatus() {
         return status;
@@ -32,12 +35,20 @@ public class TeamSucessWithId {
         this.message = message;
     }
 
-    public int getTeamId() {
-        return teamId;
+    public String getToken() {
+        return token;
     }
 
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

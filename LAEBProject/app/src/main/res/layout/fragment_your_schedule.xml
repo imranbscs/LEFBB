@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/txtMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/schedule"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RelativeLayout
+                android:id="@+id/male_selector"
+                android:layout_width="80dp"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/txtMale"
+                android:layout_marginRight="16dp"
+                android:background="#fff" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/texInvi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/invitations"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RelativeLayout
+                android:id="@+id/female_delector"
+                android:layout_width="95dp"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/texInvi"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#fff"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragSchedule"
+        android:orientation="vertical">
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/inviteMore"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recylerView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+            <!--</android.support.v7.widget.RecyclerView>-->
+
+        <!--</LinearLayout>-->
+    </LinearLayout>
 </LinearLayout>

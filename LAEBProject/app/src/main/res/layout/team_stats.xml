@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_login_registration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/logo"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/image_wide" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/teme_name"
+                android:textColor="@color/textColorHint"
+                android:text="Jaddah Warriors"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:background="#fff"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/textColorHint"
+                android:text="Last 5 matches"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle_win">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            android:layout_centerInParent="true"
+                            android:text="T"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"/>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle_win">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            android:layout_centerInParent="true"
+                            android:text="T"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"/>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle_win">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            android:layout_centerInParent="true"
+                            android:text="T"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"/>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle_win">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            android:layout_centerInParent="true"
+                            android:text="T"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"/>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle_win">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            android:layout_centerInParent="true"
+                            android:text="T"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:background="#fff"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/textColorHint"
+                android:text="Totel Matech on record"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:background="#fff"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
