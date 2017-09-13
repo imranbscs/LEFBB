@@ -105,7 +105,7 @@ public class AdapterYourPlayer extends RecyclerView.Adapter<AdapterYourPlayer.Vi
             holder.selectedLy.setVisibility(View.GONE);
             holder.inviteLayout.setVisibility(View.VISIBLE);
             holder.inviteLayout.setBackgroundColor(Color.parseColor("#90BE47"));
-            holder.inviteText.setText("INVITED");
+            holder.inviteText.setText("invited");
             holder.inviteText.setTextColor(Color.parseColor("#ffffff"));
         }
 

@@ -68,7 +68,7 @@ public class AdapterInvitePlayer extends RecyclerView.Adapter<AdapterInvitePlaye
         final Datum tempDatum = listItem;
         holder.ratingValue.setText(listItem.getStars().toString());
         holder.inviteLayout.setBackgroundColor(Color.parseColor("#EDFCEA"));
-        holder.inText.setText("INVITE");
+        holder.inText.setText("invite");
 //        holder.inText.setTextColor(Color.parseColor("#000"));
 
         if(listItems.get(position).isSlected == true){

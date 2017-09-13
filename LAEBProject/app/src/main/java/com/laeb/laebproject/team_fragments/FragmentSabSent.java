@@ -29,6 +29,7 @@ import com.laeb.laebproject.adapter_team.AdapterSabRecivedInvitation;
 import com.laeb.laebproject.adapter_team.AdapterSabSentInvitation;
 import com.laeb.laebproject.adapter_team.AdapterSchedule;
 import com.laeb.laebproject.general.Globels;
+import com.laeb.laebproject.general.Prefs;
 import com.laeb.laebproject.model_create_team.recived_invi.Datum;
 import com.laeb.laebproject.model_create_team.recived_invi.RecivedInvitations;
 import com.laeb.laebproject.model_create_team.team_schedule.TeamSchedule;
@@ -108,7 +109,7 @@ public class FragmentSabSent extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("x-access-key", Globels.ACCESS_KEY);
-                headers.put("x-access-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1NywidXNlcm5hbWUiOiIwNTU1NTUxMDA1IiwiaWF0IjoxNTAyMTE4MDg0fQ.XHLt8e3AMioTxI8m0m3QEzvm3qUYixi9Bnr-XBztGXo");
+                headers.put("x-access-token", Prefs.getString(getActivity(), Prefs.auth_key));
                 headers.put("locale", Globels.LOCAL);
                 headers.put("Content-Type", Globels.CONTENT_TYPE);
                 return headers;

@@ -22,6 +22,7 @@ public class Prefs {
     public static final  String COLOR = "t_color";
     public static final String CITY_ID = "t_city_id";
     public static final  String FIELD_ID = "i_field_id";
+    public static final  String TEAM_ID = "team_id";
 
 
     public static void putString(Context ctx, String key, String value){

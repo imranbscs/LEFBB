@@ -222,7 +222,7 @@ public class FragmentInvitePlayer extends Fragment implements View.OnClickListen
 
                     }else{
                         Toast.makeText(getActivity(), "pppppp", Toast.LENGTH_SHORT).show();
-                        Prefs.putString(getActivity(), Prefs.DIALOGDECISSION, "0");
+                        Prefs.putString(getActivity(), Prefs.DIALOGDECISSION, "1");
                         CreateTeamActivity.myActivity.finish();
                         FragmentProfile.myTv.setText("Manage Team");
                         Prefs.putString(getActivity(), Prefs.CREATE_TEAM, "Manage Team");

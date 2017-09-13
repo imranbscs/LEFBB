@@ -150,7 +150,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                 TeamSucessWithId sucessResponse = gson.fromJson(response, TeamSucessWithId.class);
                 String _message = sucessResponse.getMessage();
                 int _status = sucessResponse.getStatus();
-                //int teamId = sucessResponse.getTeamId();
+                int teamId = sucessResponse.getTeamId();
                 //Toast.makeText(getActivity(), _status+": "+_message+" "+teamId, Toast.LENGTH_LONG).show();
                 if(_status == 200){
                     Toast.makeText(getActivity(), _status+": "+_message+" ", Toast.LENGTH_LONG).show();
@@ -162,6 +162,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
                     Prefs.putString(getActivity(), Prefs.COLOR, currentColor+"");
                     Prefs.putString(getActivity(), Prefs.CITY_ID, mCity_Id+"");
                     Prefs.putString(getActivity(), Prefs.FIELD_ID, ""+mField_Id);
+                    Prefs.putString(getActivity(), Prefs.TEAM_ID, teamId+"");
                     startActivity(new Intent(getActivity(), InvitePlayerActivity.class));
                 }else {
 

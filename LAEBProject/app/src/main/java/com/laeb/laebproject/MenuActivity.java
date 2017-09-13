@@ -57,6 +57,7 @@ public class MenuActivity extends AppCompatActivity {
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
-//
+//        FragmentProfile fragmentProfile = new FragmentProfile();
+//        addFragment(fragmentProfile);
 //    }
 }

@@ -131,7 +131,7 @@ public class FragmentYourPlayer extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("team_id", "22");
+                params.put("team_id", Prefs.getString(getActivity(), Prefs.TEAM_ID));
                 return params;
             }
         };;

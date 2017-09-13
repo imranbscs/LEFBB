@@ -52,6 +52,7 @@ import com.laeb.laebproject.model.Days;
 import com.laeb.laebproject.model.PlayerPosition;
 import com.laeb.laebproject.model_create_team.AllPlayers;
 import com.laeb.laebproject.model_create_team.Datum;
+import com.laeb.laebproject.model_create_team.SucessResponse;
 import com.loopj.android.http.RequestParams;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -122,7 +123,7 @@ public class FragmentProfile extends Fragment {
     CircularImageView circleView;
     ImageView addpic;
     ArrayAdapter adap;
-    String mImage;
+    String mImage = "";
     ArrayAdapter oad;
     public TextView createText;
     public static TextView myTv;
@@ -285,9 +286,12 @@ public class FragmentProfile extends Fragment {
                         Log.v("qwe", response);
                         progressDialog.dismiss();
                         Gson gson = new Gson();
-                        // Datum sucessResponse = gson.fromJson(response, Datum.class);
-                        // int _status = sucessResponse.getStatus();
+                        SucessResponse sucessResponse = gson.fromJson(response, SucessResponse.class);
+                        int _status = sucessResponse.status;
 
+                        if(_status == 200){
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -313,7 +317,7 @@ public class FragmentProfile extends Fragment {
                         Log.i("asd", mHeight);
                         Map<String, String> param = new HashMap<>();
                         param.put("name", mName);
-                        param.put("image", "im");
+                        param.put("image", mImage);
                         param.put("nickname", mNick);
                         param.put("city", mCity_Id + "");
                         param.put("dob", mDOB);
@@ -446,7 +450,7 @@ public class FragmentProfile extends Fragment {
                         //imageView.setImageResource(R.drawable.image_square);
                         circleView.setImageBitmap(yourSelectedImage);
 
-                        yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                        //yourSelectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                         mImage = imageToString(yourSelectedImage);
                         // mImage = myBase64Image;
 
@@ -469,7 +473,7 @@ public class FragmentProfile extends Fragment {
 
     public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100/100, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
@@ -495,17 +499,17 @@ public class FragmentProfile extends Fragment {
                 Datum sucessResponse = null;
                 try {
                     sucessResponse = gson.fromJson(jSon.get("data").toString(), Datum.class);
-                    if (sucessResponse.getPicture().length() > 10) {
-                        byte[] decodedString = Base64.decode(sucessResponse.getPicture(), Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        circleView.setImageBitmap(decodedByte);
-                    }
+//                    if (sucessResponse.getPicture().length() > 10) {
+//                        byte[] decodedString = Base64.decode(sucessResponse.getPicture(), Base64.DEFAULT);
+//                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                        circleView.setImageBitmap(decodedByte);
+//                    }
 
                     Edt_Height.setText(sucessResponse.getHeight().toString());
                     Edt_Weight.setText(sucessResponse.getWeight().toString());
                     Edt_Nick.setText(sucessResponse.getNick());
                     Place_of_Birth.setText(sucessResponse.getDistrict());
-                    // Picasso.with(getActivity()).load(sucessResponse.getPicture()).into(circleView);
+                    Picasso.with(getActivity()).load(sucessResponse.getPicture()).into(circleView);
                     fc_local.setText(sucessResponse.getFcLocal());
                     fc_International.setText(sucessResponse.getFcInternational());
                     spn_position.setSelection(oad.getPosition(sucessResponse.getPlayingRole()));
