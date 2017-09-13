@@ -390,10 +390,10 @@ public class FragmentProfile extends Fragment {
                             Log.i("asd", spn_days.getSelectedItemsAsString() + "");
                             String operating = "{";
 
-                                if (spn_days.getSelectedItemsAsString().contains("Sunday"))
-                                    operating += " sun=1,";
-                                else
-                                    operating += "sun=0,";
+                            if (spn_days.getSelectedItemsAsString().contains("Sunday"))
+                                operating += " sun=1,";
+                            else
+                                operating += "sun=0,";
                             if (spn_days.getSelectedItemsAsString().contains("Monday"))
                                 operating += " mon=1,";
                             else
@@ -419,12 +419,12 @@ public class FragmentProfile extends Fragment {
                             else
                                 operating += "sat=0,";
 
-operating+= "}";
-                            operating = operating.replace(",}","}");
-Log.i("asd",operating);
+                            operating += "}";
+                            operating = operating.replace(",}", "}");
+                            Log.i("asd", operating);
                             try {
                                 JSONObject j = new JSONObject(operating);
-                                param.put("operating", j.toString() );
+                                param.put("operating", j.toString());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
