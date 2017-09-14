@@ -112,6 +112,7 @@ public class FragmentProfile extends Fragment {
     List<com.laeb.laebproject.model_create_team.list_city_and_fields.City> citis;
     List<String> cityStr;
     TextView SaveProfile;
+    MultiSelectionSpinner spn_days;
     String mName;
     String mDOB;
     String mNick;
@@ -199,7 +200,7 @@ public class FragmentProfile extends Fragment {
         oad = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, listOfPlayerRoles);
         spn_position.setAdapter(oad);
 
-        final MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
+        spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
 
         spn_days.setItems(names());
 
@@ -330,7 +331,9 @@ public class FragmentProfile extends Fragment {
                         param.put("weight", mWeight);
                         param.put("playing_role", spn_position.getSelectedItem().toString());
                         param.put("player", Player);
-                        param.put("refree", Refree);
+                        Log.i("asd",Player);
+                        param.put("referee", Refree);
+                        Log.i("asd",Refree);
                         param.put("fc_local", mLocal);
                         param.put("fc_international", mInter);
                         return param;
@@ -500,8 +503,35 @@ public class FragmentProfile extends Fragment {
                 }
                 Gson gson = new Gson();
                 Datum sucessResponse = null;
+                String RefreeResponse = null;
                 try {
                     sucessResponse = gson.fromJson(jSon.get("data").toString(), Datum.class);
+                    RefreeResponse = jSon.get("referee_schedule").toString();
+                    Log.i("asd","Ref    "+RefreeResponse);
+                    if (RefreeResponse != null && RefreeResponse != "")
+                    {
+                        JSONObject jRefree = new JSONObject(RefreeResponse);
+                        List<String> setRefree = new ArrayList<String>();
+
+                        if (jRefree.getInt("mon") == 1){
+                            Log.i("asd",jRefree.get("mon").toString());
+                            setRefree.add("Monday") ;}
+                        if (jRefree.getInt("tue") == 1)
+                            setRefree.add("Tuesday");
+                        if (jRefree.getInt("wed") == 1)
+                            setRefree.add("Wednesday");
+                        if (jRefree.getInt("thu") == 1)
+                            setRefree.add("Thursday");
+                        if (jRefree.getInt("fri") == 1)
+                            setRefree.add("Friday");
+                        if (jRefree.getInt("sat") == 1)
+                            setRefree.add("Saturday");
+                        if (jRefree.getInt("sun") == 1)
+                            setRefree.add("Sunday");
+
+
+                        spn_days.setSelection(setRefree);
+                    }
 //                    if (sucessResponse.getPicture().length() > 10) {
 //                        byte[] decodedString = Base64.decode(sucessResponse.getPicture(), Base64.DEFAULT);
 //                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -522,11 +552,10 @@ public class FragmentProfile extends Fragment {
 
                     //   EDT_City.setSelection(getIndex(mySpinner, sucessResponse.getCity()));
                     Edt_Full_Name.setText(sucessResponse.getName());
+                    int imgResource = R.drawable.tickselected;
                     if (sucessResponse.getPlayer() == 1) {
-                        int imgResource = R.drawable.tickselected;
                         ed_player.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                     } else {
-                        int imgResource = R.drawable.tickselected;
                         ed_refree.setCompoundDrawablesWithIntrinsicBounds(imgResource, 0, 0, 0);
                     }
                     SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
