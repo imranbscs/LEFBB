@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class CustomBinder implements Serializable {
     private static final long serialVersionUID = 4466821913603037341L;
-    private FieldInfo f;
+    private transient FieldInfo f;
 
 
     public FieldInfo getField() {
