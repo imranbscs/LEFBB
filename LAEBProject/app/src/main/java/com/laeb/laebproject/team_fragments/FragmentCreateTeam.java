@@ -252,7 +252,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
 
     public String imageToString(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50/100, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
@@ -313,6 +313,7 @@ public class FragmentCreateTeam extends Fragment implements View.OnClickListener
         groundName = (Spinner) getView().findViewById(R.id.fvt_ground);
         SpinnerAdapter adap = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, fieldStr);
         groundName.setAdapter(adap);
+//        groundName.setInd
         // Spinner on item click listener
         groundName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 

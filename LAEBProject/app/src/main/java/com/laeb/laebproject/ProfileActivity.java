@@ -161,11 +161,11 @@ public class ProfileActivity extends AppCompatActivity {
 
                         if(_status == 200){
                             Toast.makeText(ProfileActivity.this, "Sucess", Toast.LENGTH_LONG).show();
-                            Prefs.putString(ProfileActivity.this, "name", mName);
-                            Prefs.putString(ProfileActivity.this, "image", mImage);
-                            Prefs.putString(ProfileActivity.this, "email", mEmail);
-                            Prefs.putString(ProfileActivity.this, "city", mCity_Id+"");
-                            Prefs.putString(ProfileActivity.this, "dob", mDOB);
+//                            Prefs.putString(ProfileActivity.this, "name", mName);
+//                            Prefs.putString(ProfileActivity.this, "image", mImage);
+//                            Prefs.putString(ProfileActivity.this, "email", mEmail);
+//                            Prefs.putString(ProfileActivity.this, "city", mCity_Id+"");
+//                            Prefs.putString(ProfileActivity.this, "dob", mDOB);
                             startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
 
                         }else {

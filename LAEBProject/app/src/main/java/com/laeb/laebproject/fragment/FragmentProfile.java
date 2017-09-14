@@ -124,6 +124,7 @@ public class FragmentProfile extends Fragment {
     ImageView addpic;
     ArrayAdapter adap;
     String mImage = "";
+    //SpinnerAdapter oad;
     ArrayAdapter oad;
     public TextView createText;
     public static TextView myTv;
@@ -191,10 +192,12 @@ public class FragmentProfile extends Fragment {
 
 
         // spn_position = (Spinner) v.findViewById(R.id.ed_select_position);
-        oad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles);
-        oad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles);
-        spn_position.setAdapter(oad);
+        //oad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles);
+//        oad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listOfPlayerRoles);
+//        spn_position.setAdapter(oad);
 
+        oad = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, listOfPlayerRoles);
+        spn_position.setAdapter(oad);
 
         final MultiSelectionSpinner spn_days = (MultiSelectionSpinner) v.findViewById(R.id.ed_schedule);
 
